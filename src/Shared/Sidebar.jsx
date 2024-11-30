@@ -1,28 +1,17 @@
 import React, { useState } from 'react'
-import { FaMusic, FaCrown, FaCog, FaSignOutAlt, FaBars } from "react-icons/fa";
-import { FaHeadphonesSimple } from "react-icons/fa6";
-import { HiOutlineMusicalNote } from "react-icons/hi2";
-import { MdOutlineDashboard } from "react-icons/md";
-import { RiMusic2Line } from "react-icons/ri";
-import { Link } from 'react-router-dom';
-    
-import React, { useState } from "react";
-import { FaCrown, FaCog, FaSignOutAlt, FaBars, FaPlus } from "react-icons/fa";
+import { FaCrown, FaPlus, FaMusic, FaCog, FaSignOutAlt, FaBars } from "react-icons/fa";
 import { FaHeadphonesSimple } from "react-icons/fa6";
 import { GrLineChart } from "react-icons/gr";
 import { LuCreditCard } from "react-icons/lu";
 import { MdKeyboardArrowDown, MdOutlineDashboard } from "react-icons/md";
 import { RiMusic2Line, RiUser3Line } from "react-icons/ri";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
-
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isDropdown, setDropdown] = useState(false)
     const toggleDropdown = () => {
         setDropdown(!isDropdown)
     }
-
   return (
     <div>
         {/* Sidebar */}
