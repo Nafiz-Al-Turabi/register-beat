@@ -1,22 +1,18 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import { FaMusic, FaCrown, FaCog, FaSignOutAlt, FaBars } from "react-icons/fa";
 import { FaHeadphonesSimple } from "react-icons/fa6";
 import { HiOutlineMusicalNote } from "react-icons/hi2";
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiMusic2Line } from "react-icons/ri";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-const Dashboard = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
+    
 
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
-
-    return (
-        <div className="flex min-h-screen  text-white">
-            {/* Sidebar */}
-            <div
+  return (
+    <div>
+        {/* Sidebar */}
+        <div
                 className={`fixed top-0 left-0 h-full bg-[#0f0f0f] w-64 p-4 flex flex-col transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
                     } md:translate-x-0 z-50`}
             >
@@ -31,7 +27,7 @@ const Dashboard = () => {
                 </div>
                 <nav className="space-y-6">
                     <Link
-                        to="/dashboard"
+                        to="/"
                         className="flex items-center text-lg text-gray-300 hover:text-white"
                     >
                         <MdOutlineDashboard className="mr-2"/> Dashboard
@@ -75,26 +71,8 @@ const Dashboard = () => {
                     onClick={toggleSidebar}
                 ></div>
             )}
+    </div>
+  )
+}
 
-            {/* Main Content */}
-            <div className="flex-1 md:ml-64">
-                <div className="flex items-center justify-between bg-black p-4 md:pl-8">
-                    <button
-                        className="text-white md:hidden"
-                        onClick={toggleSidebar}
-                    >
-                        <FaBars className="text-2xl" />
-                    </button>
-                    <h1 className="text-purple-500 text-2xl">Dashboard</h1>
-                </div>
-
-                {/* Content Section */}
-                <div className="p-4">
-                    <Outlet />
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default Dashboard;
+export default Sidebar

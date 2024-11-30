@@ -5,29 +5,30 @@ import Layout from "../Layout/Layout";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
-import Dashboard from "../Pages/Dashboard/Dashboard";
+import PlansBills from "../Pages/Plans&Bills/PlansBills";
+import DashboardLayout from "../Layout/DashboardLayout";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Layout />,
+        element: <DashboardLayout />,
         children: [
+            // {
+            //     path: '/',
+            //     element: <Home />
+            // },
             {
-                path: '/',
-                element: <Home />
-            },
-            {
-                path: '/login',
-                element: <Login />
-            },
-            {
-                path: '/signup',
-                element: <Signup />
-            },
-            {
-                path: '/dashboard',
-                element: <Dashboard />
+                path: '/plan-bills',
+                element: <PlansBills />
             },
         ]
+    },
+    {
+        path: '/login',
+        element: <Login />
+    },
+    {
+        path: '/signup',
+        element: <Signup />
     },
 ]);
