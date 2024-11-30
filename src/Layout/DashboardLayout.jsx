@@ -15,14 +15,17 @@ const DashboardLayout = () => {
             <Sidebar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
             {/* Main Content */}
             <div className="flex-1 md:ml-64">
-                <div className="flex items-center justify-between bg-black p-4 md:pl-8">
+                <div className="flex items-center justify-between bg-[#0f0f0f] p-4 md:pl-8">
                     <button
                         className="text-white md:hidden"
-                        onClick={toggleSidebar}  
+                        onClick={toggleSidebar}
                     >
                         <FaBars className="text-2xl" />
                     </button>
-                    <h1 className="text-purple-500 text-2xl">Dashboard</h1>
+                    <div>
+                        <input type="text" className="py-1.5 px-5 w-96 rounded-full outline-none bg-transparent text-gray-200  border-[0.5px] border-violet-400 " placeholder="Search your beat..." />
+                    </div>
+                    <button className="flex items-center text-lg font-bold secondary-bg py-1.5 px-5 rounded-full hover:bg-violet-700 duration-300 active:scale-95 ">Register a Beat <FaPlus className="ml-2 text-xl border p-0.5 rounded-sm " /></button>
                 </div>
 
                 {/* Content Section */}
