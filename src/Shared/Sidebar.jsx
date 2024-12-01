@@ -87,7 +87,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         <FaCrown className="inline-block mr-2" /> Upgrade to Pro
                     </button>
                     <Link
-                        to="/dashboard/settings"
+                        to="/settings"
                         className="flex items-center text-lg text-gray-300 hover:text-white mb-2"
                     >
                         <FaCog className="mr-2" /> Settings

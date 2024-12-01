@@ -5,8 +5,8 @@ import Layout from "../Layout/Layout";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
-import PlansBills from "../Pages/Plans&Bills/PlansBills";
 import DashboardLayout from "../Layout/DashboardLayout";
+import Settings from "../Pages/Settings";
 
 export const router = createBrowserRouter([
     {
@@ -18,8 +18,8 @@ export const router = createBrowserRouter([
             //     element: <Home />
             // },
             {
-                path: '/plan-bills',
-                element: <PlansBills />
+                path: '/settings',
+                element: <Settings />
             },
         ]
     },
