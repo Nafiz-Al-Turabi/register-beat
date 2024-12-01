@@ -7,6 +7,7 @@ import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Settings from "../Pages/Settings";
+import PlanPurchase from "../Pages/PlanPurchase/PlanPurchase";
 
 export const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
             {
                 path: '/settings',
                 element: <Settings />
+            },
+            {
+                path: '/upgrade',
+                element: <PlanPurchase />
             },
         ]
     },

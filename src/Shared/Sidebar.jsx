@@ -53,7 +53,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                     <LuCreditCard className="mr-2" /> Manage Subscription
                                 </Link>
                                 <Link
-                                    to="/dashboard"
+                                    to="/upgrade"
                                     className="flex items-center text-base text-gray-300 hover:text-white"
                                 >
                                     <GrLineChart className="mr-2" /> Upgrade you Plan
