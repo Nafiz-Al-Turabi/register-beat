@@ -84,11 +84,11 @@ body{
 
   @keyframes popIn {
     from {
-      transform: scale(0.5);
+      /* transform: scale(0.5); */
       opacity: 0;
     }
     to {
-      transform: scale(1);
+      /* transform: scale(1); */
       opacity: 1;
     }
   }
@@ -97,9 +97,3 @@ body{
     animation: popIn 0.6s ease-out;
   }
   
-  input:-webkit-autofill {
-    background-color: none !important; /* Match your custom background */
-    color: none; /* Match your text color */
-    -webkit-text-fill-color: none; /* Ensures text remains white */
-    border: none; /* Optional: adjust the border to match your style */
-  }

@@ -3,7 +3,7 @@ import Faqs from '../../Components/PlanPurchase.jsx/Faqs'
 
 const PlanPurchase = () => {
   return (
-    <div className='py-12'>
+    <div className='py-12 animate-from-middle'>
         <h1 className='text-4xl font-bold text-center'>Choose Your Plan</h1>
         <div className='max-w-2xl mx-auto my-24'>
             <div className='flex flex-col border-2 border-[#7837eb] rounded-md bg-[#0f1423]'>

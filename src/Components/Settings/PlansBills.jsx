@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
+import PlanBillsModal from './PlanBillsModal';
 
 const PlansBills = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div className=''>
       <div className='text-2xl font-bold my-4'>Beat Registration Plan</div>
@@ -28,9 +31,10 @@ const PlansBills = () => {
         <div className=''>
           <h5 className='text-[#80858f] text-lg font-bold'>Get Extra Credits</h5>
           <p className='text-[#80858f] mt-1'>Need more? Purchase additional credits to register more beats.</p>
-          <button className='px-4 py-3 bg-[#7837eb] text-xs xl:text-base font-medium text-white rounded hover:bg-[#804cd8] mt-3'>Buy Extra Credits</button>
+          <button className='px-4 py-3 bg-[#7837eb] text-xs xl:text-base font-medium text-white rounded hover:bg-[#804cd8] mt-3' onClick={() => setShowModal(true)}>Buy Extra Credits</button>
         </div>
       </div>
+      <PlanBillsModal setShowModal={setShowModal} showModal={showModal} />
     </div>
   )
 }
