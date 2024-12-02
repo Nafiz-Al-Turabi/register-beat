@@ -23,9 +23,9 @@ const DashboardLayout = () => {
                         <FaBars className="text-2xl" />
                     </button>
                     <div>
-                        <input type="text" className="py-1.5 px-5 w-96 rounded-full outline-none bg-transparent text-gray-200  border-[0.5px] border-violet-400 " placeholder="Search your beat..." />
+                        <input type="text" className="py-1.5 px-5 w-full md:w-full  lg:w-96 rounded-full outline-none bg-transparent text-gray-200  border-[0.5px] border-violet-400 " placeholder="Search your beat..." />
                     </div>
-                    <button className="flex items-center text-xs lg:text-lg font-bold secondary-bg py-1.5 px-5 rounded-full hover:bg-violet-700 duration-300 active:scale-95 ">Register a Beat <FaPlus className="ml-2 text-xl border p-0.5 rounded-sm " /></button>
+                    <button className="flex items-center text-xs md:text-lg font-bold secondary-bg p-2 md:py-1.5 md:px-5 rounded-full hover:bg-violet-700 duration-300 active:scale-95 "><span className="hidden md:block">Register a Beat</span> <FaPlus className="md:ml-2 text-xl border p-0.5 rounded-sm " /></button>
                 </div>
 
                 {/* Content Section */}
