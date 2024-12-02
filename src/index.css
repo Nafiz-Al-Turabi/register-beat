@@ -65,7 +65,7 @@ body{
 
   @keyframes animates {
     0% {
-      opacity: 1;
+      opacity: 0;
       transform: translateY(-20%);
     }
     50% {
