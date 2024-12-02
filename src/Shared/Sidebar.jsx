@@ -53,7 +53,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                     <LuCreditCard className="mr-2" /> Manage Subscription
                                 </Link>
                                 <Link
-                                    to="/dashboard"
+                                    to="/upgrade"
                                     className="flex items-center text-base text-gray-300 hover:text-white"
                                 >
                                     <GrLineChart className="mr-2" /> Upgrade you Plan
@@ -87,7 +87,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         <FaCrown className="inline-block mr-2" /> Upgrade to Pro
                     </button>
                     <Link
-                        to="/dashboard/settings"
+                        to="/settings"
                         className="flex items-center text-lg text-gray-300 hover:text-white mb-2"
                     >
                         <FaCog className="mr-2" /> Settings
