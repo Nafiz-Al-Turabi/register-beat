@@ -17,7 +17,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
         {/* Sidebar */}
         <div
                 className={`fixed top-0 left-0 h-full bg-[#0f0f0f] w-64 p-4 flex flex-col transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-                    } md:translate-x-0 z-50`}
+                    } lg:translate-x-0 z-50`}
             >
                 <div className="relative">
                     <div onClick={toggleDropdown} className="flex items-center justify-between mb-8 border border-gray-700 bg-[#1e1e1e] p-3 rounded-md cursor-pointer">

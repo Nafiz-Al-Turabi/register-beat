@@ -8,6 +8,7 @@ import Signup from "../Pages/Signup/Signup";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Settings from "../Pages/Settings";
 import PlanPurchase from "../Pages/PlanPurchase/PlanPurchase";
+import RegisterBeat from "../Pages/RegisterBeat";
 
 export const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
             {
                 path: '/upgrade',
                 element: <PlanPurchase />
+            },
+            {
+                path: '/register-beat',
+                element: <RegisterBeat />
             },
         ]
     },
