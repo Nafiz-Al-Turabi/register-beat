@@ -34,7 +34,7 @@ const Faqs = () => {
   ];
 
   return (
-    <div className="max-w-[1216px] px-4 sm:px-6 lg:px-8 xl:px-0 mx-auto">
+    <div className="max-w-[1216px] lg:px-8 xl:px-0 mx-auto">
       <div className="flex flex-col">
         <h2 className="text-2xl font-bold md:text-4xl md:leading-tight text-center mb-24">Frequently Asked Questions</h2>
         <div>

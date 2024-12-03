@@ -42,7 +42,7 @@ const RegisterBeat = () => {
   return (
     <div className="flex flex-col p-4 animate-from-middle max-w-6xl mx-auto">
       <h1 className="text-4xl font-bold text-[#b079e9] text-center mb-8">Register a New Beat</h1>
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col md:flex-row gap-8">
         {/* Beat File Upload */}
         <div className="w-full lg:w-1/2 bg-gray-800 p-6 rounded-lg">
           <h2 className="text-2xl font-bold text-[#5fa5fa] mb-4">Upload Your Beat</h2>
@@ -53,10 +53,10 @@ const RegisterBeat = () => {
             }`}
           >
             <input {...audioDropzone.getInputProps()} />
-            <p className="py-3 px-5 bg-purple-600 text-white font-semibold rounded-full hover:bg-purple-500 transition">
+            <p className="py-3 px-5 bg-purple-600 text-sm md:text-base text-white font-semibold rounded-full hover:bg-purple-500 transition">
               {audio ? audio.name : 'Select or Drop Beat File'}
             </p>
-            <p className="mt-4 text-base text-gray-400">or drag and drop your beat file here</p>
+            <p className="mt-4 text-sm md:text-base text-gray-400">or drag and drop your beat file here</p>
           </div>
         </div>
 
@@ -70,10 +70,10 @@ const RegisterBeat = () => {
             }`}
           >
             <input {...imageDropzone.getInputProps()} />
-            <p className="py-3 px-5 bg-purple-600 text-white font-semibold rounded-full hover:bg-purple-500 transition">
+            <p className="py-3 px-5 bg-purple-600 text-sm md:text-base text-white font-semibold rounded-full hover:bg-purple-500 transition">
               {image ? image.name : 'Select or Drop Image File'}
             </p>
-            <p className="mt-4 text-base text-gray-400">or drag and drop your image file here</p>
+            <p className="mt-4 text-sm md:text-base text-gray-400">or drag and drop your image file here</p>
           </div>
         </div>
       </div>
