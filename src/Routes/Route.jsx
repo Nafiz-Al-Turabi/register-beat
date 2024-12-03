@@ -9,16 +9,17 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import Settings from "../Pages/Settings";
 import PlanPurchase from "../Pages/PlanPurchase/PlanPurchase";
 import RegisterBeat from "../Pages/RegisterBeat";
+import DashboardContents from "../Components/DashboardContents/DashboardContents";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <DashboardLayout />,
         children: [
-            // {
-            //     path: '/',
-            //     element: <Home />
-            // },
+            {
+                path: '/',
+                element: <DashboardContents />
+            },
             {
                 path: '/settings',
                 element: <Settings />
