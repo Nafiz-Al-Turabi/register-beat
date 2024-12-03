@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaBars, FaPlus } from "react-icons/fa";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Shared/Sidebar";
+import DashboardContents from "../Components/DashboardContents/DashboardContents";
 
 const DashboardLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -27,6 +28,7 @@ const DashboardLayout = () => {
                     </div>
                     <button className="flex items-center text-xs md:text-lg font-bold secondary-bg p-2 md:py-1.5 md:px-5 rounded-full hover:bg-violet-700 duration-300 active:scale-95 "><span className="hidden md:block">Register a Beat</span> <FaPlus className="md:ml-2 text-xl border p-0.5 rounded-sm " /></button>
                 </div>
+                <DashboardContents />
 
                 {/* Content Section */}
                 <div className="p-4">
