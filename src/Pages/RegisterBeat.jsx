@@ -3,9 +3,18 @@ import { useDropzone } from 'react-dropzone';
 import RegisterBeatForm from '../Components/RegisterBeat/RegisterBeatForm';
 
 const RegisterBeat = () => {
+  const [registerData, setRegisterData] = useState();
   const [audio, setAudio] = useState(null);
   const [image, setImage] = useState(null);
   const [isDragging, setIsDragging] = useState({ audio: false, image: false });
+
+  const data = {
+    registerData: registerData,
+    audio: audio,
+    image: image,
+    }
+
+  console.log('data', data)
 
   const onAudioDrop = (acceptedFiles) => {
     if (acceptedFiles[0]) {
@@ -41,7 +50,7 @@ const RegisterBeat = () => {
 
   return (
     <div className="flex flex-col p-4 animate-from-middle max-w-6xl mx-auto">
-      <h1 className="text-4xl font-bold text-[#b079e9] text-center mb-8">Register a New Beat</h1>
+      <h1 className="text-3xl md:text-4xl font-bold text-[#b079e9] text-center mb-8">Register a New Beat</h1>
       <div className="flex flex-col md:flex-row gap-8">
         {/* Beat File Upload */}
         <div className="w-full lg:w-1/2 bg-gray-800 p-6 rounded-lg">
@@ -78,7 +87,7 @@ const RegisterBeat = () => {
         </div>
       </div>
       <div className=''>
-        <RegisterBeatForm />
+        <RegisterBeatForm setRegisterData={setRegisterData} formData={data} />
       </div>
     </div>
   );

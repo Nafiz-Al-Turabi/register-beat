@@ -19,7 +19,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
     <>
         {showModal ? (
             <>
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="animate-from-middle justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                 <div className="relative w-auto my-6 mx-auto max-w-6xl">
                     {/*content*/}
                     <div className=" px-4 py-5 border-0 rounded-lg shadow-lg relative flex flex-col gap-2 w-full bg-[#0f0f0f] outline-none focus:outline-none">

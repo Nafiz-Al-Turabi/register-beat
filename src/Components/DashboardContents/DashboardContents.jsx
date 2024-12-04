@@ -8,7 +8,7 @@ const DashboardContents = () => {
         { beatName: "Chill Waves", regID: "REG004", regDate: "2023-06-12" },
       ];
     return (
-        <div className='lg:px-4 xl:px-10 xl:pt-20 '>
+        <div className='lg:px-4 xl:px-10 xl:pt-20 animate-from-middle'>
             <h1 className='text-5xl font-bold'> <span className="bg-gradient-to-r from-purple-500  to-violet-400 text-transparent bg-clip-text">
                 Dashboard
             </span></h1>
