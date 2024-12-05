@@ -10,6 +10,7 @@ import Settings from "../Pages/Settings";
 import PlanPurchase from "../Pages/PlanPurchase/PlanPurchase";
 import RegisterBeat from "../Pages/RegisterBeat";
 import DashboardContents from "../Components/DashboardContents/DashboardContents";
+import MyBeats from "../Pages/MyBeats/MyBeats";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             {
                 path: '/register-beat',
                 element: <RegisterBeat />
+            },
+            {
+                path: '/my-beats',
+                element: <MyBeats />
             },
         ]
     },

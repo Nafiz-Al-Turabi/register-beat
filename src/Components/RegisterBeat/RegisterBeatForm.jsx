@@ -52,7 +52,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
 
   return (
     <div className='max-w-3xl mx-auto pt-16 pb-8'>
-      <div className='bg-[#0f0f0f] p-10 md:p-20 rounded-lg'>
+      <div className='bg-[#0f0f0f] p-2 md:p-20 rounded-lg'>
         <h1 className='text-4xl font-bold text-white text-center'>Beat Information</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:grid md:grid-cols-2 gap-6 mt-8">
           {/* Full Name */}
