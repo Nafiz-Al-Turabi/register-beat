@@ -6,12 +6,16 @@ import { LuCreditCard } from "react-icons/lu";
 import { MdKeyboardArrowDown, MdOutlineDashboard } from "react-icons/md";
 import { RiMusic2Line, RiUser3Line } from "react-icons/ri";
 import { Link } from 'react-router-dom';
+import ManangeSubsPopup from '../Components/ManageSubscription/ManangeSubsPopup';
 
 const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     const [isDropdown, setDropdown] = useState(false)
+    const [showPopup, setShowPopup] = useState(false);
+
     const toggleDropdown = () => {
         setDropdown(!isDropdown)
     }
+
   return (
     <div>
         {/* Sidebar */}
@@ -46,12 +50,12 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                 >
                                     <RiUser3Line className="mr-2" /> Edit Profile
                                 </Link>
-                                <Link
-                                    to="/dashboard"
+                                <button
                                     className="flex items-center text-base text-gray-300 hover:text-white"
+                                    onClick={() => setShowPopup(true)}
                                 >
                                     <LuCreditCard className="mr-2" /> Manage Subscription
-                                </Link>
+                                </button>
                                 <Link
                                     to="/upgrade"
                                     className="flex items-center text-base text-gray-300 hover:text-white"
@@ -100,7 +104,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     </Link>
                 </div>
             </div>
-
+            {showPopup && <ManangeSubsPopup setShowPopup={setShowPopup} />}
             {/* Sidebar Overlay for Mobile */}
             {isSidebarOpen && (
                 <div
