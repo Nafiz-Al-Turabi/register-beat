@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { FaRegCircleCheck } from 'react-icons/fa6';
+import { FiCheckCircle } from 'react-icons/fi';
 import { PiWarningBold } from 'react-icons/pi';
 
 const ManangeSubsPopup = ({ setShowPopup }) => {
@@ -18,6 +20,11 @@ const ManangeSubsPopup = ({ setShowPopup }) => {
         // Ensure the card number is a string
         const str = cardNumber.toString();
         return str.slice(0, -4).replace(/\d/g, '*') + str.slice(-4);
+      }
+
+      const handleConfirmation = () => {
+        setShowBenefit(false);
+        setShowCancelSuccess(true);
       }
 
   return (
@@ -43,7 +50,21 @@ const ManangeSubsPopup = ({ setShowPopup }) => {
                                         <p className='flex items-center gap-2 text-slate-300'><PiWarningBold className='text-yellow-500 text-xl' /> Your beats will be exposed to the public</p>
                                         <p className='flex items-center gap-2 text-slate-300'><PiWarningBold className='text-yellow-500 text-xl' /> No premium access to features</p>
                                     </div>
-                                    <button className='w-full bg-red-600 font-semibold rounded-full py-2 mt-2 active:scale-95' onClick={() => setShowBenefit(true)}>Confirm Cancellation</button>
+                                    <button className='w-full bg-red-600 font-semibold rounded-full py-2 mt-2 active:scale-95' onClick={handleConfirmation}>Confirm Cancellation</button>
+                                </div>
+                            ) : showCancelSuccess ? ( 
+                                <div className='flex flex-col items-center justify-center gap-6'>
+                                    <div className='grid justify-center'>
+                                        <FiCheckCircle className='text-6xl text-green-600' />
+                                    </div>
+                                    <h2 className='text-2xl text-white font-bold'>Membership Cancelled</h2>
+                                    {/* <div className='flex flex-col gap-2'> */}
+                                        <p className="mt-2 text-base text-gray-400 text-center">Your membership has been successfully cancelled
+                                        Redirecting to dashboard...</p>
+                                    {/* </div> */}
+                                    <button onClick={() => setShowPopup(false)} className="bg-purple-600 text-white font-bold px-8 py-3 rounded-full w-full hover:bg-purple-700 transition active:scale-95">
+                                        Close
+                                    </button>
                                 </div>
                             ) : (
                                 <div className='flex flex-col gap-5 animate-from-middle'>

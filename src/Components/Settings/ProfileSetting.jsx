@@ -45,7 +45,7 @@ const ProfileSetting = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div>
                         <label htmlFor="username" className="block text-[#9da6be] text-sm font-medium mb-2">Username</label>
-                        <div className='flex justify-between items-center md:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
+                        <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
                                 type="text"
                                 id="username"
@@ -59,7 +59,7 @@ const ProfileSetting = () => {
                     </div>
                     <div>
                         <label htmlFor="email" className="block text-[#9da6be] text-sm font-medium mb-2">Email</label>
-                        <div className='flex justify-between items-center md:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
+                        <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
                                 type="email"
                                 id="email"
@@ -74,7 +74,7 @@ const ProfileSetting = () => {
                     </div>
                     <div>
                         <label htmlFor="full-name" className="block text-[#9da6be] text-sm font-medium mb-2">Full Name</label>
-                        <div className='flex justify-between items-center md:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
+                        <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
                                 type="text"
                                 id="full-name"
@@ -86,7 +86,7 @@ const ProfileSetting = () => {
                     </div>
                     <div>
                         <label htmlFor="full-name" className="block text-[#9da6be] text-sm font-medium mb-2">Producer Name</label>
-                        <div className='flex justify-between items-center md:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
+                        <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
                                 type="text"
                                 id="producer-name"
@@ -98,7 +98,7 @@ const ProfileSetting = () => {
                     </div>
                     <div>
                         <label htmlFor="youtube-channel" className="block text-[#9da6be] text-sm font-medium mb-2">Youtube Channel</label>
-                        <div className='flex justify-between items-center md:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
+                        <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
                                 type="text"
                                 id="youtube-channel"
