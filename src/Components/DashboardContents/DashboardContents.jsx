@@ -31,9 +31,9 @@ const DashboardContents = () => {
                 <h2 className="text-3xl font-bold mb-4"><span className="bg-gradient-to-r from-green-500  to-green-300 text-transparent bg-clip-text">
                 Recent Activity
             </span></h2>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto w-80 md:w-full">
                     <table className="min-w-full border-collapse">
-                        <thead className='border-b-2 border-gray-700 text-[#a1afc5]'>
+                        <thead className='border-b-2  border-gray-700 text-[#a1afc5]'>
                             <tr className="">
                                 <th className="p-4 text-left">Beat Name</th>
                                 <th className="p-4 text-left">Registration ID</th>
@@ -55,7 +55,7 @@ const DashboardContents = () => {
                                     </td>
                                     <td className="p-4">{item.regDate}</td>
                                     <td className="p-4">
-                                        <button className="bg-gradient-to-l to-purple-500 from-[#5046e6] font-bold text-white px-4 py-2 rounded-md text-sm">
+                                        <button className="bg-gradient-to-l to-purple-500 from-[#5046e6] hover:bg-gradient-to-r hover:to-purple-500 hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm">
                                             View Certificate
                                         </button>
                                     </td>

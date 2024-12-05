@@ -19,12 +19,12 @@ const Settings = () => {
 
   return (
     <div className='mx-2'>
-        {planActive && <div className='text-3xl font-bold p-4 mt-4'>Plans & Billing</div>} 
+        {planActive && <div className='text-3xl font-bold p-0 lg:p-4 mt-4'>Plans & Billing</div>} 
         <div className='flex gap-4  border-b border-[#464646]'>
             <button className={`pb-2 px-4 ${settingActive ? 'border-b-2 border-[#7335ed] text-[#7335ed]' : ''}`} onClick={() => handleActive('settings')}>Settings</button>
             <button className={`pb-2 px-4 ${planActive ? 'border-b-2 border-[#7335ed] text-[#7335ed]' : ''}`} onClick={() => handleActive('plans')}>Plan & Billing</button>
         </div>
-        <div className='p-4'>
+        <div className='p-0 lg:p-4'>
             {settingActive && (
                 <div className='animate-from-middle'>
                     <ProfileSetting />
