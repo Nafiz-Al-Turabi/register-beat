@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FaBars, FaPlus } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import Sidebar from "../Shared/Sidebar";
-import DashboardContents from "../Components/DashboardContents/DashboardContents";
 
 const DashboardLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -32,7 +31,7 @@ const DashboardLayout = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-4">
+                <div className="p-2">
                     <Outlet />
                 </div>
             </div>

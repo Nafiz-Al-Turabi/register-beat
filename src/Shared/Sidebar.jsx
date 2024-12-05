@@ -74,7 +74,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         <MdOutlineDashboard className="mr-2" /> Dashboard
                     </Link>
                     <Link
-                        to="/dashboard/my-beats"
+                        to="/my-beats"
                         className="flex items-center text-lg text-gray-300 hover:text-white"
                     >
                         <RiMusic2Line className="mr-2" /> My Beats

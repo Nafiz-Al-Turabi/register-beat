@@ -49,7 +49,7 @@ const RegisterBeat = () => {
   });
 
   return (
-    <div className="flex flex-col p-4 animate-from-middle max-w-6xl mx-auto">
+    <div className="flex flex-col p-1 lg:p-4 animate-from-middle max-w-6xl mx-auto">
       <h1 className="text-3xl md:text-4xl font-bold text-[#b079e9] text-center mb-8">Register a New Beat</h1>
       <div className="flex flex-col md:flex-row gap-8">
         {/* Beat File Upload */}
