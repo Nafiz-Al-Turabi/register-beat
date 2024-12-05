@@ -9,7 +9,7 @@ const BeatDetailsModal = () => {
     return (
         <div>
             <button
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600"
                 onClick={openModal}
             >
                 View Beat Details
@@ -44,7 +44,7 @@ const BeatDetailsModal = () => {
                                         href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-blue-400 hover:underline"
+                                        className="text-purple-400 hover:underline"
                                     >
                                         https://www.youtube.com/watch?v=dQw4w9WgXcQ
                                     </a>
