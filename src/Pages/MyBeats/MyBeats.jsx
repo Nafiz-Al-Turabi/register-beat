@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaRegEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import BeatDetailsModal from "../../Components/BeatDetailsModal/BeatDetailsModal";
 
 const MyBeats = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [beatDetails, setBeatDetails] = useState();
+    
+    const openModal = (data) => {
+        // console.log('data', data)
+        setIsOpen(true)
+        setBeatDetails(data)
+    }
+    
     // Full data
     const data = [
         { image: "https://via.placeholder.com/50", beatName: "Summer Vibes", totalMatched: "21", regID: "REG001", regDate: "2023-06-15" },
@@ -44,7 +54,7 @@ const MyBeats = () => {
                     Registered Beats
                 </span>
             </h1>
-            <div className="overflow-x-auto md:w-full">
+            <div className="overflow-x-auto w-[392px] md:w-full">
                 <table className="min-w-full border-collapse bg-[#374150] rounded-xl">
                     <thead className="border-b-2 border-gray-700 text-[#ffffff]">
                         <tr className="text-xs xl:text-base">
@@ -52,7 +62,7 @@ const MyBeats = () => {
                             <th className="p-4 text-left">Beat Name</th>
                             <th className="p-4 text-left">Registration ID</th>
                             <th className="p-4 text-left">Registration Date</th>
-                            <th className="p-4 text-left">Total Matches</th>
+                            <th className="p-4 text-left">Total Madatches</th>
                             <th className="p-4 text-left">View Matches</th>
                             <th className="p-4 text-left">Action</th>
                         </tr>
@@ -67,7 +77,7 @@ const MyBeats = () => {
                                         className="w-12 h-12 rounded-full"
                                     />
                                 </td>
-                                <td className="p-4 text-xs xl:text-base font-bold">{item.beatName}</td>
+                                <td className="p-4 text-xs xl:text-base font-bold hover:text-purple-500 cursor-pointer" onClick={() => openModal(item)}>{item.beatName}</td>
                                 <td className="p-4 text-xs xl:text-base">
                                     <span className="bg-purple-800 text-white px-3 py-1 rounded-full">
                                         {item.regID}
@@ -121,6 +131,7 @@ const MyBeats = () => {
                     <FaArrowRight />
                 </button>
             </div>
+            <BeatDetailsModal isOpen={isOpen} setIsOpen={setIsOpen} beatDetails={beatDetails} />
         </div>
     );
 };

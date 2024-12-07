@@ -28,7 +28,7 @@ const DashboardContents = () => {
     };
 
     return (
-        <div className='lg:px-4 xl:px-10 xl:pt-20 animate-from-middle'>
+        <div className='lg:px-4 xl:pt-20 animate-from-middle'>
             <h1 className='text-5xl font-bold'>
                 <span className="bg-gradient-to-r from-purple-500  to-violet-400 text-transparent bg-clip-text">
                     Dashboard

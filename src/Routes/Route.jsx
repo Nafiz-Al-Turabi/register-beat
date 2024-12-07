@@ -11,6 +11,8 @@ import PlanPurchase from "../Pages/PlanPurchase/PlanPurchase";
 import RegisterBeat from "../Pages/RegisterBeat";
 import DashboardContents from "../Components/DashboardContents/DashboardContents";
 import MyBeats from "../Pages/MyBeats/MyBeats";
+import Profile from "../Pages/Profile/Profile";
+import SongMatches from "../Pages/SongMatches/SongMatches";
 
 export const router = createBrowserRouter([
     {
@@ -36,6 +38,14 @@ export const router = createBrowserRouter([
             {
                 path: '/my-beats',
                 element: <MyBeats />
+            },
+            {
+                path: '/song-matches',
+                element: <SongMatches />
+            },
+            {
+                path: '/profile',
+                element: <Profile />
             },
         ]
     },

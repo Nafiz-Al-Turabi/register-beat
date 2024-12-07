@@ -45,7 +45,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         isDropdown && (
                             <div className="absolute space-y-5 -bottom-32 text-white bg-[#1e1e1e] p-4 w-full border border-gray-700 rounded-md animate-dropdown ">
                                 <Link
-                                    to="/dashboard"
+                                    to="/profile"
                                     className="flex items-center text-base text-gray-300 hover:text-white"
                                 >
                                     <RiUser3Line className="mr-2" /> Edit Profile
@@ -80,7 +80,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         <RiMusic2Line className="mr-2" /> My Beats
                     </Link>
                     <Link
-                        to="/dashboard/song-matches"
+                        to="/song-matches"
                         className="flex items-center text-lg text-gray-300 hover:text-white"
                     >
                         <FaHeadphonesSimple className="mr-2" />Song Matches
@@ -97,7 +97,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         <FaCog className="mr-2" /> Settings
                     </Link>
                     <Link
-                        to="/"
+                        to="/login"
                         className="flex items-center text-lg text-gray-300 hover:text-white"
                     >
                         <FaSignOutAlt className="mr-2" /> Log Out

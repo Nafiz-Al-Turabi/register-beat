@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 
-const BeatDetailsModal = () => {
-    const [isOpen, setIsOpen] = useState(false);
+const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
+    
+    // console.log('beatDetails', beatDetails)
 
-    const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
 
     return (
         <div>
-            <button
+            {/* <button
                 className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600"
                 onClick={openModal}
             >
                 View Beat Details
-            </button>
+            </button> */}
 
             {isOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-[#111111] text-white rounded-lg p-8 w-[90%] md:w-[50%]">
                         <div className="flex justify-between items-start">
-                            <h2 className="text-2xl font-bold">Summer Vibes</h2>
+                            <h2 className="text-2xl font-bold">{beatDetails?.beatName}</h2>
                             <button
                                 className="text-gray-400 hover:text-white text-2xl font-bold"
                                 onClick={closeModal}
@@ -28,13 +28,13 @@ const BeatDetailsModal = () => {
                             </button>
                         </div>
                         <p className="text-sm text-gray-400 mb-4">
-                            Registration ID: <span className="font-bold text-white">BS001</span>
+                            Registration ID: <span className="font-bold text-white">{beatDetails?.regID}</span>
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                             <div>
                                 <img
-                                    src="https://via.placeholder.com/150"
+                                    src={beatDetails?.image}
                                     alt="Beat Cover"
                                     className="rounded-lg mb-4"
                                 />
