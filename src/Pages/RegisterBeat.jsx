@@ -69,7 +69,7 @@ const RegisterBeat = () => {
             <p className="py-3 px-5 bg-purple-600 text-sm md:text-base text-white font-semibold rounded-full hover:bg-purple-500 transition">
               Select or Drop Beat File
             </p>
-            <p className="mt-4 text-sm md:text-base text-gray-400">or drag and drop your beat file here</p>
+            <p className="mt-4 text-sm md:text-base text-gray-400 text-center">or drag and drop your beat file here</p>
              {audio && <p className='flex justify-between items-center gap-2 text-lg text-[#c6b3ec] mt-3'><LuMusic className='font-bold' /> {audio.name}</p>}
           </div>
         </div>
@@ -87,7 +87,7 @@ const RegisterBeat = () => {
             <p className="py-3 px-5 bg-purple-600 text-sm md:text-base text-white font-semibold rounded-full hover:bg-purple-500 transition">
               Select or Drop Image File
             </p>
-            <p className="mt-4 text-sm md:text-base text-gray-400">or drag and drop your image file here</p>
+            <p className="mt-4 text-sm md:text-base text-gray-400 text-center">or drag and drop your image file here</p>
             {previewImage && <img src={previewImage} alt="" className='w-36 h-36 mt-4 object-cover rounded-lg' /> }
           </div>
         </div>
