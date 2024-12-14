@@ -62,8 +62,8 @@ const MyBeats = () => {
                             <th className="p-4 text-left">Beat Name</th>
                             <th className="p-4 text-left">Registration ID</th>
                             <th className="p-4 text-left">Registration Date</th>
-                            <th className="p-4 text-left">Total Madatches</th>
-                            <th className="p-4 text-left">View Matches</th>
+                            {/* <th className="p-4 text-left">Total Madatches</th> */}
+                            <th className="p-4 text-left">View Info</th>
                             <th className="p-4 text-left">Action</th>
                         </tr>
                     </thead>
@@ -84,10 +84,10 @@ const MyBeats = () => {
                                     </span>
                                 </td>
                                 <td className="p-4 text-xs xl:text-base">{item.regDate}</td>
-                                <td className="p-4 text-xs xl:text-base">{item.totalMatched}</td>
+                                {/* <td className="p-4 text-xs xl:text-base">{item.totalMatched}</td> */}
                                 <td className="p-4">
-                                    <button className="flex items-center gap-2 bg-gradient-to-l to-purple-500 from-[#5046e6] hover:bg-gradient-to-r hover:to-purple-500 hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-xs xl:text-base">
-                                        <FaRegEye /> View Matches
+                                    <button className="flex items-center gap-2 bg-gradient-to-l to-purple-500 from-[#5046e6] hover:bg-gradient-to-r hover:to-purple-500 hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-xs xl:text-base" onClick={() => openModal(item)}>
+                                        <FaRegEye /> View info
                                     </button>
                                 </td>
                                 <td className="p-4">

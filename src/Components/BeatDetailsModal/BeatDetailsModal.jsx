@@ -84,7 +84,15 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
                             <span className="font-bold">3rd Party Samples:</span> Yes
                         </p>
 
-                        <div className="mt-6 flex justify-end">
+                        <div className="mt-6 flex justify-end gap-4">
+                            <button
+                            className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700"
+                            onClick={() => {
+                                // Add delete functionality here
+                                console.log("Beat deleted");
+                            }}>
+                                Download Certificate
+                            </button>
                             <button
                                 className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
                                 onClick={() => {

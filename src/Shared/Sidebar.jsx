@@ -45,7 +45,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         isDropdown && (
                             <div className="absolute space-y-5 -bottom-32 text-white bg-[#1e1e1e] p-4 w-full border border-gray-700 rounded-md animate-dropdown ">
                                 <Link
-                                    to="/profile"
+                                    to="/settings"
                                     className="flex items-center text-base text-gray-300 hover:text-white"
                                 >
                                     <RiUser3Line className="mr-2" /> Edit Profile
@@ -79,17 +79,17 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     >
                         <RiMusic2Line className="mr-2" /> My Beats
                     </Link>
-                    <Link
+                    {/* <Link
                         to="/song-matches"
                         className="flex items-center text-lg text-gray-300 hover:text-white"
                     >
                         <FaHeadphonesSimple className="mr-2" />Song Matches
-                    </Link>
+                    </Link> */}
                 </nav>
-                <div className="mt-auto">
-                    <button className="bg-purple-500 text-white w-full py-2 rounded mb-4">
+                <div className="mt-auto border-t border-gray-800 py-4 flex flex-col gap-2">
+                    {/* <button className="bg-purple-500 text-white w-full py-2 rounded mb-4">
                         <FaCrown className="inline-block mr-2" /> Upgrade to Pro
-                    </button>
+                    </button> */}
                     <Link
                         to="/settings"
                         className="flex items-center text-lg text-gray-300 hover:text-white mb-2"
