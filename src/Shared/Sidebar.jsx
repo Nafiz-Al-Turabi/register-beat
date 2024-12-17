@@ -24,13 +24,13 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     } lg:translate-x-0 z-50`}
             >
                 <div className="relative">
-                    <div onClick={toggleDropdown} className="flex items-center justify-between mb-8 border border-gray-700 bg-[#1e1e1e] p-3 rounded-md cursor-pointer">
+                    <div onClick={toggleDropdown} className="flex items-center justify-between mb-8 border border-gray-700 bg-[#0f0f0f] p-3 rounded-md cursor-pointer">
                         <div className="flex items-center ">
-                            <div className="bg-gray-800 w-10 h-10 rounded-md flex items-center justify-center text-xl">
+                            <div className="bg-[#2f3947] w-8 h-8 rounded-md flex items-center justify-center text-sm">
                                 US
                             </div>
                             <div className="ml-3 ">
-                                <p className="text-sm">Usuario</p>
+                                <p className="text-sm font-semibold">Usuario</p>
                                 <p className="text-xs text-gray-400">Plan Básico</p>
                             </div>
                         </div>
@@ -45,20 +45,20 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         isDropdown && (
                             <div className="absolute space-y-5 -bottom-32 text-white bg-[#1e1e1e] p-4 w-full border border-gray-700 rounded-md animate-dropdown ">
                                 <Link
-                                    to="/profile"
-                                    className="flex items-center text-base text-gray-300 hover:text-white"
+                                    to="/settings"
+                                    className="flex items-center text-base text-white hover:text-white"
                                 >
                                     <RiUser3Line className="mr-2" /> Edit Profile
                                 </Link>
                                 <button
-                                    className="flex items-center text-base text-gray-300 hover:text-white"
+                                    className="flex items-center text-base text-white hover:text-white"
                                     onClick={() => setShowPopup(true)}
                                 >
                                     <LuCreditCard className="mr-2" /> Manage Subscription
                                 </button>
                                 <Link
                                     to="/upgrade"
-                                    className="flex items-center text-base text-gray-300 hover:text-white"
+                                    className="flex items-center text-base text-white hover:text-white"
                                 >
                                     <GrLineChart className="mr-2" /> Upgrade you Plan
                                 </Link>
@@ -66,43 +66,46 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         )
                     }
                 </div>
-                <nav className="space-y-6">
+                <nav className="space-y-6 mx-5">
                     <Link
                         to="/"
-                        className="flex items-center text-lg text-gray-300 hover:text-white"
+                        className="flex items-center text-lg text-[#e3e6ed] hover:text-white"
                     >
                         <MdOutlineDashboard className="mr-2" /> Dashboard
                     </Link>
                     <Link
                         to="/my-beats"
-                        className="flex items-center text-lg text-gray-300 hover:text-white"
+                        className="flex items-center text-lg text-[#e3e6ed] hover:text-white"
                     >
                         <RiMusic2Line className="mr-2" /> My Beats
                     </Link>
-                    <Link
+                    {/* <Link
                         to="/song-matches"
                         className="flex items-center text-lg text-gray-300 hover:text-white"
                     >
                         <FaHeadphonesSimple className="mr-2" />Song Matches
-                    </Link>
+                    </Link> */}
                 </nav>
-                <div className="mt-auto">
-                    <button className="bg-purple-500 text-white w-full py-2 rounded mb-4">
+                <div className="mt-auto border-t border-gray-800 py-4 flex flex-col gap-2">
+                    {/* <button className="bg-purple-500 text-white w-full py-2 rounded mb-4">
                         <FaCrown className="inline-block mr-2" /> Upgrade to Pro
-                    </button>
+                    </button> */}
                     <Link
                         to="/settings"
-                        className="flex items-center text-lg text-gray-300 hover:text-white mb-2"
+                        className="flex items-center text-lg text-[#e3e6ed] hover:text-white mb-2 mx-5"
                     >
                         <FaCog className="mr-2" /> Settings
                     </Link>
                     <Link
                         to="/login"
-                        className="flex items-center text-lg text-gray-300 hover:text-white"
+                        className="flex items-center text-lg text-[#e3e6ed] hover:text-white mx-5"
                     >
                         <FaSignOutAlt className="mr-2" /> Log Out
                     </Link>
                 </div>
+                <p className='text-xs text-gray-500'>
+                    <Link to='/terms' className='hover:underline'>Term of Use</Link> and <Link to='/privacy' className='hover:underline'>Privacy Policy</Link>
+                </p>
             </div>
             {showPopup && <ManangeSubsPopup setShowPopup={setShowPopup} />}
             {/* Sidebar Overlay for Mobile */}

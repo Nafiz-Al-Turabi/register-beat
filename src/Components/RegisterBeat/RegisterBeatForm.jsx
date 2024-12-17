@@ -57,7 +57,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:grid md:grid-cols-2 gap-6 mt-8">
           {/* Full Name */}
           <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               Full Name
             </label>
             <input
@@ -73,7 +73,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
 
           {/* Beat Name */}
           <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               Beat Name
             </label>
             <input
@@ -89,7 +89,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
 
           {/* BPM */}
           <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               BPM
             </label>
             <input
@@ -105,7 +105,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
 
           {/* Genre */}
           <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               Genre
             </label>
             <input
@@ -121,7 +121,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
 
           {/* Date of Release */}
           <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               Date of Release
             </label>
             <input
@@ -136,7 +136,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
 
           {/* YouTube URL */}
           <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               YouTube URL
             </label>
             <input
@@ -147,35 +147,9 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             />
           </div>
 
-          {/* Collaborators */}
-          <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
-              Name of Collaborators
-            </label>
-            <input
-              type="text"
-              placeholder="Enter the names of collaborators"
-              {...register('collaborators')}
-              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
-            />
-          </div>
-
-          {/* Producer name of Collaborators */}
-          <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
-              Producer name of Collaborators
-            </label>
-            <input
-              type="text"
-              placeholder="Enter the producer name"
-              {...register('producerName')}
-              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
-            />
-          </div>
-
           {/* Are you the only producer? */}
           <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               Are you the only producer on this beat?
             </label>
             <select
@@ -193,9 +167,52 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
 
+          {/* Collaborators */}
+          <div>
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+              Name of Collaborators
+            </label>
+            <input
+              type="text"
+              placeholder="Enter the names of collaborators"
+              {...register('collaborators')}
+              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+            />
+          </div>
+
+          {/* Producer name of Collaborators */}
+          <div>
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+              Producer name of Collaborators
+            </label>
+            <input
+              type="text"
+              placeholder="Enter the producer name"
+              {...register('producerName')}
+              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+            />
+          </div>
+
+          {/* Collab percentage (%) Of other producer */}
+          <div>
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+              Collab percentage (%) Of other producer
+            </label>
+            <input
+              type="number"
+              placeholder="Enter the percentage"
+              {...register('percentage')}
+              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+            />
+            {/* {errors.percentage && (
+              <p className="text-red-500 text-xs mt-1">{errors.percentage.message}</p>
+            )} */}
+          </div>
+
+
           {/* Contains 3rd party samples */}
           <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               This beat contains 3rd party samples
             </label>
             <select
@@ -213,22 +230,6 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
 
-          {/* Collab percentage (%) Of other producer */}
-          <div>
-            <label className="block text-[#9da6be] text-sm font-medium mb-2">
-              Collab percentage (%) Of other producer
-            </label>
-            <input
-              type="number"
-              placeholder="Enter the percentage"
-              {...register('percentage')}
-              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
-            />
-            {/* {errors.percentage && (
-              <p className="text-red-500 text-xs mt-1">{errors.percentage.message}</p>
-            )} */}
-          </div>
-
           {/* Terms and Conditions */}
           <div className="col-span-2">
             <label className="flex items-center space-x-2">
@@ -237,7 +238,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
                 {...register('terms', { required: 'You must agree to continue' })}
                 className="w-4 h-4 bg-[#1e2837] text-purple-600 rounded focus:ring-purple-600"
               />
-              <span className="text-[#9da6be] text-sm">
+              <span className="text-[#e3e6ed] text-sm">
                 I agree to the terms and conditions
               </span>
             </label>
