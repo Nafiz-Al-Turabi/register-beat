@@ -63,16 +63,16 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         )
                     }
                 </div>
-                <nav className="space-y-6 mx-5">
+                <nav className="space-y-2">
                     <Link
                         to="/"
-                        className="flex items-center text-lg text-[#e3e6ed] hover:text-white"
+                        className="flex items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded hover:bg-[#191919]"
                     >
                         <MdOutlineDashboard className="mr-2" /> Dashboard
                     </Link>
                     <Link
                         to="/my-beats"
-                        className="flex items-center text-lg text-[#e3e6ed] hover:text-white"
+                        className="flex items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded hover:bg-[#191919]"
                     >
                         <RiMusic2Line className="mr-2" /> My Beats
                     </Link>
@@ -83,19 +83,19 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         <FaHeadphonesSimple className="mr-2" />Song Matches
                     </Link> */}
                 </nav>
-                <div className="mt-auto border-t border-gray-800 py-4 flex flex-col gap-2">
+                <div className="mt-auto border-t border-gray-800 flex flex-col py-2">
                     {/* <button className="bg-purple-500 text-white w-full py-2 rounded mb-4">
                         <FaCrown className="inline-block mr-2" /> Upgrade to Pro
                     </button> */}
                     <Link
                         to="/settings"
-                        className="flex items-center text-lg text-[#e3e6ed] hover:text-white mb-2 mx-5"
+                        className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
                     >
                         <FaCog className="mr-2" /> Settings
                     </Link>
                     <Link
                         to="/login"
-                        className="flex items-center text-lg text-[#e3e6ed] hover:text-white mx-5"
+                        className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
                     >
                         <FaSignOutAlt className="mr-2" /> Log Out
                     </Link>
