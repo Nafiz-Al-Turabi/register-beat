@@ -11,12 +11,12 @@ const DashboardLayout = () => {
     };
 
     return (
-        <div className="flex min-h-screen  text-white">
+        <div className="md:flex min-h-screen  text-white">
             <Sidebar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
             {/* Main Content */}
             <div className="flex-1 lg:ml-64 lg:z-50 ">
-                <div className="flex items-center justify-between gap-4 bg-[#0f0f0f] p-4 md:pl-8 sticky top-0">
-                    <div className="flex items-center gap-5">
+                <div className="flex items-center justify-between gap-4 bg-[#0f0f0f] px-4 md:px-12 py-4 md:pl-8 sticky top-0">
+                    <div className="flex items-center gap-5 md:pl-4">
                         <button
                             className="text-white lg:hidden"
                             onClick={toggleSidebar}
@@ -33,7 +33,7 @@ const DashboardLayout = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className="px-12 py-2">
+                <div className="max-w-full mx-4 md:mx-12 py-2">
                     <Outlet />
                 </div>
             </div>

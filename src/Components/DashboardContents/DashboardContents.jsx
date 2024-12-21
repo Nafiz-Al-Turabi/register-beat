@@ -56,7 +56,7 @@ const DashboardContents = () => {
                 </h2>
                 {
                     data.length > 0 ? (
-                        <div className="overflow-x-auto w-[360px] md:w-full">
+                        <div className="overflow-x-auto  md:w-full">
                             <table className="min-w-full border-collapse">
                                 <thead className='border-b-2  border-gray-700 text-[#a1afc5]'>
                                     <tr className="">
