@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import ManangeSubsPopup from '../Components/ManageSubscription/ManangeSubsPopup';
 
 const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
-    const [isDropdown, setDropdown] = useState(false)
+    const [isDropdown, setDropdown] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
 
     const toggleDropdown = () => {
@@ -40,9 +40,9 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     </div>
                     {
                         isDropdown && (
-                            <div className="absolute space-y-5 -bottom-32 text-white bg-[#1e1e1e] p-4 w-full border border-gray-700 rounded-md animate-dropdown ">
+                            <div className="absolute space-y-5 -bottom-20 text-white bg-[#1e1e1e] p-4 w-full border border-gray-700 rounded-md animate-dropdown ">
                                 <Link
-                                    to="/settings"
+                                    to="/settings?name=profile"
                                     className="flex items-center text-base text-white hover:text-white"
                                 >
                                     <RiUser3Line className="mr-2" /> Edit Profile
@@ -53,12 +53,12 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                 >
                                     <LuCreditCard className="mr-2" /> Manage Subscription
                                 </button>
-                                <Link
+                                {/* <Link
                                     to="/upgrade"
                                     className="flex items-center text-base text-white hover:text-white"
                                 >
                                     <GrLineChart className="mr-2" /> Upgrade you Plan
-                                </Link>
+                                </Link> */}
                             </div>
                         )
                     }

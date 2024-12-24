@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import PlanBillsModal from './PlanBillsModal';
+import ManangeSubsPopup from '../ManageSubscription/ManangeSubsPopup';
 
 const PlansBills = () => {
   const [showModal, setShowModal] = useState(false);
+  const [managePopup, setManagePopup] = useState(false);
 
   return (
     <div className=''>
@@ -15,8 +17,8 @@ const PlansBills = () => {
             <p className='text-[#80858f]'>Renews on September 28th, 2024.</p>
           </div>
           <div className='flex flex-row gap-2 items-end'>
-            <button className='p-3 bg-[#1e2837] text-xs xl:text-base text-white rounded hover:bg-gray-600 active:scale-95'>Manage billing</button>
-            <button className='p-3 bg-[#7837eb] text-xs xl:text-base text-white rounded hover:bg-[#804cd8] active:scale-95'>Update Plan</button>
+            <button className='p-3 bg-[#7837eb] text-xs xl:text-base text-white rounded hover:bg-[#804cd8] active:scale-95' onClick={() => setManagePopup(true)}>Manage billing</button>
+            {/* <button className='p-3 bg-[#7837eb] text-xs xl:text-base text-white rounded hover:bg-[#804cd8] active:scale-95'>Update Plan</button> */}
           </div>
         </div>
         <div className=''>
@@ -34,6 +36,7 @@ const PlansBills = () => {
           <button className='px-4 py-3 bg-[#7837eb] text-xs xl:text-base font-medium text-white rounded hover:bg-[#804cd8] active:scale-95 mt-3' onClick={() => setShowModal(true)}>Buy Extra Credits</button>
         </div>
       </div>
+      {managePopup && <ManangeSubsPopup setShowPopup={setManagePopup} />}
       <PlanBillsModal setShowModal={setShowModal} showModal={showModal} />
     </div>
   )

@@ -48,16 +48,16 @@ const MyBeats = () => {
     };
 
     return (
-        <div className="p-2 lg:p-4">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-purple-500 to-violet-400 text-transparent bg-clip-text">
+        <div className="p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle">
+            <h1 className="text-xl xl:text-3xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-[#7837eb] to-violet-400 text-transparent bg-clip-text">
                     Registered Beats
                 </span>
             </h1>
-            <div className="overflow-x-auto w-[392px] md:w-full">
-                <table className="min-w-full border-collapse bg-[#374150] rounded-xl">
-                    <thead className="border-b-2 border-gray-700 text-[#ffffff]">
-                        <tr className="text-xs xl:text-base">
+            <div className="overflow-x-auto  md:w-full">
+                <table className="min-w-full border-collapse">
+                    <thead className='border-b-2  border-gray-700 text-[#a1afc5]'>
+                        <tr className="text-sm md:text-base">
                             <th className="p-4 text-left">Image</th>
                             <th className="p-4 text-left">Beat Name</th>
                             <th className="p-4 text-left">Registration ID</th>
@@ -67,9 +67,9 @@ const MyBeats = () => {
                             <th className="p-4 text-left">Action</th>
                         </tr>
                     </thead>
-                    <tbody className="text-[#ffffff] bg-[#1e2837] rounded-b-full">
+                    <tbody className='divide-y-[1px] divide-[#2d344b] text-[#a1afc5]'>
                         {currentData.map((item, index) => (
-                            <tr key={index}>
+                            <tr key={index} className="hover:bg-gradient-to-tl hover:to-[#192332] hover:via-[#22314b] hover:from-[#141928]">
                                 <td className="p-4 text-xs xl:text-base">
                                     <img
                                         src={item.image}
@@ -77,16 +77,16 @@ const MyBeats = () => {
                                         className="w-12 h-12 rounded-full"
                                     />
                                 </td>
-                                <td className="p-4 text-xs xl:text-base font-bold hover:text-purple-500 cursor-pointer" onClick={() => openModal(item)}>{item.beatName}</td>
+                                <td className="p-4 text-xs xl:text-base font-medium text-white hover:text-[#7837eb] cursor-pointer" onClick={() => openModal(item)}>{item.beatName}</td>
                                 <td className="p-4 text-xs xl:text-base">
-                                    <span className="bg-purple-800 text-white px-3 py-1 rounded-full">
+                                    <span className="bg-[#7837eb] text-white px-3 py-1 rounded-full">
                                         {item.regID}
                                     </span>
                                 </td>
-                                <td className="p-4 text-xs xl:text-base">{item.regDate}</td>
+                                <td className="p-4 text-xs xl:text-base text-white">{item.regDate}</td>
                                 {/* <td className="p-4 text-xs xl:text-base">{item.totalMatched}</td> */}
                                 <td className="p-4">
-                                    <button className="flex items-center gap-2 bg-gradient-to-l to-purple-500 from-[#5046e6] hover:bg-gradient-to-r hover:to-purple-500 hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-xs xl:text-base" onClick={() => openModal(item)}>
+                                    <button className="flex items-center gap-2 bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-xs xl:text-base" onClick={() => openModal(item)}>
                                         <FaRegEye /> More info
                                     </button>
                                 </td>
@@ -115,7 +115,7 @@ const MyBeats = () => {
                         key={index}
                         className={`px-4 py-2 rounded-md ${
                             currentPage === index + 1
-                                ? "bg-purple-500 text-white"
+                                ? "bg-[#7837eb] text-white"
                                 : "bg-gray-600 text-white hover:bg-gray-700"
                         }`}
                         onClick={() => goToPage(index + 1)}

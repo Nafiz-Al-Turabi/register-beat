@@ -251,7 +251,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
           <div className="col-span-2 flex justify-center mt-6">
             <button
               type="submit"
-              className="bg-purple-600 text-white font-bold px-8 py-3 rounded-lg hover:bg-purple-700 transition active:scale-95"
+              className="bg-[#7837eb] text-white font-bold px-8 py-3 rounded-lg hover:bg-[#894fee] transition active:scale-95"
             >
               Register Beat
             </button>

@@ -62,11 +62,11 @@ const RegisterBeat = () => {
           <div
             {...audioDropzone.getRootProps()}
             className={`border-2 border-dashed flex flex-col items-center rounded py-8 cursor-pointer transition ${
-              isDragging.audio ? 'bg-purple-900/50 border-purple-600' : 'border-purple-500'
+              isDragging.audio ? 'bg-purple-900/50 border-purple-600' : 'border-[#7837eb]'
             }`}
           >
             <input {...audioDropzone.getInputProps()} />
-            <p className="py-3 px-5 bg-purple-600 text-sm md:text-base text-white font-semibold rounded-full hover:bg-purple-500 transition">
+            <p className="py-3 px-5 bg-[#7837eb] text-sm md:text-base text-white font-semibold rounded-full hover:bg-[#8749f1] transition active:scale-95">
               Select or Drop Beat File
             </p>
             <p className="mt-4 text-sm md:text-base text-gray-400 text-center">or drag and drop your beat file here</p>
@@ -80,11 +80,11 @@ const RegisterBeat = () => {
           <div
             {...imageDropzone.getRootProps()}
             className={`border-2 border-dashed flex flex-col items-center rounded py-8 cursor-pointer transition ${
-              isDragging.image ? 'bg-purple-900/50 border-purple-600' : 'border-purple-500'
+              isDragging.image ? 'bg-purple-900/50 border-purple-600' : 'border-[#7837eb]'
             }`}
           >
             <input {...imageDropzone.getInputProps()} />
-            <p className="py-3 px-5 bg-purple-600 text-sm md:text-base text-white font-semibold rounded-full hover:bg-purple-500 transition">
+            <p className="py-3 px-5 bg-[#7837eb] text-sm md:text-base text-white font-semibold rounded-full hover:bg-[#8749f1] transition active:scale-95">
               Select or Drop Image File
             </p>
             <p className="mt-4 text-sm md:text-base text-gray-400 text-center">or drag and drop your image file here</p>

@@ -28,23 +28,23 @@ const DashboardContents = () => {
     return (
         <div className=' animate-from-middle'>
             {/* <h1 className='text-5xl font-bold mt-4'>
-                <span className="bg-gradient-to-r from-purple-500  to-violet-400 text-transparent bg-clip-text">
+                <span className="bg-gradient-to-r from-[#7837eb]  to-violet-400 text-transparent bg-clip-text">
                     Dashboard
                 </span>
             </h1> */}
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
                 <div className='bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-xl hover:scale-105 duration-200'>
-                    <h1 className='text-xl xl:text-3xl mb-4 font-bold text-[#a1afc5]'>Beats Registered</h1>
+                    <h1 className='text-xl xl:text-2xl mb-4 font-extrabold text-[#c8ccd3]'>Beats Registered</h1>
                     <p className='text-4xl font-extrabold text-blue-400'><span className="bg-gradient-to-r from-blue-500  to-violet-500 text-transparent bg-clip-text">{data.length}</span></p>
                 </div>
                 <div className='bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-xl hover:scale-105 duration-200'>
-                    <h1 className='text-xl xl:text-3xl mb-4 font-bold text-[#a1afc5]'>Credits</h1>
+                    <h1 className='text-xl xl:text-2xl mb-4 font-extrabold text-[#c8ccd3]'>Credits</h1>
                     <p className='text-4xl font-extrabold text-blue-400'><span className="bg-gradient-to-r from-blue-500  to-violet-500 text-transparent bg-clip-text">20</span></p>
                 </div>
                 <div className='bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-xl hover:scale-105 duration-200'>
-                    <h1 className='text-xl xl:text-3xl mb-4 font-bold text-[#a1afc5]'>Need more credits?</h1>
+                    <h1 className='text-xl xl:text-2xl mb-4 font-extrabold text-[#c8ccd3]'>Need more credits?</h1>
                     {/* <p className='text-4xl font-extrabold text-blue-400'><span className="bg-gradient-to-r from-blue-500  to-violet-500 text-transparent bg-clip-text">Active</span></p> */}
-                    <button className='bg-gradient-to-l to-purple-500 from-[#5046e6] hover:bg-gradient-to-r hover:to-purple-500 hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm' onClick={() => setShowModal(true)}>Get Extra Credits</button>
+                    <button className='bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm' onClick={() => setShowModal(true)}>Get Extra Credits</button>
                 </div>
             </div>
 
@@ -66,10 +66,10 @@ const DashboardContents = () => {
                                         <th className="p-4 text-left">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody className='divide-y-[1px] divide-[#2d344b] text-[#a1afc5]'>
+                                <tbody className='divide-y-[1px] divide-[#2d344b] text-white'>
                                     {currentData.map((item, index) => (
                                         <tr key={index}>
-                                            <td className="p-4 font-bold">{item.beatName}</td>
+                                            <td className="p-4 font-medium">{item.beatName}</td>
                                             <td className="py-5">
                                                 <span className="bg-purple-800 text-white px-3 py-1 rounded-full text-sm">
                                                     {item.regID}
@@ -77,7 +77,7 @@ const DashboardContents = () => {
                                             </td>
                                             <td className="p-4">{item.regDate}</td>
                                             <td className="p-4">
-                                                <button className="bg-gradient-to-l to-purple-500 from-[#5046e6] hover:bg-gradient-to-r hover:to-purple-500 hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm">
+                                                <button className="bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm">
                                                     View Certificate
                                                 </button>
                                             </td>
@@ -106,7 +106,7 @@ const DashboardContents = () => {
                                 onClick={() => handlePageChange(index + 1)}
                                 className={`px-4 py-2 rounded-md ${
                                     currentPage === index + 1
-                                        ? 'bg-purple-500 text-white'
+                                        ? 'bg-[#7837eb] text-white'
                                         : 'bg-gray-700 text-[#a1afc5] hover:bg-gray-600'
                                 }`}
                             >

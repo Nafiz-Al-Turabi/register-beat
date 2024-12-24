@@ -7,7 +7,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
     const closeModal = () => setIsOpen(false);
 
     return (
-        <div>
+        <div className="">
             {/* <button
                 className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600"
                 onClick={openModal}
@@ -16,7 +16,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
             </button> */}
 
             {isOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 animate-from-middle">
                     <div className="bg-[#111111] text-white rounded-lg p-8 w-[90%] md:w-[50%]">
                         <div className="flex justify-between items-start">
                             <h2 className="text-2xl font-bold">{beatDetails?.beatName}</h2>
