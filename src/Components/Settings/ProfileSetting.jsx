@@ -1,19 +1,57 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiDotsThree } from "react-icons/pi";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
+import axiosInstance from '../../Axios/AxiosInstance';
+import toast from 'react-hot-toast';
 
 const ProfileSetting = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [image, setImage] = useState('');
+    const { user } = useContext(AuthContext);
 
     const handleFile = (file) => {
         const fileUrl = URL.createObjectURL(file);
         setImage(fileUrl);
     };
 
-    const onSubmit = (data) => {
-        console.log(data); // This should show the submitted data if inputs are valid
+    const onSubmit = async (data) => {
+        try {
+            const formData = new FormData();  
+            formData.append('username', data.username);
+            formData.append('email', data.email);
+            formData.append('fullName', data["full-name"] || '');
+            formData.append('producerName', data["producer-name"] || '');
+            formData.append('youtubeChannel', data["youtube-channel"] || '');
+    
+            if (data["new-password"]) {
+                if (data["new-password"] !== data.confirmPassword) {
+                    toast.error("Passwords do not match");
+                    return;
+                }
+                formData.append('newpassword', data["new-password"]);
+                formData.append('confirmPassword', data.confirmPassword);
+            }
+    
+            if (image) {
+                formData.append('avatar', image.file[0]);  
+            }
+            console.log(formData)
+            const response = await axiosInstance.put(`/users/update-profile/${user?._id}`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+    
+            if (response.status === 200) {
+                toast.success('Profile updated successfully!');
+            } else {
+                throw new Error('Unexpected error while updating profile.');
+            }
+        } catch (error) {
+            const errorMsg = error.response?.data?.message || 'Profile update failed. Please try again.';
+            toast.error(errorMsg);
+            console.error('Profile update error:', error);
+        }
     };
 
     return (
@@ -22,7 +60,7 @@ const ProfileSetting = () => {
             <div>
                 <div className='flex gap-4 mt-4'>
                     <div className='bg-[#1e2837] rounded-lg w-20 h-20'>
-                        <img src={image} alt="" className={`${image ? 'object-cover w-full h-full' : ''} rounded-lg`} />
+                        <img src={image || user?.profilePicture} alt="Profile" className={`${image ? 'object-cover w-full h-full' : ''} rounded-lg`} />
                     </div>
                     <button>
                         <label htmlFor="uploadFile1" className="flex bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
@@ -50,6 +88,7 @@ const ProfileSetting = () => {
                                 type="text"
                                 id="username"
                                 placeholder="Enter your name"
+                                defaultValue={user?.username}
                                 {...register("username", { required: "Username is required" })}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
@@ -64,6 +103,7 @@ const ProfileSetting = () => {
                                 type="email"
                                 id="email"
                                 placeholder="Enter your email"
+                                defaultValue={user?.email}
                                 {...register("email", { required: "Email is required" })}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
@@ -79,18 +119,20 @@ const ProfileSetting = () => {
                                 type="text"
                                 id="full-name"
                                 placeholder="Enter your full name"
+                                defaultValue={user?.fullName}
                                 {...register("full-name")}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="full-name" className="block text-[#e3e6ed] text-sm font-medium mb-2">Producer Name</label>
+                        <label htmlFor="producer-name" className="block text-[#e3e6ed] text-sm font-medium mb-2">Producer Name</label>
                         <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
                                 type="text"
                                 id="producer-name"
                                 placeholder="Enter your producer name"
+                                defaultValue={user?.producerName}
                                 {...register("producer-name")}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
@@ -103,6 +145,7 @@ const ProfileSetting = () => {
                                 type="text"
                                 id="youtube-channel"
                                 placeholder="Enter your youtube channel URL"
+                                defaultValue={user?.youtubeChannel}
                                 {...register("youtube-channel")}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
@@ -118,9 +161,7 @@ const ProfileSetting = () => {
                                 {...register("new-password")}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
-                            <PiDotsThree className='bg-red-500 w-6 h-6 rounded' />
                         </div>
-                        {/* {errors.username && <p className="text-red-500 text-xs mt-1">{errors.new-password.message}</p>} */}
                     </div>
                     <div>
                         <label htmlFor="confirmPassword" className="block text-[#e3e6ed] text-sm font-medium mb-2">Confirm Password</label>
@@ -128,13 +169,10 @@ const ProfileSetting = () => {
                             <input
                                 type="password"
                                 id="confirmPassword"
-                                placeholder="Enter confirm password"
-                                {...register("confirmPassword", { 
-                                    validate: (value) => value === watch('new-password') || "Passwords do not match" 
-                                  })}
+                                placeholder="Confirm password"
+                                {...register("confirmPassword", { validate: (value) => value === watch('new-password') || "Passwords do not match" })}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
-                            <PiDotsThree className='bg-red-500 w-6 h-6 rounded' />
                         </div>
                         {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>}
                     </div>
