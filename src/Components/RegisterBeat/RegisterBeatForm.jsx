@@ -1,54 +1,92 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import RegisterBeatPopup from './RegisterBeatPopup';
 import CompletedPopup from './CompletedPopup';
+import axiosInstance from '../../Axios/AxiosInstance';
 
 const RegisterBeatForm = ({ setRegisterData, formData }) => {
-  const { register, handleSubmit, formState: { errors }, watch } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [showPopup, setShowPopup] = useState(false);
   const [progress, setProgress] = useState(0);
   const [success, setSuccess] = useState(false);
   const [showCompletedPopup, setShowCompletedPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    let isMounted = true;
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const simulateProgress = async () => {
+    for (let i = 0; i <= 100; i += 20) {
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      setProgress((prev) => (prev < 100 ? i : 100));
+    }
+  };
 
   const simulateApiCall = async (data) => {
-    setShowPopup(true);
+    // setShowPopup(true);
     setProgress(0);
     setSuccess(false);
+    setErrorMessage('');
 
-    // Simulating an API call with progress
-    for (let i = 0; i <= 100; i += 20) {
-      await new Promise((resolve) => setTimeout(resolve, 300)); // Simulate delay
-      setProgress(i); // Update progress
+    try {
+      // Creating FormData to include audio and image files
+      const payload = new FormData();
+      payload.append('fullName', data.fullName);
+      payload.append('beatName', data.beatName);
+      payload.append('bpm', data.bpm);
+      payload.append('genre', data.genre);
+      payload.append('releaseDate', data.releaseDate);
+      payload.append('youtubeUrl', data.youtubeUrl);
+      payload.append('isOnlyProducer', data.isOnlyProducer);
+      payload.append('collaborators', data.collaborators || '');
+      payload.append('producerName', data.producerName || '');
+      payload.append('percentage', data.percentage || '');
+      payload.append('containsSamples', data.containsSamples);
+      payload.append('terms', data.terms);
+
+      // Append files
+      if (formData.audio) {
+        payload.append('audio', formData.audio);
+      }
+      if (formData.image) {
+        payload.append('image', formData.image);
+      }
+
+      const response = await axiosInstance.post('/beat/create-beat', payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Important for sending files
+        },
+      });
+
+      console.log(response.data);
+      // await simulateProgress(); // Simulate progress bar update
+      // return { success: true };
+    } catch (error) {
+      console.error('Error:', error);
+      setErrorMessage('Failed to register. Please try again.');
+      return { success: false };
     }
-
-    // Simulate API success response
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ success: true });
-      }, 500);
-    });
   };
 
   const onSubmit = async (data) => {
-    try {
-      setRegisterData(data); // Pass data to parent
-      const response = await simulateApiCall(formData);
+    setRegisterData(data);
 
-      if (response.success) {
-        setSuccess(true);
-        // setTimeout(() => setShowCompletedPopup(true), 2000);
-        setTimeout(() => {
-          setShowPopup(false);
-          setShowCompletedPopup(true)
-        }, 2000)
-        
-      }
-    } catch (error) {
-      console.error('Error during registration:', error);
+    const response = await simulateApiCall(data);
+
+    if (response.success) {
+      setSuccess(true);
+      setTimeout(() => {
+        setShowPopup(false);
+        setShowCompletedPopup(true);
+      }, 2000);
+    } else {
       setSuccess(false);
     }
   };
-
 
   return (
     <div className='max-w-3xl mx-auto pt-16 pb-8'>
