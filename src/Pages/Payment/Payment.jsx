@@ -5,7 +5,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import CheckoutForm from '../../Components/CheckoutForm/CheckoutForm';
 
-const stripePromise = loadStripe("pk_test_51PylxMEutx1ydWq1n1MswnBHTlsEuuZzJxZzDIZOPV0tqvhbqiiZI443twXhWN1yNnegA2jXSGHpq3POrwMY2jRQ00RrEFv8fT");
+const stripePromise = loadStripe("pk_test_51QFpATLEvlBZD5dJaha6mJPocvY5x6EoeWDg3DVjMIFdAwRzxN6sNlimMO6xW3hk3a7STUMQtVi6vb2NWu1Vc46c000l8Y7yha");
 
 const Payment = () => {
   const [priceId, setPriceId] = useState(null);  
