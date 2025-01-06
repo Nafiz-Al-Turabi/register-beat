@@ -8,23 +8,25 @@ import toast from 'react-hot-toast';
 
 const ProfileSetting = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const [image, setImage] = useState('');
+    const [imageFile, setImageFile] = useState(null);
+    const [previewImage, setPreviewImage] = useState('');
     const { user } = useContext(AuthContext);
 
     const handleFile = (file) => {
         const fileUrl = URL.createObjectURL(file);
-        setImage(fileUrl);
+        setImageFile(file);
+        setPreviewImage(fileUrl);
     };
 
     const onSubmit = async (data) => {
         try {
-            const formData = new FormData();  
+            const formData = new FormData();
             formData.append('username', data.username);
             formData.append('email', data.email);
             formData.append('fullName', data["full-name"] || '');
             formData.append('producerName', data["producer-name"] || '');
             formData.append('youtubeChannel', data["youtube-channel"] || '');
-    
+
             if (data["new-password"]) {
                 if (data["new-password"] !== data.confirmPassword) {
                     toast.error("Passwords do not match");
@@ -33,15 +35,15 @@ const ProfileSetting = () => {
                 formData.append('newpassword', data["new-password"]);
                 formData.append('confirmPassword', data.confirmPassword);
             }
-    
-            if (image) {
-                formData.append('avatar', image.file[0]);  
+
+            if (imageFile) {
+                formData.append('avatar', imageFile);
             }
-            console.log(formData)
+
             const response = await axiosInstance.put(`/users/update-profile/${user?._id}`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-    
+
             if (response.status === 200) {
                 toast.success('Profile updated successfully!');
             } else {
@@ -60,7 +62,7 @@ const ProfileSetting = () => {
             <div>
                 <div className='flex gap-4 mt-4'>
                     <div className='bg-[#1e2837] rounded-lg w-20 h-20'>
-                        <img src={image || user?.profilePicture} alt="Profile" className={`${image ? 'object-cover w-full h-full' : ''} rounded-lg`} />
+                        <img src={previewImage || user?.profilePicture} alt="Profile" className={`rounded-lg ${previewImage ? 'object-cover w-full h-full' : ''}`} />
                     </div>
                     <button>
                         <label htmlFor="uploadFile1" className="flex bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">

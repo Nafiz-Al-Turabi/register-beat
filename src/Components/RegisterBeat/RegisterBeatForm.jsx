@@ -56,7 +56,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
         payload.append('image', formData.image);
       }
 
-      const response = await axiosInstance.post('/beat/create-beat', payload, {
+      const response = await axiosInstance.post('/beat/create-beat/677a57e28c65420264b4abe0', payload, {
         headers: {
           'Content-Type': 'multipart/form-data', // Important for sending files
         },
