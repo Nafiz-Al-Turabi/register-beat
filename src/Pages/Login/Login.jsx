@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiDotsThree } from "react-icons/pi";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [emailFilled, setEmailFilled] = useState(false);
     const [passwordFilled, setPasswordFilled] = useState(false);
+    const { login } = useContext(AuthContext)
+    const navigate = useNavigate();
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        try {
+            await login({
+                email: data.email,
+                password: data.password
+            })
+            navigate("/")
+        } catch (error) {
+            console.error('Login error:', error.response?.data?.message || error.message);
+            alert('Login failed. Please try again.');
+        }
     };
 
     const handleEmailChange = (e) => {

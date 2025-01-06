@@ -1,20 +1,37 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiDotsThree } from "react-icons/pi";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [emailFilled, setEmailFilled] = useState(false);
+    const [nameFilled, setNameFilled] = useState(false);
     const [passwordFilled, setPasswordFilled] = useState(false);
     const [confirmPasswordFilled, setConfirmPasswordFilled] = useState(false);
+    const { signup } = useContext(AuthContext)
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        try {
+            await signup({
+              name: data.name,
+              email: data.email,
+              password: data.password
+            })
+            alert('Registration Successful.');
+            navigate('/login');
+          } catch (error) {
+            console.error('Registration error:', error.response?.data?.message || error.message);
+            alert('Registration failed. Please try again.');
+          }
     };
 
     const handleEmailChange = (e) => {
         setEmailFilled(e.target.value !== "");
+    };
+    const handleNameChange = (e) => {
+        setNameFilled(e.target.value !== "");
     };
 
     const handlePasswordChange = (e) => {
@@ -35,6 +52,19 @@ const Signup = () => {
                     <span className='text-white'>Join</span> BeatProtect
                 </h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    <div className='relative'>
+                        <label htmlFor="name" className="block text-[#9da6be] text-sm font-medium mb-2">name</label>
+                        <input
+                            type="name"
+                            id="name"
+                            placeholder="Enter your name"
+                            {...register("name", { required: "name is required" })}
+                            onChange={handleNameChange}
+                            className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+                        />
+                        {!nameFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
+                        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                    </div>
                     <div className='relative'>
                         <label htmlFor="email" className="block text-[#9da6be] text-sm font-medium mb-2">Email</label>
                         <input
@@ -95,7 +125,7 @@ const Signup = () => {
                     </button>
 
                     <div className="mt-4 text-center">
-                        <Link to='/' className="text-sm text-gray-400">Already have an account? <a href="#" className="text-purple-600 hover:underline">Login</a></Link>
+                        <Link to='/login' className="text-sm text-gray-400">Already have an account? <a href="#" className="text-purple-600 hover:underline">Login</a></Link>
                     </div>
                 </form>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaCrown, FaPlus, FaMusic, FaCog, FaSignOutAlt, FaBars } from "react-icons/fa";
 import { FaHeadphonesSimple } from "react-icons/fa6";
 import { GrLineChart } from "react-icons/gr";
@@ -7,10 +7,13 @@ import { MdKeyboardArrowDown, MdOutlineDashboard } from "react-icons/md";
 import { RiMusic2Line, RiUser3Line } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import ManangeSubsPopup from '../Components/ManageSubscription/ManangeSubsPopup';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     const [isDropdown, setDropdown] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
+    const {logout,user} = useContext(AuthContext)
+    console.log(user);
 
     const toggleDropdown = () => {
         setDropdown(!isDropdown)
@@ -27,7 +30,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                 US
                             </div>
                             <div className="ml-3 ">
-                                <p className="text-sm font-semibold">Usuario</p>
+                                <p className="text-sm font-semibold">{user?.name}</p>
                                 <p className="text-xs text-gray-400">Plan Básico</p>
                             </div>
                         </div>
@@ -94,7 +97,8 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         <FaCog className="mr-2" /> Settings
                     </Link>
                     <Link
-                        to="/login"
+                        // to="/login"
+                        onClick={logout}
                         className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
                     >
                         <FaSignOutAlt className="mr-2" /> Log Out
