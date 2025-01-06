@@ -12,15 +12,16 @@ import MyBeats from "../Pages/MyBeats/MyBeats";
 import Profile from "../Pages/Profile/Profile";
 import SongMatches from "../Pages/SongMatches/SongMatches";
 import Protected from "../Private/Protected";
+import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <DashboardLayout />,
+        element: <Protected role={['admin', 'user']}><DashboardLayout /></Protected>,
         children: [
             {
                 path: '/',
-                element:<Protected  role={['admin', 'user']}> <DashboardContents /></Protected>
+                element: <DashboardContents />
             },
             {
                 path: '/settings',
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <Profile />
+            },
+            {
+                path: '/payment',
+                element: <Payment />
             },
         ]
     },

@@ -12,22 +12,22 @@ import { AuthContext } from '../Provider/AuthProvider';
 const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     const [isDropdown, setDropdown] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
-    const {logout,user} = useContext(AuthContext)
+    const { logout, user } = useContext(AuthContext)
     console.log(user);
 
     const toggleDropdown = () => {
         setDropdown(!isDropdown)
     }
 
-  return (
-    <div>
-        {/* Sidebar */}
-        <div className={`fixed top-0 left-0 h-full bg-[#0f0f0f] w-64 p-4 flex flex-col transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 z-50`}>
+    return (
+        <div>
+            {/* Sidebar */}
+            <div className={`fixed top-0 left-0 h-full bg-[#0f0f0f] w-64 p-4 flex flex-col transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 z-50`}>
                 <div className="relative">
                     <div onClick={toggleDropdown} className="flex items-center justify-between mb-8 border border-gray-700 bg-[#0f0f0f] p-3 rounded-md cursor-pointer">
                         <div className="flex items-center ">
                             <div className="bg-[#2f3947] w-8 h-8 rounded-md flex items-center justify-center text-sm">
-                                US
+                                <img src={`http://localhost:3001/uploads/images/${user?.avatar}`} alt="" />
                             </div>
                             <div className="ml-3 ">
                                 <p className="text-sm font-semibold">{user?.name}</p>
@@ -87,9 +87,11 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     </Link> */}
                 </nav>
                 <div className="mt-auto border-t border-gray-800 flex flex-col py-2">
-                    {/* <button className="bg-purple-500 text-white w-full py-2 rounded mb-4">
-                        <FaCrown className="inline-block mr-2" /> Upgrade to Pro
-                    </button> */}
+                    <Link to = 'payment'>
+                        <button className="bg-purple-500 text-white w-full py-2 rounded mb-4 flex items-center justify-center">
+                            <FaCrown className=" mr-2" /> Subscribe Now
+                        </button>
+                    </Link>
                     <Link
                         to="/settings"
                         className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
@@ -116,8 +118,8 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     onClick={toggleSidebar}
                 ></div>
             )}
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Sidebar
