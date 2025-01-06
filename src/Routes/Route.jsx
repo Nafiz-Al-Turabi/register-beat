@@ -1,8 +1,6 @@
 import {
     createBrowserRouter,
 } from "react-router-dom";
-import Layout from "../Layout/Layout";
-import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import DashboardLayout from "../Layout/DashboardLayout";
@@ -13,6 +11,7 @@ import DashboardContents from "../Components/DashboardContents/DashboardContents
 import MyBeats from "../Pages/MyBeats/MyBeats";
 import Profile from "../Pages/Profile/Profile";
 import SongMatches from "../Pages/SongMatches/SongMatches";
+import Protected from "../Private/Protected";
 
 export const router = createBrowserRouter([
     {
@@ -21,7 +20,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <DashboardContents />
+                element:<Protected  role={['admin', 'user']}> <DashboardContents /></Protected>
             },
             {
                 path: '/settings',
@@ -57,4 +56,5 @@ export const router = createBrowserRouter([
         path: '/signup',
         element: <Signup />
     },
+    
 ]);

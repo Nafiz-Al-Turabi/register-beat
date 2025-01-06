@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { PiDotsThree } from "react-icons/pi";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -17,6 +18,7 @@ const Login = () => {
                 email: data.email,
                 password: data.password
             })
+            toast.success("Login Successful")
             navigate("/")
         } catch (error) {
             console.error('Login error:', error.response?.data?.message || error.message);

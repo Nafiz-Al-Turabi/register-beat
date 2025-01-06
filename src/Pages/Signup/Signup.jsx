@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { PiDotsThree } from "react-icons/pi";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -19,11 +20,11 @@ const Signup = () => {
               email: data.email,
               password: data.password
             })
-            alert('Registration Successful.');
+            toast.success('Registration Successful.');
             navigate('/login');
           } catch (error) {
             console.error('Registration error:', error.response?.data?.message || error.message);
-            alert('Registration failed. Please try again.');
+            toast.error('Registration failed. Please try again.');
           }
     };
 

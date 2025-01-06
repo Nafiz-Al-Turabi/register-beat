@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import axiosInstance from "../Axios/AxiosInstance";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext();
 
@@ -29,10 +30,10 @@ const AuthProvider = ({ children }) => {
     const handleError = (error) => {
         if (error.response?.data?.message) {
             console.error(error.response.data.message);
-            alert(error.response.data.message);
+            toast.error(error.response.data.message);
         } else {
             console.error("An unexpected error occurred:", error);
-            alert("Something went wrong. Please try again.");
+            toast.error("Something went wrong. Please try again.");
         }
     };
 
@@ -40,9 +41,10 @@ const AuthProvider = ({ children }) => {
     const signup = async (credentials) => {
         try {
             const response = await axiosInstance.post("/users/register", credentials);
-            console.log(response.data.message);
+            return response.data;
         } catch (error) {
-            handleError(error);
+            handleError(error);  
+            throw error;
         }
     };
 
@@ -51,11 +53,10 @@ const AuthProvider = ({ children }) => {
             const response = await axiosInstance.post("/users/login", credentials, { withCredentials: true });
             console.log("Login Response:", response.data);
             const { token, user } = response.data;
-            localStorage.setItem("token", token);
             setUser(user);
-            console.log("Token saved to localStorage:", token);
         } catch (error) {
             handleError(error);
+            throw error;
         }
     };
 
@@ -63,10 +64,11 @@ const AuthProvider = ({ children }) => {
         try {
             await axiosInstance.post("/users/logout", {}, { withCredentials: true });
             setUser(null);
-            alert("Logout successful");
+            toast.success("Logout successful");
         } catch (error) {
             console.error("Logout failed:", error);
-           alert("Logout failed. Please try again.");
+            toast.error("Logout failed. Please try again.");
+            throw error;
         }
     };
 
