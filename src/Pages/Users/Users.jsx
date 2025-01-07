@@ -4,19 +4,20 @@ import axiosInstance from '../../Axios/AxiosInstance';
 import { FaUsers } from 'react-icons/fa';
 
 const Users = () => {
-    const [timeRange, setTimeRange] = useState('lastMongth');
+    const [timeframe, setTimeframe] = useState('lastMonth');
 
     const { isLoading, isError, data: users = [], error, refetch } = useQuery({
-        queryKey: ['userOrders', timeRange],
+        queryKey: ['users', timeframe],
         queryFn: async () => {
-            const response = await axiosInstance.get('/admin/allUserDetails', {
+            const response = await axiosInstance.get('/admin/user-registrations', {
                 params: {
-                    timeRange,
+                    timeframe,
                 },
             });
-            return response.data;
+            return response.data.users;
+            
         },
-        enabled: !!timeRange,
+        enabled: !!timeframe,
     });
 
     return (
@@ -30,10 +31,10 @@ const Users = () => {
 
                 <div className="relative">
                     <select
-                        className="block w-full py-2 px-4 pr-8 admin-p-bg border border-zinc-600 text-white text-gray-900 rounded-lg shadow-sm focus:outline-none focus:ring-zinc-500 focus:border-zinc-500 "
-                        value={timeRange}
+                        className="block w-full py-2 px-4 pr-8 admin-p-bg border border-zinc-600 text-white  rounded-lg shadow-sm focus:outline-none focus:ring-zinc-500 focus:border-zinc-500 "
+                        value={timeframe}
                         onChange={(e) => {
-                            setTimeRange(e.target.value);
+                            setTimeframe(e.target.value);
                             refetch();
                         }}
                     >
