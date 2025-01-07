@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiDotsThree } from "react-icons/pi";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 
@@ -12,6 +12,7 @@ const Signup = () => {
     const [passwordFilled, setPasswordFilled] = useState(false);
     const [confirmPasswordFilled, setConfirmPasswordFilled] = useState(false);
     const { signup } = useContext(AuthContext)
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {

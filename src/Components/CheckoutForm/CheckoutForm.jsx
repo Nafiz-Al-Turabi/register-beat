@@ -143,9 +143,10 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const CheckoutForm = ({ priceId }) => {
   const [email, setEmail] = useState('');
@@ -153,6 +154,7 @@ const CheckoutForm = ({ priceId }) => {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const { user } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -174,7 +176,7 @@ const CheckoutForm = ({ priceId }) => {
     setPaymentMethodId(paymentMethod.id);
 
     // Call backend to create customer
-    const response = await axios.post('http://localhost:3001/api/payments/create-customer/677b7c3e8390917bf396384c', {
+    const response = await axios.post(`http://localhost:3001/api/payments/create-customer/${user._id}`, {
       email,
       paymentMethodId: paymentMethod.id,
     });
@@ -182,7 +184,7 @@ const CheckoutForm = ({ priceId }) => {
     const customerId = response.data.customerId;
 
     // Now, create the subscription
-    const subscriptionResponse = await axios.post('http://localhost:3001/api/payments/create-subscription/677b7c3e8390917bf396384c', {
+    const subscriptionResponse = await axios.post(`http://localhost:3001/api/payments/create-subscription/${user._id}`, {
       customerId,
       priceId,
     });
