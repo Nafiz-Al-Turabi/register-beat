@@ -26,8 +26,8 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                 <div className="relative">
                     <div onClick={toggleDropdown} className="flex items-center justify-between mb-8 border border-gray-700 bg-[#0f0f0f] p-3 rounded-md cursor-pointer">
                         <div className="flex items-center ">
-                            <div className="bg-[#2f3947] w-8 h-8 rounded-md flex items-center justify-center text-sm">
-                                <img src={`http://localhost:3001/uploads/images/${user?.avatar}`} alt="" />
+                            <div className="bg-[#2f3947] w-8 h-8 rounded-md flex items-center justify-center text-sm overflow-hidden">
+                                <img src={`http://localhost:3001/uploads/images/${user?.avatar}`} alt="avatar" />
                             </div>
                             <div className="ml-3 ">
                                 <p className="text-sm font-semibold">{user?.name}</p>

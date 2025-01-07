@@ -13,6 +13,9 @@ import Profile from "../Pages/Profile/Profile";
 import SongMatches from "../Pages/SongMatches/SongMatches";
 import Protected from "../Private/Protected";
 import Payment from "../Pages/Payment/Payment";
+import AdminDashboard from "../Pages/AdminDashboard/AdminDashboard";
+import Users from "../Pages/Users/Users";
+import AdminHome from "../Pages/AdminHome/AdminHome";
 
 export const router = createBrowserRouter([
     {
@@ -61,5 +64,20 @@ export const router = createBrowserRouter([
         path: '/signup',
         element: <Signup />
     },
-    
+
+    {
+        path: '/admin-dashboard',
+        element: <Protected role={['admin']}><AdminDashboard /></Protected>,
+        children: [
+            {
+                path: '',  
+                element: <AdminHome />
+            },
+            {
+                path: 'users',  
+                element: <Users />
+            }
+        ]
+    }
+
 ]);

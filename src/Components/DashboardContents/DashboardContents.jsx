@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { PiMusicNotesSimple } from 'react-icons/pi';
 import PlanBillsModal from '../Settings/PlanBillsModal';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const DashboardContents = () => {
   const [showModal, setShowModal] = useState(false);
+  const {user} = useContext(AuthContext);
 
     const data = [
         { beatName: "Summer Vibes", regID: "REG001", regDate: "2023-06-15" },
@@ -39,7 +41,7 @@ const DashboardContents = () => {
                 </div>
                 <div className='bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-xl hover:scale-105 duration-200'>
                     <h1 className='text-xl xl:text-2xl mb-4 font-extrabold text-[#c8ccd3]'>Credits</h1>
-                    <p className='text-4xl font-extrabold text-blue-400'><span className="bg-gradient-to-r from-blue-500  to-violet-500 text-transparent bg-clip-text">20</span></p>
+                    <p className='text-4xl font-extrabold text-blue-400'><span className="bg-gradient-to-r from-blue-500  to-violet-500 text-transparent bg-clip-text">{user?.credit}</span></p>
                 </div>
                 <div className='bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-xl hover:scale-105 duration-200'>
                     <h1 className='text-xl xl:text-2xl mb-4 font-extrabold text-[#c8ccd3]'>Need more credits?</h1>

@@ -1,0 +1,6 @@
+.admin-p-bg{
+    @apply bg-[#1a1d21]
+}
+.admin-s-bg{
+    @apply bg-[#212529]
+}
