@@ -10,10 +10,11 @@ const CheckoutForm = ({ priceId }) => {
   const [email, setEmail] = useState('');
   const [paymentMethodId, setPaymentMethodId] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,15 +59,32 @@ const CheckoutForm = ({ priceId }) => {
       }
     } catch (error) {
       console.error("Error during subscription creation: ", error);
-      toast.error(`${error.response.data.message || error.response.data.error || 'An unknown error occurred.'}`);
+      setErrorMessage(error.response?.data?.message || 'An unknown error occurred.');
     } finally {
       setLoading(false);
     }
   };
 
+
+  const handleCredit = async () => {
+    try {
+      const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
+      
+      
+      if (response.data?.url) {
+        window.location.href = response.data.url; 
+      } else {
+        console.error('Redirect URL not found in the response');
+      }
+    } catch (error) {
+      console.error("Error purchasing credits: ", error.response ? error.response.data : error.message);
+    }
+  };
+  
+
   return (
     <div>
-      
+
       <form
         onSubmit={handleSubmit}
         className="max-w-md mx-auto bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-lg shadow-lg"
@@ -118,6 +136,11 @@ const CheckoutForm = ({ priceId }) => {
           {loading ? 'Processing...' : 'Subscribe'}
         </button>
       </form>
+      {errorMessage && (
+        <div className="text-blue-500 bg-blue-500/10 border border-blue-500 p-4 text-sm text-center mb-4 max-w-md rounded-md mx-auto mt-5 flex flex-col justify-center">{errorMessage}
+          <button onClick={handleCredit} className='block text-green-500 hover:underline mt-2'>Click here</button>
+        </div>
+      )}
     </div>
   );
 };
