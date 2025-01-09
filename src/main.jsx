@@ -17,7 +17,28 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <div>
-        <Toaster />
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            success: {
+              style: {
+                background: '#2c3e50', 
+                color: '#ecf0f1',
+                borderRadius: '8px',
+                padding: '16px',
+              },
+            },
+            error: {
+              style: {
+                background: '#ff0000', 
+                color: '#fff',
+                borderRadius: '8px',
+                padding: '16px',
+              },
+            },
+          }}
+        />
         <AuthProvider>
           <RouterProvider router={router} />
         </AuthProvider>

@@ -45,7 +45,7 @@ const Users = () => {
                         <option value="lastMonth">Last Month</option>
                         <option value="startOfMonth">Month-to-date</option>
                         <option value="last90Days">Last 90 Days</option>
-                        <option value="startOfYear">Year-to-date</option>
+                        <option value="startofYear">Year-to-date</option>
                     </select>
                 </div>
             </div>
