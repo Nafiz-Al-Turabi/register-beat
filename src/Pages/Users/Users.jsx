@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import axiosInstance from '../../Axios/AxiosInstance';
 import { FaUsers } from 'react-icons/fa';
+import fileUrl from '../../Axios/fileUrl';
 
 const Users = () => {
     const [timeframe, setTimeframe] = useState('lastMonth');
@@ -15,7 +16,7 @@ const Users = () => {
                 },
             });
             return response.data.users;
-            
+
         },
         enabled: !!timeframe,
     });
@@ -99,11 +100,11 @@ const Users = () => {
                                     className="odd:bg-neutral-900  even:bg-zinc-900  border-b border-zinc-800 "
                                 >
                                     <td className="px-6 py-4">
-                                        <img
-                                            src={user?.image || '/default-avatar.png'}
-                                            alt="User"
-                                            className="w-12 h-12 rounded-full"
-                                        />
+                                        {(user.avatar === null || user.avatar === undefined) ? (
+                                            <p className="w-12 h-12 rounded-full bg-white flex justify-center items-center text-2xl text-violet-600 font-bold">{user?.name?.[0]?.toUpperCase()}</p>
+                                        ) : (
+                                            <img src={`${fileUrl}/uploads/images/${user?.avatar}`} alt="avatar" className="w-12 h-12 rounded-full" />
+                                        )}
                                     </td>
                                     <td className="px-6 py-4 font-medium  ">
                                         {user.name}
