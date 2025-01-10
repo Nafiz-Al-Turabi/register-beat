@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import { PiMusicNotesSimple } from 'react-icons/pi';
 import PlanBillsModal from '../Settings/PlanBillsModal';
 import { AuthContext } from '../../Provider/AuthProvider';
+import axiosInstance from '../../Axios/AxiosInstance';
 
 const DashboardContents = () => {
-  const [showModal, setShowModal] = useState(false);
-  const {user} = useContext(AuthContext);
+    const [showModal, setShowModal] = useState(false);
+    const { user } = useContext(AuthContext);
 
     const data = [
         { beatName: "Summer Vibes", regID: "REG001", regDate: "2023-06-15" },
@@ -26,7 +27,20 @@ const DashboardContents = () => {
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-
+    const handleCredit = async () => {
+        try {
+          const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
+          
+          
+          if (response.data?.url) {
+            window.location.href = response.data.url; 
+          } else {
+            console.error('Redirect URL not found in the response');
+          }
+        } catch (error) {
+          console.error("Error purchasing credits: ", error.response ? error.response.data : error.message);
+        }
+      };
     return (
         <div className=' animate-from-middle'>
             {/* <h1 className='text-5xl font-bold mt-4'>
@@ -46,7 +60,7 @@ const DashboardContents = () => {
                 <div className='bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-xl hover:scale-105 duration-200'>
                     <h1 className='text-xl xl:text-2xl mb-4 font-extrabold text-[#c8ccd3]'>Need more credits?</h1>
                     {/* <p className='text-4xl font-extrabold text-blue-400'><span className="bg-gradient-to-r from-blue-500  to-violet-500 text-transparent bg-clip-text">Active</span></p> */}
-                    <button className='bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm' onClick={() => setShowModal(true)}>Get Extra Credits</button>
+                    <button className='bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm' onClick={handleCredit}>Get Extra Credits</button>
                 </div>
             </div>
 
@@ -106,11 +120,10 @@ const DashboardContents = () => {
                             <button
                                 key={index}
                                 onClick={() => handlePageChange(index + 1)}
-                                className={`px-4 py-2 rounded-md ${
-                                    currentPage === index + 1
+                                className={`px-4 py-2 rounded-md ${currentPage === index + 1
                                         ? 'bg-[#7837eb] text-white'
                                         : 'bg-gray-700 text-[#a1afc5] hover:bg-gray-600'
-                                }`}
+                                    }`}
                             >
                                 {index + 1}
                             </button>
