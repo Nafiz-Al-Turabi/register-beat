@@ -1,68 +1,75 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { FaHome, FaUsers, FaChartBar, FaCog, FaBars, FaTimes, FaUserCircle, FaSignOutAlt, FaUserSlash, } from 'react-icons/fa';
-import AdminHome from '../AdminHome/AdminHome';
+import { 
+  FaHome, 
+  FaUsers, 
+  FaChartBar, 
+  FaCog, 
+  FaBars, 
+  FaTimes, 
+  FaUserCircle, 
+  FaSignOutAlt 
+} from 'react-icons/fa';
 
 const AdminDashboard = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="flex">
+        <div className="h-screen flex overflow-hidden">
+            {/* Mobile Menu Button */}
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="md:hidden fixed top-4 left-4 z-50 bg-[#212529] text-white p-2 rounded-md"
+            >
+                {isOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
+            </button>
+
             {/* Sidebar */}
-            <>
-                {/* Mobile Menu Button */}
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden fixed top-4 left-4 z-50  bg-[#212529] text-white p-2 rounded-md"
-                >
-                    {isOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
-                </button>
+            <div
+                className={`fixed md:static w-64 h-full bg-[#212529] text-white transition-transform duration-300 ease-in-out ${
+                    isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+                }`}
+            >
+                <div className="p-4 text-2xl font-bold">Admin Dashboard</div>
+                <nav className="mt-6">
+                    <NavLink
+                        to=""
+                        className={({ isActive }) =>
+                            `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                        }
+                    >
+                        <FaHome className="h-5 w-5 mr-2" /> Dashboard
+                    </NavLink>
+                    <NavLink
+                        to="users"
+                        className={({ isActive }) =>
+                            `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                        }
+                    >
+                        <FaUsers className="h-5 w-5 mr-2" /> Users
+                    </NavLink>
+                    <NavLink
+                        to="/reports"
+                        className={({ isActive }) =>
+                            `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                        }
+                    >
+                        <FaChartBar className="h-5 w-5 mr-2" /> Reports
+                    </NavLink>
+                    <NavLink
+                        to="/settings"
+                        className={({ isActive }) =>
+                            `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                        }
+                    >
+                        <FaCog className="h-5 w-5 mr-2" /> Settings
+                    </NavLink>
+                </nav>
+            </div>
 
-                <div
-                    className={`fixed top-0 left-0 h-screen w-64 bg-[#212529] text-white md:flex flex-col md:static ${isOpen ? 'flex' : 'hidden'
-                        }`}
-                >
-                    <div className="p-4 text-2xl font-bold ">Admin Dashboard</div>
-                    <nav className="mt-6 flex-1">
-                        <NavLink
-                            to=""
-                            className={({ isActive }) =>
-                                `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
-                            }
-                        >
-                            <FaHome className="h-5 w-5 mr-2" /> Dashboard
-                        </NavLink>
-                        <NavLink
-                            to="users"
-                            className={({ isActive }) =>
-                                `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
-                            }
-                        >
-                            <FaUsers className="h-5 w-5 mr-2" /> Users
-                        </NavLink>
-                        <NavLink
-                            to="/reports"
-                            className={({ isActive }) =>
-                                `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
-                            }
-                        >
-                            <FaChartBar className="h-5 w-5 mr-2" /> Reports
-                        </NavLink>
-                        <NavLink
-                            to="/settings"
-                            className={({ isActive }) =>
-                                `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
-                            }
-                        >
-                            <FaCog className="h-5 w-5 mr-2" /> Settings
-                        </NavLink>
-                    </nav>
-                </div>
-            </>
-
-            {/* Main Content */}
-            <div className="flex-1 min-h-screen  bg-[#1a1d21]">
-                {/* Header */}
+            {/* Main Content Area */}
+            <div className="flex-1 flex flex-col overflow-hidden">
+                {/* Fixed Header */}
                 <header className="bg-[#212529] shadow-md p-4 flex justify-between items-center">
                     <h1 className="text-xl font-semibold flex text-white items-center gap-2">
                         <FaUserCircle className="h-6 w-6 text-gray-100" />
@@ -75,12 +82,10 @@ const AdminDashboard = () => {
                     </div>
                 </header>
 
-                <div className="p-6 ">
-
-                    <div className="mt-6">
-                        <Outlet />
-                    </div>
-                </div>
+                {/* Scrollable Content Area */}
+                <main className="flex-1 overflow-y-auto bg-[#1a1d21] p-6">
+                    <Outlet />
+                </main>
             </div>
         </div>
     );

@@ -22,17 +22,17 @@ const Users = () => {
     });
 
     return (
-        <div>
-            <div className="flex justify-between items-center mb-8 p-4 admin-s-bg rounded-lg shadow-md ">
-                <h1 className="text-3xl font-extrabold text-gray-900  ">
+        <div className="relative z-0 w-full"> 
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 p-4 bg-[#212529] rounded-lg shadow-md">
+                <h1 className="text-2xl md:text-3xl font-extrabold">
                     <span className="flex items-center gap-2 text-white">
                         <span className="text-violet-500"><FaUsers /></span> Users
                     </span>
                 </h1>
 
-                <div className="relative">
+                <div className="w-full md:w-auto min-w-[200px]">
                     <select
-                        className="block w-full py-2 px-4 pr-8 admin-p-bg border border-zinc-600 text-white  rounded-lg shadow-sm focus:outline-none focus:ring-zinc-500 focus:border-zinc-500 "
+                        className="block w-full py-2 px-4 bg-[#1a1d21] border border-zinc-600 text-white rounded-lg shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500"
                         value={timeframe}
                         onChange={(e) => {
                             setTimeframe(e.target.value);
@@ -50,76 +50,89 @@ const Users = () => {
                 </div>
             </div>
 
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-300 ">
-                    <thead className="text-xs text-zinc-300 uppercase admin-s-bg">
-                        <tr>
-                            <th scope="col" className="px-6 py-3">
-                                Image
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Name
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Email
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Country
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {isLoading && (
-                            <tr>
-                                <td colSpan="5" className="text-center py-4">
-                                    Loading...
-                                </td>
-                            </tr>
-                        )}
-                        {isError && (
-                            <tr>
-                                <td colSpan="5" className="text-center py-4 text-red-500">
-                                    {error?.message || 'Error fetching users'}
-                                </td>
-                            </tr>
-                        )}
-                        {!isLoading && users.length === 0 && (
-                            <tr>
-                                <td colSpan="5" className="text-center py-4">
-                                    No users found for the selected time range.
-                                </td>
-                            </tr>
-                        )}
-                        {!isLoading &&
-                            users.map((user, index) => (
-                                <tr
-                                    key={index}
-                                    className="odd:bg-neutral-900  even:bg-zinc-900  border-b border-zinc-800 "
-                                >
-                                    <td className="px-6 py-4">
-                                        {(user.avatar === null || user.avatar === undefined) ? (
-                                            <p className="w-12 h-12 rounded-full bg-white flex justify-center items-center text-2xl text-violet-600 font-bold">{user?.name?.[0]?.toUpperCase()}</p>
-                                        ) : (
-                                            <img src={`${fileUrl}/uploads/images/${user?.avatar}`} alt="avatar" className="w-12 h-12 rounded-full" />
-                                        )}
-                                    </td>
-                                    <td className="px-6 py-4 font-medium  ">
-                                        {user.name}
-                                    </td>
-                                    <td className="px-6 py-4">{user.email}</td>
-                                    <td className="px-6 py-4">{user.country || 'N/A'}</td>
-                                    <td className="px-6 py-4 space-x-2">
-
-                                        <button className="font-medium bg-zinc-600 px-3 py-1 text-white rounded hover:bg-green-600 duration-200"> Details</button>
-                                        <button className="font-medium bg-red-500  px-3 py-1 text-white rounded  hover:bg-red-600 duration-200"> + Blacklist</button>
-                                    </td>
+            <div className="w-full overflow-x-auto rounded-lg shadow-md">
+                <div className="min-w-full inline-block align-middle">
+                    <div className="overflow-hidden">
+                        <table className="min-w-full divide-y divide-zinc-800">
+                            <thead className="bg-[#212529]">
+                                <tr>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Image
+                                    </th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Name
+                                    </th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Email
+                                    </th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Country
+                                    </th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Action
+                                    </th>
                                 </tr>
-                            ))}
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody className="divide-y divide-zinc-800 bg-[#1a1d21]">
+                                {isLoading && (
+                                    <tr>
+                                        <td colSpan="5" className="px-4 py-4 text-center text-white">
+                                            Loading...
+                                        </td>
+                                    </tr>
+                                )}
+                                {isError && (
+                                    <tr>
+                                        <td colSpan="5" className="px-4 py-4 text-center text-red-500">
+                                            {error?.message || 'Error fetching users'}
+                                        </td>
+                                    </tr>
+                                )}
+                                {!isLoading && users.length === 0 && (
+                                    <tr>
+                                        <td colSpan="5" className="px-4 py-4 text-center text-white">
+                                            No users found for the selected time range.
+                                        </td>
+                                    </tr>
+                                )}
+                                {!isLoading && users.map((user, index) => (
+                                    <tr key={index} className="hover:bg-zinc-800 transition-colors">
+                                        <td className="px-4 py-4 whitespace-nowrap">
+                                            {(user.avatar === null || user.avatar === undefined) ? (
+                                                <div className="w-10 h-10 rounded-full bg-white flex justify-center items-center text-xl text-violet-600 font-bold">
+                                                    {user?.name?.[0]?.toUpperCase()}
+                                                </div>
+                                            ) : (
+                                                <img
+                                                    src={`${fileUrl}/uploads/images/${user?.avatar}`}
+                                                    alt="avatar"
+                                                    className="w-10 h-10 rounded-full object-cover"
+                                                />
+                                            )}
+                                        </td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-white">
+                                            {user.name}
+                                        </td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
+                                            {user.email}
+                                        </td>
+                                        <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
+                                            {user.country || 'N/A'}
+                                        </td>
+                                        <td className="px-4 py-4 whitespace-nowrap space-x-2">
+                                            <button className="px-3 py-1 text-sm bg-zinc-600 text-white rounded hover:bg-green-600 transition-colors duration-200">
+                                                Details
+                                            </button>
+                                            <button className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-200">
+                                                + Blacklist
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -5,6 +5,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import CheckoutForm from '../../Components/CheckoutForm/CheckoutForm';
 import axiosInstance from '../../Axios/AxiosInstance';
+import Loading from '../../Components/Loading/Loading';
 
 const stripePromise = loadStripe("pk_test_51QFpATLEvlBZD5dJaha6mJPocvY5x6EoeWDg3DVjMIFdAwRzxN6sNlimMO6xW3hk3a7STUMQtVi6vb2NWu1Vc46c000l8Y7yha");
 
@@ -39,9 +40,7 @@ const Payment = () => {
           <CheckoutForm priceId={priceId} />
         </Elements>
       ) : (
-        <div className='flex justify-center items-center h-96'>
-          <span class="loader"></span>
-        </div>
+        <Loading />
       )}
 
       {/* <SubscriptionStatus /> */}
