@@ -7,6 +7,7 @@ import { MdOutlineCancel, MdOutlineLibraryMusic } from 'react-icons/md';
 import axiosInstance from '../../Axios/AxiosInstance';
 import Loading from '../../Components/Loading/Loading';
 import Charts from '../../Components/Charts/Charts';
+import SubscriptionTable from '../../Components/SubscriptionTable/SubscriptionTable';
 
 const AdminHome = () => {
     const { isLoading, isError, data: admin = {}, error, refetch } = useQuery({
@@ -84,7 +85,8 @@ const AdminHome = () => {
                     </div>
                 </div>
             </div>
-            <Charts/>
+            <Charts />
+            <SubscriptionTable />
         </div>
     );
 };
