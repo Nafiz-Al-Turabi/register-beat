@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ImCreditCard } from 'react-icons/im';
+import axiosInstance from '../../Axios/AxiosInstance';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const PlanBillsModal = ({ setShowModal, showModal }) => {
     const [input, setInput] = useState(1);
     const [credits, setCredits] = useState(10);
     const [totalCost, setTotalCost] = useState(5);
+    const {user} = useContext(AuthContext)
 
     useEffect(() => {
         setCredits(input * 10)
@@ -14,7 +17,20 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
     const handleCreditPurchase = () => {
         setShowModal(false);
     }
-
+    const handleCredit = async () => {
+        try {
+          const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
+          
+          
+          if (response.data?.url) {
+            window.location.href = response.data.url; 
+          } else {
+            console.error('Redirect URL not found in the response');
+          }
+        } catch (error) {
+          console.error("Error purchasing credits: ", error.response ? error.response.data : error.message);
+        }
+      };
   return (
     <>
         {showModal ? (
@@ -33,7 +49,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                         <div className="">
                             <p className='text-base leading-5 md:leading-10 text-[#797979] font-bold'>Buy packages of 10 credits for $5 USD to your 1 credit equals 1 registration.</p>
                         </div>
-                        <div className='flex flex-col gap-2'>
+                        {/* <div className='flex flex-col gap-2'>
                             <h4 className='text-base'>Number of packages:</h4>
                             <div className='flex flex-row gap-2'>
                                 <button className={`px-3 flex items-center rounded bg-[#8c50ff] ${input === 1 && 'opacity-50'}`} onClick={() => setInput(input - 1)} disabled={input === 1}>-</button>
@@ -48,12 +64,12 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                                 <p className='text-base text-[#797979]'>Total Credits: {credits}</p>
                                 <h3 className='text-lg font-bold'>Total Cost: ${totalCost} USD</h3>
                             </div>
-                        </div>
+                        </div> */}
                         <div className='flex flex-col gap-2 bg-[#282828] p-4 rounded mt-2'>
                             <p className='text-base'>Payment Method</p>
                             <div className='flex gap-2 items-center'><ImCreditCard className=' text-[#c4bb8f] text-xl' /> <p className='text-base'>Visa ending in 1234</p></div>
                         </div>
-                        <button className='bg-[#8c50ff] rounded py-3 mt-2 active:scale-95' onClick={handleCreditPurchase}>Purchase Credits</button>
+                        <button className='bg-[#8c50ff] rounded py-3 mt-2 active:scale-95' onClick={handleCredit}>Purchase Credits</button>
                     </div>
                 </div>
             </div>
