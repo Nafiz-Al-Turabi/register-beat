@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { 
   FaHome, 
@@ -13,6 +13,21 @@ import {
 
 const AdminDashboard = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const sidebarRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <div className="h-screen flex overflow-hidden">
@@ -26,9 +41,8 @@ const AdminDashboard = () => {
 
             {/* Sidebar */}
             <div
-                className={`fixed md:static w-64 h-full bg-[#212529] text-white transition-transform duration-300 ease-in-out ${
-                    isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-                }`}
+                ref={sidebarRef}
+                className={`fixed md:static w-64 h-full bg-[#212529] text-white transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
             >
                 <div className="p-4 text-2xl font-bold">Admin Dashboard</div>
                 <nav className="mt-6">

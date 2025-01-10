@@ -6,23 +6,57 @@ import fileUrl from '../../Axios/fileUrl';
 
 const Users = () => {
     const [timeframe, setTimeframe] = useState('lastMonth');
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [blacklistedUsers, setBlacklistedUsers] = useState(new Set());
 
     const { isLoading, isError, data: users = [], error, refetch } = useQuery({
         queryKey: ['users', timeframe],
         queryFn: async () => {
-            const response = await axiosInstance.get('/admin/user-registrations', {
+            const response = await axiosInstance.get('/admin/users', {
                 params: {
                     timeframe,
                 },
             });
             return response.data.users;
-
         },
         enabled: !!timeframe,
     });
 
+    const handleBlacklist = async (userId) => {
+        try {
+            const response = await axiosInstance.post(`/admin/user-blacklist/${userId}`);
+            if (response.data.message === "User added to blacklist successfully") {
+                setBlacklistedUsers((prevSet) => new Set(prevSet.add(userId)));
+                refetch();
+            } else {
+                alert("Failed to blacklist user.");
+            }
+        } catch (error) {
+            console.error("Error blacklisting user:", error);
+            alert("Error blacklisting user.");
+        }
+    };
+
+    const isUserBlacklisted = (userId) => {
+        return blacklistedUsers.has(userId);
+    };
+
+    // Handle click on blacklist button
+    const handleBlacklistClick = (user) => {
+        setSelectedUser(user);
+        setShowConfirmDialog(true);
+    };
+
+    // Confirm the blacklisting action
+    const confirmBlacklist = async () => {
+        if (!selectedUser) return;
+        await handleBlacklist(selectedUser.id);
+        setShowConfirmDialog(false);
+    };
+
     return (
-        <div className="relative z-0 w-full"> 
+        <div>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 p-4 bg-[#212529] rounded-lg shadow-md">
                 <h1 className="text-2xl md:text-3xl font-extrabold">
                     <span className="flex items-center gap-2 text-white">
@@ -49,7 +83,6 @@ const Users = () => {
                     </select>
                 </div>
             </div>
-
             <div className="w-full overflow-x-auto rounded-lg shadow-md">
                 <div className="min-w-full inline-block align-middle">
                     <div className="overflow-hidden">
@@ -73,7 +106,7 @@ const Users = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-zinc-800 bg-[#1a1d21]">
+                            <tbody className="divide-y  divide-zinc-800 bg-[#1a1d21]">
                                 {isLoading && (
                                     <tr>
                                         <td colSpan="5" className="px-4 py-4 text-center text-white">
@@ -96,7 +129,7 @@ const Users = () => {
                                     </tr>
                                 )}
                                 {!isLoading && users.map((user, index) => (
-                                    <tr key={index} className="hover:bg-zinc-800 transition-colors">
+                                    <tr key={index} className="hover:bg-zinc-800 even:bg-[#212529] transition-colors">
                                         <td className="px-4 py-4 whitespace-nowrap">
                                             {(user.avatar === null || user.avatar === undefined) ? (
                                                 <div className="w-10 h-10 rounded-full bg-white flex justify-center items-center text-xl text-violet-600 font-bold">
@@ -123,8 +156,16 @@ const Users = () => {
                                             <button className="px-3 py-1 text-sm bg-zinc-600 text-white rounded hover:bg-green-600 transition-colors duration-200">
                                                 Details
                                             </button>
-                                            <button className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-200">
-                                                + Blacklist
+                                            <button
+                                                onClick={() => handleBlacklistClick(user)}
+                                                // disabled={user.blacklist}
+                                                disabled={isUserBlacklisted(user._id)}
+                                                className={`px-3 py-1 text-sm ${user.blacklist
+                                                    ? 'bg-zinc-400 cursor-not-allowed'
+                                                    : 'bg-red-500 hover:bg-red-600'
+                                                    } text-white rounded transition-colors duration-200`}
+                                            >
+                                                {user.blacklist ? 'Blacklisted' : '+ Blacklist'}
                                             </button>
                                         </td>
                                     </tr>
@@ -134,6 +175,33 @@ const Users = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Confirmation Modal */}
+            {showConfirmDialog && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+                    <div className="bg-[#212529] rounded-lg p-6 max-w-md w-full">
+                        <h3 className="text-lg font-semibold text-white mb-4">Confirm Blacklist</h3>
+                        <p className="text-zinc-300 mb-6">
+                            Are you sure you want to blacklist {selectedUser?.name}? This action will restrict their access to the platform.
+                        </p>
+                        <div className="flex justify-end space-x-3">
+                            <button
+                                onClick={() => setShowConfirmDialog(false)}
+                                className="px-4 py-2 bg-zinc-600 text-white rounded hover:bg-zinc-700 transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={confirmBlacklist}
+                                disabled={false}
+                                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                            >
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
