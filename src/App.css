@@ -4,3 +4,7 @@
 .admin-s-bg{
     @apply bg-[#212529]
 }
+
+.text{
+    color: #02e2ff;
+}

@@ -6,6 +6,7 @@ import { ImCreditCard } from 'react-icons/im';
 import { MdOutlineCancel, MdOutlineLibraryMusic } from 'react-icons/md';
 import axiosInstance from '../../Axios/AxiosInstance';
 import Loading from '../../Components/Loading/Loading';
+import Charts from '../../Components/Charts/Charts';
 
 const AdminHome = () => {
     const { isLoading, isError, data: admin = {}, error, refetch } = useQuery({
@@ -83,6 +84,7 @@ const AdminHome = () => {
                     </div>
                 </div>
             </div>
+            <Charts/>
         </div>
     );
 };
