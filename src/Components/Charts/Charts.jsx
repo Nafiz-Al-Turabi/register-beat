@@ -1,7 +1,20 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const Charts = () => {
+
+    const { isLoading, isError, data = [], error, refetch } = useQuery({
+        queryKey: ['revenue'],
+        queryFn: async () => {
+            const response = await axiosInstance.get('/admin/revenueDashboard', {
+
+            });
+            console.log(response.data);
+            return response.data;
+        },
+    });
+
     const [barChartState] = useState({
         series: [
             {

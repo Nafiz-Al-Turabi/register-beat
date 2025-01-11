@@ -57,6 +57,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                 >
                                     <LuCreditCard className="mr-2" /> Manage Subscription
                                 </button>
+                                
                                 {/* <Link
                                     to="/upgrade"
                                     className="flex items-center text-base text-white hover:text-white"
@@ -80,6 +81,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     >
                         <RiMusic2Line className="mr-2" /> My Beats
                     </Link>
+                    
                     {/* <Link
                         to="/song-matches"
                         className="flex items-center text-lg text-gray-300 hover:text-white"
@@ -88,11 +90,21 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     </Link> */}
                 </nav>
                 <div className="mt-auto border-t border-gray-800 flex flex-col py-2">
-                    <Link to = 'payment'>
+                    <Link to='payment'>
                         <button className="bg-purple-500 text-white w-full py-2 rounded mb-4 flex items-center justify-center">
                             <FaCrown className=" mr-2" /> Subscribe Now
                         </button>
                     </Link>
+                    {
+                        user.role === 'admin' ?
+                            <Link
+                                to="/admin-dashboard"
+                                className="flex justify-center items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded bg-violet-700 hover:bg-violet-600 duration-300 ease-linear"
+                            >
+                                Admin Panel
+                            </Link> :
+                            ''
+                    }
                     <Link
                         to="/settings"
                         className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
