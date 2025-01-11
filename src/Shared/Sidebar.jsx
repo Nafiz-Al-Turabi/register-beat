@@ -14,7 +14,6 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     const [isDropdown, setDropdown] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const { logout, user } = useContext(AuthContext)
-    console.log(user);
 
     const toggleDropdown = () => {
         setDropdown(!isDropdown)

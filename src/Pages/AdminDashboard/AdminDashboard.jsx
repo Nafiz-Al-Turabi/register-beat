@@ -15,7 +15,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 const AdminDashboard = () => {
     const [isOpen, setIsOpen] = useState(false);
     const sidebarRef = useRef(null);
-    const {user}= useContext(AuthContext)
+    const {user,logout}= useContext(AuthContext)
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -93,7 +93,7 @@ const AdminDashboard = () => {
                         Welcome, {user?.name}
                     </h1>
                     <div className="flex items-center">
-                        <button className="bg-violet-500 hover:bg-violet-700 duration-300 flex items-center gap-2 text-white px-4 py-2 rounded-md">
+                        <button onClick={logout} className="bg-violet-500 hover:bg-violet-700 duration-300 flex items-center gap-2 text-white px-4 py-2 rounded-md">
                             <FaSignOutAlt /> Logout
                         </button>
                     </div>
