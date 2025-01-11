@@ -16,6 +16,7 @@ import Payment from "../Pages/Payment/Payment";
 import AdminDashboard from "../Pages/AdminDashboard/AdminDashboard";
 import Users from "../Pages/Users/Users";
 import AdminHome from "../Pages/AdminHome/AdminHome";
+import NotFound from "../Pages/NotFound/NotFound";
 
 const protectedRoute = (element, roles) => <Protected role={roles}>{element}</Protected>;
 
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: protectedRoute(<DashboardLayout />, ['admin', 'user']), 
+        errorElement: <NotFound></NotFound>,
         children: [
             { path: '/', element: <DashboardContents /> },
             { path: '/settings', element: <Settings /> },

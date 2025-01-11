@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import {
     FaHome,
@@ -10,10 +10,12 @@ import {
     FaUserCircle,
     FaSignOutAlt
 } from 'react-icons/fa';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const AdminDashboard = () => {
     const [isOpen, setIsOpen] = useState(false);
     const sidebarRef = useRef(null);
+    const {user}= useContext(AuthContext)
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -45,12 +47,12 @@ const AdminDashboard = () => {
                 className={`fixed md:static w-64 h-full bg-[#212529] text-white transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
             >
                 <div className="p-4 text-2xl font-bold">Admin Dashboard</div>
-                <nav className="mt-6">
+                <nav className="mt-6 space-y-4 px-4">
                     <NavLink
                         to="/admin-dashboard"
                         end  // for active route 
                         className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-violet-400 ${isActive ? 'bg-violet-700' : ''}`
+                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
                         }
                     >
                         <FaHome className="h-5 w-5 mr-2" /> Dashboard
@@ -58,7 +60,7 @@ const AdminDashboard = () => {
                     <NavLink
                         to="users"
                         className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-violet-400 ${isActive ? 'bg-violet-700' : ''}`
+                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
                         }
                     >
                         <FaUsers className="h-5 w-5 mr-2" /> Users
@@ -66,7 +68,7 @@ const AdminDashboard = () => {
                     <NavLink
                         to="/reports"
                         className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-violet-400 ${isActive ? 'bg-violet-700' : ''}`
+                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
                         }
                     >
                         <FaChartBar className="h-5 w-5 mr-2" /> Reports
@@ -74,7 +76,7 @@ const AdminDashboard = () => {
                     <NavLink
                         to="/settings"
                         className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-violet-400 ${isActive ? 'bg-violet-700' : ''}`
+                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
                         }
                     >
                         <FaCog className="h-5 w-5 mr-2" /> Settings
@@ -88,7 +90,7 @@ const AdminDashboard = () => {
                 <header className="bg-[#212529] shadow-md p-4 flex justify-between items-center">
                     <h1 className="text-xl font-semibold flex text-white items-center gap-2">
                         <FaUserCircle className="h-6 w-6 text-gray-100" />
-                        Welcome, Admin
+                        Welcome, {user?.name}
                     </h1>
                     <div className="flex items-center">
                         <button className="bg-violet-500 hover:bg-violet-700 duration-300 flex items-center gap-2 text-white px-4 py-2 rounded-md">
