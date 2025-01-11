@@ -17,43 +17,21 @@ import AdminDashboard from "../Pages/AdminDashboard/AdminDashboard";
 import Users from "../Pages/Users/Users";
 import AdminHome from "../Pages/AdminHome/AdminHome";
 
+const protectedRoute = (element, roles) => <Protected role={roles}>{element}</Protected>;
+
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Protected role={['admin', 'user']}><DashboardLayout /></Protected>,
+        element: protectedRoute(<DashboardLayout />, ['admin', 'user']), 
         children: [
-            {
-                path: '/',
-                element: <DashboardContents />
-            },
-            {
-                path: '/settings',
-                element: <Settings />
-            },
-            {
-                path: '/upgrade',
-                element: <PlanPurchase />
-            },
-            {
-                path: '/register-beat',
-                element: <RegisterBeat />
-            },
-            {
-                path: '/my-beats',
-                element: <MyBeats />
-            },
-            {
-                path: '/song-matches',
-                element: <SongMatches />
-            },
-            {
-                path: '/profile',
-                element: <Profile />
-            },
-            {
-                path: '/payment',
-                element: <Payment />
-            },
+            { path: '/', element: <DashboardContents /> },
+            { path: '/settings', element: <Settings /> },
+            { path: '/upgrade', element: <PlanPurchase /> },
+            { path: '/register-beat', element: <RegisterBeat /> },
+            { path: '/my-beats', element: <MyBeats /> },
+            { path: '/song-matches', element: <SongMatches /> },
+            { path: '/profile', element: <Profile /> },
+            { path: '/payment', element: <Payment /> },
         ]
     },
     {
@@ -64,20 +42,12 @@ export const router = createBrowserRouter([
         path: '/signup',
         element: <Signup />
     },
-
     {
         path: '/admin-dashboard',
-        element: <Protected role={['admin']}><AdminDashboard /></Protected>,
+        element: protectedRoute(<AdminDashboard />, ['admin']), 
         children: [
-            {
-                path: '',  
-                element: <AdminHome />
-            },
-            {
-                path: 'users',  
-                element: <Users />
-            }
+            { index: true, element: <AdminHome /> },  
+            { path: 'users', element: <Users /> }, 
         ]
     }
-
 ]);

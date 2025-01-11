@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { 
-  FaHome, 
-  FaUsers, 
-  FaChartBar, 
-  FaCog, 
-  FaBars, 
-  FaTimes, 
-  FaUserCircle, 
-  FaSignOutAlt 
+import {
+    FaHome,
+    FaUsers,
+    FaChartBar,
+    FaCog,
+    FaBars,
+    FaTimes,
+    FaUserCircle,
+    FaSignOutAlt
 } from 'react-icons/fa';
 
 const AdminDashboard = () => {
@@ -47,9 +47,10 @@ const AdminDashboard = () => {
                 <div className="p-4 text-2xl font-bold">Admin Dashboard</div>
                 <nav className="mt-6">
                     <NavLink
-                        to=""
+                        to="/admin-dashboard"
+                        end  // for active route 
                         className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                            `flex items-center px-4 py-2 hover:bg-violet-400 ${isActive ? 'bg-violet-700' : ''}`
                         }
                     >
                         <FaHome className="h-5 w-5 mr-2" /> Dashboard
@@ -57,7 +58,7 @@ const AdminDashboard = () => {
                     <NavLink
                         to="users"
                         className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                            `flex items-center px-4 py-2 hover:bg-violet-400 ${isActive ? 'bg-violet-700' : ''}`
                         }
                     >
                         <FaUsers className="h-5 w-5 mr-2" /> Users
@@ -65,7 +66,7 @@ const AdminDashboard = () => {
                     <NavLink
                         to="/reports"
                         className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                            `flex items-center px-4 py-2 hover:bg-violet-400 ${isActive ? 'bg-violet-700' : ''}`
                         }
                     >
                         <FaChartBar className="h-5 w-5 mr-2" /> Reports
@@ -73,7 +74,7 @@ const AdminDashboard = () => {
                     <NavLink
                         to="/settings"
                         className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                            `flex items-center px-4 py-2 hover:bg-violet-400 ${isActive ? 'bg-violet-700' : ''}`
                         }
                     >
                         <FaCog className="h-5 w-5 mr-2" /> Settings
