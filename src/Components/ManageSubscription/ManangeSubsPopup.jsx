@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import axiosInstance from '../../Axios/AxiosInstance';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const ManageSubscriptionPopup = ({ setShowPopup }) => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const subscription = {
         plan: "Standard",
@@ -84,6 +86,11 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
         }
     };
 
+    const handleContactClick = () => {
+        setShowPopup(false); // Hide the popup
+        navigate('/contact'); // Navigate to contact page
+    };
+
     return (
         <div>
             <div className="animate-from-middle justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[99999] outline-none focus:outline-none">
@@ -135,7 +142,7 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
                         </button>
                         <button
                             className="bg-slate-700 font-semibold rounded-full py-3 mt-2 active:scale-95"
-                            onClick={() => alert("Contact support not implemented yet.")}
+                            onClick={handleContactClick}
                         >
                             Contact Support
                         </button>

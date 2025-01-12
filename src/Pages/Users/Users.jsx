@@ -13,7 +13,7 @@ const Users = () => {
     const { isLoading, isError, data: users = [], error, refetch } = useQuery({
         queryKey: ['users', timeframe],
         queryFn: async () => {
-            const response = await axiosInstance.get('/admin/users', {
+            const response = await axiosInstance.get('/admin/user-registrations', {
                 params: {
                     timeframe,
                 },
@@ -24,8 +24,9 @@ const Users = () => {
     });
 
     const handleBlacklist = async (userId) => {
+        console.log(userId)
         try {
-            const response = await axiosInstance.post(`/admin/user-blacklist/${userId}`);
+            const response = await axiosInstance.delete(`/admin/user-blacklist/${userId}`);
             if (response.data.message === "User added to blacklist successfully") {
                 setBlacklistedUsers((prevSet) => new Set(prevSet.add(userId)));
                 refetch();
