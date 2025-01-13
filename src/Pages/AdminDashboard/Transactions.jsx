@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axiosInstance from '../../Axios/AxiosInstance';
 import axios from 'axios';
 import { FaMoneyCheckAlt } from 'react-icons/fa';
 
@@ -13,7 +14,7 @@ const Transactions = () => {
   const fetchTransactions = async (currentPage) => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:3001/api/admin/AllTransections', {
+      const response = await axiosInstance.get('/admin/AllTransections', {
         params: {
           page: currentPage,
           limit,
