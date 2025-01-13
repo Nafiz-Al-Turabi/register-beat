@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../Axios/AxiosInstance';
-import axios from 'axios';
-import { FaMoneyCheckAlt } from 'react-icons/fa';
+import React, { useEffect, useState } from "react";
+import axiosInstance from "../../Axios/AxiosInstance";
+import axios from "axios";
+import { FaMoneyCheckAlt } from "react-icons/fa";
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -14,7 +14,7 @@ const Transactions = () => {
   const fetchTransactions = async (currentPage) => {
     setLoading(true);
     try {
-      const response = await axiosInstance.get('/admin/AllTransections', {
+      const response = await axiosInstance.get("/admin/AllTransections", {
         params: {
           page: currentPage,
           limit,
@@ -41,12 +41,12 @@ const Transactions = () => {
 
   const getMethodColor = (method) => {
     switch (method) {
-      case 'subscription':
-        return 'text-green-500';
-      case 'extracredit':
-        return 'text-blue-500';
+      case "subscription":
+        return "text-green-500";
+      case "extracredit":
+        return "text-blue-500";
       default:
-        return 'text-gray-500';
+        return "text-gray-500";
     }
   };
 
@@ -56,7 +56,10 @@ const Transactions = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 p-4 bg-[#212529] rounded-lg shadow-md">
         <h1 className="text-2xl md:text-3xl font-extrabold">
           <span className="flex items-center gap-2 text-white">
-            <span className="text-green-500"><FaMoneyCheckAlt /></span> Transactions
+            <span className="text-green-500">
+              <FaMoneyCheckAlt />
+            </span>{" "}
+            Transactions
           </span>
         </h1>
       </div>
@@ -68,52 +71,100 @@ const Transactions = () => {
             <table className="min-w-full divide-y divide-zinc-800">
               <thead className="bg-[#212529]">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">ID</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">User Name</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">Email</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">Credit</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">Customer ID</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">Method</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">Amount</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">Created At</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    ID
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    User Name
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    Email
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    Credit
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    Customer ID
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    Method
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    Amount
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    Created At
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-800 bg-[#1a1d21]">
                 {loading && (
                   <tr>
-                    <td colSpan="8" className="px-4 py-4 text-center text-white">
+                    <td
+                      colSpan="8"
+                      className="px-4 py-4 text-center text-white"
+                    >
                       Loading...
                     </td>
                   </tr>
                 )}
                 {error && (
                   <tr>
-                    <td colSpan="8" className="px-4 py-4 text-center text-red-500">
+                    <td
+                      colSpan="8"
+                      className="px-4 py-4 text-center text-red-500"
+                    >
                       Error: {error}
                     </td>
                   </tr>
                 )}
                 {!loading && transactions.length === 0 && (
                   <tr>
-                    <td colSpan="8" className="px-4 py-4 text-center text-white">
+                    <td
+                      colSpan="8"
+                      className="px-4 py-4 text-center text-white"
+                    >
                       No transactions found.
                     </td>
                   </tr>
                 )}
-                {!loading && transactions && transactions.map((transaction) => (
-                  <tr key={transaction._id} className="hover:bg-zinc-800 even:bg-[#212529] transition-colors">
-                    <td className="px-4 py-4 text-white">{transaction._id}</td>
-                    <td className="px-4 py-4 text-white">{transaction.userId.name}</td>
-                    <td className="px-4 py-4 text-zinc-300">{transaction.userId.email}</td>
-                    <td className="px-4 py-4 text-zinc-300">{transaction.credit}</td>
-                    <td className="px-4 py-4 text-zinc-300">{transaction.customerId}</td>
-                    <td className={`px-4 py-4 font-bold ${getMethodColor(transaction.method)}`}>
-                      {transaction.method}
-                    </td>
-                    <td className="px-4 py-4 text-zinc-300">{transaction.amount}$</td>
-                    <td className="px-4 py-4 text-zinc-300">{new Date(transaction.createdAt).toLocaleString()}</td>
-                  </tr>
-                ))}
+                {!loading &&
+                  transactions &&
+                  transactions.map((transaction) => (
+                    <tr
+                      key={transaction._id}
+                      className="hover:bg-zinc-800 even:bg-[#212529] transition-colors"
+                    >
+                      <td className="px-4 py-4 text-white">
+                        {transaction._id}
+                      </td>
+                      <td className="px-4 py-4 text-white">
+                        {transaction.userId.name}
+                      </td>
+                      <td className="px-4 py-4 text-zinc-300">
+                        {transaction.userId.email}
+                      </td>
+                      <td className="px-4 py-4 text-zinc-300">
+                        {transaction.credit}
+                      </td>
+                      <td className="px-4 py-4 text-zinc-300">
+                        {transaction.customerId}
+                      </td>
+                      <td
+                        className={`px-4 py-4 font-bold ${getMethodColor(
+                          transaction.method
+                        )}`}
+                      >
+                        {transaction.method}
+                      </td>
+                      <td className="px-4 py-4 text-zinc-300">
+                        {transaction.amount}$
+                      </td>
+                      <td className="px-4 py-4 text-zinc-300">
+                        {new Date(transaction.createdAt).toLocaleString()}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
