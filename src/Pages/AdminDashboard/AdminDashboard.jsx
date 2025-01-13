@@ -12,6 +12,7 @@ import {
     FaSignOutAlt
 } from 'react-icons/fa';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { AiOutlineTransaction } from "react-icons/ai";
 
 const AdminDashboard = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -65,6 +66,14 @@ const AdminDashboard = () => {
                         }
                     >
                         <FaUsers className="h-5 w-5 mr-2" /> Users
+                    </NavLink>
+                    <NavLink
+                        to="transections"
+                        className={({ isActive }) =>
+                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
+                        }
+                    >
+                        <AiOutlineTransaction  className="h-5 w-5 mr-2" /> Transections
                     </NavLink>
                     <NavLink
                         to="/reports"
