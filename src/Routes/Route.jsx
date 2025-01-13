@@ -17,6 +17,8 @@ import AdminDashboard from "../Pages/AdminDashboard/AdminDashboard";
 import Users from "../Pages/Users/Users";
 import AdminHome from "../Pages/AdminHome/AdminHome";
 import NotFound from "../Pages/NotFound/NotFound";
+import Contact from "../Pages/Contact";
+import AdminContact from "../Pages/AdminDashboard/AdminContact";
 
 const protectedRoute = (element, roles) => <Protected role={roles}>{element}</Protected>;
 
@@ -34,6 +36,7 @@ export const router = createBrowserRouter([
             { path: '/song-matches', element: <SongMatches /> },
             { path: '/profile', element: <Profile /> },
             { path: '/payment', element: <Payment /> },
+            {path : '/contact' ,  element : <Contact/>}
         ]
     },
     {
@@ -50,6 +53,7 @@ export const router = createBrowserRouter([
         children: [
             { index: true, element: <AdminHome /> },  
             { path: 'users', element: <Users /> }, 
+            { path: 'allcontact', element: <AdminContact/> }, 
         ]
     }
 ]);
