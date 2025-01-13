@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import axiosInstance from '../Axios/AxiosInstance';
+import React, { useState } from "react";
+import axiosInstance from "../Axios/AxiosInstance";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    issue: '',
+    name: "",
+    email: "",
+    issue: "",
   });
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,24 +23,24 @@ const Contact = () => {
 
     // Basic validation
     if (!formData.name || !formData.email || !formData.issue) {
-      setMessage('All fields are required.');
+      setMessage("All fields are required.");
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await axiosInstance.post('/support/create', formData);
+      const response = await axiosInstance.post("/support/create", formData);
       setMessage(response.data.message);
 
       // Clear the form fields on success
       setFormData({
-        name: '',
-        email: '',
-        issue: '',
+        name: "",
+        email: "",
+        issue: "",
       });
     } catch (error) {
-      setMessage('Failed to submit support request.');
+      setMessage("Failed to submit support request.");
       console.error(error);
     } finally {
       setLoading(false);
@@ -50,7 +50,9 @@ const Contact = () => {
   return (
     <div className="max-w-3xl mx-auto pt-16 pb-8">
       <div className="bg-[#0f0f0f] p-6 md:p-20 rounded-lg">
-        <h1 className="text-4xl font-bold text-[#b079e9] text-center">Contact Support</h1>
+        <h1 className="text-4xl font-bold text-[#b079e9] text-center">
+          Contact Support
+        </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 mt-8">
           {/* Name */}
           <div>
@@ -107,14 +109,18 @@ const Contact = () => {
               disabled={loading}
               className="bg-purple-600 text-white font-bold px-8 py-3 rounded-lg hover:bg-purple-700 transition active:scale-95"
             >
-              {loading ? 'Submitting...' : 'Submit'}
+              {loading ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>
 
         {/* Message */}
         {message && (
-          <p className={`mt-4 text-center ${message.includes('Failed') ? 'text-red-500' : 'text-green-500'}`}>
+          <p
+            className={`mt-4 text-center ${
+              message.includes("Failed") ? "text-red-500" : "text-green-500"
+            }`}
+          >
             {message}
           </p>
         )}

@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import axiosInstance from '../../Axios/AxiosInstance';
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axiosInstance from "../../Axios/AxiosInstance";
 
 const AdminContact = () => {
-  const [timeframe, setTimeframe] = useState('lastMonth');
+  const [timeframe, setTimeframe] = useState("lastMonth");
 
-  const { isLoading, isError, data: supportRequests = [], error, refetch } = useQuery({
-    queryKey: ['supportRequests', timeframe],
+  const {
+    isLoading,
+    isError,
+    data: supportRequests = [],
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["supportRequests", timeframe],
     queryFn: async () => {
-      const response = await axiosInstance.get('/support/getAllSupportRequests', {
-        params: {
-          timeframe,
-        },
-      });
+      const response = await axiosInstance.get(
+        "/support/getAllSupportRequests",
+        {
+          params: {
+            timeframe,
+          },
+        }
+      );
       return response.data;
     },
     enabled: !!timeframe,
@@ -53,16 +62,28 @@ const AdminContact = () => {
             <table className="min-w-full divide-y divide-zinc-800">
               <thead className="bg-[#212529]">
                 <tr>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                  <th
+                    scope="col"
+                    className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase"
+                  >
                     Name
                   </th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                  <th
+                    scope="col"
+                    className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase"
+                  >
                     Email
                   </th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                  <th
+                    scope="col"
+                    className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase"
+                  >
                     Issue
                   </th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                  <th
+                    scope="col"
+                    className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase"
+                  >
                     Created At
                   </th>
                 </tr>
@@ -70,41 +91,54 @@ const AdminContact = () => {
               <tbody className="divide-y divide-zinc-800 bg-[#1a1d21]">
                 {isLoading && (
                   <tr>
-                    <td colSpan="4" className="px-4 py-4 text-center text-white">
+                    <td
+                      colSpan="4"
+                      className="px-4 py-4 text-center text-white"
+                    >
                       Loading...
                     </td>
                   </tr>
                 )}
                 {isError && (
                   <tr>
-                    <td colSpan="4" className="px-4 py-4 text-center text-red-500">
-                      {error?.message || 'Error fetching support requests'}
+                    <td
+                      colSpan="4"
+                      className="px-4 py-4 text-center text-red-500"
+                    >
+                      {error?.message || "Error fetching support requests"}
                     </td>
                   </tr>
                 )}
                 {!isLoading && supportRequests.length === 0 && (
                   <tr>
-                    <td colSpan="4" className="px-4 py-4 text-center text-white">
+                    <td
+                      colSpan="4"
+                      className="px-4 py-4 text-center text-white"
+                    >
                       No support requests found for the selected time range.
                     </td>
                   </tr>
                 )}
-                {!isLoading && supportRequests.map((request, index) => (
-                  <tr key={index} className="hover:bg-zinc-800 even:bg-[#212529] transition-colors">
-                    <td className="px-4 py-4 whitespace-nowrap text-white">
-                      {request.name}
-                    </td>
-                    <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
-                      {request.email}
-                    </td>
-                    <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
-                      {request.issue}
-                    </td>
-                    <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
-                      {new Date(request.createdAt).toLocaleDateString()}
-                    </td>
-                  </tr>
-                ))}
+                {!isLoading &&
+                  supportRequests.map((request, index) => (
+                    <tr
+                      key={index}
+                      className="hover:bg-zinc-800 even:bg-[#212529] transition-colors"
+                    >
+                      <td className="px-4 py-4 whitespace-nowrap text-white">
+                        {request.name}
+                      </td>
+                      <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
+                        {request.email}
+                      </td>
+                      <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
+                        {request.issue}
+                      </td>
+                      <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
+                        {new Date(request.createdAt).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
