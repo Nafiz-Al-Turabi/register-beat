@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import { RiContactsLine } from "react-icons/ri";
 import {
     FaHome,
     FaUsers,
@@ -72,6 +73,14 @@ const AdminDashboard = () => {
                         }
                     >
                         <FaChartBar className="h-5 w-5 mr-2" /> Reports
+                    </NavLink>
+                    <NavLink
+                        to="allcontact"
+                        className={({ isActive }) =>
+                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
+                        }
+                    >
+                        <RiContactsLine  className="h-5 w-5 mr-2" /> All Contact
                     </NavLink>
                     <NavLink
                         to="/settings"

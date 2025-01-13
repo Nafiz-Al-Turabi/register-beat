@@ -1,0 +1,117 @@
+import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import axiosInstance from '../../Axios/AxiosInstance';
+
+const AdminContact = () => {
+  const [timeframe, setTimeframe] = useState('lastMonth');
+
+  const { isLoading, isError, data: supportRequests = [], error, refetch } = useQuery({
+    queryKey: ['supportRequests', timeframe],
+    queryFn: async () => {
+      const response = await axiosInstance.get('/support/getAllSupportRequests', {
+        params: {
+          timeframe,
+        },
+      });
+      return response.data;
+    },
+    enabled: !!timeframe,
+  });
+
+  return (
+    <div>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 p-4 bg-[#212529] rounded-lg shadow-md">
+        <h1 className="text-2xl md:text-3xl font-extrabold">
+          <span className="flex items-center gap-2 text-white">
+            Admin Contact Requests
+          </span>
+        </h1>
+
+        <div className="w-full md:w-auto min-w-[200px]">
+          <select
+            className="block w-full py-2 px-4 bg-[#1a1d21] border border-zinc-600 text-white rounded-lg shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500"
+            value={timeframe}
+            onChange={(e) => {
+              setTimeframe(e.target.value);
+              refetch();
+            }}
+          >
+            <option value="">Select Time Range</option>
+            <option value="lastDay">Last Day</option>
+            <option value="lastWeek">Last Week</option>
+            <option value="lastMonth">Last Month</option>
+            <option value="startOfMonth">Month-to-date</option>
+            <option value="last90Days">Last 90 Days</option>
+            <option value="startofYear">Year-to-date</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="w-full overflow-x-auto rounded-lg shadow-md">
+        <div className="min-w-full inline-block align-middle">
+          <div className="overflow-hidden">
+            <table className="min-w-full divide-y divide-zinc-800">
+              <thead className="bg-[#212529]">
+                <tr>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    Name
+                  </th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    Email
+                  </th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    Issue
+                  </th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                    Created At
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-800 bg-[#1a1d21]">
+                {isLoading && (
+                  <tr>
+                    <td colSpan="4" className="px-4 py-4 text-center text-white">
+                      Loading...
+                    </td>
+                  </tr>
+                )}
+                {isError && (
+                  <tr>
+                    <td colSpan="4" className="px-4 py-4 text-center text-red-500">
+                      {error?.message || 'Error fetching support requests'}
+                    </td>
+                  </tr>
+                )}
+                {!isLoading && supportRequests.length === 0 && (
+                  <tr>
+                    <td colSpan="4" className="px-4 py-4 text-center text-white">
+                      No support requests found for the selected time range.
+                    </td>
+                  </tr>
+                )}
+                {!isLoading && supportRequests.map((request, index) => (
+                  <tr key={index} className="hover:bg-zinc-800 even:bg-[#212529] transition-colors">
+                    <td className="px-4 py-4 whitespace-nowrap text-white">
+                      {request.name}
+                    </td>
+                    <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
+                      {request.email}
+                    </td>
+                    <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
+                      {request.issue}
+                    </td>
+                    <td className="px-4 py-4 whitespace-nowrap text-zinc-300">
+                      {new Date(request.createdAt).toLocaleDateString()}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminContact;
