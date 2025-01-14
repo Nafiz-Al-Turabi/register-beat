@@ -139,10 +139,10 @@ const Transactions = () => {
                         {transaction._id}
                       </td>
                       <td className="px-4 py-4 text-white">
-                        {transaction.userId.name}
+                        {transaction.userNAme || ''}
                       </td>
                       <td className="px-4 py-4 text-zinc-300">
-                        {transaction.userId.email}
+                        {transaction.userEmail || ''}
                       </td>
                       <td className="px-4 py-4 text-zinc-300">
                         {transaction.credit}
