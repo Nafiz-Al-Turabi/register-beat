@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import RegisterBeatPopup from './RegisterBeatPopup';
 import CompletedPopup from './CompletedPopup';
 import axiosInstance from '../../Axios/AxiosInstance';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -11,6 +12,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const [success, setSuccess] = useState(false);
   const [showCompletedPopup, setShowCompletedPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     let isMounted = true;
@@ -56,7 +58,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
         payload.append('image', formData.image);
       }
 
-      const response = await axiosInstance.post('/beat/create-beat/677a57e28c65420264b4abe0', payload, {
+      const response = await axiosInstance.post(`/beat/create-beat/${user._id}`, payload, {
         headers: {
           'Content-Type': 'multipart/form-data', // Important for sending files
         },
