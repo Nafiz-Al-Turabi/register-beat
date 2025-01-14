@@ -4,6 +4,7 @@ import { FaUsers, FaUserSlash } from 'react-icons/fa';
 import { HiCreditCard } from "react-icons/hi";
 import { ImCreditCard } from 'react-icons/im';
 import { MdOutlineCancel, MdOutlineLibraryMusic } from 'react-icons/md';
+import { CiDollar } from "react-icons/ci";
 import axiosInstance from '../../Axios/AxiosInstance';
 import Loading from '../../Components/Loading/Loading';
 import Charts from '../../Components/Charts/Charts';
@@ -29,7 +30,16 @@ const AdminHome = () => {
 
     return (
         <div>
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                <div className="bg-[#212529] hover:bg-violet-800 cursor-pointer duration-300 p-4 rounded-lg shadow-lg flex items-center">
+                    <div className="text-3xl text-violet-500 mr-4">
+                        <FaUsers />
+                    </div>
+                    <div>
+                        <h4 className="text-base font-semibold">Total Users</h4>
+                        <p className="text-base font-bold mt-2">{admin?.data?.totalUsers || 0}</p>
+                    </div>
+                </div>
                 <div className="bg-[#212529] hover:bg-violet-800 cursor-pointer duration-300 p-4 rounded-lg shadow-lg flex items-center">
                     <div className="text-3xl text-violet-500 mr-4">
                         <FaUsers />
@@ -78,11 +88,38 @@ const AdminHome = () => {
                 </div>
                 <div className="bg-[#212529] hover:bg-violet-800 cursor-pointer duration-300 p-4 rounded-lg shadow-lg flex items-center">
                     <div className="text-3xl text-violet-500 mr-4">
+                        <MdOutlineLibraryMusic />
+                    </div>
+                    <div>
+                        <h4 className="text-base font-semibold">Average Beat Regi</h4>
+                        <p className="text-base font-bold mt-2">{admin?.data?.AvrgBeatRegistration || 0}</p>
+                    </div>
+                </div>
+                <div className="bg-[#212529] hover:bg-violet-800 cursor-pointer duration-300 p-4 rounded-lg shadow-lg flex items-center">
+                    <div className="text-3xl text-violet-500 mr-4">
                         <HiCreditCard />
                     </div>
                     <div>
                         <h4 className="text-base font-semibold">Credit Usage</h4>
                         <p className="text-base font-bold mt-2">{admin?.data?.totalSubscriptionCredit || 0}</p>
+                    </div>
+                </div>
+                <div className="bg-[#212529] hover:bg-violet-800 cursor-pointer duration-300 p-4 rounded-lg shadow-lg flex items-center">
+                    <div className="text-3xl text-violet-500 mr-4">
+                        <HiCreditCard />
+                    </div>
+                    <div>
+                        <h4 className="text-base font-semibold">Total Credit</h4>
+                        <p className="text-base font-bold mt-2">{admin?.data?.totalCredit || 0}</p>
+                    </div>
+                </div>
+                <div className="bg-[#212529] hover:bg-violet-800 cursor-pointer duration-300 p-4 rounded-lg shadow-lg flex items-center">
+                    <div className="text-3xl text-violet-500 mr-4">
+                    <CiDollar />
+                    </div>
+                    <div>
+                        <h4 className="text-base font-semibold">Total Revenue</h4>
+                        <p className="text-base font-bold mt-2">{admin?.data?.totalRevenue || 0}</p>
                     </div>
                 </div>
             </div>
