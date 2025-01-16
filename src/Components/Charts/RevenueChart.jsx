@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
+import axiosInstance from "../../Axios/AxiosInstance";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,7 +12,14 @@ import {
   Legend,
 } from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const RevenueChart = () => {
   const [chartData, setChartData] = useState(null);
@@ -19,7 +27,7 @@ const RevenueChart = () => {
   useEffect(() => {
     const fetchRevenueAndCredit = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/admin/revenueChart"); // Adjust API endpoint
+        const response = await axiosInstance.get("/admin/revenueChart");
         const { day, week, month, year, last90Days } = response.data;
 
         setChartData({
@@ -27,16 +35,27 @@ const RevenueChart = () => {
           datasets: [
             {
               label: "Total Revenue",
-              data: [day.revenue, week.revenue, month.revenue, year.revenue, last90Days.revenue],
-              backgroundColor: "rgba(153, 102, 255, 0.8)",  // Attractive purple color for Revenue
-              borderColor: "rgba(153, 102, 255, 1)",   // Purple border for Revenue
-              borderWidth: 1,
+              data: [
+                day.revenue,
+                week.revenue,
+                month.revenue,
+                year.revenue,
+                last90Days.revenue,
+              ],
+              backgroundColor: "rgba(153, 102, 255, 0.8)",
+              borderColor: "rgba(153, 102, 255, 1)",
             },
             {
               label: "Total Credit",
-              data: [day.credit, week.credit, month.credit, year.credit, last90Days.credit],
-              backgroundColor: "rgba(255, 159, 64, 0.8)",  // Vibrant orange color for Credit
-              borderColor: "rgba(255, 159, 64, 1)",   // Orange border for Credit
+              data: [
+                day.credit,
+                week.credit,
+                month.credit,
+                year.credit,
+                last90Days.credit,
+              ],
+              backgroundColor: "rgba(255, 159, 64, 0.8)",
+              borderColor: "rgba(255, 159, 64, 1)",
               borderWidth: 1,
             },
           ],
@@ -55,13 +74,15 @@ const RevenueChart = () => {
     <div
       style={{
         width: "100%",
-        maxWidth: "1000px", // Set a max width for large screens
-        
+        maxWidth: "1000px",
+
         padding: "10px",
       }}
       className="mt-10"
     >
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Revenue and Credit Chart</h2>
+      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+        Revenue and Credit Chart
+      </h2>
       <Bar
         data={chartData}
         options={{
@@ -71,8 +92,8 @@ const RevenueChart = () => {
             title: { display: true, text: "Revenue and Credit" },
           },
           animation: {
-            duration: 2000, // Animation duration in milliseconds
-            easing: "easeOutQuad", // Smooth animation
+            duration: 2000,
+            easing: "easeOutQuad",
             onComplete: () => console.log("Animation complete!"),
           },
           scales: {
@@ -81,13 +102,13 @@ const RevenueChart = () => {
               ticks: { font: { size: 12 } },
             },
             y: {
-              beginAtZero: true, // Ensure bars animate from 0
+              beginAtZero: true,
               grid: { display: true },
               ticks: { font: { size: 12 } },
             },
           },
-          barPercentage: 0.5, // Adjust bar width
-          categoryPercentage: 0.5, // Adjust category spacing
+          barPercentage: 0.5,
+          categoryPercentage: 0.5,
         }}
       />
     </div>
