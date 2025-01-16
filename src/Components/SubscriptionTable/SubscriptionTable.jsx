@@ -1,7 +1,18 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import axiosInstance from '../../Axios/AxiosInstance';
 
 const SubscriptionTable = () => {
+
+    const { isLoading, data, isError, error } = useQuery({
+        queryKey: ['transactions'],
+        queryFn: async () => {
+            const response = await axiosInstance.get('/admin/AllTransections');
+            console.log("Hello from Admin Home",response.data);
+            return response.data;
+        },
+    });
     // Sample data - replace with your actual data
     const ordersData = [
         {

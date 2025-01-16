@@ -4,12 +4,15 @@ import axiosInstance from "../../Axios/AxiosInstance";
 import { FaUsers } from "react-icons/fa";
 import fileUrl from "../../Axios/fileUrl";
 import { Link } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 const Users = () => {
   const [timeframe, setTimeframe] = useState("lastMonth");
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [blacklistedUsers, setBlacklistedUsers] = useState(new Set());
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 2;
 
   const {
     isLoading,
@@ -52,18 +55,26 @@ const Users = () => {
     return blacklistedUsers.has(userId);
   };
 
-  // Handle click on blacklist button
   const handleBlacklistClick = (user) => {
     setSelectedUser(user);
     setShowConfirmDialog(true);
   };
 
-  // Confirm the blacklisting action
   const confirmBlacklist = async () => {
     if (!selectedUser) return;
     await handleBlacklist(selectedUser.id);
     setShowConfirmDialog(false);
   };
+
+  const handlePageChange = (selected) => {
+    setCurrentPage(selected.selected);
+  };
+
+  const paginatedUsers = users.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+
 
   return (
     <div>
@@ -155,7 +166,7 @@ const Users = () => {
                     </td>
                   </tr>
                 )}
-                {!isLoading && users.length === 0 && (
+                {!isLoading && paginatedUsers.length === 0 && (
                   <tr>
                     <td
                       colSpan="5"
@@ -166,7 +177,7 @@ const Users = () => {
                   </tr>
                 )}
                 {!isLoading &&
-                  users.map((user, index) => (
+                  paginatedUsers.map((user, index) => (
                     <tr
                       key={index}
                       className="hover:bg-zinc-800 even:bg-[#212529] transition-colors"
@@ -202,8 +213,8 @@ const Users = () => {
                           // disabled={user.blacklist}
                           disabled={isUserBlacklisted(user._id)}
                           className={`px-3 py-1 text-sm ${user.blacklist
-                              ? "bg-zinc-400 cursor-not-allowed"
-                              : "bg-red-500 hover:bg-red-600"
+                            ? "bg-zinc-400 cursor-not-allowed"
+                            : "bg-red-500 hover:bg-red-600"
                             } text-white rounded transition-colors duration-200`}
                         >
                           {user.blacklist ? "Blacklisted" : "+ Blacklist"}
@@ -216,6 +227,23 @@ const Users = () => {
           </div>
         </div>
       </div>
+      <ReactPaginate
+        previousLabel={"← Previous"}
+        nextLabel={"Next →"}
+        breakLabel={"..."}
+        pageCount={Math.ceil(users.length / itemsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageChange}
+        containerClassName={"flex justify-end mt-4 space-x-4"}
+        activeClassName={"font-bold text-violet-500"}
+        pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+        previousClassName={
+          "px-3 py-1 border border-zinc-600 rounded text-white"
+        }
+        nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+        breakClassName={"px-3 py-1 text-zinc-400"}
+      />
 
       {/* Confirmation Modal */}
       {showConfirmDialog && (
