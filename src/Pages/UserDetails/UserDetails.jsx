@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import axiosInstance from '../../Axios/AxiosInstance';
 import { useParams } from 'react-router-dom';
 import Loading from '../../Components/Loading/Loading';
@@ -10,6 +10,7 @@ import TransactionsTable from '../../Components/Tables/TransactionsTable';
 
 const UserDetails = () => {
     const { id } = useParams();
+    const [activeTab, setActiveTab] = useState('beats');
     const { isLoading, data, isError, error } = useQuery({
         queryKey: ['userDetails', id],
         queryFn: async () => {
@@ -18,7 +19,7 @@ const UserDetails = () => {
         },
     });
     const {
-         data: { beats = [], transactions = [] } = {},
+        data: { beats = [], transactions = [] } = {},
         isLoading: usersLoading,
         isError: usersError,
     } = useQuery({
@@ -44,7 +45,7 @@ const UserDetails = () => {
         );
     }
     const { user } = data;
-    
+
 
     return (
         <div className="">
@@ -118,59 +119,84 @@ const UserDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex gap-4 mt-4' >
-                <div className='className="overflow-x-auto  md:w-full"'>
-                    <table className="min-w-full border-collapse">
-                        <thead className="border-b-2  border-gray-700 text-[#a1afc5]">
-                            <tr className="text-sm md:text-base">
-                                <th className="p-4 text-left">Image</th>
-                                <th className="p-4 text-left">Beat Name</th>
-                                <th className="p-4 text-left">Registration ID</th>
-                                <th className="p-4 text-left">Registration Date</th>
-                                {/* <th className="p-4 text-left">Total Madatches</th> */}
-                                <th className="p-4 text-left">View Info</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y-[1px] divide-[#2d344b] text-[#a1afc5]">
-                            <BeatTable beats={beats} />
-                        </tbody>
-                    </table>
+            {/* Tabs Section */}
+            <div className="mt-10">
+                <div className=" gap-4 mb-10">
+                    <button
+                        onClick={() => setActiveTab('beats')}
+                        className={`px-4 py-2 font-bold ${activeTab === 'beats'
+                                ? 'text-white border-b-2 border-violet-500'
+                                : 'text-gray-400'
+                            }`}
+                    >
+                        Beats
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('transactions')}
+                        className={`px-4 py-2 font-bold ${activeTab === 'transactions'
+                                ? 'text-white border-b-2 border-violet-500'
+                                : 'text-gray-400'
+                            }`}
+                    >
+                        Transactions
+                    </button>
                 </div>
-                <div className='w-1/2 bg-red-500'>
-                    <table className="min-w-full divide-y divide-zinc-800">
-                        <thead className="bg-[#212529]">
-                            <tr>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
-                                    ID
-                                </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
-                                    User Name
-                                </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
-                                    Email
-                                </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
-                                    Credit
-                                </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
-                                    Customer ID
-                                </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
-                                    Method
-                                </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
-                                    Amount
-                                </th>
-                                <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
-                                    Created At
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-zinc-800 bg-[#1a1d21]">
-                           <TransactionsTable transactions={transactions}/>
-                        </tbody>
-                    </table>
-                </div>
+
+                {/* Render Content Based on Active Tab */}
+                {activeTab === 'beats' ? (
+                    <div className="overflow-x-auto md:w-full mt-4">
+                        <table className="min-w-full border-collapse">
+                            <thead className="border-b-2 border-gray-700 bg-slate-900 text-[#a1afc5]">
+                                <tr className="text-sm md:text-base">
+                                    <th className="p-4 text-left">Image</th>
+                                    <th className="p-4 text-left">Beat Name</th>
+                                    <th className="p-4 text-left">Registration ID</th>
+                                    <th className="p-4 text-left">Registration Date</th>
+                                    <th className="p-4 text-left">View Info</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y-[1px] divide-[#2d344b] text-[#a1afc5]">
+                                <BeatTable beats={beats} />
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <div className="overflow-x-auto mt-4 rounded-lg shadow-md">
+                        <table className="min-w-full divide-y divide-zinc-800">
+                            <thead className="bg-[#212529]">
+                                <tr>
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        ID
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        User Name
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Email
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Credit
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Customer ID
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Method
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Amount
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-zinc-300 uppercase">
+                                        Created At
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-zinc-800 bg-[#1a1d21]">
+                                <TransactionsTable transactions={transactions} />
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
         </div>
     );
