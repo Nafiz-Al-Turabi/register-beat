@@ -125,8 +125,8 @@ const UserDetails = () => {
                     <button
                         onClick={() => setActiveTab('beats')}
                         className={`px-4 py-2 font-bold ${activeTab === 'beats'
-                                ? 'text-white border-b-2 border-violet-500'
-                                : 'text-gray-400'
+                            ? 'text-white border-b-2 border-violet-500 bg-violet-600/20'
+                            : 'text-gray-400'
                             }`}
                     >
                         Beats
@@ -134,15 +134,14 @@ const UserDetails = () => {
                     <button
                         onClick={() => setActiveTab('transactions')}
                         className={`px-4 py-2 font-bold ${activeTab === 'transactions'
-                                ? 'text-white border-b-2 border-violet-500'
-                                : 'text-gray-400'
+                            ? 'text-white border-b-2 border-violet-500 bg-violet-600/20'
+                            : 'text-gray-400'
                             }`}
                     >
                         Transactions
                     </button>
                 </div>
 
-                {/* Render Content Based on Active Tab */}
                 {activeTab === 'beats' ? (
                     <div className="overflow-x-auto md:w-full mt-4">
                         <table className="min-w-full border-collapse">
