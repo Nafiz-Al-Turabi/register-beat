@@ -5,7 +5,7 @@ const BeatTable = ({ beats }) => {
     console.log("Beats", beats);
     return (
         <>
-            {beats.map((beat, index) => (
+            {beats?.map((beat, index) => (
                 <tr
                     key={index} // Use a unique key, such as `beat.id` if available
                     className="hover:bg-gradient-to-tl hover:to-[#192332] hover:via-[#22314b] hover:from-[#141928]"
@@ -20,15 +20,15 @@ const BeatTable = ({ beats }) => {
                     <td
                         className="p-4 text-xs xl:text-base font-medium text-white hover:text-[#7837eb] cursor-pointer"
                     >
-                        {beat.beatName || 'N/A'}
+                        {beat?.beatName || 'N/A'}
                     </td>
                     <td className="p-4 text-xs xl:text-base">
                         <span className="bg-[#7837eb] text-white px-3 py-1 rounded-full">
-                            {beat.registrasionId || 'N/A'}
+                            {beat?.registrasionId || 'N/A'}
                         </span>
                     </td>
                     <td className="p-4 text-xs xl:text-base text-white">
-                        {new Date(beat.registrationDate).toLocaleDateString() || 'N/A'}
+                        {new Date(beat?.registrationDate).toLocaleDateString() || 'N/A'}
                     </td>
                     <td className="p-4">
                         <button

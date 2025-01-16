@@ -74,14 +74,14 @@ const RevenueChart = () => {
     <div
       style={{
         width: "100%",
-        maxWidth: "1000px",
+        maxWidth: "600px",
 
         padding: "10px",
       }}
-      className="mt-10"
+      className="mt-10 bg-[#212529] rounded-lg"
     >
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-        Revenue and Credit Chart
+      <h2 style={{ textAlign: "left", marginBottom: "20px" }}>
+        Revenue and Credit.
       </h2>
       <Bar
         data={chartData}
@@ -94,7 +94,6 @@ const RevenueChart = () => {
           animation: {
             duration: 2000,
             easing: "easeOutQuad",
-            onComplete: () => console.log("Animation complete!"),
           },
           scales: {
             x: {

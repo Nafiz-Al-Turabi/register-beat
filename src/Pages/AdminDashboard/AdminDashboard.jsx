@@ -76,14 +76,6 @@ const AdminDashboard = () => {
                         <AiOutlineTransaction  className="h-5 w-5 mr-2" /> Transections
                     </NavLink>
                     <NavLink
-                        to="/reports"
-                        className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
-                        }
-                    >
-                        <FaChartBar className="h-5 w-5 mr-2" /> Reports
-                    </NavLink>
-                    <NavLink
                         to="allcontact"
                         className={({ isActive }) =>
                             `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
