@@ -201,11 +201,10 @@ const Users = () => {
                           onClick={() => handleBlacklistClick(user)}
                           // disabled={user.blacklist}
                           disabled={isUserBlacklisted(user._id)}
-                          className={`px-3 py-1 text-sm ${
-                            user.blacklist
+                          className={`px-3 py-1 text-sm ${user.blacklist
                               ? "bg-zinc-400 cursor-not-allowed"
                               : "bg-red-500 hover:bg-red-600"
-                          } text-white rounded transition-colors duration-200`}
+                            } text-white rounded transition-colors duration-200`}
                         >
                           {user.blacklist ? "Blacklisted" : "+ Blacklist"}
                         </button>
