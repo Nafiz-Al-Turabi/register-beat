@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axiosInstance from "../../Axios/AxiosInstance";
 import { FaUsers } from "react-icons/fa";
 import fileUrl from "../../Axios/fileUrl";
+import { Link } from "react-router-dom";
 
 const Users = () => {
   const [timeframe, setTimeframe] = useState("lastMonth");
@@ -193,9 +194,9 @@ const Users = () => {
                         {user.country || "N/A"}
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap space-x-2">
-                        <button className="px-3 py-1 text-sm bg-zinc-600 text-white rounded hover:bg-green-600 transition-colors duration-200">
+                        <Link to={`${user._id}`} className="px-3 py-1 text-sm bg-zinc-600 text-white rounded hover:bg-green-600 transition-colors duration-200">
                           Details
-                        </button>
+                        </Link>
                         <button
                           onClick={() => handleBlacklistClick(user)}
                           // disabled={user.blacklist}

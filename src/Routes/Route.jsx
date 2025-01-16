@@ -18,6 +18,7 @@ import NotFound from "../Pages/NotFound/NotFound";
 import Contact from "../Pages/Contact";
 import AdminContact from "../Pages/AdminDashboard/AdminContact";
 import Transactions from "../Pages/AdminDashboard/Transactions";
+import UserDetails from "../Pages/UserDetails/UserDetails";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -54,6 +55,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <AdminHome /> },
       { path: "users", element: <Users /> },
+      { path: "users/:id", element: <UserDetails /> },
       { path: "allcontact", element: <AdminContact /> },
       { path: "transections", element: <Transactions /> },
     ],
