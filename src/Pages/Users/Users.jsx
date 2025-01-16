@@ -12,7 +12,7 @@ const Users = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [blacklistedUsers, setBlacklistedUsers] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 2;
+  const itemsPerPage = 1;
 
   const {
     isLoading,
@@ -228,15 +228,15 @@ const Users = () => {
         </div>
       </div>
       <ReactPaginate
-        previousLabel={"← Previous"}
-        nextLabel={"Next →"}
+        previousLabel={"←"}
+        nextLabel={"→"}
         breakLabel={"..."}
         pageCount={Math.ceil(users.length / itemsPerPage)}
         marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={2}
         onPageChange={handlePageChange}
         containerClassName={"flex justify-end mt-4 space-x-4"}
-        activeClassName={"font-bold text-violet-500"}
+        activeClassName={"font-bold bg-violet-600/20"}
         pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
         previousClassName={
           "px-3 py-1 border border-zinc-600 rounded text-white"

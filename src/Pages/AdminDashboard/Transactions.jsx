@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import axiosInstance from "../../Axios/AxiosInstance";
-import axios from "axios";
 import { FaMoneyCheckAlt } from "react-icons/fa";
+import Loading from "../../Components/Loading/Loading";
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -9,7 +10,7 @@ const Transactions = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
-  const [limit] = useState(10); // Default limit is 10
+  const [limit] = useState(30); 
 
   const fetchTransactions = async (currentPage) => {
     setLoading(true);
@@ -33,10 +34,8 @@ const Transactions = () => {
     fetchTransactions(page);
   }, [page]);
 
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= meta.totalPages) {
-      setPage(newPage);
-    }
+  const handlePageChange = ({ selected }) => {
+    setPage(selected + 1); 
   };
 
   const getMethodColor = (method) => {
@@ -104,7 +103,7 @@ const Transactions = () => {
                       colSpan="8"
                       className="px-4 py-4 text-center text-white"
                     >
-                      Loading...
+                      <Loading/>
                     </td>
                   </tr>
                 )}
@@ -129,7 +128,6 @@ const Transactions = () => {
                   </tr>
                 )}
                 {!loading &&
-                  transactions &&
                   transactions.map((transaction) => (
                     <tr
                       key={transaction._id}
@@ -139,10 +137,10 @@ const Transactions = () => {
                         {transaction._id}
                       </td>
                       <td className="px-4 py-4 text-white">
-                        {transaction.userNAme || ''}
+                        {transaction.userNAme || ""}
                       </td>
                       <td className="px-4 py-4 text-zinc-300">
-                        {transaction.userEmail || ''}
+                        {transaction.userEmail || ""}
                       </td>
                       <td className="px-4 py-4 text-zinc-300">
                         {transaction.credit}
@@ -171,25 +169,24 @@ const Transactions = () => {
         </div>
       </div>
 
-      {/* Pagination Section */}
-      <div className="flex justify-between items-center mt-6 bg-[#212529] rounded-lg p-4 text-white">
-        <button
-          onClick={() => handlePageChange(page - 1)}
-          disabled={page === 1}
-          className="px-4 py-2 bg-zinc-600 text-white rounded hover:bg-zinc-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Previous
-        </button>
-        <p>
-          Page {meta.page || 1} of {meta.totalPages || 1}
-        </p>
-        <button
-          onClick={() => handlePageChange(page + 1)}
-          disabled={page === meta.totalPages}
-          className="px-4 py-2 bg-zinc-600 text-white rounded hover:bg-zinc-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Next
-        </button>
+      <div className="flex justify-end mt-6">
+        <ReactPaginate
+        previousLabel={"←"}
+        nextLabel={"→"}
+        breakLabel={"..."}
+        pageCount={meta.totalPages || 1}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={2}
+        onPageChange={handlePageChange}
+        containerClassName={"flex justify-end mt-4 space-x-4"}
+        activeClassName={"font-bold bg-violet-600/20"}
+        pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+        previousClassName={
+          "px-3 py-1 border border-zinc-600 rounded text-white"
+        }
+        nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+        breakClassName={"px-3 py-1 text-zinc-400"}
+      />
       </div>
     </div>
   );
