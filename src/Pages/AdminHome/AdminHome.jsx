@@ -8,7 +8,7 @@ import { CiDollar } from "react-icons/ci";
 import axiosInstance from '../../Axios/AxiosInstance';
 import Loading from '../../Components/Loading/Loading';
 import Charts from '../../Components/Charts/Charts';
-import SubscriptionTable from '../../Components/SubscriptionTable/SubscriptionTable';
+import SubscriptionTable from '../../Components/Tables/SubscriptionTable';
 import RevenueChart from '../../Components/Charts/RevenueChart';
 
 const AdminHome = () => {

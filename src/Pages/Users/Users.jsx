@@ -12,7 +12,7 @@ const Users = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [blacklistedUsers, setBlacklistedUsers] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 1;
+  const itemsPerPage = 100;
 
   const {
     isLoading,
