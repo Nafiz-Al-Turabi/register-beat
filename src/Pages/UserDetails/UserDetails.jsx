@@ -29,13 +29,13 @@ const UserDetails = () => {
     const { user } = data;
 
     return (
-        <div className="flex items-center justify-center py-10">
+        <div className="">
             <div className="bg-[#212529] shadow-lg rounded-lg p-6 w-full ">
-                <div className="flex items-center space-x-4">
+                <div className=" space-y-4">
                     <img
                         src={`${fileUrl}/uploads/images/${user?.avatar}`}
                         alt="Avatar"
-                        className="w-16 h-16 rounded-full object-cover"
+                        className="md:w-56 md:h-56 rounded-md object-cover"
                     />
                     <div>
                         <h2 className="text-2xl font-bold">{user?.name || "No Name"}</h2>
@@ -99,6 +99,9 @@ const UserDetails = () => {
                         </span>
                     </div>
                 </div>
+            </div>
+            <div>
+                table will be here
             </div>
         </div>
     );
