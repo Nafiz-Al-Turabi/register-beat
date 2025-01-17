@@ -4,11 +4,12 @@ import { FaHeadphonesSimple } from "react-icons/fa6";
 import { GrLineChart } from "react-icons/gr";
 import { LuCreditCard } from "react-icons/lu";
 import { MdKeyboardArrowDown, MdOutlineDashboard } from "react-icons/md";
-import { RiMusic2Line, RiUser3Line } from "react-icons/ri";
+import { RiMoneyCnyCircleLine, RiMusic2Line, RiUser3Line } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import ManangeSubsPopup from '../Components/ManageSubscription/ManangeSubsPopup';
 import { AuthContext } from '../Provider/AuthProvider';
 import fileUrl from '../Axios/fileUrl';
+import axiosInstance from '../Axios/AxiosInstance';
 
 const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     const [isDropdown, setDropdown] = useState(false);
@@ -18,7 +19,20 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     const toggleDropdown = () => {
         setDropdown(!isDropdown)
     }
+    const handleCredit = async () => {
+        try {
+            const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
 
+
+            if (response.data?.url) {
+                window.location.href = response.data.url;
+            } else {
+                console.error('Redirect URL not found in the response');
+            }
+        } catch (error) {
+            console.error("Error purchasing credits: ", error.response ? error.response.data : error.message);
+        }
+    };
     return (
         <div>
             {/* Sidebar */}
@@ -56,7 +70,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                 >
                                     <LuCreditCard className="mr-2" /> Manage Subscription
                                 </button>
-                                
+
                                 {/* <Link
                                     to="/upgrade"
                                     className="flex items-center text-base text-white hover:text-white"
@@ -80,20 +94,21 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     >
                         <RiMusic2Line className="mr-2" /> My Beats
                     </Link>
-                    
-                    {/* <Link
-                        to="/song-matches"
-                        className="flex items-center text-lg text-gray-300 hover:text-white"
-                    >
-                        <FaHeadphonesSimple className="mr-2" />Song Matches
-                    </Link> */}
                 </nav>
                 <div className="mt-auto border-t border-gray-800 flex flex-col py-2">
-                    <Link to='payment'>
-                        <button className="bg-purple-500 text-white w-full py-2 rounded mb-4 flex items-center justify-center">
-                            <FaCrown className=" mr-2" /> Subscribe Now
-                        </button>
-                    </Link>
+                    {
+                        user?.active === true
+                            ?
+                            <button onClick={handleCredit} className="bg-purple-500 text-white w-full py-2 rounded mb-4 flex items-center justify-center">
+                                <RiMoneyCnyCircleLine className=" mr-2" /> Buy Extra Credit
+                            </button>
+                            :
+                            <Link to='payment'>
+                                <button className="bg-purple-500 text-white w-full py-2 rounded mb-4 flex items-center justify-center">
+                                    <FaCrown className=" mr-2" /> Subscribe Now
+                                </button>
+                            </Link>
+                    }
                     {
                         user.role === 'admin' ?
                             <Link
