@@ -7,7 +7,6 @@ const Settings = () => {
     const [planActive, setPlanActive] = useState(false);
 
     const handleActive = (value) => {
-        // console.log('value', value)
         if (value === 'settings') {
             setPlanActive(false);
             setSettingActive(true);

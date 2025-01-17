@@ -18,7 +18,6 @@ const PlansBills = () => {
           </div>
           <div className='flex flex-row gap-2 items-end'>
             <button className='p-3 bg-[#7837eb] text-xs xl:text-base text-white rounded hover:bg-[#804cd8] active:scale-95' onClick={() => setManagePopup(true)}>Manage billing</button>
-            {/* <button className='p-3 bg-[#7837eb] text-xs xl:text-base text-white rounded hover:bg-[#804cd8] active:scale-95'>Update Plan</button> */}
           </div>
         </div>
         <div className=''>

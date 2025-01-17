@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react'
-import { FaCrown, FaPlus, FaMusic, FaCog, FaSignOutAlt, FaBars } from "react-icons/fa";
-import { FaHeadphonesSimple } from "react-icons/fa6";
-import { GrLineChart } from "react-icons/gr";
+import { FaCrown,FaCog, FaSignOutAlt,} from "react-icons/fa";
 import { LuCreditCard } from "react-icons/lu";
 import { MdKeyboardArrowDown, MdOutlineDashboard } from "react-icons/md";
 import { RiMoneyCnyCircleLine, RiMusic2Line, RiUser3Line } from "react-icons/ri";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import ManangeSubsPopup from '../Components/ManageSubscription/ManangeSubsPopup';
 import { AuthContext } from '../Provider/AuthProvider';
 import fileUrl from '../Axios/fileUrl';
@@ -69,25 +67,18 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                     onClick={() => setShowPopup(true)}
                                 >
                                     <LuCreditCard className="mr-2" /> Manage Subscription
-                                </button>
-
-                                {/* <Link
-                                    to="/upgrade"
-                                    className="flex items-center text-base text-white hover:text-white"
-                                >
-                                    <GrLineChart className="mr-2" /> Upgrade you Plan
-                                </Link> */}
+                                </button>                               
                             </div>
                         )
                     }
                 </div>
                 <nav className="space-y-2">
-                    <Link
+                    <NavLink
                         to="/"
                         className="flex items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded hover:bg-[#191919]"
                     >
                         <MdOutlineDashboard className="mr-2" /> Dashboard
-                    </Link>
+                    </NavLink>
                     <Link
                         to="/my-beats"
                         className="flex items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded hover:bg-[#191919]"
