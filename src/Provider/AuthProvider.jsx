@@ -1,12 +1,16 @@
 import React, { useState, createContext, useEffect } from "react";
 import axiosInstance from "../Axios/AxiosInstance";
 import toast from "react-hot-toast";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import app from "../firebase/firebase.config";
 
 export const AuthContext = createContext();
+const auth = getAuth(app)
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const googleProvider = new GoogleAuthProvider()
 
     useEffect(() => {
         fetchUserInfo();
@@ -43,7 +47,7 @@ const AuthProvider = ({ children }) => {
             const response = await axiosInstance.post("/users/register", credentials);
             return response.data;
         } catch (error) {
-            handleError(error);  
+            handleError(error);
             throw error;
         }
     };
@@ -59,6 +63,23 @@ const AuthProvider = ({ children }) => {
             throw error;
         }
     };
+
+    const googleLogin = async () => {
+        setLoading(true);
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            const idToken = await result.user.getIdToken();
+            const response = await axiosInstance.post("/users/register", { idToken }, { withCredentials: true });
+            setUser(response.data.user);
+            toast.success("Google login successful!");
+        } catch (error) {
+            console.error("Google login failed:", error.message);
+            toast.error("Google login failed. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
 
     const logout = async () => {
         try {
@@ -77,6 +98,7 @@ const AuthProvider = ({ children }) => {
         loading,
         signup,
         login,
+        googleLogin,
         logout,
     };
 

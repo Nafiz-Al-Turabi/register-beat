@@ -4,12 +4,13 @@ import { PiDotsThree } from "react-icons/pi";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [emailFilled, setEmailFilled] = useState(false);
     const [passwordFilled, setPasswordFilled] = useState(false);
-    const { login } = useContext(AuthContext)
+    const { login, googleLogin } = useContext(AuthContext)
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
@@ -32,6 +33,17 @@ const Login = () => {
 
     const handlePasswordChange = (e) => {
         setPasswordFilled(e.target.value !== "");
+    };
+
+    const googleLoginHandler = async () => {
+        try {
+            await googleLogin();
+            toast.success("Login Successful")
+            navigate("/")
+        } catch (error) {
+            console.error('Google login error:', error.response?.data?.message || error.message);
+            alert('Google login failed. Please try again.');
+        }
     };
 
     return (
@@ -70,21 +82,20 @@ const Login = () => {
                     <button type="submit" className="w-full bg-purple-600 text-lg text-white font-bold py-3 rounded-full mt-4 hover:bg-purple-700 duration-200 focus:outline-none">
                         Sign In
                     </button>
-
-                    <div className="mt-4 text-center flex justify-between items-center">
-                        <hr className='w-32 border-gray-600' />
-                        <span className="text-sm text-gray-400">Or continue with</span>
-                        <hr className='w-32 border-gray-600' />
-                    </div>
-
-                    <button type="button" className="w-full bg-white text-lg font-bold text-black py-3 rounded-full mt-4 hover:bg-gray-100 focus:outline-none">
-                        Sign in with Google
-                    </button>
-
-                    <div className="mt-4 text-center">
-                        <Link to='/signup' className="text-sm text-gray-400">Don't have an account? <a href="#" className="text-purple-600 hover:underline">Sign up</a></Link>
-                    </div>
                 </form>
+                <div className="mt-4 text-center flex justify-between items-center">
+                    <hr className='w-32 border-gray-600' />
+                    <span className="text-sm text-gray-400">Or continue with</span>
+                    <hr className='w-32 border-gray-600' />
+                </div>
+
+                <button onClick={googleLoginHandler} className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-4 hover:bg-gray-100 focus:outline-none">
+                    Sign in with <FcGoogle className='ml-1' />oogle
+                </button>
+
+                <div className="mt-4 text-center">
+                    <Link to='/signup' className="text-sm text-gray-400">Don't have an account? <a href="#" className="text-purple-600 hover:underline">Sign up</a></Link>
+                </div>
             </div>
         </div>
     );
