@@ -105,7 +105,7 @@ const AdminDashboard = () => {
                     </button>
                     <h1 className="text-xl font-semibold flex text-white items-center gap-2">
                         <FaUserCircle className="h-6 w-6 text-gray-100" />
-                        <span className='text-xs'>Welcome, {user?.name}</span>
+                        <span className='text-xs'>Welcome, <br /> {user?.name}</span>
                     </h1>
                     <div className="flex items-center">
                         <button onClick={logout} className="bg-violet-500 hover:bg-violet-700 duration-300 flex items-center gap-2 text-white px-4 py-2 rounded-md">

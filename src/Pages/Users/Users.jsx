@@ -5,6 +5,7 @@ import { FaUsers } from "react-icons/fa";
 import fileUrl from "../../Axios/fileUrl";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import toast from "react-hot-toast";
 
 const Users = () => {
   const [timeframe, setTimeframe] = useState("lastMonth");
@@ -34,20 +35,24 @@ const Users = () => {
   });
 
   const handleBlacklist = async (userId) => {
-    console.log(userId);
     try {
       const response = await axiosInstance.delete(
         `/admin/user-blacklist/${userId}`
       );
       if (response.data.message === "User added to blacklist successfully") {
-        setBlacklistedUsers((prevSet) => new Set(prevSet.add(userId)));
+        setBlacklistedUsers((prevSet) => {
+          const newSet = new Set(prevSet);
+          newSet.add(userId);
+          return newSet;
+        });
+        toast.success("User blacklisted successfully.");
         refetch();
       } else {
-        alert("Failed to blacklist user.");
+        toast.error("Failed to blacklist user.");
       }
     } catch (error) {
       console.error("Error blacklisting user:", error);
-      alert("Error blacklisting user.");
+      toast.error(error.response?.data?.message || "Error blacklisting user.");
     }
   };
 
@@ -62,7 +67,7 @@ const Users = () => {
 
   const confirmBlacklist = async () => {
     if (!selectedUser) return;
-    await handleBlacklist(selectedUser.id);
+    await handleBlacklist(selectedUser._id);
     setShowConfirmDialog(false);
   };
 
@@ -74,7 +79,6 @@ const Users = () => {
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );
-
 
   return (
     <div>

@@ -63,7 +63,7 @@ const SubscriptionTable = () => {
                                     {transaction?.userEmail}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {transaction?.amount}
+                                    ${transaction?.amount}
                                 </td>
                                 <td className="px-6 py-4 text-gray-400">
                                     {transaction?.credit}
