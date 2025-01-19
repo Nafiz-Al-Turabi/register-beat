@@ -70,11 +70,10 @@ const AuthProvider = ({ children }) => {
             const result = await signInWithPopup(auth, googleProvider);
             const { displayName, email, photoURL } = result.user;
             try {
-                const loginResponse = await axiosInstance.post("/users/register",
+                const loginResponse = await axiosInstance.post("/users/google/login",
                     {
                         email,
                         name: displayName,
-                        avatar: photoURL
                     },
                     { withCredentials: true }
                 );

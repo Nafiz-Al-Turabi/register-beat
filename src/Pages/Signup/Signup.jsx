@@ -11,7 +11,7 @@ const Signup = () => {
     const [nameFilled, setNameFilled] = useState(false);
     const [passwordFilled, setPasswordFilled] = useState(false);
     const [confirmPasswordFilled, setConfirmPasswordFilled] = useState(false);
-    const { signup } = useContext(AuthContext)
+    const { signup,googleLogin  } = useContext(AuthContext)
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
@@ -46,6 +46,17 @@ const Signup = () => {
 
     // Watch the password field to validate confirm password
     const password = watch('password');
+
+    const googleLoginHandler = async () => {
+        try {
+            await googleLogin();
+            toast.success("Login Successful")
+            navigate("/")
+        } catch (error) {
+            console.error('Google login error:', error.response?.data?.message || error.message);
+            alert('Google login failed. Please try again.');
+        }
+    };
 
     return (
         <div className="flex justify-center items-center min-h-screen">
