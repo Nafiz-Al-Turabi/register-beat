@@ -14,12 +14,6 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const { user } = useContext(AuthContext);
 
-  const ztime = Math.floor(Date.now());
-  console.log(
-    "Generated ztime (seconds since 1970-01-01 00:00:00 GMT):",
-    ztime
-  );
-
   useEffect(() => {
     let isMounted = true;
     return () => {
@@ -28,19 +22,21 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   }, []);
 
   const simulateProgress = async () => {
-    for (let i = 0; i <= 100; i += 20) {
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      setProgress((prev) => (prev < 100 ? i : 100));
+    for (let i = 0; i <= 100; i += 10) {
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      setProgress(i);
     }
   };
 
   const simulateApiCall = async (data) => {
-    // setShowPopup(true);
     setProgress(0);
-    setSuccess(false);
     setErrorMessage('');
+    setShowPopup(true);
 
     try {
+      // Start progress simulation
+      simulateProgress();
+
       // Creating FormData to include audio and image files
       const payload = new FormData();
       payload.append('fullName', data.fullName);
@@ -56,7 +52,6 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       payload.append('containsSamples', data.containsSamples);
       payload.append('terms', data.terms);
 
-      // Append files
       if (formData.audio) {
         payload.append('audio', formData.audio);
       }
@@ -64,17 +59,16 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
         payload.append('image', formData.image);
       }
 
-      const response = await axiosInstance.post(`/beat/create-beat/${user._id}`, payload, {
+      await axiosInstance.post(`/beat/create-beat/${user._id}`, payload, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Important for sending files
+          'Content-Type': 'multipart/form-data',
         },
       });
 
-      console.log(response.data);
-      // await simulateProgress(); // Simulate progress bar update
-      // return { success: true };
+      setProgress(100);
+      return { success: true };
     } catch (error) {
-      console.error('Error:', error);
+      setProgress(0);
       setErrorMessage('Failed to register. Please try again.');
       return { success: false };
     }
@@ -95,6 +89,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       setSuccess(false);
     }
   };
+
 
   return (
     <div className='max-w-3xl mx-auto pt-16 pb-8'>

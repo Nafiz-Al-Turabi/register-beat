@@ -17,7 +17,7 @@ const DashboardContents = () => {
         queryKey: ['adminDashboard', userId],
         queryFn: async () => {
             const response = await axiosInstance.get(`/beat/get-beats/${userId}`);
-            refetch();
+            // refetch();
             return response.data?.beats;
         },
         enabled: Boolean(userId),
@@ -33,6 +33,7 @@ const DashboardContents = () => {
             const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
             if (response.data?.url) {
                 window.location.href = response.data.url;
+                refetch();
             } else {
                 console.error('Redirect URL not found in the response');
             }
