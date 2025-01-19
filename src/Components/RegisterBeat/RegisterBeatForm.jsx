@@ -14,6 +14,12 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const { user } = useContext(AuthContext);
 
+  const ztime = Math.floor(Date.now());
+  console.log(
+    "Generated ztime (seconds since 1970-01-01 00:00:00 GMT):",
+    ztime
+  );
+
   useEffect(() => {
     let isMounted = true;
     return () => {
