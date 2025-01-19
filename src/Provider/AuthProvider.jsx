@@ -68,17 +68,27 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         try {
             const result = await signInWithPopup(auth, googleProvider);
-            const idToken = await result.user.getIdToken();
-            const response = await axiosInstance.post("/users/register", { idToken }, { withCredentials: true });
-            setUser(response.data.user);
-            toast.success("Google login successful!");
-        } catch (error) {
-            console.error("Google login failed:", error.message);
-            toast.error("Google login failed. Please try again.");
+            const { displayName, email, photoURL } = result.user;
+            try {
+                const loginResponse = await axiosInstance.post("/users/register",
+                    {
+                        email,
+                        name: displayName,
+                        avatar: photoURL
+                    },
+                    { withCredentials: true }
+                );
+                setUser(loginResponse.data.user);
+                toast.success("Google login successful!");
+                return loginResponse.data;
+            } catch (error) {
+                console.log(error);
+            }
         } finally {
             setLoading(false);
         }
     };
+
 
 
     const logout = async () => {
