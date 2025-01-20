@@ -113,7 +113,7 @@ const ProfileSetting = () => {
                             <PiDotsThree className='bg-red-500 w-6 h-6 rounded' />
                         </div>
                         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
-                        <p className='text-sm text-[#72747e] mt-2'>To change your email, please <Link to={""} className='text-[#5816c5] underline'>follow these instructions</Link></p>
+                        {/* <p className='text-sm text-[#72747e] mt-2'>To change your email, please <Link to={""} className='text-[#5816c5] underline'>follow these instructions</Link></p> */}
                     </div>
                     <div>
                         <label htmlFor="full-name" className="block text-[#e3e6ed] text-sm font-medium mb-2">Full Name</label>

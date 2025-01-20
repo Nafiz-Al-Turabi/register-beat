@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import PlanBillsModal from './PlanBillsModal';
 import ManangeSubsPopup from '../ManageSubscription/ManangeSubsPopup';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const PlansBills = () => {
   const [showModal, setShowModal] = useState(false);
   const [managePopup, setManagePopup] = useState(false);
+  const {user}=useContext(AuthContext);
 
   return (
     <div className=''>
@@ -17,7 +19,9 @@ const PlansBills = () => {
             <p className='text-[#80858f]'>Renews on September 28th, 2024.</p>
           </div>
           <div className='flex flex-row gap-2 items-end'>
-            <button className='p-3 bg-[#7837eb] text-xs xl:text-base text-white rounded hover:bg-[#804cd8] active:scale-95' onClick={() => setManagePopup(true)}>Manage billing</button>
+            {
+              user?.active === 'active' ? <button className='p-3 bg-[#7837eb] text-xs xl:text-base text-white rounded hover:bg-[#804cd8] active:scale-95' onClick={() => setManagePopup(true)}>Manage billing</button> :''
+            }
           </div>
         </div>
         <div className=''>
@@ -32,7 +36,9 @@ const PlansBills = () => {
         <div className=''>
           <h5 className='text-[#80858f] text-lg font-bold'>Get Extra Credits</h5>
           <p className='text-[#80858f] mt-1'>Need more? Purchase additional credits to register more beats.</p>
-          <button className='px-4 py-3 bg-[#7837eb] text-xs xl:text-base font-medium text-white rounded hover:bg-[#804cd8] active:scale-95 mt-3' onClick={() => setShowModal(true)}>Buy Extra Credits</button>
+          {
+            user?.active === 'active' ? <button className='p-3 bg-[#7837eb] text-xs xl:text-base text-white rounded hover:bg-[#804cd8] active:scale-95' onClick={() => setShowModal(true)}>Buy Extra Credits</button> : ''
+          }
         </div>
       </div>
       {managePopup && <ManangeSubsPopup setShowPopup={setManagePopup} />}
