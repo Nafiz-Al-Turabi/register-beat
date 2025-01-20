@@ -28,7 +28,6 @@ const DashboardLayout = () => {
                         </div>
                     </div>
                     <Link to="/register-beat" className="flex items-center text-xs md:text-lg font-bold text-center secondary-bg p-2 md:py-1.5 md:px-5 rounded-full hover:bg-violet-700 duration-300 active:scale-95 ">Register a Beat 
-                        {/* <FaPlus className="md:ml-2 text-xl border p-0.5 rounded-sm " /> */}
                     </Link>
                 </div>
 

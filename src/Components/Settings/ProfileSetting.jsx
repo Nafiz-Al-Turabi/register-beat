@@ -106,6 +106,7 @@ const ProfileSetting = () => {
                                 id="email"
                                 placeholder="Enter your email"
                                 defaultValue={user?.email}
+                                disabled
                                 {...register("email", { required: "Email is required" })}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
