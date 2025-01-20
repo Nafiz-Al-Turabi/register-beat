@@ -6,6 +6,7 @@ import axiosInstance from '../../Axios/AxiosInstance';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
 import Loading from '../Loading/Loading';
+import { Link } from 'react-router-dom';
 
 
 const DashboardContents = () => {
@@ -24,9 +25,9 @@ const DashboardContents = () => {
     });
 
     if (isLoading) {
-        return <Loading/>;
+        return <Loading />;
     }
- 
+
 
     const handleCredit = async () => {
         try {
@@ -114,7 +115,9 @@ const DashboardContents = () => {
                         <p className="text-xl xl:text-3xl text-[#adbace] font-bold">No recent activity</p>
                         <p className="text-xl text-[#6b7c96]">Start by registering your first beat to see activity here.</p>
                         <div>
-                            <button className='p-3 px-5 mt-4 bg-[#825aeb] rounded-md text-xl font-bold hover:bg-[#6d40df] duration-200 ease-linear'>Register a Beat</button>
+                            <Link to='/register-beat'>
+                                <button className='p-3 px-5 mt-4 bg-[#825aeb] rounded-md text-xl font-bold hover:bg-[#6d40df] duration-200 ease-linear'>Register a Beat</button>
+                            </Link>
                         </div>
                     </div>
                 )}

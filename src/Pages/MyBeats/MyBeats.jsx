@@ -9,13 +9,16 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { PiMusicNotesSimple } from "react-icons/pi";
 import moment from 'moment';
 import fileUrl from "../../Axios/fileUrl";
-
+import { Link } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
 
 const MyBeats = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [beatDetails, setBeatDetails] = useState();
   const { user } = useContext(AuthContext);
   const userId = user?._id;
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5;
 
   const openModal = (data) => {
     setIsOpen(true);
@@ -33,10 +36,17 @@ const MyBeats = () => {
     enabled: Boolean(userId),
   });
 
+  const offset = currentPage * itemsPerPage;
+  const currentBeats = beats.slice(offset, offset + itemsPerPage);
+  const pageCount = Math.ceil(beats.length / itemsPerPage);
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
   if (isLoading) {
     return <Loading />;
   }
-
 
   return (
     <div className="p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle">
@@ -60,7 +70,7 @@ const MyBeats = () => {
                 </tr>
               </thead>
               <tbody className="divide-y-[1px] divide-[#2d344b] text-[#a1afc5]">
-                {beats?.map((beat, index) => (
+                {currentBeats?.map((beat, index) => (
                   <tr
                     key={index}
                     className="hover:bg-gradient-to-tl hover:to-[#192332] hover:via-[#22314b] hover:from-[#141928]"
@@ -101,6 +111,26 @@ const MyBeats = () => {
                 ))}
               </tbody>
             </table>
+
+            <div className="mt-6 flex justify-end">
+            <ReactPaginate
+                    previousLabel={"←"}
+                    nextLabel={"→"}
+                    breakLabel={"..."}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={2}
+                    onPageChange={handlePageChange}
+                    containerClassName={"flex justify-end mt-4 space-x-4"}
+                    activeClassName={"font-bold bg-violet-600/20"}
+                    pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+                    previousClassName={
+                        "px-3 py-1 border border-zinc-600 rounded text-white"
+                    }
+                    nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+                    breakClassName={"px-3 py-1 text-zinc-400"}
+                />
+            </div>
           </div>
         ) : (
           <div className="text-center py-10">
@@ -108,7 +138,9 @@ const MyBeats = () => {
             <p className="text-xl xl:text-3xl text-[#adbace] font-bold">No recent activity</p>
             <p className="text-xl text-[#6b7c96]">Start by registering your first beat to see activity here.</p>
             <div>
-              <button className='p-3 px-5 mt-4 bg-[#825aeb] rounded-md text-xl font-bold hover:bg-[#6d40df] duration-200 ease-linear'>Register a Beat</button>
+              <Link to='/register-beat'>
+                <button className='p-3 px-5 mt-4 bg-[#825aeb] rounded-md text-xl font-bold hover:bg-[#6d40df] duration-200 ease-linear'>Register a Beat</button>
+              </Link>
             </div>
           </div>
         )
