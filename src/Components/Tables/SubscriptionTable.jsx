@@ -47,50 +47,55 @@ const SubscriptionTable = () => {
                             <th className="px-6 py-3 text-left">Credit</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-700">
-                        {currentItems.map((transaction) => (
-                            <tr key={transaction?._id} className="hover:bg-[#252431] even:bg-[#242a31] odd:bg-[#212529]">
-                                <td className="px-6 py-4">
-                                    <div>
-                                        <div className="text-violet-600">{transaction?.userNAme}</div>
-                                        <div className="text-sm text-gray-400">{transaction?.userId}</div>
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    {transaction?.customerId}
-                                </td>
-                                <td className="px-6 py-4">
-                                    {transaction?.userEmail}
-                                </td>
-                                <td className="px-6 py-4">
-                                    ${transaction?.amount}
-                                </td>
-                                <td className="px-6 py-4 text-gray-400">
-                                    {transaction?.credit}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
+                    {
+                        currentItems > 0 ? <tbody className="divide-y divide-gray-700">
+                            {currentItems?.map((transaction) => (
+                                <tr key={transaction?._id} className="hover:bg-[#252431] even:bg-[#242a31] odd:bg-[#212529]">
+                                    <td className="px-6 py-4">
+                                        <div>
+                                            <div className="text-violet-600">{transaction?.userNAme}</div>
+                                            <div className="text-sm text-gray-400">{transaction?.userId}</div>
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {transaction?.customerId}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {transaction?.userEmail}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        ${transaction?.amount}
+                                    </td>
+                                    <td className="px-6 py-4 text-gray-400">
+                                        {transaction?.credit}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody> : <div><p className='my-2'>No recent subscription found.</p></div>
+                    }
                 </table>
             </div>
             <div className="flex justify-end">
-                <ReactPaginate
-                    previousLabel={"←"}
-                    nextLabel={"→"}
-                    breakLabel={"..."}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={2}
-                    onPageChange={handlePageChange}
-                    containerClassName={"flex justify-end mt-4 space-x-4"}
-                    activeClassName={"font-bold bg-violet-600/20"}
-                    pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
-                    previousClassName={
-                        "px-3 py-1 border border-zinc-600 rounded text-white"
-                    }
-                    nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
-                    breakClassName={"px-3 py-1 text-zinc-400"}
-                />
+                {
+                    pageCount > 1 && (
+                        <ReactPaginate
+                            previousLabel={"←"}
+                            nextLabel={"→"}
+                            breakLabel={"..."}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={2}
+                            onPageChange={handlePageChange}
+                            containerClassName={"flex justify-end mt-4 space-x-4"}
+                            activeClassName={"font-bold bg-violet-600/20"}
+                            pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+                            previousClassName={
+                                "px-3 py-1 border border-zinc-600 rounded text-white"
+                            }
+                            nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+                            breakClassName={"px-3 py-1 text-zinc-400"}
+                        />)
+                }
             </div>
         </div >
     );
