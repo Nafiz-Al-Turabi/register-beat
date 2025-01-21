@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
-import axios from 'axios';
 import CheckoutForm from '../../Components/CheckoutForm/CheckoutForm';
 import axiosInstance from '../../Axios/AxiosInstance';
 import Loading from '../../Components/Loading/Loading';
@@ -15,7 +14,6 @@ const Payment = () => {
 
   useEffect(() => {
     async function fetchPriceId() {
-      // Example: Replace with your backend route that returns a priceId
       const response = await axiosInstance.get('/payments/get-price');
       setPriceId(response.data.priceId);
       console.log(response.data.priceId);
@@ -25,7 +23,6 @@ const Payment = () => {
   }, []);
 
   useEffect(() => {
-    // Create a new PaymentIntent after priceId is set
     if (priceId) {
       axiosInstance.post('/payments/create-payment-intent', { priceId })
         .then(response => setClientSecret(response.data.clientSecret))

@@ -108,7 +108,8 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
 
                 <div className="mt-auto border-gray-800 flex flex-col py-2">
                     {
-                        user?.active === true
+                        user?.active === true || 
+                        new Date(user?.subscriptionEndDAte) > new Date()
                             ?
                             <button onClick={handleCredit} className="bg-[#7132e9] Thank you for your attention, and I appreciate your cooperation.] text-white w-full py-2 rounded mb-4 flex items-center justify-center">
                                 <RiMoneyCnyCircleLine className=" mr-2" /> Buy Extra Credit

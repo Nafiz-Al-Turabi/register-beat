@@ -15,7 +15,8 @@ const RegisterBeat = () => {
   const [isDragging, setIsDragging] = useState({ audio: false, image: false });
 
 
-  if (user?.active === false) {
+  if ((user?.active === false && new Date(user?.subscriptionEndDAte) < new Date()) || user?.active === true && new Date(user?.subscriptionEndDAte) > new Date()) {
+    console.log(user?.subscriptionEndDAte)
     return (
       <div className='md:h-[600px] flex justify-center items-center'>
         <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">

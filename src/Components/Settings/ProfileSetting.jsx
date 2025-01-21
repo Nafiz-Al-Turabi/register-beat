@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axiosInstance from '../../Axios/AxiosInstance';
 import toast from 'react-hot-toast';
+import fileUrl from '../../Axios/fileUrl';
 
 const ProfileSetting = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -62,7 +63,7 @@ const ProfileSetting = () => {
             <div>
                 <div className='flex gap-4 mt-4'>
                     <div className='bg-[#1e2837] rounded-lg w-20 h-20'>
-                        <img src={previewImage || user?.profilePicture} alt="Profile" className={`rounded-lg ${previewImage ? 'object-cover w-full h-full' : ''}`} />
+                        <img src={previewImage || `${fileUrl}/uploads/images/${user?.avatar}`} alt="Profile" className={`rounded-lg ${previewImage ? 'object-cover w-full h-full' : ''}`} />
                     </div>
                     <button>
                         <label htmlFor="uploadFile1" className="flex bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
@@ -106,8 +107,7 @@ const ProfileSetting = () => {
                                 id="email"
                                 placeholder="Enter your email"
                                 defaultValue={user?.email}
-                                disabled
-                                {...register("email", { required: "Email is required" })}
+                                {...register("email",)}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
                             <PiDotsThree className='bg-red-500 w-6 h-6 rounded' />

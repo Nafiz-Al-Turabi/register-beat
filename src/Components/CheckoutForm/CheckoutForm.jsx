@@ -52,8 +52,10 @@ const CheckoutForm = ({ priceId }) => {
 
       if (subscriptionResponse.status === 200) {
         toast.success('Subscription created successfully!');
-
-        navigate('/');
+        setTimeout(() => {
+          navigate('/');
+          window.location.reload();
+        }, 1500);
       } else {
         toast.error('Subscription creation failed!');
       }

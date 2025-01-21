@@ -77,7 +77,7 @@ const MyBeats = () => {
                   >
                     <td className="p-4 text-xs xl:text-base">
                       <img
-                        src={`${fileUrl}/uploads/images/${beat?.imagePath}`}
+                        src={`${fileUrl}/${beat?.imagePath}`}
                         alt={beat?.beatName}
                         className="w-12 h-12 rounded-full"
                       />
