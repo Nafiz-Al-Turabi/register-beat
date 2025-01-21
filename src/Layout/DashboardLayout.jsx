@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import { FaBars, FaPlus } from "react-icons/fa";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../Shared/Sidebar";
 
 const DashboardLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const navigate = useNavigate();
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
-
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            navigate(`/search-beat?query=${encodeURIComponent(searchQuery)}`);
+        }
+    };
     return (
         <div className="md:flex min-h-screen  text-white">
             <Sidebar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
@@ -23,11 +30,17 @@ const DashboardLayout = () => {
                         >
                             <FaBars className="text-2xl" />
                         </button>
-                        <div>
-                            <input type="text" className="py-1.5 px-5 w-40 md:w-80  lg:w-96 rounded-full outline-none bg-transparent text-zinc-200 border border-gray-700 focus:border-gray-500 placeholder:text-xs md:placeholder:text-base " placeholder="Search your beat..." />
-                        </div>
+                        <form onSubmit={handleSearch}>
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="py-1.5 px-5 w-40 md:w-80 lg:w-96 rounded-full outline-none bg-transparent text-zinc-200 border border-gray-700 focus:border-gray-500 placeholder:text-xs md:placeholder:text-base"
+                                placeholder="Search your beat..."
+                            />
+                        </form>
                     </div>
-                    <Link to="/register-beat" className="flex items-center text-xs md:text-lg font-bold text-center secondary-bg p-2 md:py-1.5 md:px-5 rounded-full hover:bg-violet-700 duration-300 active:scale-95 ">Register a Beat 
+                    <Link to="/register-beat" className="flex items-center text-xs md:text-lg font-bold text-center secondary-bg p-2 md:py-1.5 md:px-5 rounded-full hover:bg-violet-700 duration-300 active:scale-95 ">Register a Beat
                     </Link>
                 </div>
 
