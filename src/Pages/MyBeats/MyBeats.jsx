@@ -139,7 +139,7 @@ const MyBeats = () => {
             <p className="text-xl text-[#6b7c96]">Start by registering your first beat to see activity here.</p>
             <div>
               <Link to='/register-beat'>
-                <button className='p-3 px-5 mt-4 bg-[#825aeb] rounded-md text-xl font-bold hover:bg-[#6d40df] duration-200 ease-linear'>Register a Beat</button>
+                <button className='p-3 px-5 mt-4 bg-[#7132e9] rounded-md text-xl font-bold hover:bg-[#6d40df] duration-200 ease-linear'>Register a Beat</button>
               </Link>
             </div>
           </div>

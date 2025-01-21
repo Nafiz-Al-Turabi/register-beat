@@ -49,13 +49,13 @@ const DashboardContents = () => {
                 <div className='bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-xl border border-transparent hover:border hover:border-zinc-600 duration-200'>
                     <h1 className='text-xl xl:text-xl mb-4 font-extrabold text-[#c8ccd3]'>Beats Registered</h1>
                     <p className='text-4xl font-extrabold text-blue-400'>
-                        <span className="bg-gradient-to-r from-blue-500 to-violet-500 text-transparent bg-clip-text">{beats?.length}</span>
+                        <span className="bg-gradient-to-r from-blue-500 to-blue-500 text-transparent bg-clip-text">{beats?.length}</span>
                     </p>
                 </div>
                 <div className='bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-xl border border-transparent hover:border hover:border-zinc-600 duration-200'>
                     <h1 className='text-xl xl:text-xl mb-4 font-extrabold text-[#c8ccd3]'>Credits</h1>
                     <p className='text-4xl font-extrabold text-blue-400'>
-                        <span className="bg-gradient-to-r from-blue-500 to-violet-500 text-transparent bg-clip-text">{user?.credit}</span>
+                        <span className="bg-gradient-to-r from-blue-500 to-blue-500 text-transparent bg-clip-text">{user?.credit}</span>
                     </p>
                 </div>
                 <div className='bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-xl border border-transparent hover:border hover:border-zinc-600 duration-200'>
@@ -77,7 +77,7 @@ const DashboardContents = () => {
                 <div className='bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-xl border border-transparent hover:border hover:border-zinc-600 duration-200'>
                     <h1 className='text-xl xl:text-xl mb-4 font-extrabold text-[#c8ccd3]'>Subscription Status</h1>
                     <p className='text-4xl font-extrabold text-blue-400'>
-                        <span className="bg-gradient-to-r from-blue-500 to-violet-500 text-transparent bg-clip-text">{user?.active === true ? 'Active' : 'Inactive'}</span>
+                        <span className="bg-gradient-to-r from-blue-500 to-blue-500 text-transparent bg-clip-text">{user?.active === true ? 'Active' : 'Inactive'}</span>
                     </p>
                 </div>
             </div>
@@ -126,7 +126,7 @@ const DashboardContents = () => {
                         <p className="text-xl text-[#6b7c96]">Start by registering your first beat to see activity here.</p>
                         <div>
                             <Link to='/register-beat'>
-                                <button className='p-3 px-5 mt-4 bg-[#825aeb] rounded-md text-xl font-bold hover:bg-[#6d40df] duration-200 ease-linear'>Register a Beat</button>
+                                <button className='p-3 px-5 mt-4 bg-[#7132e9] rounded-md text-xl font-bold hover:bg-[#6d40df] duration-200 ease-linear'>Register a Beat</button>
                             </Link>
                         </div>
                     </div>

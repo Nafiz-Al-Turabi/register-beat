@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { FaCrown,FaCog, FaSignOutAlt,} from "react-icons/fa";
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { FaCrown, FaCog, FaSignOutAlt, } from "react-icons/fa";
 import { LuCreditCard } from "react-icons/lu";
 import { MdKeyboardArrowDown, MdOutlineDashboard } from "react-icons/md";
 import { RiMoneyCnyCircleLine, RiMusic2Line, RiUser3Line } from "react-icons/ri";
@@ -12,11 +12,24 @@ import axiosInstance from '../Axios/AxiosInstance';
 const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     const [isDropdown, setDropdown] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
+    const dropdownRef = useRef(null);
     const { logout, user } = useContext(AuthContext)
 
     const toggleDropdown = () => {
         setDropdown(!isDropdown)
     }
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setDropdown(false); 
+          }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, []);
+      
     const handleCredit = async () => {
         try {
             const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
@@ -36,7 +49,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
             {/* Sidebar */}
             <div className={`fixed top-0 left-0 h-full bg-[#0f0f0f] w-64 p-4 flex flex-col transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 z-50`}>
                 <div className="relative">
-                    <div onClick={toggleDropdown} className="flex items-center justify-between mb-8 border border-gray-700 bg-[#0f0f0f] p-3 rounded-md cursor-pointer">
+                    <div onClick={toggleDropdown} className="flex items-center justify-between mb-8 border border-gray-700 bg-[#131313] p-3 rounded-md cursor-pointer">
                         <div className="flex items-center ">
                             <div className="bg-[#2f3947] w-8 h-8 rounded-md flex items-center justify-center text-sm overflow-hidden">
                                 <img src={`${fileUrl}/uploads/images/${user?.avatar}`} alt="avatar" />
@@ -55,19 +68,21 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     </div>
                     {
                         isDropdown && (
-                            <div className="absolute space-y-5 -bottom-20 text-white bg-[#1e1e1e] p-4 w-full border border-gray-700 rounded-md animate-dropdown ">
+                            <div ref={dropdownRef} className="absolute space-y-5 -bottom-20 text-white bg-[#1e1e1e] p-4 w-full border border-gray-700 rounded-md animate-dropdown ">
                                 <Link
                                     to="/settings?name=profile"
                                     className="flex items-center text-base text-white hover:text-white"
                                 >
                                     <RiUser3Line className="mr-2" /> Edit Profile
                                 </Link>
-                                <button
+                                {
+                                    user?.active === true ? <button
                                     className="flex items-center text-base text-white hover:text-white"
                                     onClick={() => setShowPopup(true)}
                                 >
                                     <LuCreditCard className="mr-2" /> Manage Subscription
-                                </button>                               
+                                </button> : <p className="flex items-center text-base text-transparent">.</p>
+                                }
                             </div>
                         )
                     }
@@ -75,27 +90,32 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                 <nav className="space-y-2">
                     <NavLink
                         to="/"
-                        className="flex items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded hover:bg-[#191919]"
+                        className={({ isActive }) =>
+                            `flex items-center text-base px-4 py-2 text-white font-medium rounded hover:bg-[#191919] hover:text-[#e3e6ed] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
+                        }
                     >
                         <MdOutlineDashboard className="mr-2" /> Dashboard
                     </NavLink>
-                    <Link
+                    <NavLink
                         to="/my-beats"
-                        className="flex items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded hover:bg-[#191919]"
+                        className={({ isActive }) =>
+                            `flex items-center text-base px-4 py-2 text-white font-medium rounded hover:bg-[#191919] hover:text-[#e3e6ed] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
+                        }
                     >
                         <RiMusic2Line className="mr-2" /> My Beats
-                    </Link>
+                    </NavLink>
                 </nav>
+
                 <div className="mt-auto border-gray-800 flex flex-col py-2">
                     {
                         user?.active === true
                             ?
-                            <button onClick={handleCredit} className="bg-purple-500 text-white w-full py-2 rounded mb-4 flex items-center justify-center">
+                            <button onClick={handleCredit} className="bg-[#7132e9] Thank you for your attention, and I appreciate your cooperation.] text-white w-full py-2 rounded mb-4 flex items-center justify-center">
                                 <RiMoneyCnyCircleLine className=" mr-2" /> Buy Extra Credit
                             </button>
                             :
                             <Link to='payment'>
-                                <button className="bg-purple-500 text-white w-full py-2 rounded mb-4 flex items-center justify-center">
+                                <button className="bg-[#7132e9] text-white w-full py-2 rounded mb-4 flex items-center justify-center">
                                     <FaCrown className=" mr-2" /> Subscribe Now
                                 </button>
                             </Link>
@@ -111,19 +131,20 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                             ''
                     }
                     <hr className='my-2 border-zinc-700' />
-                    <Link
-                        to="/settings"
-                        className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2  rounded hover:bg-[#191919]"
-                    >
-                        <FaCog className="mr-2" /> Settings
-                    </Link>
-                    <Link
-                        // to="/login"
-                        onClick={logout}
-                        className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
-                    >
-                        <FaSignOutAlt className="mr-2" /> Log Out
-                    </Link>
+                    <NavLink
+        to="/settings"
+        className={({ isActive }) =>
+            `flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
+        }
+    >
+        <FaCog className="mr-2" /> Settings
+    </NavLink>
+    <Link
+        onClick={logout}
+        className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
+    >
+        <FaSignOutAlt className="mr-2" /> Log Out
+    </Link>
                 </div>
                 <p className='text-xs text-gray-500'>
                     <Link to='/terms' className='hover:underline'>Term of Use</Link> and <Link to='/privacy' className='hover:underline'>Privacy Policy</Link>

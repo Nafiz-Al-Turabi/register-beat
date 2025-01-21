@@ -13,17 +13,19 @@ const RegisterBeat = () => {
   const [image, setImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [isDragging, setIsDragging] = useState({ audio: false, image: false });
-  
+
 
   if (user?.active === false) {
     return (
-      <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">
-        <h1 className="text-3xl text-[#b079e9] font-bold">Please subscribe to register a beat</h1>
-        <Link to='/payment'>
-          <button className="bg-purple-500 text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
-            <FaCrown className=" mr-2" /> Subscribe Now
-          </button>
-        </Link>
+      <div className='md:h-[600px] flex justify-center items-center'>
+        <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">
+          <h1 className="md:text-3xl text-white font-bold">Please subscribe to register a beat</h1>
+          <Link to='/payment'>
+            <button className="bg-[#7132e9] text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
+              <FaCrown className=" mr-2" /> Subscribe Now
+            </button>
+          </Link>
+        </div>
       </div>
     )
   }
