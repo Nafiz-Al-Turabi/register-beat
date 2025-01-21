@@ -81,15 +81,6 @@ const AdminDashboard = () => {
                         >
                             <RiContactsLine className="h-5 w-5 mr-2" /> All Contact
                         </NavLink>
-                        {/* <NavLink
-                            onClick={() => setIsOpen(!isOpen)}
-                            to="/settings"
-                            className={({ isActive }) =>
-                                `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
-                            }
-                        >
-                            <FaCog className="h-5 w-5 mr-2" /> Settings
-                        </NavLink> */}
                     </nav>
                     <div className='px-4'>
                         <Link className='flex items-center px-4 py-2 bg-[#1a1d21] rounded-md duration-300 ease-in-out' to='/'>

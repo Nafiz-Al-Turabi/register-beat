@@ -86,7 +86,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         <RiMusic2Line className="mr-2" /> My Beats
                     </Link>
                 </nav>
-                <div className="mt-auto border-t border-gray-800 flex flex-col py-2">
+                <div className="mt-auto border-gray-800 flex flex-col py-2">
                     {
                         user?.active === true
                             ?
@@ -104,15 +104,16 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         user.role === 'admin' ?
                             <Link
                                 to="/admin-dashboard"
-                                className="flex justify-center items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded bg-violet-700 hover:bg-violet-600 duration-300 ease-linear"
+                                className="flex justify-center items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded bg-zinc-700 hover:bg-zinc-600 duration-300 ease-linear"
                             >
                                 Admin Panel
                             </Link> :
                             ''
                     }
+                    <hr className='my-2 border-zinc-700' />
                     <Link
                         to="/settings"
-                        className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
+                        className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2  rounded hover:bg-[#191919]"
                     >
                         <FaCog className="mr-2" /> Settings
                     </Link>
