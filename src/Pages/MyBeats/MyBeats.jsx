@@ -15,6 +15,8 @@ import ReactPaginate from 'react-paginate';
 const MyBeats = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [beatDetails, setBeatDetails] = useState();
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [beatToDelete, setBeatToDelete] = useState(null);
   const { user } = useContext(AuthContext);
   const userId = user?._id;
   const [currentPage, setCurrentPage] = useState(0);
@@ -47,6 +49,28 @@ const MyBeats = () => {
   if (isLoading) {
     return <Loading />;
   }
+  const handleDeleteBeat = async (id) => {
+    try {
+      const response = await axiosInstance.delete(`/beat/deleteBeat/${id}`);
+      refetch();
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleDeleteClick = (beat) => {
+    setBeatToDelete(beat);
+    setDeleteModalOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (beatToDelete) {
+      await handleDeleteBeat(beatToDelete._id);
+      setDeleteModalOpen(false);
+      setBeatToDelete(null);
+    }
+  };
 
   return (
     <div className="p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle">
@@ -103,7 +127,10 @@ const MyBeats = () => {
                       </button>
                     </td>
                     <td className="p-4">
-                      <button className="flex items-center gap-2 bg-gradient-to-l to-red-400 from-red-500 hover:bg-gradient-to-r hover:to-red-400 hover:from-red-500 duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-xs xl:text-base">
+                      <button
+                        onClick={() => handleDeleteClick(beat)}
+                        className="flex items-center gap-2 bg-gradient-to-l to-red-400 from-red-500 hover:bg-gradient-to-r hover:to-red-400 hover:from-red-500 duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-xs xl:text-base"
+                      >
                         <MdDelete /> Delete
                       </button>
                     </td>
@@ -113,23 +140,23 @@ const MyBeats = () => {
             </table>
 
             <div className="mt-6 flex justify-end">
-            <ReactPaginate
-                    previousLabel={"←"}
-                    nextLabel={"→"}
-                    breakLabel={"..."}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={2}
-                    onPageChange={handlePageChange}
-                    containerClassName={"flex justify-end mt-4 space-x-4"}
-                    activeClassName={"font-bold bg-violet-600/20"}
-                    pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
-                    previousClassName={
-                        "px-3 py-1 border border-zinc-600 rounded text-white"
-                    }
-                    nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
-                    breakClassName={"px-3 py-1 text-zinc-400"}
-                />
+              <ReactPaginate
+                previousLabel={"←"}
+                nextLabel={"→"}
+                breakLabel={"..."}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={2}
+                onPageChange={handlePageChange}
+                containerClassName={"flex justify-end mt-4 space-x-4"}
+                activeClassName={"font-bold bg-violet-600/20"}
+                pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+                previousClassName={
+                  "px-3 py-1 border border-zinc-600 rounded text-white"
+                }
+                nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+                breakClassName={"px-3 py-1 text-zinc-400"}
+              />
             </div>
           </div>
         ) : (
@@ -145,6 +172,31 @@ const MyBeats = () => {
           </div>
         )
       }
+
+      {deleteModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-[#192332] p-6 rounded-lg max-w-md w-full mx-4">
+            <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
+            <p className="text-[#a1afc5] mb-6">
+              Are you sure you want to delete "{beatToDelete?.beatName}"? This action cannot be undone.
+            </p>
+            <div className="flex justify-end gap-4">
+              <button
+                onClick={() => setDeleteModalOpen(false)}
+                className="px-4 py-2 rounded-md bg-gray-600 hover:bg-gray-700 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 transition-colors"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <BeatDetailsModal
         isOpen={isOpen}
