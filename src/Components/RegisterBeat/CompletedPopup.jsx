@@ -15,9 +15,14 @@ const CompletedPopup = () => {
                     <p className="mt-2 text-base text-gray-400 text-center">Please allow up to 48 hours to complete the registration
                     process.</p>
                 {/* </div> */}
-                <Link to="/" className="bg-purple-600 text-white font-bold px-8 py-3 rounded-lg hover:bg-purple-700 transition active:scale-95">
+                <button 
+                    onClick={() => {
+                        window.location.href = '/';
+                    }}
+                    className="bg-purple-600 text-white font-bold px-8 py-3 rounded-lg hover:bg-purple-700 transition active:scale-95"
+                >
                     Return to Dashboard
-                </Link>
+                </button>
             </div>
         </div>
         <div className="opacity-50 fixed inset-0 z-40 bg-[#05050a]"></div>

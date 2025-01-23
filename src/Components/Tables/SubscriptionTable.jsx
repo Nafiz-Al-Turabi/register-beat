@@ -6,7 +6,7 @@ import Loading from '../Loading/Loading';
 
 const SubscriptionTable = () => {
     const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 10;
+    const itemsPerPage = 40;
 
     const { isLoading, data, isError, error } = useQuery({
         queryKey: ['transactions'],
@@ -71,7 +71,14 @@ const SubscriptionTable = () => {
                                     </td>
                                 </tr>
                             ))}
-                        </tbody> : <div><p className='my-2'>No recent subscription found.</p></div>
+                        </tbody> : 
+                        <tbody>
+                            <tr>
+                                <td colSpan="5" className="px-6 py-8 text-center text-gray-400">
+                                    No recent subscriptions found
+                                </td>
+                            </tr>
+                        </tbody>
                     }
                 </table>
             </div>

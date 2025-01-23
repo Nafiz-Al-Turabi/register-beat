@@ -6,6 +6,7 @@ import fileUrl from "../../Axios/fileUrl";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import toast from "react-hot-toast";
+import Loading from "../../Components/Loading/Loading";
 
 const Users = () => {
   const [timeframe, setTimeframe] = useState("lastMonth");
@@ -79,7 +80,9 @@ const Users = () => {
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );
-
+  
+if(isLoading)
+  return <Loading/>
   return (
     <div>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 p-4 bg-[#212529] rounded-lg shadow-md">
@@ -231,49 +234,59 @@ const Users = () => {
           </div>
         </div>
       </div>
-      <ReactPaginate
-        previousLabel={"←"}
-        nextLabel={"→"}
-        breakLabel={"..."}
-        pageCount={Math.ceil(users.length / itemsPerPage)}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={2}
-        onPageChange={handlePageChange}
-        containerClassName={"flex justify-end mt-4 space-x-4"}
-        activeClassName={"font-bold bg-violet-600/20"}
-        pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
-        previousClassName={
-          "px-3 py-1 border border-zinc-600 rounded text-white"
-        }
-        nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
-        breakClassName={"px-3 py-1 text-zinc-400"}
-      />
+      {users.length > 0 && (
+        <ReactPaginate
+          previousLabel={"←"}
+          nextLabel={"→"}
+          breakLabel={"..."}
+          pageCount={Math.ceil(users.length / itemsPerPage)}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={2}
+          onPageChange={handlePageChange}
+          containerClassName={"flex justify-end mt-4 space-x-4"}
+          activeClassName={"font-bold bg-violet-600/20"}
+          pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+          previousClassName={
+            "px-3 py-1 border border-zinc-600 rounded text-white"
+          }
+          nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+          breakClassName={"px-3 py-1 text-zinc-400"}
+        />
+      )}
 
       {/* Confirmation Modal */}
       {showConfirmDialog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-[#212529] rounded-lg p-6 max-w-md w-full">
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Confirm Blacklist
-            </h3>
-            <p className="text-zinc-300 mb-6">
-              Are you sure you want to blacklist {selectedUser?.name}? This
-              action will restrict their access to the platform.
-            </p>
-            <div className="flex justify-end space-x-3">
-              <button
-                onClick={() => setShowConfirmDialog(false)}
-                className="px-4 py-2 bg-zinc-600 text-white rounded hover:bg-zinc-700 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmBlacklist}
-                disabled={false}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
-              >
-                Confirm
-              </button>
+        <div className="fixed inset-0 z-50 overflow-y-auto ">
+          <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out"></div>
+          
+          <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <div className="relative transform overflow-hidden rounded-lg bg-[#212529] text-left shadow-xl transition-all duration-300 ease-in-out sm:my-8 sm:w-full sm:max-w-md
+              animate-[fadeIn_0.3s_ease-in-out] scale-100 opacity-100">
+              
+              <div className="p-6">
+                <h3 className="text-lg font-semibold text-white mb-4">
+                  Confirm Blacklist
+                </h3>
+                <p className="text-zinc-300 mb-6">
+                  Are you sure you want to blacklist {selectedUser?.name}? This
+                  action will restrict their access to the platform.
+                </p>
+                <div className="flex justify-end space-x-3">
+                  <button
+                    onClick={() => setShowConfirmDialog(false)}
+                    className="px-4 py-2 bg-zinc-600 text-white rounded hover:bg-zinc-700 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={confirmBlacklist}
+                    disabled={false}
+                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
