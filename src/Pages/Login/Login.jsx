@@ -120,7 +120,7 @@ const Login = () => {
         switch (forgotPasswordStep) {
             case 1:
                 return (
-                    <div className='bg-[#0f1423] animate-from-middle p-6 rounded-lg shadow-lg'>
+                    <div className='max-w-2xl bg-[#0f1423] animate-from-middle p-6 rounded-lg shadow-lg'>
                         <h3 className="text-xl text-center mb-4">Forgot Password</h3>
                         <div className="space-y-4">
                             <input
@@ -164,7 +164,7 @@ const Login = () => {
 
             case 3:
                 return (
-                    <div className='bg-[#0f1423] animate-from-middle p-6 rounded-lg shadow-lg'>
+                    <div className='max-w-xs bg-[#0f1423] animate-from-middle p-6 rounded-lg shadow-lg'>
                         <h3 className="text-xl text-center mb-4">Reset Password</h3>
                         <div className="space-y-4">
                             <input
@@ -270,7 +270,7 @@ const Login = () => {
 
                 ) : (
                     // Forgot password flow
-                    <form onSubmit={handleSubmit(handleForgotPassword)} className=" max-w-md animate-from-middle space-y-4 px-4 md:px-0">
+                    <form onSubmit={handleSubmit(handleForgotPassword)} className="  animate-from-middle space-y-4 px-4 md:px-0">
                         {renderForgotPasswordForm()}
                         <button
                             type="button"
