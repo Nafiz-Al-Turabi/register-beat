@@ -30,11 +30,12 @@ const Signup = () => {
         }
     };
 
-    const handleEmailChange = (e) => {
-        setEmailFilled(e.target.value !== "");
-    };
     const handleNameChange = (e) => {
         setNameFilled(e.target.value !== "");
+    };
+
+    const handleEmailChange = (e) => {
+        setEmailFilled(e.target.value !== "");
     };
 
     const handlePasswordChange = (e) => {
@@ -72,12 +73,14 @@ const Signup = () => {
                             type="name"
                             id="name"
                             placeholder="Enter your name"
-                            {...register("name", { required: "name is required" })}
-                            onChange={handleNameChange}
+                            {...register("name", { 
+                                required: "Name is required",
+                                onChange: (e) => handleNameChange(e)
+                            })}
                             className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
                         />
                         {!nameFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
-                        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
                     </div>
                     <div className='relative'>
                         <label htmlFor="email" className="block text-[#9da6be] text-sm font-medium mb-2">Email</label>
@@ -85,8 +88,10 @@ const Signup = () => {
                             type="email"
                             id="email"
                             placeholder="Enter your email"
-                            {...register("email", { required: "Email is required" })}
-                            onChange={handleEmailChange}
+                            {...register("email", { 
+                                required: "Email is required",
+                                onChange: (e) => handleEmailChange(e)
+                            })}
                             className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
                         />
                         {!emailFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
@@ -99,8 +104,10 @@ const Signup = () => {
                             type="password"
                             id="password"
                             placeholder="Enter your password"
-                            {...register("password", { required: "Password is required" })}
-                            onChange={handlePasswordChange}
+                            {...register("password", { 
+                                required: "Password is required",
+                                onChange: (e) => handlePasswordChange(e)
+                            })}
                             className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
                         />
                         {!passwordFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
@@ -115,9 +122,9 @@ const Signup = () => {
                             placeholder="Enter confirm password"
                             {...register("confirmPassword", {
                                 required: "Confirm Password is required",
-                                validate: (value) => value === password || "Passwords do not match"
+                                validate: (value) => value === password || "Passwords do not match",
+                                onChange: (e) => handleConfirmPasswordChange(e)
                             })}
-                            onChange={handleConfirmPasswordChange}
                             className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
                         />
                         {!confirmPasswordFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}

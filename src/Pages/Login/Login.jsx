@@ -209,8 +209,10 @@ const Login = () => {
                                     type="email"
                                     id="email"
                                     placeholder="Enter your email"
-                                    {...register("email", { required: "Email is required" })}
-                                    onChange={handleEmailChange}
+                                    {...register("email", { 
+                                        required: "Email is required",
+                                        onChange: (e) => handleEmailChange(e)
+                                    })}
                                     className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
                                 />
                                 {!emailFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
@@ -223,8 +225,10 @@ const Login = () => {
                                     type="password"
                                     id="password"
                                     placeholder="Enter your password"
-                                    {...register("password", { required: "Password is required" })}
-                                    onChange={handlePasswordChange}
+                                    {...register("password", { 
+                                        required: "Password is required",
+                                        onChange: (e) => handlePasswordChange(e)
+                                    })}
                                     className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
                                 />
                                 {!passwordFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
