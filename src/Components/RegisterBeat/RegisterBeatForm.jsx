@@ -102,8 +102,19 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   };
 
   const onSubmit = async (data) => {
+    // Check if audio and image files are selected
+    if (!formData.audio) {
+      setErrorMessage('Please select an audio file');
+      return;
+    }
+    
+    if (!formData.image) {
+      setErrorMessage('Please select an image file');
+      return;
+    }
+    
     setRegisterData(data);
-
+    
     const response = await simulateApiCall(data);
 
     if (response.success) {
@@ -122,6 +133,14 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
     <div className='max-w-3xl mx-auto pt-16 pb-8'>
       <div className='bg-[#0f0f0f] p-2 md:p-20 rounded-lg'>
         <h1 className='text-4xl font-bold text-white text-center'>Beat Information</h1>
+        
+        {/* Display error message if exists */}
+        {errorMessage && (
+          <div className="text-red-500 text-center mb-4 bg-red-100 border border-red-400 rounded p-2">
+            {errorMessage}
+          </div>
+        )}
+        
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:grid md:grid-cols-2 gap-6 mt-8">
           {/* Full Name */}
           <div>
