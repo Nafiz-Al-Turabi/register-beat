@@ -13,6 +13,8 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const [showCompletedPopup, setShowCompletedPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const { user } = useContext(AuthContext);
+  const [tags, setTags] = useState([]);
+  const [tagInput, setTagInput] = useState('');
 
   useEffect(() => {
     let isMounted = true;
@@ -28,6 +30,21 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
     }
   };
 
+  const handleTagInput = (e) => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const newTag = tagInput.trim();
+      if (newTag && !tags.includes(newTag)) {
+        setTags([...tags, newTag]);
+        setTagInput('');
+      }
+    }
+  };
+
+  const removeTag = (tagToRemove) => {
+    setTags(tags.filter(tag => tag !== tagToRemove));
+  };
+
   const simulateApiCall = async (data) => {
     setProgress(0);
     setErrorMessage('');
@@ -41,6 +58,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       const payload = new FormData();
       payload.append('fullName', data.fullName);
       payload.append('beatName', data.beatName);
+      payload.append('title', data.title);
       payload.append('bpm', data.bpm);
       payload.append('genre', data.genre);
       payload.append('releaseDate', data.releaseDate);
@@ -50,7 +68,12 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       payload.append('producerName', data.producerName || '');
       payload.append('percentage', data.percentage || '');
       payload.append('containsSamples', data.containsSamples);
+      payload.append('excerpt', data.excerpt);
       payload.append('terms', data.terms);
+      
+      // Ensure tags are sent as a stringified array
+      const tagsArray = Array.isArray(tags) ? tags : [];
+      payload.append('tags', JSON.stringify(tagsArray));
 
       if (formData.audio) {
         payload.append('audio', formData.audio);
@@ -58,6 +81,9 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       if (formData.image) {
         payload.append('image', formData.image);
       }
+
+      // Log the payload to verify tags are being sent correctly
+      console.log('Tags being sent:', JSON.parse(payload.get('tags')));
 
       await axiosInstance.post(`/beat/create-beat/${user._id}`, payload, {
         headers: {
@@ -68,6 +94,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       setProgress(100);
       return { success: true };
     } catch (error) {
+      console.error('Error submitting form:', error);
       setProgress(0);
       setErrorMessage('Failed to register. Please try again.');
       return { success: false };
@@ -127,6 +154,22 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
               <p className="text-red-500 text-xs mt-1">{errors.beatName.message}</p>
             )}
           </div>
+          {/* Beat title */}
+          <div>
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+              Beat title
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your beat title"
+              {...register('title', { required: 'Beat title is required' })}
+              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+            />
+            {errors.title && (
+              <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>
+            )}
+          </div>
+         
 
           {/* BPM */}
           <div>
@@ -142,6 +185,39 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             {errors.bpm && (
               <p className="text-red-500 text-xs mt-1">{errors.bpm.message}</p>
             )}
+          </div>
+
+           {/* Tags */}
+           <div className='col-span-2'>
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+              Tags
+            </label>
+            <div className="flex flex-wrap gap-2 mb-2">
+              {tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="bg-[#7837eb] text-white px-2 py-1 rounded-md flex items-center gap-1"
+                >
+                  {tag}
+                  <button
+                    type="button"
+                    onClick={() => removeTag(tag)}
+                    className="hover:text-red-300"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+            <input
+              type="text"
+              value={tagInput}
+              onChange={(e) => setTagInput(e.target.value)}
+              onKeyDown={handleTagInput}
+              placeholder="Type tag and press Enter or comma"
+              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+            />
+            <p className="text-gray-400 text-xs mt-1">Press Enter or comma to add tags</p>
           </div>
 
           {/* Genre */}
@@ -271,6 +347,21 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
 
+          <div className='col-span-2'>
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+              Excerpt
+            </label>
+            <textarea
+              type="text"
+              placeholder="Enter your beat excerpt"
+              {...register('excerpt', { required: 'Beat excerpt is required' })}
+              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+            />
+            {errors.excerpt && (
+              <p className="text-red-500 text-xs mt-1">{errors.excerpt.message}</p>
+            )}
+          </div>
+
           {/* Terms and Conditions */}
           <div className="col-span-2">
             <label className="flex items-center space-x-2">
@@ -287,6 +378,8 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
               <p className="text-red-500 text-xs mt-1">{errors.terms.message}</p>
             )}
           </div>
+
+
 
           {/* Submit Button */}
           <div className="col-span-2 flex justify-center mt-6">
