@@ -14,9 +14,13 @@ const Login = () => {
     const [passwordFilled, setPasswordFilled] = useState(false);
     const { login, googleLogin } = useContext(AuthContext)
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+    const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+    const [isForgotPasswordLoading, setIsForgotPasswordLoading] = useState(false);
 
     const onSubmit = async (data) => {
         try {
+            setIsLoading(true);
             await login({
                 email: data.email,
                 password: data.password
@@ -26,6 +30,8 @@ const Login = () => {
         } catch (error) {
             console.error('Login error:', error.response?.data?.message || error.message);
             alert('Login failed. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -39,11 +45,14 @@ const Login = () => {
 
     const googleLoginHandler = async () => {
         try {
+            setIsGoogleLoading(true);
             await googleLogin();
             navigate("/")
         } catch (error) {
             console.error('Google login error:', error.response?.data?.message || error.message);
             alert('Google login failed. Please try again.');
+        } finally {
+            setIsGoogleLoading(false);
         }
     };
 
@@ -55,6 +64,7 @@ const Login = () => {
 
     const handleForgotPassword = async (data) => {
         try {
+            setIsForgotPasswordLoading(true);
             switch (forgotPasswordStep) {
                 case 1: 
                     try {
@@ -101,6 +111,8 @@ const Login = () => {
         } catch (error) {
             console.error('Error:', error);
             toast.error('Something went wrong. Please try again.');
+        } finally {
+            setIsForgotPasswordLoading(false);
         }
     };
 
@@ -119,9 +131,10 @@ const Login = () => {
                             />
                             <button
                                 type="submit"
-                                className="w-full bg-purple-600 text-white py-2 rounded-md"
+                                disabled={isForgotPasswordLoading}
+                                className="w-full bg-purple-600 text-white py-2 rounded-md disabled:opacity-50"
                             >
-                                Send OTP
+                                {isForgotPasswordLoading ? 'Loading...' : 'Send OTP'}
                             </button>
                         </div>
                     </div>
@@ -140,9 +153,10 @@ const Login = () => {
                             />
                             <button
                                 type="submit"
-                                className="w-full bg-purple-600 text-white py-2 rounded-md"
+                                disabled={isForgotPasswordLoading}
+                                className="w-full bg-purple-600 text-white py-2 rounded-md disabled:opacity-50"
                             >
-                                Verify OTP
+                                {isForgotPasswordLoading ? 'Loading...' : 'Verify OTP'}
                             </button>
                         </div>
                     </div>
@@ -167,9 +181,10 @@ const Login = () => {
                             />
                             <button
                                 type="submit"
-                                className="w-full bg-purple-600 text-white py-2 rounded-md"
+                                disabled={isForgotPasswordLoading}
+                                className="w-full bg-purple-600 text-white py-2 rounded-md disabled:opacity-50"
                             >
-                                Reset Password
+                                {isForgotPasswordLoading ? 'Loading...' : 'Reset Password'}
                             </button>
                         </div>
                     </div>
@@ -226,8 +241,12 @@ const Login = () => {
                                 </button>
                             </div>
 
-                            <button type="submit" className="w-full bg-purple-600 text-lg text-white font-bold py-3 rounded-full mt-4 hover:bg-purple-700 duration-200 focus:outline-none">
-                                Sign In
+                            <button 
+                                type="submit" 
+                                disabled={isLoading}
+                                className="w-full bg-purple-600 text-lg text-white font-bold py-3 rounded-full mt-4 hover:bg-purple-700 duration-200 focus:outline-none disabled:opacity-50"
+                            >
+                                {isLoading ? 'Loading...' : 'Sign In'}
                             </button>
                         </form>
                         <div className="mt-4 text-center flex justify-between items-center">
@@ -236,8 +255,12 @@ const Login = () => {
                             <hr className='w-32 border-gray-600' />
                         </div>
 
-                        <button onClick={googleLoginHandler} className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-4 hover:bg-gray-100 focus:outline-none">
-                            Sign in with <FcGoogle className='ml-1' />oogle
+                        <button 
+                            onClick={googleLoginHandler} 
+                            disabled={isGoogleLoading}
+                            className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-4 hover:bg-gray-100 focus:outline-none disabled:opacity-50"
+                        >
+                            {isGoogleLoading ? 'Loading...' : <>Sign in with <FcGoogle className='ml-1' />oogle</>}
                         </button>
 
                         <div className="mt-4 text-center">
@@ -247,7 +270,7 @@ const Login = () => {
 
                 ) : (
                     // Forgot password flow
-                    <form onSubmit={handleSubmit(handleForgotPassword)} className="space-y-4">
+                    <form onSubmit={handleSubmit(handleForgotPassword)} className=" max-w-md animate-from-middle space-y-4 px-4 md:px-0">
                         {renderForgotPasswordForm()}
                         <button
                             type="button"
