@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import axiosInstance from '../../Axios/AxiosInstance';
 import { AuthContext } from '../../Provider/AuthProvider';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const ManageSubscriptionPopup = ({ setShowPopup }) => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     const subscription = {
         plan: "Standard",
@@ -22,73 +23,29 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
         return str.slice(0, -4).replace(/\d/g, '*') + str.slice(-4);
     }
 
-    const handleCancelClick = () => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, cancel it!",
-            cancelButtonText: "No, keep it",
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                cancelPlan();
-            } else {
-                Swal.fire({
-                    title: "Cancelled",
-                    text: "Your subscription is safe!",
-                    icon: "error"
-                });
-            }
-        });
-    };
-
-    const cancelPlan = async () => {
+    const handleCancelClick = async () => {
         if (!user?._id) {
-            Swal.fire({
-                title: "Error",
-                text: "User not found. Please try again.",
-                icon: "error",
-                confirmButtonText: "Close"
-            });
+            toast.error("User not found");
             return;
         }
 
+        setIsLoading(true);
         try {
-            const response = await axiosInstance.delete(`/payments/cancelSubscription/${user._id}`);
-
-            if (response.data?.success) {
-                Swal.fire({
-                    title: "Cancelled!",
-                    text: "Your subscription has been successfully cancelled.",
-                    icon: "success",
-                    confirmButtonText: "Close"
-                }).then(() => {
-                    setShowPopup(false);
-                });
-            } else {
-                Swal.fire({
-                    title: "Error",
-                    text: "There was an issue canceling your subscription. Please try again.",
-                    icon: "error",
-                    confirmButtonText: "Close"
-                });
-            }
+           const  response = await axiosInstance.delete(`/payments/cancelSubscription/${user._id}`);
+            console.log(response.data)
+            toast.success('Subscription cancelled successfully');
+            setShowPopup(false);
         } catch (error) {
             console.error("Error while cancelling: ", error.message);
-            Swal.fire({
-                title: "Error",
-                text: error.message || "An error occurred. Please try again later.",
-                icon: "error",
-                confirmButtonText: "Close"
-            });
+            toast.error('Failed to cancel subscription. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const handleContactClick = () => {
-        setShowPopup(false); // Hide the popup
-        navigate('/contact'); // Navigate to contact page
+        setShowPopup(false);
+        navigate('/contact');
     };
 
     return (
@@ -137,8 +94,9 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
                         <button
                             className="bg-red-600 font-semibold rounded-full py-3 mt-2 active:scale-95"
                             onClick={handleCancelClick}
+                            disabled={isLoading}
                         >
-                            Cancel Subscription
+                            {isLoading ? 'Cancelling...' : 'Cancel Subscription'}
                         </button>
                         <button
                             className="bg-slate-700 font-semibold rounded-full py-3 mt-2 active:scale-95"

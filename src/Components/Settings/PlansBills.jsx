@@ -2,11 +2,32 @@ import React, { useContext, useState } from 'react'
 import PlanBillsModal from './PlanBillsModal';
 import ManangeSubsPopup from '../ManageSubscription/ManangeSubsPopup';
 import { AuthContext } from '../../Provider/AuthProvider';
+import axiosInstance from '../../Axios/AxiosInstance';
 
 const PlansBills = () => {
   const [showModal, setShowModal] = useState(false);
   const [managePopup, setManagePopup] = useState(false);
   const { user } = useContext(AuthContext);
+
+  const handleCancelClick = async () => {
+    if (!user?._id) {
+        toast.error("User not found");
+        return;
+    }
+
+    setIsLoading(true);
+    try {
+       const  response = await axiosInstance.delete(`/payments/cancelSubscription/${user._id}`);
+        console.log(response.data)
+        toast.success('Subscription cancelled successfully');
+        setShowPopup(false);
+    } catch (error) {
+        console.error("Error while cancelling: ", error.message);
+        toast.error('Failed to cancel subscription. Please try again.');
+    } finally {
+        setIsLoading(false);
+    }
+};
 
   return (
     <div className=''>
