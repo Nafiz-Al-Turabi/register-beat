@@ -38,7 +38,6 @@ const Login = () => {
     const googleLoginHandler = async () => {
         try {
             await googleLogin();
-            toast.success("Login Successful")
             navigate("/")
         } catch (error) {
             console.error('Google login error:', error.response?.data?.message || error.message);

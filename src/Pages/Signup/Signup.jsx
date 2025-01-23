@@ -4,6 +4,7 @@ import { PiDotsThree } from "react-icons/pi";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
+import { FcGoogle } from 'react-icons/fc';
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -11,22 +12,22 @@ const Signup = () => {
     const [nameFilled, setNameFilled] = useState(false);
     const [passwordFilled, setPasswordFilled] = useState(false);
     const [confirmPasswordFilled, setConfirmPasswordFilled] = useState(false);
-    const { signup,googleLogin  } = useContext(AuthContext)
+    const { signup, googleLogin } = useContext(AuthContext)
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
             await signup({
-              name: data.name,
-              email: data.email,
-              password: data.password
+                name: data.name,
+                email: data.email,
+                password: data.password
             })
             toast.success('Registration Successful.');
             navigate('/login');
-          } catch (error) {
+        } catch (error) {
             console.error('Registration error:', error.response?.data?.message || error.message);
             toast.error('Registration failed. Please try again.');
-          }
+        }
     };
 
     const handleEmailChange = (e) => {
@@ -50,13 +51,13 @@ const Signup = () => {
     const googleLoginHandler = async () => {
         try {
             await googleLogin();
-            toast.success("Login Successful")
             navigate("/")
         } catch (error) {
             console.error('Google login error:', error.response?.data?.message || error.message);
-            alert('Google login failed. Please try again.');
+            toast.error('Google login failed. Please try again.');
         }
     };
+
 
     return (
         <div className="flex justify-center items-center min-h-screen">
@@ -132,15 +133,14 @@ const Signup = () => {
                         <span className="text-sm text-gray-400">Or continue with</span>
                         <hr className='w-32 border-gray-600' />
                     </div>
-
-                    <button type="button" className="w-full bg-white text-lg font-bold text-black py-3 rounded-full mt-4 hover:bg-gray-100 focus:outline-none">
-                        Sign up with Google
-                    </button>
-
-                    <div className="mt-4 text-center">
-                        <Link to='/login' className="text-sm text-gray-400">Already have an account? <a href="#" className="text-purple-600 hover:underline">Login</a></Link>
-                    </div>
                 </form>
+                <button onClick={googleLoginHandler} className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-4 hover:bg-gray-100 focus:outline-none">
+                    Sign up with <FcGoogle className='ml-1' />oogle
+                </button>
+
+                <div className="mt-4 text-center">
+                    <Link to='/login' className="text-sm text-gray-400">Already have an account? <a href="#" className="text-purple-600 hover:underline">Login</a></Link>
+                </div>
             </div>
         </div>
     );
