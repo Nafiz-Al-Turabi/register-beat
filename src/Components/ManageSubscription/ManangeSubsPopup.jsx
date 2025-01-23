@@ -31,7 +31,7 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
 
         setIsLoading(true);
         try {
-           const  response = await axiosInstance.delete(`/payments/cancelSubscription/${user._id}`);
+            const response = await axiosInstance.delete(`/payments/cancelSubscription/${user._id}`);
             console.log(response.data)
             toast.success('Subscription cancelled successfully');
             setShowPopup(false);
@@ -91,13 +91,15 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
                                 </li>
                             </ul>
                         </div>
-                        <button
-                            className="bg-red-600 font-semibold rounded-full py-3 mt-2 active:scale-95"
-                            onClick={handleCancelClick}
-                            disabled={isLoading}
-                        >
-                            {isLoading ? 'Cancelling...' : 'Cancel Subscription'}
-                        </button>
+                        {
+                            user?.active === true ? <button
+                                className="bg-red-600 font-semibold rounded-full py-3 mt-2 active:scale-95"
+                                onClick={handleCancelClick}
+                                disabled={isLoading}
+                            >
+                                {isLoading ? 'Cancelling...' : 'Cancel Subscription'}
+                            </button> : ''
+                        }
                         <button
                             className="bg-slate-700 font-semibold rounded-full py-3 mt-2 active:scale-95"
                             onClick={handleContactClick}
