@@ -3,11 +3,17 @@ import PlanBillsModal from './PlanBillsModal';
 import ManangeSubsPopup from '../ManageSubscription/ManangeSubsPopup';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axiosInstance from '../../Axios/AxiosInstance';
+import moment from 'moment';
 
 const PlansBills = () => {
   const [showModal, setShowModal] = useState(false);
   const [managePopup, setManagePopup] = useState(false);
   const { user } = useContext(AuthContext);
+
+  // Calculate subscription dates and remaining days
+  const subscriptionEndDate = moment(user?.subscriptionEndDAte);
+  const daysUntilReset = subscriptionEndDate.diff(moment(), 'days');
+  const resetDate = subscriptionEndDate.format('MMMM Do, YYYY');
 
   const handleCancelClick = async () => {
     if (!user?._id) {
@@ -37,7 +43,7 @@ const PlansBills = () => {
           <div>
             <p className='text-[#80858f] text-lg'>Subscription</p>
             <h4 className='text-xl font-semibold mt-1'>Standard</h4>
-            <p className='text-[#80858f]'>Renews on September 28th, 2024.</p>
+            <p className='text-[#80858f]'>Renews on {resetDate}.</p>
           </div>
           <div className='flex flex-row gap-2 items-end'>
             {
@@ -49,11 +55,11 @@ const PlansBills = () => {
         <div className=''>
           <p className='text-[#80858f] text-lg'>Beat Registration Credits</p>
           <h4 className='text-xl font-semibold mt-1'>20 monthly credits</h4>
-          <p className='text-[#80858f]'>Your credits will reset to 20 in 19 days. on September 27th, 2024,</p>
+          <p className='text-[#80858f]'>Your credits will reset to 20 in {daysUntilReset} days, on {resetDate}.</p>
         </div>
         <div className=''>
-          <h4 className='text-xl font-semibold'>12 credits remaining</h4>
-          <p className='text-[#80858f] mt-1'>You can register 12 more beats this month.</p>
+          <h4 className='text-xl font-semibold'>{user?.credit} credits remaining</h4>
+          <p className='text-[#80858f] mt-1'>You can register {user?.credit} more beats this month.</p>
         </div>
         <div className=''>
           <h5 className='text-[#80858f] text-lg font-bold'>Get Extra Credits</h5>

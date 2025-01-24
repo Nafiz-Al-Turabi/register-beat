@@ -30,6 +30,21 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    const refreshUserInfo = async () => {
+        try {
+            setLoading(true);
+            const response = await axiosInstance.get("/users/check", {
+                withCredentials: true,
+            });
+            setUser(response.data.user);
+        } catch (error) {
+            console.error("Failed to refresh user info:", error.response?.data?.message || error.message);
+            handleError(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     // Handle API errors
     const handleError = (error) => {
         if (error.response?.data?.message) {
@@ -88,8 +103,6 @@ const AuthProvider = ({ children }) => {
         }
     };
 
-
-
     const logout = async () => {
         try {
             await axiosInstance.post("/users/logout", {}, { withCredentials: true });
@@ -109,6 +122,7 @@ const AuthProvider = ({ children }) => {
         login,
         googleLogin,
         logout,
+        refreshUserInfo,
     };
 
     return (

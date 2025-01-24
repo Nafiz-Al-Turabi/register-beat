@@ -13,7 +13,7 @@ const CheckoutForm = ({ priceId }) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const stripe = useStripe();
   const elements = useElements();
-  const { user } = useContext(AuthContext);
+  const { user,refreshUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -54,7 +54,7 @@ const CheckoutForm = ({ priceId }) => {
         toast.success('Subscription created successfully!');
         setTimeout(() => {
           navigate('/');
-          window.location.reload();
+          refreshUserInfo();
         }, 1500);
       } else {
         toast.error('Subscription creation failed!');
