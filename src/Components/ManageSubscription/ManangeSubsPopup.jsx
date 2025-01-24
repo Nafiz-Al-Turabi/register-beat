@@ -3,11 +3,17 @@ import axiosInstance from '../../Axios/AxiosInstance';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import moment from 'moment';
 
 const ManageSubscriptionPopup = ({ setShowPopup }) => {
-    const { user } = useContext(AuthContext);
+    const { user, refreshUserInfo } = useContext(AuthContext);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+
+    const formatDate = (dateString) => {
+        if (!dateString) return 'N/A';
+        return moment(dateString).format('MMMM Do, YYYY');
+    };
 
     const subscription = {
         plan: "Standard",
@@ -34,6 +40,7 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
             const response = await axiosInstance.delete(`/payments/cancelSubscription/${user._id}`);
             console.log(response.data)
             toast.success('Subscription cancelled successfully');
+            refreshUserInfo();
             setShowPopup(false);
         } catch (error) {
             console.error("Error while cancelling: ", error.message);
@@ -70,24 +77,30 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
                             <h3 className="text-xl font-semibold">Subscription summary</h3>
                             <ul className="flex flex-col gap-2">
                                 <li className="flex justify-between">
-                                    <p className="text-xs md:text-base text-slate-400">Current Plan:</p>
-                                    <p className="text-xs md:text-base">{subscription.plan}</p>
+                                    <p className="text-xs md:text-base text-slate-400">Status:</p>
+                                    <p className={`text-xs md:text-base ${user?.active ? 'text-green-500' : 'text-red-500'}`}>
+                                        {user?.active ? 'Active' : 'Inactive'}
+                                    </p>
                                 </li>
                                 <li className="flex justify-between">
-                                    <p className="text-xs md:text-base text-slate-400">Renewal Date:</p>
-                                    <p className="text-xs md:text-base">{subscription.renewalDate}</p>
+                                    <p className="text-xs md:text-base text-slate-400">Subscription End Date:</p>
+                                    <p className="text-xs md:text-base">
+                                        {formatDate(user?.subscriptionEndDAte)}
+                                    </p>
                                 </li>
                                 <li className="flex justify-between">
                                     <p className="text-xs md:text-base text-slate-400">Available Credits:</p>
-                                    <p className="text-xs md:text-base">{subscription.credits}</p>
+                                    <p className="text-xs md:text-base">{user?.credit || 0}</p>
                                 </li>
                                 <li className="flex justify-between">
-                                    <p className="text-xs md:text-base text-slate-400">Protected Beats:</p>
-                                    <p className="text-xs md:text-base">{subscription.protectedBeats}</p>
+                                    <p className="text-xs md:text-base text-slate-400">Country:</p>
+                                    <p className="text-xs md:text-base">{user?.country || 'N/A'}</p>
                                 </li>
                                 <li className="flex justify-between">
-                                    <p className="text-xs md:text-base text-slate-400">Payment Method:</p>
-                                    <p className="text-xs md:text-base">{maskCardNumber(subscription.paymentMethod)}</p>
+                                    <p className="text-xs md:text-base text-slate-400">Member Since:</p>
+                                    <p className="text-xs md:text-base">
+                                        {formatDate(user?.createdAt)}
+                                    </p>
                                 </li>
                             </ul>
                         </div>
