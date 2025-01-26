@@ -63,7 +63,7 @@ const ProfileSetting = () => {
             <div>
                 <div className='flex gap-4 mt-4'>
                     <div className='bg-[#1e2837] rounded-lg w-20 h-20'>
-                        <img src={previewImage || `${fileUrl}/uploads/images/${user?.avatar}`} alt="Profile" className={`rounded-lg ${previewImage ? 'object-cover w-full h-full' : ''}`} />
+                        <img src={previewImage || `${fileUrl}/uploads/images/${user?.avatar}`} alt="Profile" className="rounded-lg w-full h-full object-cover" />
                     </div>
                     <button>
                         <label htmlFor="uploadFile1" className="flex bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
@@ -106,6 +106,7 @@ const ProfileSetting = () => {
                                 type="email"
                                 id="email"
                                 placeholder="Enter your email"
+                                disabled
                                 defaultValue={user?.email}
                                 {...register("email",)}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"

@@ -34,7 +34,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                             <div>
                                 <img
-                                    src={`${fileUrl}/uploads/images/${beatDetails?.imagePath}`}
+                                    src={`${fileUrl}/${beatDetails?.imagePath}`}
                                     alt="Beat Cover"
                                     className="rounded-lg mb-4"
                                 />
@@ -92,15 +92,6 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
                                 console.log("Beat deleted");
                             }}>
                                 Download Certificate
-                            </button>
-                            <button
-                                className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
-                                onClick={() => {
-                                    // Add delete functionality here
-                                    console.log("Beat deleted");
-                                }}
-                            >
-                                Delete Beat
                             </button>
                         </div>
                     </div>
