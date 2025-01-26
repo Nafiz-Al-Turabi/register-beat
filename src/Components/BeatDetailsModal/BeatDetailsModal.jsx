@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import fileUrl from "../../Axios/fileUrl";
 
 const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
     
-    // console.log('beatDetails', beatDetails)
-
+    
     const closeModal = () => setIsOpen(false);
 
     return (
@@ -28,60 +28,60 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
                             </button>
                         </div>
                         <p className="text-sm text-gray-400 mb-4">
-                            Registration ID: <span className="font-bold text-white">{beatDetails?.regID}</span>
+                            Registration ID: <span className="font-bold text-white">{beatDetails?.registrasionId}</span>
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                             <div>
                                 <img
-                                    src={beatDetails?.image}
+                                    src={`${fileUrl}/uploads/images/${beatDetails?.imagePath}`}
                                     alt="Beat Cover"
                                     className="rounded-lg mb-4"
                                 />
                                 <p>
                                     <span className="font-bold">YouTube Link:</span>{" "}
                                     <a
-                                        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                                        href={beatDetails?.youtubeUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-purple-400 hover:underline"
                                     >
-                                        https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                                        {beatDetails?.youtubeUrl}
                                     </a>
                                 </p>
                             </div>
                             <div>
                                 <p>
-                                    <span className="font-bold">Genre:</span> Hip Hop
+                                    <span className="font-bold">Genre:</span> {beatDetails?.genre}
                                 </p>
                                 <p>
-                                    <span className="font-bold">BPM:</span> 120
+                                    <span className="font-bold">BPM:</span> {beatDetails?.bpm}
                                 </p>
                                 <p>
                                     <span className="font-bold">Key:</span> C Minor
                                 </p>
                                 <p>
-                                    <span className="font-bold">Upload Date:</span> 2023-06-15
+                                    <span className="font-bold">Upload Date:</span> {new Date(beatDetails?.createdAt).toLocaleDateString()}
                                 </p>
                                 <p>
-                                    <span className="font-bold">Date of Release:</span> 2023-07-01
+                                    <span className="font-bold">Date of Release:</span> {new Date(beatDetails?.releaseDate).toLocaleDateString()}
                                 </p>
                                 <p>
                                     <span className="font-bold">Are you the only producer?</span>{" "}
-                                    No
+                                    {beatDetails?.isOnlyProducer ? "Yes" : "No"}
                                 </p>
                             </div>
                         </div>
 
                         <div className="mt-4">
                             <h3 className="font-bold">Collaborators</h3>
-                            <p>Name: John Doe</p>
-                            <p>Producer Name: JD Beats</p>
-                            <p>Collab Percentage: 40%</p>
+                            <p>Name: {beatDetails?.fullName}</p>
+                            <p>Producer Name: {beatDetails?.producerName}</p>
+                            <p>Collab Percentage: {beatDetails?.percentage}%</p>
                         </div>
 
                         <p className="mt-4">
-                            <span className="font-bold">3rd Party Samples:</span> Yes
+                            <span className="font-bold">3rd Party Samples:</span> {beatDetails?.containsSamples ? "Yes" : "No"}
                         </p>
 
                         <div className="mt-6 flex justify-end gap-4">

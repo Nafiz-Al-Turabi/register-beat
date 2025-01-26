@@ -22,9 +22,14 @@ const MyBeats = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
 
-  const openModal = (data) => {
-    setIsOpen(true);
-    setBeatDetails(data);
+  const openModal = async (beatId) => {
+    try {
+      const response = await axiosInstance.get(`/beat/oneBeatDetails/${beatId}`);
+      setBeatDetails(response.data?.beat);
+      setIsOpen(true);
+    } catch (error) {
+      console.error("Failed to fetch beat details:", error);
+    }
   };
 
   const { isLoading, isError, data: beats = [], error, refetch } = useQuery({
@@ -109,7 +114,7 @@ const MyBeats = () => {
                       </td>
                       <td
                         className="p-4 text-xs xl:text-base font-medium text-white hover:text-[#7837eb] cursor-pointer"
-                        onClick={() => openModal(beat)}
+                        onClick={() => openModal(beat?._id)}
                       >
                         {beat?.beatName}
                       </td>
@@ -122,7 +127,7 @@ const MyBeats = () => {
                       <td className="p-4">
                         <button
                           className="flex items-center gap-2 bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-xs xl:text-base"
-                          onClick={() => openModal(beat)}
+                          onClick={() => openModal(beat?._id)}
                         >
                           <FaRegEye /> More info
                         </button>

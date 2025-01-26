@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axiosInstance from '../../Axios/AxiosInstance';
 import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Components/Loading/Loading';
 import moment from 'moment';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const SearchBeat = () => {
     const [searchParams] = useSearchParams();
     const query = searchParams.get('query');
     console.log("ssssss", query)
+    const {user} = useContext(AuthContext)
 
     const { data: beats = [], isLoading, error } = useQuery({
-        queryKey: ['beats', query],
+        queryKey: ['beats', query, user?._id],
         queryFn: async () => {
             try {
                 console.log("fsdfsdfsdfsfd")
-                const response = await axiosInstance.get(`/admin/search`, {
+                const response = await axiosInstance.get(`/admin/search/${user?._id}`, {
                     params: { query },
                 });
                 console.log(response.data);
