@@ -48,7 +48,7 @@ const SubscriptionTable = () => {
                         </tr>
                     </thead>
                     {
-                        currentItems > 0 ? <tbody className="divide-y divide-gray-700">
+                        currentItems.length > 0 ? <tbody className="divide-y divide-gray-700">
                             {currentItems?.map((transaction) => (
                                 <tr key={transaction?._id} className="hover:bg-[#252431] even:bg-[#242a31] odd:bg-[#212529]">
                                     <td className="px-6 py-4">
