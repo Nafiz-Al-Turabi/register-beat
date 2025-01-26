@@ -5,6 +5,7 @@ import { LuMusic } from 'react-icons/lu';
 import { AuthContext } from '../Provider/AuthProvider';
 import { Link } from 'react-router-dom';
 import { FaCrown } from 'react-icons/fa';
+import { RiMoneyCnyCircleLine } from 'react-icons/ri';
 
 const RegisterBeat = () => {
   const { user } = useContext(AuthContext);
@@ -14,8 +15,7 @@ const RegisterBeat = () => {
   const [previewImage, setPreviewImage] = useState(null);
   const [isDragging, setIsDragging] = useState({ audio: false, image: false });
 
-
-  if ((user?.active === false && new Date(user?.subscriptionEndDAte) < new Date()) || user?.active === true && new Date(user?.subscriptionEndDAte) > new Date()) {
+  if ((user?.active === false && new Date(user?.subscriptionEndDAte) < new Date())) {
     console.log(user?.subscriptionEndDAte)
     return (
       <div className='md:h-[600px] flex justify-center items-center'>
@@ -24,6 +24,19 @@ const RegisterBeat = () => {
           <Link to='/payment'>
             <button className="bg-[#7132e9] text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
               <FaCrown className=" mr-2" /> Subscribe Now
+            </button>
+          </Link>
+        </div>
+      </div>
+    )
+  }else if(user?.credit === 0){
+    return(
+      <div className='md:h-[600px] flex justify-center items-center'>
+        <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">
+          <h1 className="md:text-3xl text-white font-bold">You alreay subscribed but you have no credit</h1>
+          <Link to='/payment'>
+            <button className="bg-[#7132e9] text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
+              <RiMoneyCnyCircleLine className=" mr-2" />  Buy Extra Credit
             </button>
           </Link>
         </div>

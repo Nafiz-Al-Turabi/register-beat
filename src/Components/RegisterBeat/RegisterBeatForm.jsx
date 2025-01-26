@@ -16,13 +16,6 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState('');
 
-  useEffect(() => {
-    let isMounted = true;
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   const simulateProgress = async () => {
     for (let i = 0; i <= 100; i += 10) {
       await new Promise((resolve) => setTimeout(resolve, 200));
