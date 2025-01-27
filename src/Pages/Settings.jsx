@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import PlansBills from '../Components/Settings/PlansBills';
 import ProfileSetting from '../Components/Settings/ProfileSetting';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Settings = () => {
+    const { user } = useContext(AuthContext);
     const [settingActive, setSettingActive] = useState(true);
     const [planActive, setPlanActive] = useState(false);
 
@@ -31,9 +33,13 @@ const Settings = () => {
                 </div>
             )}
             {planActive && (
-                <div className='animate-from-middle'>
-                    <PlansBills />
-                </div>
+                (user?.active === false || user?.subscriptionEndDAte < new Date()) ? (
+                    <p className="text-center py-4">Your subscription is expired. Please renew your subscription.</p>
+                ) : (
+                    <div className='animate-from-middle'>
+                        <PlansBills />
+                    </div>
+                )
             )}
         </div>
     </div>

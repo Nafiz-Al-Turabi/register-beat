@@ -42,7 +42,6 @@ const SubscriptionTable = () => {
                         <tr className="text-gray-400 text-sm">
                             <th className="px-6 py-3 text-left">CUSTOMER</th>
                             <th className="px-6 py-3 text-left">Customer Id</th>
-                            <th className="px-6 py-3 text-left">User Email</th>
                             <th className="px-6 py-3 text-left">Amount</th>
                             <th className="px-6 py-3 text-left">Credit</th>
                         </tr>
@@ -60,9 +59,7 @@ const SubscriptionTable = () => {
                                     <td className="px-6 py-4">
                                         {transaction?.customerId}
                                     </td>
-                                    <td className="px-6 py-4">
-                                        {transaction?.userEmail}
-                                    </td>
+                                    
                                     <td className="px-6 py-4">
                                         ${transaction?.amount}
                                     </td>

@@ -51,7 +51,7 @@ const UserDetails = () => {
 
     return (
         <div className="">
-            <div className="lg:flex items-center gap-5 bg-[#212529] shadow-lg rounded-lg p-6 w-full ">
+            <div className="lg:flex  gap-5 bg-[#212529] shadow-lg rounded-lg p-6 w-full ">
                 <div className="space-y-4">
                     <img
                         src={`${fileUrl}/uploads/images/${user?.avatar}`}
@@ -63,7 +63,7 @@ const UserDetails = () => {
                         <p className="text-sm text-gray-500">Producer Name: {user?.producerName || "N/A"}</p>
                     </div>
                 </div>
-                <div className="mt-6 lg:w-full">
+                <div className=" lg:w-full">
                     <div className="flex items-center justify-between py-2 border-b border-gray-700">
                         <span className="text-white font-medium">Full Name:</span>
                         <span className="text-white">{user?.fullName || "N/A"}</span>
@@ -92,8 +92,8 @@ const UserDetails = () => {
                     <div className="flex items-center justify-between py-2 border-b border-gray-700">
                         <span className="text-white font-medium">Subscription Ends:</span>
                         <span className="text-white">
-                            {user?.subscriptionEndDate
-                                ? new Date(user.subscriptionEndDate).toLocaleDateString()
+                            {user?.subscriptionEndDAte
+                                ? new Date(user.subscriptionEndDAte).toLocaleDateString()
                                 : "N/A"}
                         </span>
                     </div>
