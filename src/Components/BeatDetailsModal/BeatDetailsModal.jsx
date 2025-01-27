@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import fileUrl from "../../Axios/fileUrl";
 
 const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
-    
-    
+
+
     const closeModal = () => setIsOpen(false);
 
     return (
@@ -33,11 +33,13 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                             <div>
-                                <img
-                                    src={`${fileUrl}/${beatDetails?.imagePath}`}
-                                    alt="Beat Cover"
-                                    className="rounded-lg mb-4"
-                                />
+                                <div>
+                                    <img
+                                        src={`${fileUrl}/${beatDetails?.imagePath}`}
+                                        alt="Beat Cover"
+                                        className="w-32 h-32 object-cover rounded-lg mb-4"
+                                    />
+                                </div>
                                 <p>
                                     <span className="font-bold">YouTube Link:</span>{" "}
                                     <a
@@ -86,11 +88,11 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
 
                         <div className="mt-6 flex justify-end gap-4">
                             <button
-                            className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700"
-                            onClick={() => {
-                                // Add delete functionality here
-                                console.log("Beat deleted");
-                            }}>
+                                className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700"
+                                onClick={() => {
+                                    // Add delete functionality here
+                                    console.log("Beat deleted");
+                                }}>
                                 Download Certificate
                             </button>
                         </div>
