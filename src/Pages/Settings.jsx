@@ -33,7 +33,7 @@ const Settings = () => {
                 </div>
             )}
             {planActive && (
-                (user?.active === false || user?.subscriptionEndDAte < new Date()) ? (
+                (user?.active === false && user?.subscriptionEndDAte < new Date()) ? (
                     <p className="text-center py-4">Your subscription is expired. Please renew your subscription.</p>
                 ) : (
                     <div className='animate-from-middle'>

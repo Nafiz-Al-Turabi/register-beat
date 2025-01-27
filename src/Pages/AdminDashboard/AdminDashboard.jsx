@@ -41,7 +41,7 @@ const AdminDashboard = () => {
                 ref={sidebarRef}
                 className={`fixed md:static w-64 h-full bg-[#212529] text-white transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
             >
-                <div className="py-5 ml-16 text-lg font-bold">Admin Dashboard</div>
+                <div className="py-5 ml-16 md:ml-5 text-lg font-bold">Admin Dashboard</div>
                 <div className='flex flex-col justify-between h-[90%]'>
                     <nav className="mt-6 space-y-4 px-4">
                         <NavLink
