@@ -56,7 +56,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                             </div>
                             <div className="ml-3 ">
                                 <p className="text-sm font-semibold">{user?.name}</p>
-                                <p className="text-xs text-gray-400">Plan Básico</p>
+                                <p className="text-xs text-gray-400">Plan: {user?.active === true ? 'Standard' : 'N/A'}</p>
                             </div>
                         </div>
                         <span

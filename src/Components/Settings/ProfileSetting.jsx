@@ -23,7 +23,7 @@ const ProfileSetting = () => {
         try {
             const formData = new FormData();
             formData.append('username', data.username);
-            formData.append('email', data.email);
+            // formData.append('email', data.email);
             formData.append('fullName', data["full-name"] || '');
             formData.append('producerName', data["producer-name"] || '');
             formData.append('youtubeChannel', data["youtube-channel"] || '');
@@ -80,7 +80,7 @@ const ProfileSetting = () => {
                         </label>
                     </button>
                 </div>
-                <p className='text-sm text-[#72747e] mt-2'>Min. 200x200 px. PNG or JPG.</p>
+                <p className='text-base text-[#72747e] mt-2'>{user?.email}</p>
             </div>
             <div className='mt-6'>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -100,7 +100,7 @@ const ProfileSetting = () => {
                         {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>}
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-[#e3e6ed] text-sm font-medium mb-2">Email</label>
+                        {/* <label htmlFor="email" className="block text-[#e3e6ed] text-sm font-medium mb-2">Email</label>
                         <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
                                 type="email"
@@ -111,8 +111,8 @@ const ProfileSetting = () => {
                                 {...register("email",)}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
-                        </div>
-                        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                        </div> */}
+                        {/* {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>} */}
                         {/* <p className='text-sm text-[#72747e] mt-2'>To change your email, please <Link to={""} className='text-[#5816c5] underline'>follow these instructions</Link></p> */}
                     </div>
                     <div>
