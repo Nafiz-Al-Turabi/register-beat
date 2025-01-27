@@ -107,11 +107,10 @@ const ProfileSetting = () => {
                                 id="email"
                                 placeholder="Enter your email"
                                 disabled
-                                defaultValue={user?.email}
+                                Value={user?.email}
                                 {...register("email",)}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
-                            <PiDotsThree className='bg-red-500 w-6 h-6 rounded' />
                         </div>
                         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                         {/* <p className='text-sm text-[#72747e] mt-2'>To change your email, please <Link to={""} className='text-[#5816c5] underline'>follow these instructions</Link></p> */}
