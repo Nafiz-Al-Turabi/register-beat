@@ -5,8 +5,8 @@ export const initFacebookPixel = () => {
   ReactPixel.pageView(); 
 };
 
-export const trackEvent = (eventName) => {
-  ReactPixel.track(eventName);
+export const trackEvent = (eventName, data) => {
+  ReactPixel.track(eventName, data);
   ReactPixel.track('PageView', {
     path: window.location.pathname
   });
