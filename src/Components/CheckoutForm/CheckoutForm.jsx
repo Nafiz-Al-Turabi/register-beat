@@ -5,6 +5,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import axiosInstance from '../../Axios/AxiosInstance';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { trackEvent } from '../../facebookPixel/facebookPixel';
 
 const CheckoutForm = ({ priceId }) => {
   const [email, setEmail] = useState('');
@@ -15,6 +16,11 @@ const CheckoutForm = ({ priceId }) => {
   const elements = useElements();
   const { user,refreshUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  // Track event when button is clicked for meta pixel
+  const handleButtonClick = () => {
+    trackEvent("SubscribedButtonClick", { buttonName: "subscribe" });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -126,6 +132,7 @@ const CheckoutForm = ({ priceId }) => {
         </div>
 
         <button
+          onClick={handleButtonClick}
           type="submit"
           disabled={loading}
           className={`w-full py-3 px-4 rounded-md text-white font-medium text-base

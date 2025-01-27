@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBars, FaPlus } from "react-icons/fa";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../Shared/Sidebar";
+import { initFacebookPixel } from "../facebookPixel/facebookPixel";
 
 const DashboardLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -17,6 +18,9 @@ const DashboardLayout = () => {
             navigate(`/search-beat?query=${encodeURIComponent(searchQuery)}`);
         }
     };
+    useEffect(() => {
+        initFacebookPixel(); 
+    }, []);
     return (
         <div className="md:flex min-h-screen  text-white">
             <Sidebar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />

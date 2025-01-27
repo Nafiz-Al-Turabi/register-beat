@@ -6,6 +6,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
 import axiosInstance from '../../Axios/AxiosInstance';
+import { trackEvent } from '../../facebookPixel/facebookPixel';
 
 const Login = () => {
     const [forgotPasswordStep, setForgotPasswordStep] = useState(0);
@@ -17,6 +18,12 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isGoogleLoading, setIsGoogleLoading] = useState(false);
     const [isForgotPasswordLoading, setIsForgotPasswordLoading] = useState(false);
+
+    // Track event when button is clicked for meta pixel
+  const handleButtonClick = () => {
+    trackEvent("loginButtonClick", { buttonName: "login" });
+  };
+
 
     const onSubmit = async (data) => {
         try {
@@ -246,6 +253,7 @@ const Login = () => {
                             </div>
 
                             <button 
+                                onClick={handleButtonClick}
                                 type="submit" 
                                 disabled={isLoading}
                                 className="w-full bg-purple-600 text-lg text-white font-bold py-3 rounded-full mt-4 hover:bg-purple-700 duration-200 focus:outline-none disabled:opacity-50"

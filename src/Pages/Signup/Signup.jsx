@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
+import { trackEvent } from '../../facebookPixel/facebookPixel';
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -14,6 +15,11 @@ const Signup = () => {
     const [confirmPasswordFilled, setConfirmPasswordFilled] = useState(false);
     const { signup, googleLogin } = useContext(AuthContext)
     const navigate = useNavigate();
+
+    // Track event when button is clicked for meta pixel
+    const handleButtonClick = () => {
+        trackEvent("signupButtonClick", { buttonName: "signup" });
+    };
 
     const onSubmit = async (data) => {
         try {
@@ -73,7 +79,7 @@ const Signup = () => {
                             type="name"
                             id="name"
                             placeholder="Enter your name"
-                            {...register("name", { 
+                            {...register("name", {
                                 required: "Name is required",
                                 onChange: (e) => handleNameChange(e)
                             })}
@@ -88,7 +94,7 @@ const Signup = () => {
                             type="email"
                             id="email"
                             placeholder="Enter your email"
-                            {...register("email", { 
+                            {...register("email", {
                                 required: "Email is required",
                                 onChange: (e) => handleEmailChange(e)
                             })}
@@ -104,7 +110,7 @@ const Signup = () => {
                             type="password"
                             id="password"
                             placeholder="Enter your password"
-                            {...register("password", { 
+                            {...register("password", {
                                 required: "Password is required",
                                 onChange: (e) => handlePasswordChange(e)
                             })}
@@ -131,7 +137,7 @@ const Signup = () => {
                         {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>}
                     </div>
 
-                    <button type="submit" className="w-full bg-purple-600 text-lg text-white font-bold py-3 rounded-full mt-4 hover:bg-purple-700 duration-200 focus:outline-none">
+                    <button onClick={handleButtonClick} type="submit" className="w-full bg-purple-600 text-lg text-white font-bold py-3 rounded-full mt-4 hover:bg-purple-700 duration-200 focus:outline-none">
                         Create Account
                     </button>
 

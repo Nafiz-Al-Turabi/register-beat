@@ -4,6 +4,7 @@ import RegisterBeatPopup from './RegisterBeatPopup';
 import CompletedPopup from './CompletedPopup';
 import axiosInstance from '../../Axios/AxiosInstance';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { trackEvent } from '../../facebookPixel/facebookPixel';
 
 const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -15,6 +16,12 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const { user } = useContext(AuthContext);
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState('');
+
+
+  // Track event when button is clicked for meta pixel
+  const handleButtonClick = () => {
+    trackEvent("regiser-beat", { buttonName: "beat-register" });
+  };
 
   const simulateProgress = async () => {
     for (let i = 0; i <= 100; i += 10) {
@@ -396,6 +403,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
           {/* Submit Button */}
           <div className="col-span-2 flex justify-center mt-6">
             <button
+              onClick={handleButtonClick}
               type="submit"
               className="bg-[#7837eb] text-white font-bold px-8 py-3 rounded-lg hover:bg-[#894fee] transition active:scale-95"
             >
