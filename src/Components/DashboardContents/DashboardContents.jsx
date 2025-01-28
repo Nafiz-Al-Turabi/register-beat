@@ -127,25 +127,7 @@ const DashboardContents = () => {
                                 ))}
                             </tbody>
                         </table>
-                        {
-                            pageCount > 1 && (
-                                <ReactPaginate
-                                    previousLabel={"←"}
-                                    nextLabel={"→"}
-                                    breakLabel={"..."}
-                                    pageCount={pageCount}
-                                    marginPagesDisplayed={2}
-                                    pageRangeDisplayed={2}
-                                    onPageChange={handlePageChange}
-                                    containerClassName={"flex justify-end mt-4 space-x-4"}
-                                    activeClassName={"font-bold bg-violet-600/20"}
-                                    pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
-                                    previousClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
-                                    nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
-                                    breakClassName={"px-3 py-1 text-zinc-400"}
-                                />
-                            )
-                        }
+
                     </div>
                 ) : (
                     <div className="text-center py-10">
@@ -161,6 +143,25 @@ const DashboardContents = () => {
                 )}
             </div>
             <PlanBillsModal setShowModal={setShowModal} showModal={showModal} />
+            {
+                pageCount > 1 && (
+                    <ReactPaginate
+                        previousLabel={"←"}
+                        nextLabel={"→"}
+                        breakLabel={"..."}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={2}
+                        onPageChange={handlePageChange}
+                        containerClassName={"flex justify-end mt-4 space-x-4"}
+                        activeClassName={"font-bold bg-violet-600/20"}
+                        pageClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+                        previousClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+                        nextClassName={"px-3 py-1 border border-zinc-600 rounded text-white"}
+                        breakClassName={"px-3 py-1 text-zinc-400"}
+                    />
+                )
+            }
         </div>
     );
 };

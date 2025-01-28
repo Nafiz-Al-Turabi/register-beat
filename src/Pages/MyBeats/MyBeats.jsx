@@ -194,7 +194,7 @@ const MyBeats = () => {
 
       </div>
       {
-        pageCount > 0 && (
+        pageCount > 1 && (
           <div className="mt-6 flex justify-end">
             <ReactPaginate
               previousLabel={"←"}
