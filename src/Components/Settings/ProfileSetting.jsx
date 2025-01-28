@@ -11,7 +11,7 @@ const ProfileSetting = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [imageFile, setImageFile] = useState(null);
     const [previewImage, setPreviewImage] = useState('');
-    const { user } = useContext(AuthContext);
+    const { user,refreshUserInfo } = useContext(AuthContext);
 
     const handleFile = (file) => {
         const fileUrl = URL.createObjectURL(file);
@@ -22,7 +22,7 @@ const ProfileSetting = () => {
     const onSubmit = async (data) => {
         try {
             const formData = new FormData();
-            formData.append('username', data.username);
+            formData.append('name', data.username);
             // formData.append('email', data.email);
             formData.append('fullName', data["full-name"] || '');
             formData.append('producerName', data["producer-name"] || '');
@@ -47,6 +47,7 @@ const ProfileSetting = () => {
 
             if (response.status === 200) {
                 toast.success('Profile updated successfully!');
+                refreshUserInfo();
             } else {
                 throw new Error('Unexpected error while updating profile.');
             }
