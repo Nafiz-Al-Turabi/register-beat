@@ -14,7 +14,7 @@ const DashboardContents = () => {
     const { user } = useContext(AuthContext);
     const userId = user?._id;
     const [currentPage, setCurrentPage] = useState(0);
-    const beatsPerPage = 40;
+    const beatsPerPage = 5;
 
     const { isLoading, isError, data: beats = [], error, refetch } = useQuery({
         queryKey: ['adminDashboard', userId],
