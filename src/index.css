@@ -157,7 +157,7 @@ body{
 
 
 .primary-bg{
-  @apply bg-[#9d00ff] hover:bg-[#9c22ffd3] duration-300
+  @apply bg-[#7e3aed] hover:bg-[#7f3aedd8] duration-300
 }
 
 /* number input */

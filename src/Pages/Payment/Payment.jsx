@@ -61,16 +61,16 @@ const Payment = () => {
 
           <div className="payment-method w-full md:w-1/2 p-6 bg-[#111111] border border-purple-700/30 rounded-lg">
             <h2 className="text-xl font-bold mb-4">Payment Method</h2>
-            <div className="payment-method-toggle flex mb-4 bg-[#1a1a1a] rounded-lg p-1">
+            <div className="payment-method-toggle flex mb-4 bg-[#1a1a1a] rounded p-1">
               <button
                 onClick={() => handlePaymentMethodChange('card')}
-                className={`flex-1 py-1 ${paymentMethod === 'card' ? 'primary-bg' : ''} rounded-lg`}
+                className={`flex-1 py-1 ${paymentMethod === 'card' ? 'primary-bg' : ''} rounded`}
               >
                 Card
               </button>
               <button
                 onClick={() => handlePaymentMethodChange('paypal')}
-                className={`flex-1 py-1 ${paymentMethod === 'paypal' ? 'primary-bg' : ''} rounded-lg`}
+                className={`flex-1 py-1 ${paymentMethod === 'paypal' ? 'primary-bg' : ''} rounded`}
               >
                 PayPal
               </button>
