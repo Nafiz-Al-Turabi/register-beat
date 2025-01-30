@@ -36,7 +36,6 @@ const Login = () => {
             navigate("/")
         } catch (error) {
             console.error('Login error:', error.response?.data?.message || error.message);
-            alert('Login failed. Please try again.');
         } finally {
             setIsLoading(false);
         }

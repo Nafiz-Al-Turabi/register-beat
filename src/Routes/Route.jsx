@@ -38,11 +38,12 @@ export const router = createBrowserRouter([
       { path: "/my-beats", element: <MyBeats /> },
       { path: "/song-matches", element: <SongMatches /> },
       { path: "/profile", element: <Profile /> },
-      { path: "/payment", element: <Payment /> },
       { path: "/contact", element: <Contact /> },
       { path: "/search-beat", element: <SearchBeat /> },
     ],
   },
+  { path: "/payment", element: protectedRoute(<Payment />, ["user", "admin"]) },
+
   {
     path: "/login",
     element: <Login />,
