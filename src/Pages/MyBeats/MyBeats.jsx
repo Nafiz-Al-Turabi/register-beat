@@ -120,7 +120,7 @@ const MyBeats = () => {
                       </td>
                       <td className="p-4 text-xs xl:text-base">
                         <span className="primary-bg text-white px-3 py-1 rounded-full">
-                          {beat?.registrasionId}
+                          {beat?.registerCode}
                         </span>
                       </td>
                       <td className="p-4">{moment(beat?.updatedAt).format('MMMM Do YYYY')}</td>

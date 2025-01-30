@@ -97,7 +97,7 @@ const DashboardContents = () => {
                             <thead className='border-b-2 border-gray-700 text-[#a1afc5]'>
                                 <tr>
                                     <th className="p-4 text-left">Beat Name</th>
-                                    <th className="p-4 text-left">Registration ID</th>
+                                    <th className="p-4 text-left">Registration Code</th>
                                     <th className="p-4 text-left">Registration Date</th>
                                     <th className="p-4 text-left">Action</th>
                                 </tr>
@@ -108,14 +108,16 @@ const DashboardContents = () => {
                                         <td className="p-4 font-medium">{beat?.beatName}</td>
                                         <td className="py-5">
                                             <span className="primary-bg text-white px-3 py-1 rounded-full text-sm">
-                                                {beat.registrasionId}
+                                                {beat?.registerCode}
                                             </span>
                                         </td>
                                         <td className="p-4">{moment(beat?.updatedAt).format('MMMM Do YYYY')}</td>
                                         <td className="p-4">
-                                            <button className="bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm">
-                                                View Certificate
-                                            </button>
+                                            {beat?.certificateUrl && (
+                                                <a href={beat.certificateUrl} target="_blank" rel="noopener noreferrer" className="ml-4 bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm">
+                                                    View Certificate
+                                                </a>
+                                            )}
                                         </td>
                                     </tr>
                                 ))}
