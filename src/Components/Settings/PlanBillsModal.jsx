@@ -2,35 +2,54 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ImCreditCard } from 'react-icons/im';
 import axiosInstance from '../../Axios/AxiosInstance';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { toast } from 'react-hot-toast';
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe("pk_test_51QFpATLEvlBZD5dJaha6mJPocvY5x6EoeWDg3DVjMIFdAwRzxN6sNlimMO6xW3hk3a7STUMQtVi6vb2NWu1Vc46c000l8Y7yha");
 
 const PlanBillsModal = ({ setShowModal, showModal }) => {
     const [input, setInput] = useState(1);
     const [credits, setCredits] = useState(10);
-    const [totalCost, setTotalCost] = useState(5);
+    const [amount, setAmount] = useState(5);
     const { user } = useContext(AuthContext)
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setCredits(input * 10)
-        setTotalCost(input * 5);
+        setAmount(input * 5);
     }, [input])
 
     const handleCreditPurchase = () => {
         setShowModal(false);
     }
     const handleCredit = async () => {
-        console.log("Total Cost:", totalCost);
+        setIsLoading(true);
+        console.log("Total Cost:", amount);
         console.log("Total Credits:", credits);
         try {
-            const response = await axiosInstance.post(`/credit/purchase-credit/${user?._id}`);
-
-
-            if (response.data?.url) {
-                window.location.href = response.data.url;
+            const data = {
+                amount: amount,
+                credits: credits
+            };
+            const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`, data);
+            if (response.data?.id) {
+                const stripe = await stripePromise;
+                const result = await stripe.redirectToCheckout({
+                    sessionId: response.data.id
+                });
+                
+                if (result.error) {
+                    toast.error('Payment failed. Please try again.');
+                } else {
+                    toast.success('Credits purchased successfully!');
+                    setShowModal(false);
+                }
             } else {
-                console.error('Redirect URL not found in the response');
+                toast.error('Something went wrong. Please try again.');
             }
         } catch (error) {
             console.error("Error purchasing credits: ", error.response ? error.response.data : error.message);
+        } finally {
+            setIsLoading(false);
         }
     };
     return (
@@ -64,14 +83,20 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                             </div>
                             <div className='flex justify-between items-center mt-2'>
                                 <p className='text-base text-[#797979]'>Total Credits: {credits}</p>
-                                <h3 className='text-lg font-bold'>Total Cost: ${totalCost} USD</h3>
+                                <h3 className='text-lg font-bold'>Total Cost: ${amount} USD</h3>
                             </div>
                         </div>
                                 <div className='flex flex-col gap-2 bg-[#282828] p-4 rounded mt-2'>
                                     <p className='text-base'>Payment Method</p>
                                     <div className='flex gap-2 items-center'><ImCreditCard className=' text-[#c4bb8f] text-xl' /> <p className='text-base'>Visa ending in 1234</p></div>
                                 </div>
-                                <button className='bg-[#8c50ff] rounded py-3 mt-2 active:scale-95' onClick={handleCredit}>Purchase Credits</button>
+                                <button 
+                                    className='bg-[#8c50ff] rounded py-3 mt-2 active:scale-95' 
+                                    onClick={handleCredit}
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? 'Processing...' : 'Purchase Credits'}
+                                </button>
                             </div>
                         </div>
                     </div>
