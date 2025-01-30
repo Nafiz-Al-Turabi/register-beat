@@ -48,7 +48,7 @@ const PlansBills = () => {
           <div className='flex flex-row gap-2 items-end'>
             {
               user?.active === true || 
-              new Date(user?.subscriptionEndDAte) > new Date() ? <button className='p-3 bg-[#7837eb] text-xs xl:text-base text-white rounded hover:bg-[#804cd8] active:scale-95' onClick={() => setManagePopup(true)}>Manage billing</button> : ''
+              new Date(user?.subscriptionEndDAte) > new Date() ? <button className='p-3 primary-bg text-xs xl:text-base text-white rounded active:scale-95' onClick={() => setManagePopup(true)}>Manage billing</button> : ''
             }
           </div>
         </div>
@@ -68,7 +68,7 @@ const PlansBills = () => {
             user?.active === true || 
             new Date(user?.subscriptionEndDAte) > new Date() ? (
               <button 
-                className='p-3 bg-[#7837eb] mt-2 text-xs xl:text-base text-white rounded hover:bg-[#804cd8] active:scale-95' 
+                className='p-3 primary-bg mt-2 text-xs xl:text-base text-white rounded  active:scale-95' 
                 onClick={() => setShowModal(true)}
               >
                 Buy Extra Credits

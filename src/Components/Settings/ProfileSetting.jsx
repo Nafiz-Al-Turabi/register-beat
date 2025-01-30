@@ -180,7 +180,7 @@ const ProfileSetting = () => {
                         </div>
                         {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>}
                     </div>
-                    <button type="submit" className="bg-[#7837eb] text-base text-white font-bold p-3 mt-4 rounded-lg hover:bg-purple-700 duration-200 focus:outline-none">
+                    <button type="submit" className="primary-bg text-base text-white font-bold p-3 mt-4 rounded-lg active:scale-95">
                         Save
                     </button>
                 </form>

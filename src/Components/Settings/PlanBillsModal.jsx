@@ -18,8 +18,10 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
         setShowModal(false);
     }
     const handleCredit = async () => {
+        console.log("Total Cost:", totalCost);
+        console.log("Total Credits:", credits);
         try {
-            const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
+            const response = await axiosInstance.post(`/credit/purchase-credit/${user?._id}`);
 
 
             if (response.data?.url) {
@@ -36,7 +38,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
             {showModal ? (
                 <>
                     <div className="animate-from-middle justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                        <div className="relative w-auto my-6 mx-auto max-w-6xl">
+                        <div className="relative w-auto my-6 mx-auto max-w-lg">
                             {/*content*/}
                             <div className=" px-4 py-5 border-0 rounded-lg shadow-lg relative flex flex-col gap-2 w-full bg-[#0f0f0f] outline-none focus:outline-none">
                                 {/*header*/}
@@ -47,9 +49,9 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                                     <button className=" text-xl" onClick={() => setShowModal(false)}>×</button>
                                 </div>
                                 <div className="">
-                                    <p className='text-base leading-5 md:leading-10 text-[#797979] font-bold'>Buy packages of 10 credits for $5 USD to your 1 credit equals 1 registration.</p>
+                                    <p className='text-base text-[#797979] font-bold'>Buy packages of 10 credits for $5 USD to your 1 credit equals 1 registration.</p>
                                 </div>
-                                {/* <div className='flex flex-col gap-2'>
+                                <div className='flex flex-col gap-2'>
                             <h4 className='text-base'>Number of packages:</h4>
                             <div className='flex flex-row gap-2'>
                                 <button className={`px-3 flex items-center rounded bg-[#8c50ff] ${input === 1 && 'opacity-50'}`} onClick={() => setInput(input - 1)} disabled={input === 1}>-</button>
@@ -64,7 +66,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                                 <p className='text-base text-[#797979]'>Total Credits: {credits}</p>
                                 <h3 className='text-lg font-bold'>Total Cost: ${totalCost} USD</h3>
                             </div>
-                        </div> */}
+                        </div>
                                 <div className='flex flex-col gap-2 bg-[#282828] p-4 rounded mt-2'>
                                     <p className='text-base'>Payment Method</p>
                                     <div className='flex gap-2 items-center'><ImCreditCard className=' text-[#c4bb8f] text-xl' /> <p className='text-base'>Visa ending in 1234</p></div>
