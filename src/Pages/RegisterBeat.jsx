@@ -36,7 +36,7 @@ const RegisterBeat = () => {
         <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">
           <h1 className="md:text-3xl text-white font-bold">Please subscribe to register a beat</h1>
           <Link to='/payment'>
-            <button className="bg-[#7132e9] text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
+            <button className="primary-bg text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
               <FaCrown className=" mr-2" /> Subscribe Now
             </button>
           </Link>
@@ -48,7 +48,7 @@ const RegisterBeat = () => {
       <div className='md:h-[600px] flex justify-center items-center'>
         <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">
           <h1 className="md:text-3xl text-white font-bold">You alreay subscribed but you have no credit</h1>
-            <button onClick={handleCredit} className="bg-[#7132e9] text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
+            <button onClick={handleCredit} className="primary-bg text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
               <RiMoneyCnyCircleLine className=" mr-2" />  Buy Extra Credit
             </button>
         </div>
@@ -111,7 +111,7 @@ const RegisterBeat = () => {
               }`}
           >
             <input {...audioDropzone.getInputProps()} />
-            <p className="py-3 px-5 bg-[#7837eb] text-sm md:text-base text-white font-semibold rounded-full hover:bg-[#8749f1] transition active:scale-95">
+            <p className="py-3 px-5 primary-bg text-sm md:text-base text-white font-semibold rounded-full active:scale-95">
               Select or Drop Beat File
             </p>
             <p className="mt-4 text-sm md:text-base text-gray-400 text-center">Or drag and drop your beat file here</p>
@@ -128,7 +128,7 @@ const RegisterBeat = () => {
               }`}
           >
             <input {...imageDropzone.getInputProps()} />
-            <p className="py-3 px-5 bg-[#7837eb] text-sm md:text-base text-white font-semibold rounded-full hover:bg-[#8749f1] transition active:scale-95">
+            <p className="py-3 px-5 primary-bg text-sm md:text-base text-white font-semibold rounded-full active:scale-95">
               Select or Drop Image File
             </p>
             <p className="mt-4 text-sm md:text-base text-gray-400 text-center">Or drag and drop your image file here</p>

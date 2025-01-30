@@ -156,6 +156,6 @@ body{
 }
 
 
-.demo{
-  background-color: #7132e9;
+.primary-bg{
+  @apply bg-[#9d00ff] hover:bg-[#9c22ffd3] duration-300
 }

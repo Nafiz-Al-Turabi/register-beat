@@ -70,7 +70,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       payload.append('containsSamples', data.containsSamples);
       payload.append('excerpt', data.excerpt);
       payload.append('terms', data.terms);
-      
+
       // Ensure tags are sent as a stringified array
       const tagsArray = Array.isArray(tags) ? tags : [];
       payload.append('tags', JSON.stringify(tagsArray));
@@ -107,14 +107,14 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       setErrorMessage('Please select an audio file');
       return;
     }
-    
+
     if (!formData.image) {
       setErrorMessage('Please select an image file');
       return;
     }
-    
+
     setRegisterData(data);
-    
+
     const response = await simulateApiCall(data);
 
     if (response.success) {
@@ -133,14 +133,14 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
     <div className='max-w-3xl mx-auto pt-16 pb-8'>
       <div className='bg-[#0f0f0f] p-2 md:p-20 rounded-lg'>
         <h1 className='text-4xl font-bold text-white text-center'>Beat Information</h1>
-        
+
         {/* Display error message if exists */}
         {errorMessage && (
           <div className="text-red-500 text-center mb-4 bg-red-100 border border-red-400 rounded p-2">
             {errorMessage}
           </div>
         )}
-        
+
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:grid md:grid-cols-2 gap-6 mt-8">
           {/* Full Name */}
           <div>
@@ -188,7 +188,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
               <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>
             )}
           </div>
-         
+
 
           {/* BPM */}
           <div>
@@ -206,8 +206,8 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
 
-           {/* Tags */}
-           <div className='col-span-2'>
+          {/* Tags */}
+          <div className='col-span-2'>
             <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               Tags
             </label>
@@ -383,14 +383,14 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
 
           {/* Terms and Conditions */}
           <div className="col-span-2">
-            <label className="flex items-center space-x-2">
+            <label className="flex  space-x-2">
               <input
                 type="checkbox"
                 {...register('terms', { required: 'You must agree to continue' })}
-                className="w-4 h-4 bg-[#1e2837] text-purple-600 rounded focus:ring-purple-600"
+                className="w-6 h-6  bg-[#1e2837] text-purple-600 rounded focus:ring-purple-600"
               />
               <span className="text-[#e3e6ed] text-sm">
-                I agree to the terms and conditions
+                I confirm that I am the rightful owner of this beat and have all necessary rights to register it. I acknowledge that BeatProtect is not responsible for any disputes or legal claims arising from the registration of this beat. By proceeding, I also agree to BeatProtect’s Terms and Conditions
               </span>
             </label>
             {errors.terms && (
@@ -405,7 +405,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             <button
               onClick={handleButtonClick}
               type="submit"
-              className="bg-[#7837eb] text-white font-bold px-8 py-3 rounded-lg hover:bg-[#894fee] transition active:scale-95"
+              className="primary-bg text-white font-bold px-8 py-3 rounded-lg active:scale-95"
             >
               Register Beat
             </button>

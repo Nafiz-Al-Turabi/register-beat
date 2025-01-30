@@ -119,7 +119,7 @@ const MyBeats = () => {
                         {beat?.beatName}
                       </td>
                       <td className="p-4 text-xs xl:text-base">
-                        <span className="bg-[#7837eb] text-white px-3 py-1 rounded-full">
+                        <span className="primary-bg text-white px-3 py-1 rounded-full">
                           {beat?.registrasionId}
                         </span>
                       </td>
@@ -153,7 +153,7 @@ const MyBeats = () => {
               <p className="text-xl text-[#6b7c96]">Start by registering your first beat to see activity here.</p>
               <div>
                 <Link to='/register-beat'>
-                  <button className='p-3 px-5 mt-4 bg-[#7132e9] rounded-md text-xl font-bold hover:bg-[#6d40df] duration-200 ease-linear'>Register a Beat</button>
+                  <button className='p-3 px-5 mt-4 primary-bg rounded-md text-xl font-bold'>Register a Beat</button>
                 </Link>
               </div>
             </div>
