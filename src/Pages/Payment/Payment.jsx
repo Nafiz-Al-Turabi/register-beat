@@ -6,17 +6,16 @@ import CheckoutForm from '../../Components/CheckoutForm/CheckoutForm';
 import axiosInstance from '../../Axios/AxiosInstance';
 import Loading from '../../Components/Loading/Loading';
 
-const stripePromise = loadStripe("pk_test_51QFpATLEvlBZD5dJaha6mJPocvY5x6EoeWDg3DVjMIFdAwRzxN6sNlimMO6xW3hk3a7STUMQtVi6vb2NWu1Vc46c000l8Y7yha");
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Payment = () => {
-  const [priceId, setPriceId] = useState(null);
+    const [priceId, setPriceId] = useState(null);
   const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
     async function fetchPriceId() {
       const response = await axiosInstance.get('/payments/get-price');
       setPriceId(response.data.priceId);
-      console.log(response.data.priceId);
     }
 
     fetchPriceId();
