@@ -168,7 +168,7 @@ const UserDetails = () => {
                         }
                     </div>
                 ) : (
-                    <div className="overflow-x-auto mt-4 rounded-lg shadow-md">
+                    <div className="overflow-x-auto mt-4 rounded-lg ">
                         {
                             transactions?.length > 0 ? (
                                 <table className="min-w-full border-collapse">
