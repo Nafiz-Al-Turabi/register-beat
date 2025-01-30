@@ -100,10 +100,10 @@ const UserDetails = () => {
                     <div className="flex items-center justify-between py-2 border-b border-gray-700">
                         <span className="text-white font-medium">Account Status:</span>
                         <span
-                            className={`text-sm font-semibold ${user?.true ? 'text-green-500' : 'text-red-500'
+                            className={`text-sm font-semibold ${user?.active === true ? 'text-green-500' : 'text-red-500'
                                 }`}
                         >
-                            {user?.true ? "Active" : "Inactive"}
+                            {user?.active === true ? "Active" : "Inactive"}
                         </span>
                     </div>
                     <div className="flex items-center justify-between py-2 border-b border-gray-700">
