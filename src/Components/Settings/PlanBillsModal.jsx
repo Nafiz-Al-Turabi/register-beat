@@ -36,7 +36,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                 const result = await stripe.redirectToCheckout({
                     sessionId: response.data.id
                 });
-
+                
                 if (result.error) {
                     toast.error('Payment failed. Please try again.');
                 } else {
@@ -71,27 +71,27 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                                     <p className='text-base text-[#797979] font-bold'>Buy packages of 10 credits for $5 USD to your 1 credit equals 1 registration.</p>
                                 </div>
                                 <div className='flex flex-col gap-2'>
-                                    <h4 className='text-base'>Number of packages:</h4>
-                                    <div className='flex flex-row gap-2'>
-                                        <button className={`px-3 flex items-center rounded bg-[#8c50ff] ${input === 1 && 'opacity-50'}`} onClick={() => setInput(input - 1)} disabled={input === 1}>-</button>
-                                        <input
-                                            type="number"
-                                            value={input}
-                                            className='w-10 rounded bg-[#282828] px-2 py-1 outline-none appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-                                        />
-                                        <button className='px-3 flex items-center rounded bg-[#8c50ff]' onClick={() => setInput(input + 1)}>+</button>
-                                    </div>
-                                    <div className='flex justify-between items-center mt-2'>
-                                        <p className='text-base text-[#797979]'>Total Credits: {credits}</p>
-                                        <h3 className='text-lg font-bold'>Total Cost: ${amount} USD</h3>
-                                    </div>
-                                </div>
+                            <h4 className='text-base'>Number of packages:</h4>
+                            <div className='flex flex-row gap-2'>
+                                <button className={`px-3 flex items-center rounded bg-[#8c50ff] ${input === 1 && 'opacity-50'}`} onClick={() => setInput(input - 1)} disabled={input === 1}>-</button>
+                                <input 
+                                    type="number" 
+                                    value={input} 
+                                    className='w-10 rounded bg-[#282828] px-2 py-1 outline-none appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                                />
+                                <button className='px-3 flex items-center rounded bg-[#8c50ff]' onClick={() => setInput(input + 1)}>+</button>
+                            </div>
+                            <div className='flex justify-between items-center mt-2'>
+                                <p className='text-base text-[#797979]'>Total Credits: {credits}</p>
+                                <h3 className='text-lg font-bold'>Total Cost: ${amount} USD</h3>
+                            </div>
+                        </div>
                                 <div className='flex flex-col gap-2 bg-[#282828] p-4 rounded mt-2'>
                                     <p className='text-base'>Payment Method</p>
                                     <div className='flex gap-2 items-center'><ImCreditCard className=' text-[#c4bb8f] text-xl' /> <p className='text-base'>Visa ending in 1234</p></div>
                                 </div>
-                                <button
-                                    className='bg-[#8c50ff] rounded py-3 mt-2 active:scale-95'
+                                <button 
+                                    className='bg-[#8c50ff] rounded py-3 mt-2 active:scale-95' 
                                     onClick={handleCredit}
                                     disabled={isLoading}
                                 >

@@ -79,7 +79,7 @@ const MyBeats = () => {
 
   return (
     <>
-      <div className="p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle">
+      <div className="p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle relative z-0">
         <h1 className="text-xl xl:text-3xl font-bold mb-6">
           <span className="bg-gradient-to-r from-[#7837eb] to-violet-400 text-transparent bg-clip-text">
             Registered Beats
@@ -87,7 +87,7 @@ const MyBeats = () => {
         </h1>
         {
           beats.length > 0 ? (
-            <div className="overflow-x-auto md:w-full">
+            <div className="overflow-x-auto md:w-full z-10">
               <table className="min-w-full border-collapse">
                 <thead className="border-b-2 border-gray-700 text-[#a1afc5]">
                   <tr className="text-sm md:text-base">

@@ -30,20 +30,6 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
         };
       }, []);
       
-    const handleCredit = async () => {
-        try {
-            const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
-
-
-            if (response.data?.url) {
-                window.location.href = response.data.url;
-            } else {
-                console.error('Redirect URL not found in the response');
-            }
-        } catch (error) {
-            console.error("Error purchasing credits: ", error.response ? error.response.data : error.message);
-        }
-    };
     return (
         <div>
             {/* Sidebar */}
@@ -111,9 +97,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         user?.active === true || 
                         new Date(user?.subscriptionEndDAte) > new Date()
                             ?
-                            <button onClick={handleCredit} className="primary-bg Thank you for your attention, and I appreciate your cooperation.] text-white w-full py-2 rounded mb-4 flex items-center justify-center">
-                                <RiMoneyCnyCircleLine className=" mr-2" /> Buy Extra Credit
-                            </button>
+                            ''
                             :
                             <Link to='payment'>
                                 <button className="primary-bg text-white w-full py-2 rounded mb-4 flex items-center justify-center">
