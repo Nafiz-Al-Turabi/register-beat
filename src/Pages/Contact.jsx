@@ -103,11 +103,11 @@ const Contact = () => {
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-end mt-6">
             <button
               type="submit"
               disabled={loading}
-              className="bg-purple-600 text-white font-bold px-8 py-3 rounded-lg hover:bg-purple-700 transition active:scale-95"
+              className="primary-bg text-white font-bold px-8 py-3 rounded-lg hover:bg-purple-700 transition active:scale-95"
             >
               {loading ? "Submitting..." : "Submit"}
             </button>

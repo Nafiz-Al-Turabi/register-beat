@@ -70,7 +70,7 @@ const AdminDashboard = () => {
                                 `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
                             }
                         >
-                            <AiOutlineTransaction className="h-5 w-5 mr-2" /> Transections
+                            <AiOutlineTransaction className="h-5 w-5 mr-2" /> Transactions
                         </NavLink>
                         <NavLink
                             onClick={() => setIsOpen(!isOpen)}
