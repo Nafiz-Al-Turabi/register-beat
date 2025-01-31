@@ -236,7 +236,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
               placeholder="Type tag and press Enter or comma"
               className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
             />
-            <p className="text-gray-400 text-xs mt-1">Press Enter or comma to add tags</p>
+            <p className="text-gray-400 text-xs mt-1">Add tags like genre, BPM, or anything to help you find it more easily later.</p>
           </div>
 
           {/* Genre */}
