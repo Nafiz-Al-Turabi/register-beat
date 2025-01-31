@@ -68,7 +68,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       payload.append('producerName', data.producerName || '');
       payload.append('percentage', data.percentage || '');
       payload.append('containsSamples', data.containsSamples);
-      payload.append('excerpt', data.excerpt);
+      // payload.append('excerpt', data.excerpt);
       payload.append('terms', data.terms);
 
       // Ensure tags are sent as a stringified array
@@ -233,10 +233,10 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
               value={tagInput}
               onChange={(e) => setTagInput(e.target.value)}
               onKeyDown={handleTagInput}
-              placeholder="Type tag and press Enter or comma"
+              placeholder="Add tags like genre, BPM, or anything to help you find it more easily later"
               className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
             />
-            <p className="text-gray-400 text-xs mt-1">Add tags like genre, BPM, or anything to help you find it more easily later.</p>
+            <p className="text-gray-400 text-xs mt-1">Type tag and press Enter or comma.</p>
           </div>
 
           {/* Genre */}
@@ -366,7 +366,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
 
-          <div className='col-span-2'>
+          {/* <div className='col-span-2'>
             <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               Excerpt
             </label>
@@ -379,7 +379,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             {errors.excerpt && (
               <p className="text-red-500 text-xs mt-1">{errors.excerpt.message}</p>
             )}
-          </div>
+          </div> */}
 
           {/* Terms and Conditions */}
           <div className="col-span-2">

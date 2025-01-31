@@ -45,7 +45,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
                         </h2>
                         <div className="mt-2 flex items-center space-x-2">
                             <span className="px-3 py-1 bg-gray-800/50 rounded-full text-xs text-gray-400">
-                                ID: {beatDetails?.registrasionId}
+                                ID: {beatDetails?.registerCode}
                             </span>
                             <span className="px-3 py-1 bg-purple-900/30 rounded-full text-xs text-purple-300">
                                 {beatDetails?.genre}

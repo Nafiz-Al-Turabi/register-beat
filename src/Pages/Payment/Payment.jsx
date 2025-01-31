@@ -34,6 +34,20 @@ const Payment = () => {
     setPaymentMethod(method);
   };
 
+  const handlePaypalPayment = () => {
+    axiosInstance.post(`/paypalPayment/create-subscription-paypal/6795f179a41b9df6ea8e39c1`)
+      .then(response => {
+        // Find the approval URL from the links array
+        const approvalUrl = response.data.links.find(link => link.rel === 'approve')?.href;
+        if (approvalUrl) {
+          window.location.href = approvalUrl; // Redirect to PayPal
+        } else {
+          console.error('PayPal approval URL not found');
+        }
+      })
+      .catch(error => console.error(error));  
+  };
+
   return (
     <div className='animate-from-middle'>
       <h1 className='text-white text-center md:text-left text-4xl font-bold max-w-7xl mx-auto mt-10 px-4 xl:px-0'>Checkout</h1>
@@ -83,8 +97,13 @@ const Payment = () => {
                 </Elements>
               ) : (
                 <div>
-                  {/* PayPal integration goes here */}
                   <p>PayPal payment form</p>
+                  <button 
+                    onClick={handlePaypalPayment}
+                    className="w-full py-3 px-4 bg-[#0070ba] hover:bg-[#003087] text-white font-semibold rounded-md transition duration-200"
+                  >
+                    Pay with PayPal
+                  </button>
                 </div>
               )
             ) : (
