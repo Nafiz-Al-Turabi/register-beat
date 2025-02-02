@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-
+import { IoIosLogOut } from 'react-icons/io';
 import CheckoutForm from '../../Components/CheckoutForm/CheckoutForm';
 import axiosInstance from '../../Axios/AxiosInstance';
 import Loading from '../../Components/Loading/Loading';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -12,7 +13,7 @@ const Payment = () => {
   const [priceId, setPriceId] = useState(null);
   const [clientSecret, setClientSecret] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('card');
-
+  const { user } = useContext(AuthContext);
   useEffect(() => {
     async function fetchPriceId() {
       const response = await axiosInstance.get('/payments/get-price');
@@ -35,7 +36,7 @@ const Payment = () => {
   };
 
   const handlePaypalPayment = () => {
-    axiosInstance.post(`/paypalPayment/create-subscription-paypal/6795f179a41b9df6ea8e39c1`)
+    axiosInstance.post(`/paypalPayment/create-subscription-paypal/${user._id}`)
       .then(response => {
         // Find the approval URL from the links array
         const approvalUrl = response.data.links.find(link => link.rel === 'approve')?.href;
@@ -45,12 +46,21 @@ const Payment = () => {
           console.error('PayPal approval URL not found');
         }
       })
-      .catch(error => console.error(error));  
+      .catch(error => console.error(error));
   };
 
   return (
     <div className='animate-from-middle'>
-      <h1 className='text-white text-center md:text-left text-4xl font-bold max-w-7xl mx-auto mt-10 px-4 xl:px-0'>Checkout</h1>
+      <div className='max-w-7xl mx-auto flex justify-between items-center mt-10'>
+        <h1 className='text-white text-center md:text-left text-4xl font-bold px-4 xl:px-0'>Checkout</h1>
+        <div className='flex justify-between items-center gap-2'>
+          <div className='-space-y-1'>
+            <p className='text-zinc-400'>{user?.name}</p>
+            <p className='text-zinc-400 text-xs'>{user?.email}</p>
+          </div>
+          <button className='text-white text-xl border border-zinc-600 rounded p-1 hover:bg-[#7e3aed]'><IoIosLogOut /></button>
+        </div>
+      </div>
       <div className="flex justify-center text-white px-4 md:p-4 xl:p-0">
         <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8 py-8 bg-rounded-lg w-full max-w-7xl">
           <div className="w-full md:w-1/2 p-6 bg-[#111111] rounded-lg border border-purple-700/30">
@@ -98,7 +108,7 @@ const Payment = () => {
               ) : (
                 <div>
                   <p>PayPal payment form</p>
-                  <button 
+                  <button
                     onClick={handlePaypalPayment}
                     className="w-full py-3 px-4 bg-[#0070ba] hover:bg-[#003087] text-white font-semibold rounded-md transition duration-200"
                   >
