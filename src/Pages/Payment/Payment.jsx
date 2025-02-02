@@ -6,14 +6,14 @@ import CheckoutForm from '../../Components/CheckoutForm/CheckoutForm';
 import axiosInstance from '../../Axios/AxiosInstance';
 import Loading from '../../Components/Loading/Loading';
 import { AuthContext } from '../../Provider/AuthProvider';
-
+import paypal from '../../assets/img/paypal.png';
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Payment = () => {
   const [priceId, setPriceId] = useState(null);
   const [clientSecret, setClientSecret] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('card');
-  const { user } = useContext(AuthContext);
+  const { user,logout } = useContext(AuthContext);
   useEffect(() => {
     async function fetchPriceId() {
       const response = await axiosInstance.get('/payments/get-price');
@@ -51,14 +51,14 @@ const Payment = () => {
 
   return (
     <div className='animate-from-middle'>
-      <div className='max-w-7xl mx-auto flex justify-between items-center mt-10'>
-        <h1 className='text-white text-center md:text-left text-4xl font-bold px-4 xl:px-0'>Checkout</h1>
+      <div className='max-w-7xl mx-auto flex justify-between items-center mt-10 px-4 xl:px-0'>
+        <h1 className='text-white text-center md:text-left text-2xl md:text-4xl font-bold '>Checkout</h1>
         <div className='flex justify-between items-center gap-2'>
           <div className='-space-y-1'>
-            <p className='text-zinc-400'>{user?.name}</p>
+            <p className='text-zinc-400 text-sm'>{user?.name}</p>
             <p className='text-zinc-400 text-xs'>{user?.email}</p>
           </div>
-          <button className='text-white text-xl border border-zinc-600 rounded p-1 hover:bg-[#7e3aed]'><IoIosLogOut /></button>
+          <button onClick={logout} className='text-white text-xl border border-zinc-600 rounded p-1 hover:bg-[#7e3aed] duration-300'><IoIosLogOut /></button>
         </div>
       </div>
       <div className="flex justify-center text-white px-4 md:p-4 xl:p-0">
@@ -107,12 +107,11 @@ const Payment = () => {
                 </Elements>
               ) : (
                 <div>
-                  <p>PayPal payment form</p>
                   <button
                     onClick={handlePaypalPayment}
-                    className="w-full py-3 px-4 bg-[#0070ba] hover:bg-[#003087] text-white font-semibold rounded-md transition duration-200"
+                    className="flex justify-center items-center w-full py-3 px-4 bg-yellow-500 text-white font-semibold rounded-md transition duration-200"
                   >
-                    Pay with PayPal
+                    <img src={paypal} alt="paypal" className='w-40 object-cover'/>
                   </button>
                 </div>
               )
