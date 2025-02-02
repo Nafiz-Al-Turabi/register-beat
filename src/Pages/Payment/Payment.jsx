@@ -18,7 +18,7 @@ const Payment = () => {
 
   const navigate = useNavigate();
 
-  if (user?.active === true || user?.role === 'admin' || (user?.subscriptionEndDate && new Date(user?.subscriptionEndDate) > new Date())) {
+  if (user?.active === true || user?.role === 'admin' || new Date(user?.subscriptionEndDate) > new Date()) {
     navigate('/');
   }
 

@@ -39,7 +39,7 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
         try {
             let response;
             if (user.paymentMethod === 'stripe') {
-                response = await axiosInstance.delete(`/payments/stripe/cancelSubscription/${user._id}`);
+                response = await axiosInstance.delete(`/payments/cancelSubscription/${user._id}`);
             } else if (user.paymentMethod === 'paypal') {
                 response = await axiosInstance.post(`/paypalPayment/cancel-subscription-paypal/${user._id}`);
             } else {
