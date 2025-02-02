@@ -12,6 +12,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
     const [amount, setAmount] = useState(5);
     const { user } = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState(false);
+    const [paymentMethod, setPaymentMethod] = useState(user?.paymentMethod || 'stripe');
 
     useEffect(() => {
         setCredits(input * 10)
@@ -21,37 +22,54 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
     const handleCreditPurchase = () => {
         setShowModal(false);
     }
+
+    const handleStripePayment = async (data) => {
+        const stripe = await stripePromise;
+        const result = await stripe.redirectToCheckout({
+            sessionId: data.id
+        });
+        
+        if (result.error) {
+            toast.error('Payment failed. Please try again.');
+        } else {
+            toast.success('Credits purchased successfully!');
+            setShowModal(false);
+        }
+    };
+
+    const handlePayPalPayment = async (data) => {
+        // Redirect to PayPal checkout URL
+        window.location.href = data.approvalUrl;
+    };
+
     const handleCredit = async () => {
         setIsLoading(true);
-        console.log("Total Cost:", amount);
-        console.log("Total Credits:", credits);
         try {
             const data = {
                 amount: amount,
-                credits: credits
+                credits: credits,
+                paymentMethod: paymentMethod
             };
+            
             const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`, data);
-            if (response.data?.id) {
-                const stripe = await stripePromise;
-                const result = await stripe.redirectToCheckout({
-                    sessionId: response.data.id
-                });
-                
-                if (result.error) {
-                    toast.error('Payment failed. Please try again.');
-                } else {
-                    toast.success('Credits purchased successfully!');
-                    setShowModal(false);
+            
+            if (response.data?.id || response.data?.approvalUrl) {
+                if (paymentMethod === 'stripe') {
+                    await handleStripePayment(response.data);
+                } else if (paymentMethod === 'paypal') {
+                    await handlePayPalPayment(response.data);
                 }
             } else {
                 toast.error('Something went wrong. Please try again.');
             }
         } catch (error) {
             console.error("Error purchasing credits: ", error.response ? error.response.data : error.message);
+            toast.error('Payment failed. Please try again.');
         } finally {
             setIsLoading(false);
         }
     };
+
     return (
         <>
             {showModal ? (
@@ -88,7 +106,22 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                         </div>
                                 <div className='flex flex-col gap-2 bg-[#282828] p-4 rounded mt-2'>
                                     <p className='text-base'>Payment Method</p>
-                                    <div className='flex gap-2 items-center'><ImCreditCard className=' text-[#c4bb8f] text-xl' /> <p className='text-base'>Visa ending in 1234</p></div>
+                                    <div className='flex gap-4'>
+                                        <button 
+                                            className={`flex gap-2 items-center p-2 rounded ${paymentMethod === 'stripe' ? 'bg-[#8c50ff]' : 'bg-[#3a3a3a]'}`}
+                                            onClick={() => setPaymentMethod('stripe')}
+                                        >
+                                            <ImCreditCard className='text-[#c4bb8f] text-xl' /> 
+                                            <span>Stripe</span>
+                                        </button>
+                                        <button 
+                                            className={`flex gap-2 items-center p-2 rounded ${paymentMethod === 'paypal' ? 'bg-[#8c50ff]' : 'bg-[#3a3a3a]'}`}
+                                            onClick={() => setPaymentMethod('paypal')}
+                                        >
+                                            <ImCreditCard className='text-[#c4bb8f] text-xl' /> 
+                                            <span>PayPal</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 <button 
                                     className='bg-[#8c50ff] rounded py-3 mt-2 active:scale-95' 

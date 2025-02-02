@@ -37,14 +37,25 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
 
         setIsLoading(true);
         try {
-            const response = await axiosInstance.delete(`/payments/cancelSubscription/${user._id}`);
-            console.log(response.data)
+            let response;
+            if (user.paymentMethod === 'stripe') {
+                response = await axiosInstance.delete(`/payments/stripe/cancelSubscription/${user._id}`);
+            } else if (user.paymentMethod === 'paypal') {
+                response = await axiosInstance.post(`/paypalPayment/cancel-subscription-paypal/${user._id}`);
+            } else {
+                throw new Error('Invalid payment method');
+            }
+            
+            console.log(response.data);
             toast.success('Subscription cancelled successfully');
             refreshUserInfo();
             setShowPopup(false);
         } catch (error) {
             console.error("Error while cancelling: ", error.message);
-            toast.error('Failed to cancel subscription. Please try again.');
+            const errorMessage = error.message === 'Invalid payment method' 
+                ? 'Invalid payment method detected'
+                : 'Failed to cancel subscription. Please try again.';
+            toast.error(errorMessage);
         } finally {
             setIsLoading(false);
         }
