@@ -7,13 +7,21 @@ import axiosInstance from '../../Axios/AxiosInstance';
 import Loading from '../../Components/Loading/Loading';
 import { AuthContext } from '../../Provider/AuthProvider';
 import paypal from '../../assets/img/paypal.png';
+import { useNavigate } from 'react-router-dom';
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Payment = () => {
   const [priceId, setPriceId] = useState(null);
   const [clientSecret, setClientSecret] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('card');
-  const { user,logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  if (user?.active === true || user?.role === 'admin' || new Date(user?.subscriptionEndDate) > new Date()) {
+    navigate('/');
+  }
+
   useEffect(() => {
     async function fetchPriceId() {
       const response = await axiosInstance.get('/payments/get-price');
@@ -111,7 +119,7 @@ const Payment = () => {
                     onClick={handlePaypalPayment}
                     className="flex justify-center items-center w-full py-3 px-4 bg-yellow-500 text-white font-semibold rounded-md transition duration-200"
                   >
-                    <img src={paypal} alt="paypal" className='w-40 object-cover'/>
+                    <img src={paypal} alt="paypal" className='w-40 object-cover' />
                   </button>
                 </div>
               )
