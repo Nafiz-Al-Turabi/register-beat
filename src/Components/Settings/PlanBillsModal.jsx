@@ -39,7 +39,16 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
 
     const handlePayPalPayment = async (data) => {
         // Redirect to PayPal checkout URL
-        window.location.href = data.approvalUrl;
+        try {
+            const response = await axiosInstance.post(`/paypalPayment/purchase-credits-paypal/${user?._id}`, {
+                amount: amount,
+                credits: credits,
+                paymentMethod: paymentMethod
+            });
+            window.location.href = response.data.approvalUrl;
+        } catch (error) {
+            toast.error('Payment failed. Please try again.');
+        }
     };
 
     const handleCredit = async () => {
