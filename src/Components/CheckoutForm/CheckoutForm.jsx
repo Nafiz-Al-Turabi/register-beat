@@ -126,15 +126,12 @@ const CheckoutForm = ({ priceId }) => {
                   color: '#ecf0f1',
                   '::placeholder': {
                     color: '#94a3b8'
-                  },
-                  backgroundColor: 'transparent',
-                  padding: '10px'
+                  }
                 },
                 invalid: {
                   color: '#ef4444'
                 }
-              },
-              placeholder: 'Card number'
+              }
             }}
             className="p-2 mt-1 rounded-md bg-transparent border border-purple-700/20"
           />
@@ -151,15 +148,12 @@ const CheckoutForm = ({ priceId }) => {
                     color: '#ecf0f1',
                     '::placeholder': {
                       color: '#94a3b8'
-                    },
-                    backgroundColor: 'transparent',
-                    padding: '10px'
+                    }
                   },
                   invalid: {
                     color: '#ef4444'
                   }
-                },
-                placeholder: 'MM / YY'
+                }
               }}
               className="p-2 mt-1 w-full rounded-md bg-transparent border border-purple-700/20"
             />
@@ -175,15 +169,12 @@ const CheckoutForm = ({ priceId }) => {
                     color: '#ecf0f1',
                     '::placeholder': {
                       color: '#94a3b8'
-                    },
-                    backgroundColor: 'transparent',
-                    padding: '10px'
+                    }
                   },
                   invalid: {
                     color: '#ef4444'
                   }
-                },
-                placeholder: 'CVC'
+                }
               }}
               className="p-2 mt-1 rounded-md bg-transparent border border-purple-700/20"
             />
