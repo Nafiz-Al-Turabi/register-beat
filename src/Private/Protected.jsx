@@ -32,7 +32,7 @@ const Protected = ({ children, role = [] }) => {
     }
 
     if (user?.paypalSubsStatus === 'pending') {
-        return <Navigate to="/paypal-loading" replace />;
+        return <Navigate to="/payment-checking" replace />;
     }
 
     const needsSubscription = 

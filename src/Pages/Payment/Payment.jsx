@@ -18,7 +18,7 @@ const Payment = () => {
   const navigate = useNavigate();
 
   if (user?.paypalSubsStatus === 'pending') {
-    navigate('/paypal-loading');
+    navigate('/payment-checking');
   }
 
   // Retrieve stored payment method or default to 'card'

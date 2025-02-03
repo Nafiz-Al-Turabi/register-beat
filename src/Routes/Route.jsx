@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
     element: <Signup />,
   },
   {
-    path: "/paypal-loading",
+    path: "/payment-checking",
     element: <PaypalLoading />,
   },
   {
