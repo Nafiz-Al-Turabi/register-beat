@@ -45,7 +45,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                 credits: credits,
                 paymentMethod: paymentMethod
             });
-            window.location.href = response.data.approvalUrl;
+            // window.location.href = response.data.approvalUrl;
         } catch (error) {
             toast.error('Payment failed. Please try again.');
         }

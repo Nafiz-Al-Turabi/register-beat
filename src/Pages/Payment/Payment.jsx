@@ -8,15 +8,23 @@ import Loading from '../../Components/Loading/Loading';
 import { AuthContext } from '../../Provider/AuthProvider';
 import paypal from '../../assets/img/paypal.png';
 import { useNavigate } from 'react-router-dom';
+
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Payment = () => {
   const [priceId, setPriceId] = useState(null);
   const [clientSecret, setClientSecret] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('card');
-  const { user, logout } = useContext(AuthContext);
-
+  const { user, logout, refreshUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  if (user?.paypalSubsStatus === 'pending') {
+    navigate('/paypal-loading');
+  }
+
+  // Retrieve stored payment method or default to 'card'
+  const [paymentMethod, setPaymentMethod] = useState(
+    localStorage.getItem('paymentMethod') || 'card'
+  );
 
   if (user?.active === true || user?.role === 'admin' || new Date(user?.subscriptionEndDate) > new Date()) {
     navigate('/');
@@ -33,23 +41,25 @@ const Payment = () => {
 
   useEffect(() => {
     if (priceId) {
-      axiosInstance.post('/payments/create-payment-intent', { priceId })
+      axiosInstance
+        .post('/payments/create-payment-intent', { priceId })
         .then(response => setClientSecret(response.data.clientSecret))
         .catch(error => console.error(error));
     }
   }, [priceId]);
 
+  // Handle switching payment methods and store in localStorage
   const handlePaymentMethodChange = (method) => {
     setPaymentMethod(method);
+    localStorage.setItem('paymentMethod', method);
   };
 
   const handlePaypalPayment = () => {
     axiosInstance.post(`/paypalPayment/create-subscription-paypal/${user._id}`)
       .then(response => {
-        // Find the approval URL from the links array
         const approvalUrl = response.data.links.find(link => link.rel === 'approve')?.href;
         if (approvalUrl) {
-          window.location.href = approvalUrl; // Redirect to PayPal
+          window.location.href = approvalUrl;
         } else {
           console.error('PayPal approval URL not found');
         }
@@ -69,6 +79,7 @@ const Payment = () => {
           <button onClick={logout} className='text-white text-xl border border-zinc-600 rounded p-1 hover:bg-[#7e3aed] duration-300'><IoIosLogOut /></button>
         </div>
       </div>
+
       <div className="flex justify-center text-white px-4 md:p-4 xl:p-0">
         <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8 py-8 bg-rounded-lg w-full max-w-7xl">
           <div className="w-full md:w-1/2 p-6 bg-[#111111] rounded-lg border border-purple-700/30">

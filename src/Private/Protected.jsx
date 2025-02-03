@@ -31,6 +31,10 @@ const Protected = ({ children, role = [] }) => {
         return <Navigate to="/" replace />;
     }
 
+    if (user?.paypalSubsStatus === 'pending') {
+        return <Navigate to="/paypal-loading" replace />;
+    }
+
     const needsSubscription = 
         user?.role !== "admin" && 
         !user?.active && 

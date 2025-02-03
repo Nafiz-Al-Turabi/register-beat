@@ -20,6 +20,7 @@ import AdminContact from "../Pages/AdminDashboard/AdminContact";
 import Transactions from "../Pages/AdminDashboard/Transactions";
 import UserDetails from "../Pages/UserDetails/UserDetails";
 import SearchBeat from "../Pages/SearchBeat/SearchBeat";
+import PaypalLoading from "../Components/PaypalLoading/PaypalLoading";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/paypal-loading",
+    element: <PaypalLoading />,
   },
   {
     path: "/admin-dashboard",
