@@ -37,19 +37,35 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
         }
     };
 
-    const handlePayPalPayment = async (data) => {
-        // Redirect to PayPal checkout URL
+    const handlePayPalPayment = async () => {
         try {
-            const response = await axiosInstance.post(`/paypalPayment/purchase-credits-paypal/${user?._id}`, {
-                amount: amount,
-                credits: credits,
-                paymentMethod: paymentMethod
-            });
-            // window.location.href = response.data.approvalUrl;
+            const response = await axiosInstance.post(
+                `/paypalPayment/purchase-credits-paypal/${user?._id}`,
+                {
+                    amount: amount,
+                    credits: credits,
+                    paymentMethod: paymentMethod
+                }
+            );
+            console.log("PayPal Response:", response.data); 
+    
+            if (!response.data?.data?.links || !Array.isArray(response.data.data.links)) {
+                toast.error("PayPal response is missing links.");
+                return;
+            }
+            const approvalUrl = response.data.data.links.find(link => link.rel === 'approve')?.href;
+    
+            if (approvalUrl) {
+                window.location.href = approvalUrl; 
+            } else {
+                toast.error('Failed to retrieve PayPal approval URL.');
+            }
         } catch (error) {
+            console.error("Error purchasing credits via PayPal: ", error.response ? error.response.data : error.message);
             toast.error('Payment failed. Please try again.');
         }
     };
+    
 
     const handleCredit = async () => {
         setIsLoading(true);

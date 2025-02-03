@@ -55,7 +55,7 @@ const PlansBills = () => {
         <div className=''>
           <p className='text-[#80858f] text-lg'>Beat Registration Credits</p>
           <h4 className='text-xl font-semibold mt-1'>20 monthly credits</h4>
-          <p className='text-[#80858f]'>Your credits will reset to 20 in {daysUntilReset} days, on {resetDate}.</p>
+          <p className='text-[#80858f]'>Your credits will reset in {daysUntilReset} days, on {resetDate}.</p>
         </div>
         <div className=''>
           <h4 className='text-xl font-semibold'>{user?.credit} credits remaining</h4>
