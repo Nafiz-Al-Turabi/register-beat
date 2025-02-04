@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import RegisterBeatPopup from './RegisterBeatPopup';
 import CompletedPopup from './CompletedPopup';
@@ -7,7 +7,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { trackEvent } from '../../facebookPixel/facebookPixel';
 
 const RegisterBeatForm = ({ setRegisterData, formData }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, watch } = useForm();  // Add watch here
   const [showPopup, setShowPopup] = useState(false);
   const [progress, setProgress] = useState(0);
   const [success, setSuccess] = useState(false);
@@ -16,7 +16,6 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const { user } = useContext(AuthContext);
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState('');
-
 
   // Track event when button is clicked for meta pixel
   const handleButtonClick = () => {
@@ -58,7 +57,6 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       const payload = new FormData();
       payload.append('fullName', data.fullName);
       payload.append('beatName', data.beatName);
-      payload.append('title', data.title);
       payload.append('bpm', data.bpm);
       payload.append('genre', data.genre);
       payload.append('releaseDate', data.releaseDate);
@@ -68,7 +66,6 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       payload.append('producerName', data.producerName || '');
       payload.append('percentage', data.percentage || '');
       payload.append('containsSamples', data.containsSamples);
-      // payload.append('excerpt', data.excerpt);
       payload.append('terms', data.terms);
 
       // Ensure tags are sent as a stringified array
@@ -101,6 +98,8 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
     }
   };
 
+  const isOnlyProducer = watch('isOnlyProducer');  // Now watch is defined
+
   const onSubmit = async (data) => {
     // Check if audio and image files are selected
     if (!formData.audio) {
@@ -127,7 +126,6 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
       setSuccess(false);
     }
   };
-
 
   return (
     <div className='max-w-3xl mx-auto pt-16 pb-8'>
@@ -173,25 +171,8 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
               <p className="text-red-500 text-xs mt-1">{errors.beatName.message}</p>
             )}
           </div>
-          {/* Beat title */}
-          <div>
-            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
-              Beat title
-            </label>
-            <input
-              type="text"
-              placeholder="Enter your beat title"
-              {...register('title', { required: 'Beat title is required' })}
-              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
-            />
-            {errors.title && (
-              <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>
-            )}
-          </div>
-
-
           {/* BPM */}
-          <div>
+          <div className='col-span-2'>
             <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               BPM
             </label>
@@ -303,48 +284,48 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
 
-          {/* Collaborators */}
-          <div>
-            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
-              Name of Collaborators
-            </label>
-            <input
-              type="text"
-              placeholder="Enter the names of collaborators"
-              {...register('collaborators')}
-              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
-            />
-          </div>
+          {isOnlyProducer === 'no' && (
+            <>
+              {/* Collaborators */}
+              <div>
+                <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+                  Name of Collaborators
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter the names of collaborators"
+                  {...register('collaborators')}
+                  className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+                />
+              </div>
 
-          {/* Producer name of Collaborators */}
-          <div>
-            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
-              Producer name of Collaborators
-            </label>
-            <input
-              type="text"
-              placeholder="Enter the producer name"
-              {...register('producerName')}
-              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
-            />
-          </div>
+              {/* Producer name of Collaborators */}
+              <div>
+                <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+                  Producer name of Collaborators
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter the producer name"
+                  {...register('producerName')}
+                  className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+                />
+              </div>
 
-          {/* Collab percentage (%) Of other producer */}
-          <div>
-            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
-              Collab percentage (%) Of other producer
-            </label>
-            <input
-              type="number"
-              placeholder="Enter the percentage"
-              {...register('percentage')}
-              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
-            />
-            {/* {errors.percentage && (
-              <p className="text-red-500 text-xs mt-1">{errors.percentage.message}</p>
-            )} */}
-          </div>
-
+              {/* Collab percentage (%) Of other producer */}
+              <div>
+                <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+                  Collab percentage (%) Of other producer
+                </label>
+                <input
+                  type="number"
+                  placeholder="Enter the percentage"
+                  {...register('percentage')}
+                  className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+                />
+              </div>
+            </>
+          )}
 
           {/* Contains 3rd party samples */}
           <div>
@@ -366,21 +347,6 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
 
-          {/* <div className='col-span-2'>
-            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
-              Excerpt
-            </label>
-            <textarea
-              type="text"
-              placeholder="Enter your beat excerpt"
-              {...register('excerpt', { required: 'Beat excerpt is required' })}
-              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
-            />
-            {errors.excerpt && (
-              <p className="text-red-500 text-xs mt-1">{errors.excerpt.message}</p>
-            )}
-          </div> */}
-
           {/* Terms and Conditions */}
           <div className="col-span-2">
             <label className="flex  space-x-2">
@@ -398,25 +364,29 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
 
-
-
-          {/* Submit Button */}
-          <div className="col-span-2 flex justify-center mt-6">
-            <button
-              onClick={handleButtonClick}
-              type="submit"
-              className="primary-bg text-white font-bold px-8 py-3 rounded-lg active:scale-95"
-            >
-              Register Beat
-            </button>
-          </div>
+          <button
+            type="submit"
+            onClick={handleButtonClick}
+            className="bg-[#7837eb] text-white py-3 px-8 rounded-md mt-8 hover:bg-[#5a2ca3] transition duration-200"
+          >
+            Submit
+          </button>
         </form>
       </div>
-      {/* Show popup when registration is successful */}
-      {showPopup && <RegisterBeatPopup success={success} progress={progress} />}
-      {showCompletedPopup && <CompletedPopup />}
-    </div>
-  )
-}
 
-export default RegisterBeatForm
+      {showPopup && (
+        <RegisterBeatPopup
+          progress={progress}
+          success={success}
+          setShowPopup={setShowPopup}
+        />
+      )}
+
+      {showCompletedPopup && (
+        <CompletedPopup setShowCompletedPopup={setShowCompletedPopup} />
+      )}
+    </div>
+  );
+};
+
+export default RegisterBeatForm;

@@ -79,8 +79,9 @@ const PlansBills = () => {
         </div>
       </div>
       {managePopup && <ManangeSubsPopup setShowPopup={setManagePopup} />}
-      <PayPalScriptProvider options={{ "client-id": "AWvrU5g6XjUjgUTqn5o2a9tdwTpRUWCJLsZRRQJfjU8Ql18RpRygwnc_fBl3tfaHrdvWUmAAlXwVRJ9l" }}>
+      <PayPalScriptProvider options={{ "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID }}>
       <PlanBillsModal setShowModal={setShowModal} showModal={showModal} />
+
       </PayPalScriptProvider>
     </div>
   )

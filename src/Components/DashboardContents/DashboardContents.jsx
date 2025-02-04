@@ -119,7 +119,7 @@ const DashboardContents = () => {
                                                     View Certificate
                                                 </a>
                                             ) : (
-                                                <p className="bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm">
+                                                <p className="bg-gradient-to-l w-20 to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm">
                                                     Certificate Pending
                                                 </p>
                                             )}
@@ -143,9 +143,10 @@ const DashboardContents = () => {
                     </div>
                 )}
             </div>
-            <PayPalScriptProvider options={{ "client-id": "AWvrU5g6XjUjgUTqn5o2a9tdwTpRUWCJLsZRRQJfjU8Ql18RpRygwnc_fBl3tfaHrdvWUmAAlXwVRJ9l" }}>
+            <PayPalScriptProvider options={{ "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID }}>
                 <PlanBillsModal setShowModal={setShowModal} showModal={showModal} />
             </PayPalScriptProvider>
+
 
             {
                 pageCount > 1 && (
