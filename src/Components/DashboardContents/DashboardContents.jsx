@@ -8,6 +8,7 @@ import moment from 'moment';
 import Loading from '../Loading/Loading';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 const DashboardContents = () => {
     const [showModal, setShowModal] = useState(false);
@@ -71,7 +72,7 @@ const DashboardContents = () => {
                     {
                         user?.active === true ||
                             new Date(user?.subscriptionEndDAte) > new Date() ? (
-                            <button className='bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm' onClick={handleCredit}>
+                            <button className='bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] duration-200 ease-linear transition-all active:scale-95 font-bold text-white px-4 py-2 rounded-md text-sm' onClick={() => setShowModal(true)}>
                                 Get Extra Credits
                             </button>
                         ) : (
@@ -142,7 +143,10 @@ const DashboardContents = () => {
                     </div>
                 )}
             </div>
-            <PlanBillsModal setShowModal={setShowModal} showModal={showModal} />
+            <PayPalScriptProvider options={{ "client-id": "AWvrU5g6XjUjgUTqn5o2a9tdwTpRUWCJLsZRRQJfjU8Ql18RpRygwnc_fBl3tfaHrdvWUmAAlXwVRJ9l" }}>
+                <PlanBillsModal setShowModal={setShowModal} showModal={showModal} />
+            </PayPalScriptProvider>
+
             {
                 pageCount > 1 && (
                     <ReactPaginate
