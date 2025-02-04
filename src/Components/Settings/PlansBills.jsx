@@ -3,6 +3,7 @@ import PlanBillsModal from './PlanBillsModal';
 import ManangeSubsPopup from '../ManageSubscription/ManangeSubsPopup';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axiosInstance from '../../Axios/AxiosInstance';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import moment from 'moment';
 
 const PlansBills = () => {
@@ -78,7 +79,9 @@ const PlansBills = () => {
         </div>
       </div>
       {managePopup && <ManangeSubsPopup setShowPopup={setManagePopup} />}
+      <PayPalScriptProvider options={{ "client-id": "AWvrU5g6XjUjgUTqn5o2a9tdwTpRUWCJLsZRRQJfjU8Ql18RpRygwnc_fBl3tfaHrdvWUmAAlXwVRJ9l" }}>
       <PlanBillsModal setShowModal={setShowModal} showModal={showModal} />
+      </PayPalScriptProvider>
     </div>
   )
 }
