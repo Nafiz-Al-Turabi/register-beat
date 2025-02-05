@@ -38,7 +38,7 @@ const BeatTable = ({ beats }) => {
                     </td>
                     <td className="p-4 text-xs xl:text-base">
                         <span className="bg-[#7837eb] text-white px-3 py-1 rounded-full">
-                            {beat?.registrasionId || 'N/A'}
+                            {beat?.registerCode || 'N/A'} 
                         </span>
                     </td>
                     <td className="p-4 text-xs xl:text-base text-white">
