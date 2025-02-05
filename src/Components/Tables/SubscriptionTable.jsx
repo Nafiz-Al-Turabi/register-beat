@@ -33,7 +33,7 @@ const SubscriptionTable = () => {
     return (
         <div className="w-full bg-[#212529] p-6 mt-16">
             <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold uppercase text-white">recent Subscription</h2>
+                <h2 className="text-xl font-semibold uppercase text-white">recent Transactions</h2>
             </div>
 
             <div className="overflow-x-auto">
