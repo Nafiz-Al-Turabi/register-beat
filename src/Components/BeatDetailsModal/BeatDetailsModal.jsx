@@ -179,7 +179,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails }) => {
                                     className="flex items-center gap-2 px-8 py-3  bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] rounded-md transform hover:scale-105 transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
                                 >
 
-                                    Download Certificate <img src={usFlag} alt="usFlag" className="w-5 h-5" />
+                                    Download Certificate EN <img src={usFlag} alt="usFlag" className="w-5 h-5" />
                                 </button>
                             </div>
                         </div>
