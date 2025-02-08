@@ -5,6 +5,8 @@ import CompletedPopup from './CompletedPopup';
 import axiosInstance from '../../Axios/AxiosInstance';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { trackEvent } from '../../facebookPixel/facebookPixel';
+import { IoMdInformationCircleOutline } from "react-icons/io";
+
 
 const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();  // Add watch here
@@ -51,16 +53,18 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
 
     try {
       // Start progress simulation
-      simulateProgress();
+      await simulateProgress();
 
       // Creating FormData to include audio and image files
       const payload = new FormData();
       payload.append('fullName', data.fullName);
+      payload.append('producer', data.producer);
       payload.append('beatName', data.beatName);
       payload.append('bpm', data.bpm);
       payload.append('genre', data.genre);
       payload.append('releaseDate', data.releaseDate);
       payload.append('youtubeUrl', data.youtubeUrl);
+
       payload.append('isOnlyProducer', data.isOnlyProducer);
       payload.append('collaborators', data.collaborators || '');
       payload.append('producerName', data.producerName || '');
@@ -156,7 +160,21 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
 
-          {/* Beat Name */}
+          {/* Producer name*/}
+          <div>
+            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+              Producer Name
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your producer"
+              {...register('producer', { required: 'Producer is required' })}
+              className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+            />
+            {errors.producer && (
+              <p className="text-red-500 text-xs mt-1">{errors.producer.message}</p>
+            )}
+          </div>
           <div>
             <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               Beat Name
@@ -172,7 +190,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
           {/* BPM */}
-          <div className='col-span-2'>
+          <div className=''>
             <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
               BPM
             </label>
@@ -329,9 +347,49 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
 
           {/* Contains 3rd party samples */}
           <div>
-            <label className="block text-[#e3e6ed] text-sm font-medium mb-2">
+            <label className="flex items-center gap-2 cursor-pointer text-[#e3e6ed] text-sm font-medium mb-2 group">
               This beat contains 3rd party samples
+              <span className="relative">
+                <IoMdInformationCircleOutline />
+                <span className="absolute w-72 hidden bg-gray-800 text-white text-xs rounded-md p-2 bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:block">
+                  Third-party sarrvles are any audio dements
+                  you create yourself, including:
+                  <ul className='list-disc pl-5 my-3'>
+                    <li>
+                      Samples from platforms like Splice, Loopmasters, Cymatics, Tracklib, LANDR, samples etc.
+                    </li>
+                    <li>
+                      Snippets from other songs.
+                    </li>
+                    <li>
+                      Any externany source audio.
+                    </li>
+                  </ul>
+                  <div>
+                    <h1 className='text-sm font-semibold mb-2'>Why is this important?</h1>
+                    <p>
+                      If your beat contains third-party samples, it's
+                      essential to disclose it. This doesn't mean you
+                      can't use them, but you must follow their
+                      licensing terms.
+
+                    </p>
+                    <h1 className='text-sm font-semibold mb-2'>Can I Register a Beat With Third-Party Samples ?</h1>
+                    <p>
+                      Yes. but make sure you with the
+
+                      license agreements. Platforms like Splice allow unrestricted use. while may require additional permissims. If the sample comes from a copyrighted song. you may need clearance to avoid legal issues.
+                    </p>
+                  </div>
+                </span>
+
+              </span>
+
+
+
             </label>
+
+
             <select
               {...register('containsSamples', { required: 'This field is required' })}
               className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
@@ -364,13 +422,15 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             )}
           </div>
 
-          <button
-            type="submit"
-            onClick={handleButtonClick}
-            className="bg-[#7837eb] text-white py-3 px-8 rounded-md mt-8 hover:bg-[#5a2ca3] transition duration-200"
-          >
-            Submit
-          </button>
+          <div className='w-full flex justify-center col-span-2'>
+            <button
+              type="submit"
+              onClick={handleButtonClick}
+              className="bg-[#7837eb]  text-white py-3 px-8 rounded-md mt-8 hover:bg-[#5a2ca3] transition duration-200"
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
 
