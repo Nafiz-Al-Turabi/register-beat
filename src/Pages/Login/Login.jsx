@@ -138,7 +138,7 @@ const Login = () => {
                             <button
                                 type="submit"
                                 disabled={isForgotPasswordLoading}
-                                className="w-full bg-purple-600 text-white py-2 rounded-md disabled:opacity-50"
+                                className="w-full primary-bg text-white py-2 rounded-md disabled:opacity-50"
                             >
                                 {isForgotPasswordLoading ? 'Loading...' : 'Send OTP'}
                             </button>
@@ -160,7 +160,7 @@ const Login = () => {
                             <button
                                 type="submit"
                                 disabled={isForgotPasswordLoading}
-                                className="w-full bg-purple-600 text-white py-2 rounded-md disabled:opacity-50"
+                                className="w-full primary-bg text-white py-2 rounded-md disabled:opacity-50"
                             >
                                 {isForgotPasswordLoading ? 'Loading...' : 'Verify OTP'}
                             </button>
@@ -188,7 +188,7 @@ const Login = () => {
                             <button
                                 type="submit"
                                 disabled={isForgotPasswordLoading}
-                                className="w-full bg-purple-600 text-white py-2 rounded-md disabled:opacity-50"
+                                className="w-full primary-bg text-white py-2 rounded-md disabled:opacity-50"
                             >
                                 {isForgotPasswordLoading ? 'Loading...' : 'Reset Password'}
                             </button>
@@ -207,7 +207,7 @@ const Login = () => {
                 {forgotPasswordStep === 0 ? (
                     // Normal login form
                     <div className="w-full max-w-md tertiary-bg p-8 rounded-xl shadow-lg animate-login ">
-                        <h2 className="text-3xl font-bold text-center text-purple-600 mb-8"> <span className='text-white'>Login</span> to BeatProtect</h2>
+                        <h2 className="text-3xl font-bold text-center text-[#7e3aed] mb-8"> <span className='text-white'>Login</span> to BeatProtect</h2>
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                             <div className='relative'>
                                 <label htmlFor="email" className="block text-[#9da6be] text-sm font-medium mb-2">Email</label>
@@ -219,7 +219,7 @@ const Login = () => {
                                         required: "Email is required",
                                         onChange: (e) => handleEmailChange(e)
                                     })}
-                                    className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+                                    className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                                 />
                                 {!emailFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
                                 {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
@@ -235,7 +235,7 @@ const Login = () => {
                                         required: "Password is required",
                                         onChange: (e) => handlePasswordChange(e)
                                     })}
-                                    className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+                                    className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                                 />
                                 {!passwordFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
                                 {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
@@ -245,7 +245,7 @@ const Login = () => {
                                 <button
                                     type="button"
                                     onClick={() => handleStepChange(1)}
-                                    className="text-sm text-purple-500 hover:text-purple-400"
+                                    className="text-sm text-[#7e3aed] hover:text-[#7f3aedd8]"
                                 >
                                     Forgot Password?
                                 </button>
@@ -255,7 +255,7 @@ const Login = () => {
                                 onClick={handleButtonClick}
                                 type="submit" 
                                 disabled={isLoading}
-                                className="w-full bg-purple-600 text-lg text-white font-bold py-3 rounded-full mt-4 hover:bg-purple-700 duration-200 focus:outline-none disabled:opacity-50"
+                                className="w-full primary-bg text-lg text-white font-bold py-3 rounded-full mt-4 disabled:opacity-50"
                             >
                                 {isLoading ? 'Loading...' : 'Sign In'}
                             </button>
@@ -275,7 +275,7 @@ const Login = () => {
                         </button>
 
                         <div className="mt-4 text-center">
-                            <Link to='/signup' className="text-sm text-gray-400">Don't have an account? <span className="text-purple-600 hover:underline">Sign up</span></Link>
+                            <Link to='/signup' className="text-sm text-gray-400">Don't have an account? <span className="text-[#7e3aed] hover:underline underline-offset-4">Sign up</span></Link>
                         </div>
                     </div>
 
@@ -286,10 +286,11 @@ const Login = () => {
                         <button
                             type="button"
                             onClick={() => handleStepChange(0)}
-                            className="text-sm text-purple-500 hover:text-purple-400"
+                            className="text-sm text-[#7e3aed] hover:text-[#7f3aedd8]"
                         >
                             Back to Login
                         </button>
+
                     </form>
                 )}
             </div>

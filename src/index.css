@@ -14,9 +14,9 @@ body{
 }
 
 
-.primary-bg{
+/* .primary-bg{
     @apply bg-[#9132e6]
-}
+} */
 
 .secondary-bg{
     @apply bg-[#7837eb]

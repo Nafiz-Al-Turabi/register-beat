@@ -69,10 +69,11 @@ const Signup = () => {
     return (
         <div className="flex justify-center items-center min-h-screen">
             <div className="w-full max-w-md tertiary-bg p-8 rounded-xl shadow-lg animate-signup ">
-                <h2 className="text-3xl font-bold text-center text-purple-600 mb-8">
+                <h2 className="text-3xl font-bold text-center text-[#7e3aed] mb-8">
                     <span className='text-white'>Join</span> BeatProtect
                 </h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+
                     <div className='relative'>
                         <label htmlFor="name" className="block text-[#9da6be] text-sm font-medium mb-2">name</label>
                         <input
@@ -83,7 +84,7 @@ const Signup = () => {
                                 required: "Name is required",
                                 onChange: (e) => handleNameChange(e)
                             })}
-                            className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+                            className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                         />
                         {!nameFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
                         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
@@ -98,7 +99,7 @@ const Signup = () => {
                                 required: "Email is required",
                                 onChange: (e) => handleEmailChange(e)
                             })}
-                            className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+                            className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                         />
                         {!emailFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
                         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
@@ -114,7 +115,7 @@ const Signup = () => {
                                 required: "Password is required",
                                 onChange: (e) => handlePasswordChange(e)
                             })}
-                            className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+                            className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                         />
                         {!passwordFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
                         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
@@ -131,16 +132,15 @@ const Signup = () => {
                                 validate: (value) => value === password || "Passwords do not match",
                                 onChange: (e) => handleConfirmPasswordChange(e)
                             })}
-                            className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-600"
+                            className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                         />
                         {!confirmPasswordFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
                         {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>}
                     </div>
 
-                    <button onClick={handleButtonClick} type="submit" className="w-full bg-purple-600 text-lg text-white font-bold py-3 rounded-full mt-4 hover:bg-purple-700 duration-200 focus:outline-none">
+                    <button onClick={handleButtonClick} type="submit" className="w-full primary-bg text-lg text-white font-bold py-3 rounded-full mt-4">
                         Create Account
                     </button>
-
                     <div className="mt-4 text-center flex justify-between items-center">
                         <hr className='w-32 border-gray-600' />
                         <span className="text-sm text-gray-400">Or continue with</span>
@@ -150,12 +150,12 @@ const Signup = () => {
                 <button onClick={googleLoginHandler} className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-4 hover:bg-gray-100 focus:outline-none">
                     Sign up with <FcGoogle className='ml-1' />oogle
                 </button>
-
                 <div className="mt-4 text-center">
-                    <Link to='/login' className="text-sm text-gray-400">Already have an account? <span className="text-purple-600 hover:underline">Login</span></Link>
+                    <Link to='/login' className="text-sm text-gray-400">Already have an account? <span className="text-[#7e3aed] hover:underline underline-offset-4">Login</span></Link>
                 </div>
             </div>
         </div>
+
     );
 };
 

@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 
 const MyBeats = () => {
+  const [beatLoading, setBeatLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [beatDetails, setBeatDetails] = useState();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -23,14 +24,18 @@ const MyBeats = () => {
   const itemsPerPage = 5;
 
   const openModal = async (beatId) => {
+    setBeatLoading(true); 
+    setIsOpen(true); 
+
     try {
-      const response = await axiosInstance.get(`/beat/oneBeatDetails/${beatId}`);
-      setBeatDetails(response.data?.beat);
-      setIsOpen(true);
+        const response = await axiosInstance.get(`/beat/oneBeatDetails/${beatId}`);
+        setBeatDetails(response.data?.beat);
     } catch (error) {
-      console.error("Failed to fetch beat details:", error);
+        console.error("Failed to fetch beat details:", error);
+    } finally {
+        setBeatLoading(false); 
     }
-  };
+};
 
   const { isLoading, isError, data: beats = [], error, refetch } = useQuery({
     queryKey: ['adminDashboard', userId],
@@ -190,6 +195,7 @@ const MyBeats = () => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           beatDetails={beatDetails}
+          beatLoading={beatLoading}
         />
 
       </div>

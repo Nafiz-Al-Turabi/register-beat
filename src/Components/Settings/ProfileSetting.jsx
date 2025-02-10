@@ -42,7 +42,8 @@ const ProfileSetting = () => {
             }
 
             const response = await axiosInstance.put(`/users/update-profile/${user?._id}`, formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
+                headers: { 'Content-Type': 'multipart/form-data' },
+                withCredentials: true
             });
 
             if (response.status === 200) {

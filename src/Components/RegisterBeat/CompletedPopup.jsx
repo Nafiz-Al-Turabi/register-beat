@@ -20,7 +20,7 @@ const CompletedPopup = () => {
                 <Link 
                     to="/"
                     onClick={refreshUserInfo}
-                    className="bg-purple-600 text-white font-bold px-8 py-3 rounded-lg hover:bg-purple-700 transition active:scale-95"
+                    className="primary-bg text-white font-bold px-8 py-3 rounded-lg hover:bg-purple-700 transition active:scale-95"
                 >
                     Return to Dashboard
                 </Link>

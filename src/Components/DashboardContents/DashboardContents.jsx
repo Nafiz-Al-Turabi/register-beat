@@ -9,11 +9,15 @@ import Loading from '../Loading/Loading';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import BeatDetailsModal from '../BeatDetailsModal/BeatDetailsModal';
 
 const DashboardContents = () => {
+    const [beatLoading, setBeatLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const { user } = useContext(AuthContext);
     const userId = user?._id;
+    const [beatDetails, setBeatDetails] = useState();
     const [currentPage, setCurrentPage] = useState(0);
     const beatsPerPage = 5;
 
@@ -51,6 +55,20 @@ const DashboardContents = () => {
     const offset = currentPage * beatsPerPage;
     const currentBeats = beats.slice(offset, offset + beatsPerPage);
     const pageCount = Math.ceil(beats.length / beatsPerPage);
+
+    const openModal = async (beatId) => {
+        setBeatLoading(true); 
+        setIsOpen(true); 
+    
+        try {
+            const response = await axiosInstance.get(`/beat/oneBeatDetails/${beatId}`);
+            setBeatDetails(response.data?.beat);
+        } catch (error) {
+            console.error("Failed to fetch beat details:", error);
+        } finally {
+            setBeatLoading(false); 
+        }
+    };
 
     return (
         <div className='animate-from-middle'>
@@ -103,10 +121,10 @@ const DashboardContents = () => {
                                     <th className="p-4 text-left">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className='divide-y-[1px] divide-[#2d344b] text-white'>
+                            <tbody className='divide-y-[1px] divide-[#2d344b] text-white '>
                                 {currentBeats.map((beat) => (
-                                    <tr key={beat?._id}>
-                                        <td className="p-4 font-medium">{beat?.beatName}</td>
+                                    <tr onClick={() => openModal(beat?._id)} key={beat?._id} className='group'>
+                                        <td className="p-4 font-medium group-hover:bg-gradient-to-r group-hover:from-[#7837eb] group-hover:to-[#5046e6] group-hover:text-transparent group-hover:bg-clip-text duration-200 ease-linear transition-all cursor-pointer">{beat?.beatName}</td>
                                         <td className="py-5">
                                             <span className="primary-bg text-white px-3 py-1 rounded-full text-sm">
                                                 {beat?.registerCode}
@@ -128,7 +146,13 @@ const DashboardContents = () => {
                                 ))}
                             </tbody>
                         </table>
+                        <BeatDetailsModal
+                            isOpen={isOpen}
+                            setIsOpen={setIsOpen}
+                            beatDetails={beatDetails}
+                            beatLoading={beatLoading}
 
+                        />
                     </div>
                 ) : (
                     <div className="text-center py-10">
