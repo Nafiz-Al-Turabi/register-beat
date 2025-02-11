@@ -119,7 +119,7 @@ const AdminHome = () => {
                     </div>
                     <div>
                         <h4 className="text-base font-semibold">Total Revenue</h4>
-                        <p className="text-base font-bold mt-2">{admin?.data?.totalRevenue || 0}</p>
+                        <p className="text-base font-bold mt-2">{admin?.data?.totalRevenue?.toFixed(2) || 0}</p>
                     </div>
                 </div>
             </div>

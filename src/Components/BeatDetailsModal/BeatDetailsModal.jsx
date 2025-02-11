@@ -9,6 +9,8 @@ import Loading from "../Loading/Loading";
 const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
     if (!isOpen) return null;
 
+    console.log(beatDetails)
+
     const closeModal = () => setIsOpen(false);
 
     const StatCard = ({ title, value, className = "" }) => (
@@ -143,15 +145,21 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                                 </h3>
                                                 <div className="space-y-1">
                                                     <div className="flex justify-between">
-                                                        <span className="text-gray-400">Artist</span>
+                                                        <span className="text-gray-400">Full name:</span>
                                                         <span className="font-medium">{beatDetails?.fullName}</span>
                                                     </div>
                                                     <div className="flex justify-between">
-                                                        <span className="text-gray-400">Producer</span>
-                                                        <span className="font-medium">{beatDetails?.producerName}</span>
+                                                        <span className="text-gray-400">Collaborators:</span>
+                                                        {
+                                                            beatDetails?.producerName && beatDetails?.collaborators ? (
+                                                                <p className="font-medium flex flex-col items-center gap-2"><span>{beatDetails?.producerName}</span><span>{ beatDetails?.collaborators}</span></p>
+                                                            ) : (
+                                                                <span className="font-medium">{beatDetails?.fullName}</span>
+                                                            )
+                                                        }
                                                     </div>
                                                     <div className="flex justify-between">
-                                                        <span className="text-gray-400">Share</span>
+                                                        <span className="text-gray-400">Share:</span>
                                                         <span className="font-medium text-purple-400">{beatDetails?.percentage}%</span>
                                                     </div>
                                                 </div>

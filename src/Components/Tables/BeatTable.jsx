@@ -5,16 +5,20 @@ import { useState } from 'react';
 import BeatDetailsModal from '../BeatDetailsModal/BeatDetailsModal';
 
 const BeatTable = ({ beats }) => {
+    const [beatLoading, setBeatLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [beatDetails, setBeatDetails] = useState();
     console.log("Beats", beats);
     const openModal = async (beatId) => {
+        setBeatLoading(true);
+        setIsOpen(true);
         try {
             const response = await axiosInstance.get(`/beat/oneBeatDetails/${beatId}`);
             setBeatDetails(response.data?.beat);
-            setIsOpen(true);
         } catch (error) {
             console.error("Failed to fetch beat details:", error);
+        } finally {
+            setBeatLoading(false);
         }
     };
     return (
@@ -38,7 +42,7 @@ const BeatTable = ({ beats }) => {
                     </td>
                     <td className="p-4 text-xs xl:text-base">
                         <span className="bg-[#7837eb] text-white px-3 py-1 rounded-full">
-                            {beat?.registerCode || 'N/A'} 
+                            {beat?.registerCode || 'N/A'}
                         </span>
                     </td>
                     <td className="p-4 text-xs xl:text-base text-white">
@@ -59,6 +63,7 @@ const BeatTable = ({ beats }) => {
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
                 beatDetails={beatDetails}
+                beatLoading={beatLoading}
             />
         </>
     );
