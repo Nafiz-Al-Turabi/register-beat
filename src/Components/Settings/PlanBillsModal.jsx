@@ -160,7 +160,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
     return (
         <>
             {redirectLoading && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-md z-50">
                     <div className="bg-gradient-to-br from-gray-900 via-black to-gray-900 p-6 rounded-lg flex flex-col items-center  shadow-2xl border border-gray-800/50">
                         <h2 className="text-lg text-gray-400 font-semibold mb-2">Your Payment is being proccessing...</h2>
                         <span className="loader"></span>

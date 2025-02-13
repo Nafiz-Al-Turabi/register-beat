@@ -20,16 +20,16 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     }
     useEffect(() => {
         const handleClickOutside = (event) => {
-          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-            setDropdown(false); 
-          }
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdown(false);
+            }
         };
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
-      }, []);
-      
+    }, []);
+
     return (
         <div>
             {/* Sidebar */}
@@ -63,11 +63,16 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                 </Link>
                                 {
                                     user?.active === true ? <button
-                                    className="flex items-center text-base text-white hover:text-white"
-                                    onClick={() => setShowPopup(true)}
-                                >
-                                    <LuCreditCard className="mr-2" /> Manage Subscription
-                                </button> : <p className="flex items-center text-base text-transparent">.</p>
+                                        className="flex items-center text-base text-white hover:text-white"
+                                        onClick={() => setShowPopup(true)}
+                                    >
+                                        <LuCreditCard className="mr-2" /> Manage Subscription
+                                    </button> : <NavLink
+                                        to="/settings"
+                                         className="flex items-center text-base text-white hover:text-white"
+                                    >
+                                        <FaCog className="mr-2" /> Settings
+                                    </NavLink>
                                 }
                             </div>
                         )
@@ -94,8 +99,8 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
 
                 <div className="mt-auto border-gray-800 flex flex-col py-2">
                     {
-                        user?.active === true || 
-                        new Date(user?.subscriptionEndDAte) > new Date()
+                        user?.active === true ||
+                            new Date(user?.subscriptionEndDAte) > new Date()
                             ?
                             ''
                             :
@@ -117,19 +122,19 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     }
                     <hr className='my-2 border-zinc-700' />
                     <NavLink
-        to="/settings"
-        className={({ isActive }) =>
-            `flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
-        }
-    >
-        <FaCog className="mr-2" /> Settings
-    </NavLink>
-    <Link
-        onClick={logout}
-        className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
-    >
-        <FaSignOutAlt className="mr-2" /> Log Out
-    </Link>
+                        to="/settings"
+                        className={({ isActive }) =>
+                            `flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
+                        }
+                    >
+                        <FaCog className="mr-2" /> Settings
+                    </NavLink>
+                    <Link
+                        onClick={logout}
+                        className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
+                    >
+                        <FaSignOutAlt className="mr-2" /> Log Out
+                    </Link>
                 </div>
                 <p className='text-xs text-gray-500'>
                     <Link target='_blank' to='/term-of-use' className='hover:underline'>Term of Use</Link> and <Link target='_blank' to='/privacy' className='hover:underline'>Privacy Policy</Link>
