@@ -6,10 +6,10 @@ import axiosInstance from '../../Axios/AxiosInstance';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { trackEvent } from '../../facebookPixel/facebookPixel';
 import { IoMdInformationCircleOutline } from "react-icons/io";
-
+import { toast } from 'react-hot-toast';
 
 const RegisterBeatForm = ({ setRegisterData, formData }) => {
-  const { register, handleSubmit, formState: { errors }, watch } = useForm();  // Add watch here
+  const { register, handleSubmit, formState: { errors }, watch } = useForm();  
   const [showPopup, setShowPopup] = useState(false);
   const [progress, setProgress] = useState(0);
   const [success, setSuccess] = useState(false);
@@ -49,70 +49,77 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   const simulateApiCall = async (data) => {
     setProgress(0);
     setErrorMessage('');
-    setShowPopup(true);
+    setShowPopup(true);  // Open modal when request starts
 
     try {
-      // Start progress simulation
-      await simulateProgress();
+        // Start progress simulation
+        await simulateProgress();
 
-      // Creating FormData to include audio and image files
-      const payload = new FormData();
-      payload.append('fullName', data.fullName);
-      payload.append('producer', data.producer);
-      payload.append('beatName', data.beatName);
-      payload.append('bpm', data.bpm);
-      payload.append('genre', data.genre);
-      payload.append('releaseDate', data.releaseDate);
-      payload.append('youtubeUrl', data.youtubeUrl);
+        // Creating FormData to include audio and image files
+        const payload = new FormData();
+        payload.append('fullName', data.fullName);
+        payload.append('producer', data.producer);
+        payload.append('beatName', data.beatName);
+        payload.append('bpm', data.bpm);
+        payload.append('genre', data.genre);
+        payload.append('releaseDate', data.releaseDate);
+        payload.append('youtubeUrl', data.youtubeUrl);
 
-      payload.append('isOnlyProducer', data.isOnlyProducer);
-      payload.append('collaborators', data.collaborators || '');
-      payload.append('producerName', data.producerName || '');
-      payload.append('percentage', data.percentage || '');
-      payload.append('containsSamples', data.containsSamples);
-      payload.append('terms', data.terms);
+        payload.append('isOnlyProducer', data.isOnlyProducer);
+        payload.append('collaborators', data.collaborators || '');
+        payload.append('producerName', data.producerName || '');
+        payload.append('percentage', data.percentage || '');
+        payload.append('containsSamples', data.containsSamples);
+        payload.append('terms', data.terms);
 
-      // Ensure tags are sent as a stringified array
-      const tagsArray = Array.isArray(tags) ? tags : [];
-      payload.append('tags', JSON.stringify(tagsArray));
+        // Ensure tags are sent as a stringified array
+        const tagsArray = Array.isArray(tags) ? tags : [];
+        payload.append('tags', JSON.stringify(tagsArray));
 
-      if (formData.audio) {
-        payload.append('audio', formData.audio);
-      }
-      if (formData.image) {
-        payload.append('image', formData.image);
-      }
+        if (formData.audio) {
+            payload.append('audio', formData.audio);
+        }
+        if (formData.image) {
+            payload.append('image', formData.image);
+        }
 
-      // Log the payload to verify tags are being sent correctly
-      console.log('Tags being sent:', JSON.parse(payload.get('tags')));
+        // Log the payload to verify tags are being sent correctly
+        console.log('Tags being sent:', JSON.parse(payload.get('tags')));
 
-      await axiosInstance.post(`/beat/create-beat/${user._id}`, payload, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+        await axiosInstance.post(`/beat/create-beat/${user._id}`, payload, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
 
-      setProgress(100);
-      return { success: true };
+        setProgress(100);
+        return { success: true };
     } catch (error) {
-      console.error('Error submitting form:', error);
-      setProgress(0);
-      setErrorMessage('Failed to register. Please try again.');
-      return { success: false };
+        console.error('Error submitting form:', error);
+        setProgress(0);
+        toast.error('Failed to register. Please try again.');
+        
+        // Automatically close the modal if an error occurs
+        setTimeout(() => {
+            setShowPopup(false);
+        }, 2000); 
+
+        return { success: false };
     }
-  };
+};
+
 
   const isOnlyProducer = watch('isOnlyProducer');  // Now watch is defined
 
   const onSubmit = async (data) => {
     // Check if audio and image files are selected
     if (!formData.audio) {
-      setErrorMessage('Please select an audio file');
+      toast.error('Please select an audio file');
       return;
     }
 
     if (!formData.image) {
-      setErrorMessage('Please select an image file');
+      toast.error('Please select an image file');
       return;
     }
 
@@ -134,15 +141,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
   return (
     <div className='max-w-3xl mx-auto pt-16 pb-8'>
       <div className='bg-[#0f0f0f] p-2 md:p-20 rounded-lg'>
-        <h1 className='text-4xl font-bold text-white text-center'>Beat Information</h1>
-
-        {/* Display error message if exists */}
-        {errorMessage && (
-          <div className="text-red-500 text-center mb-4 bg-red-100 border border-red-400 rounded p-2">
-            {errorMessage}
-          </div>
-        )}
-
+        <h1 className='text-4xl font-bold text-white text-center'>Beat Information</h1>        
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:grid md:grid-cols-2 gap-6 mt-8">
           {/* Full Name */}
           <div>

@@ -21,6 +21,8 @@ import Transactions from "../Pages/AdminDashboard/Transactions";
 import UserDetails from "../Pages/UserDetails/UserDetails";
 import SearchBeat from "../Pages/SearchBeat/SearchBeat";
 import PaypalLoading from "../Components/PaypalLoading/PaypalLoading";
+import TermOfUse from "../Pages/TermOfUse/TermOfUse";
+import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -56,6 +58,14 @@ export const router = createBrowserRouter([
   {
     path: "/payment-checking",
     element: <PaypalLoading />,
+  },
+  {
+    path: "/term-of-use",
+    element: <TermOfUse />,
+  },
+  {
+    path: "/privacy",
+    element: <PrivacyPolicy />,
   },
   {
     path: "/admin-dashboard",

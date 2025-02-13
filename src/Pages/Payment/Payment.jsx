@@ -7,7 +7,7 @@ import axiosInstance from '../../Axios/AxiosInstance';
 import Loading from '../../Components/Loading/Loading';
 import { AuthContext } from '../../Provider/AuthProvider';
 import paypal from '../../assets/img/paypal.png';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -99,7 +99,12 @@ const Payment = () => {
               <li><span className="text-purple-700 mr-2">✔</span> Get Extra Credits to Register More Beats</li>
             </ul>
             <hr className="border-purple-700/30 my-4" />
-            <p className="mt-4 text-lg font-bold">Total: $9.99/month</p>
+            <div className='flex justify-between items-center mt-4'>
+              <p className=" text-lg font-bold">Total: $9.99/month</p>
+              <p className='text-gray-400 text-sm'>
+                <Link target='_blank' to='/term-of-use' className='hover:underline'>Terms of Use</Link> and <Link target='_blank' to='/privacy' className='hover:underline'>Privacy Policy</Link>
+              </p>
+            </div>
           </div>
 
           <div className="payment-method w-full md:w-1/2 p-6 bg-[#111111] border border-purple-700/30 rounded-lg">
