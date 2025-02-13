@@ -6,17 +6,20 @@ import { toast } from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useNavigate } from "react-router-dom";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const PlanBillsModal = ({ setShowModal, showModal }) => {
     const [input, setInput] = useState(1);
     const [credits, setCredits] = useState(10);
     const [amount, setAmount] = useState(5);
-    const { user } = useContext(AuthContext);
+    const { user,refreshUserInfo } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState(
         user?.paymentMethod || "stripe"
     );
+    const [redirectLoading, setRedirectLoading] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setCredits(input * 10);
@@ -137,16 +140,33 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                 { headers: { "Content-Type": "application/json" } }
             );
 
-            alert("Payment successful! Credits added.");
-            console.log("Capture response:", response.data);
+            toast.success("Credits purchased successfully!");
+            setShowModal(false);
+            setRedirectLoading(true); 
+
+            setTimeout(() => {
+                setRedirectLoading(false);
+                navigate("/");
+            }, 30000);
+            setTimeout(() => {
+                refreshUserInfo();
+            }, 30000); 
         } catch (error) {
             console.error("Error capturing payment:", error);
-            alert("Payment capture failed.");
+            toast.error("Payment capture failed.");
         }
     };
 
     return (
         <>
+            {redirectLoading && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-gradient-to-br from-gray-900 via-black to-gray-900 p-6 rounded-lg flex flex-col items-center  shadow-2xl border border-gray-800/50">
+                        <h2 className="text-lg text-gray-400 font-semibold mb-2">Your Payment is being proccessing...</h2>
+                        <span className="loader"></span>
+                    </div>
+                </div>
+            )}
             {showModal ? (
                 <>
                     <div className="animate-from-middle justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
