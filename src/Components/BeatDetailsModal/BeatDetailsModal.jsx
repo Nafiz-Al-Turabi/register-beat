@@ -47,7 +47,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                     {/* Header Section */}
                     {
                         beatLoading ? (
-                            <Loading/>
+                            <Loading />
                         ) :
                             <>
                                 <div className="pt-8 px-8">
@@ -148,20 +148,20 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                                         <span className="text-gray-400">Full name:</span>
                                                         <span className="font-medium">{beatDetails?.fullName}</span>
                                                     </div>
-                                                    <div className="flex justify-between">
-                                                        <span className="text-gray-400">Collaborators:</span>
-                                                        {
-                                                            beatDetails?.producerName && beatDetails?.collaborators ? (
-                                                                <p className="font-medium flex flex-col items-center gap-2"><span>{beatDetails?.producerName}</span><span>{ beatDetails?.collaborators}</span></p>
-                                                            ) : (
-                                                                <span className="font-medium">{beatDetails?.fullName}</span>
-                                                            )
-                                                        }
-                                                    </div>
-                                                    <div className="flex justify-between">
-                                                        <span className="text-gray-400">Share:</span>
-                                                        <span className="font-medium text-purple-400">{beatDetails?.percentage}%</span>
-                                                    </div>
+                                                    {
+                                                        beatDetails?.producerName && beatDetails?.collaborators ?
+                                                            <div className="flex justify-between">
+                                                                <span className="text-gray-400">Collaborators:</span>
+                                                                <p className="font-medium flex flex-col items-center gap-2"><span>{beatDetails?.producerName}</span><span>{beatDetails?.collaborators}</span></p>
+                                                            </div> : null
+                                                    }
+                                                    {
+                                                        beatDetails?.percentage ? <div className="flex justify-between">
+                                                            <span className="text-gray-400">Share:</span>
+                                                            <span className="font-medium text-purple-400">{beatDetails?.percentage}%</span>
+                                                        </div> : null
+                                                    }
+
                                                 </div>
                                             </div>
 
