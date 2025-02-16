@@ -138,10 +138,10 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                                 />
                                             </div>
 
-                                            {/* Collaborators Section */}
+                                            {/* Producers Section */}
                                             <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl space-y-4">
                                                 <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                                                    Collaborators
+                                                    Producers
                                                 </h3>
                                                 <div className="space-y-1">
                                                     <div className="flex justify-between">
@@ -149,10 +149,17 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                                         <span className="font-medium">{beatDetails?.fullName}</span>
                                                     </div>
                                                     {
+                                                        beatDetails?.producer ? 
+                                                        <div className="flex justify-between">
+                                                            <span className="text-gray-400">Producer:</span>
+                                                            <p className="font-medium flex flex-col items-center gap-2 text-right"><span>{beatDetails?.producer}</span></p>
+                                                        </div> : null
+                                                    }
+                                                    {
                                                         beatDetails?.producerName && beatDetails?.collaborators ?
                                                             <div className="flex justify-between">
                                                                 <span className="text-gray-400">Collaborators:</span>
-                                                                <p className="font-medium flex flex-col items-center gap-2"><span>{beatDetails?.producerName}</span><span>{beatDetails?.collaborators}</span></p>
+                                                                <p className="font-medium flex flex-col items-center gap-2 text-right"><span>{beatDetails?.producerName}</span><span>{beatDetails?.collaborators}</span></p>
                                                             </div> : null
                                                     }
                                                     {

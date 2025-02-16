@@ -105,9 +105,7 @@ const Users = () => {
           <option value="lastDay">Last Day</option>
           <option value="lastWeek">Last Week</option>
           <option value="lastMonth">Last Month</option>
-          <option value="startOfMonth">Month-to-date</option>
           <option value="last90Days">Last 90 Days</option>
-          <option value="startofYear">Year-to-date</option>
         </select>
       </div>
 
@@ -172,9 +170,9 @@ const Users = () => {
                   <span className={`px-2 py-1 rounded-full text-sm ${
                     user.blacklist 
                       ? 'bg-red-500/20 text-red-500' 
-                      : 'bg-green-500/20 text-green-500'
+                      : 'bg-blue-500/20 text-blue-500'
                   }`}>
-                    {user.blacklist ? 'Blacklisted' : 'Active'}
+                    {user.blacklist ? 'Blocked' : 'Allowed'}
                   </span>
                 </td>
                 <td className="px-4 py-4 whitespace-nowrap space-x-2">
