@@ -158,8 +158,11 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                                     {
                                                         beatDetails?.producerName && beatDetails?.collaborators ?
                                                             <div className="flex justify-between">
-                                                                <span className="text-gray-400">Collaborators:</span>
-                                                                <p className="font-medium flex flex-col items-center gap-2 text-right"><span>{beatDetails?.producerName}</span><span>{beatDetails?.collaborators}</span></p>
+                                                                <p className="text-gray-400">Collaborators:</p>
+                                                                <div className="font-medium flex flex-col items-center gap-2 text-right">
+                                                                    <p className="font-medium">{beatDetails?.collaborators}</p>
+                                                                    <p className="font-medium ">{beatDetails?.producerName}</p>
+                                                                </div>
                                                             </div> : null
                                                     }
                                                     {
