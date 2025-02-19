@@ -51,7 +51,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                         ) :
                             <>
                                 <div className="pt-8 px-8">
-                                    <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                                    <h2 className="text-4xl font-bold bg-[#7C3AED] bg-clip-text text-transparent">
                                         {beatDetails?.beatName}
                                     </h2>
                                     <div className="mt-2 flex items-center space-x-2">
@@ -91,7 +91,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                             </div>
                                             <div className="bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl hover:bg-gray-800/50 transition-all duration-300">
                                                 <div>
-                                                    <h1 className="text-lg font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                                                    <h1 className="text-lg font-semibold bg-[#7C3AED] bg-clip-text text-transparent">
                                                         Certificate:
                                                     </h1>
                                                     <p className="text-sm">
@@ -126,7 +126,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                         <div className="space-y-6">
                                             {/* Beat Stats Grid */}
                                             <div className="grid grid-cols-2 gap-4">
-                                                <StatCard title="BPM" value={beatDetails?.bpm} className="text-purple-400" />
+                                                <StatCard title="BPM" value={beatDetails?.bpm} className="text-[#7C3AED] " />
                                                 <StatCard title="Type" value="Music" className="text-pink-400" />
                                                 <StatCard
                                                     title="Upload Date"
@@ -140,7 +140,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
 
                                             {/* Producers Section */}
                                             <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl space-y-4">
-                                                <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                                                <h3 className="text-lg font-semibold bg-[#7C3AED]  bg-clip-text text-transparent">
                                                     Producers
                                                 </h3>
                                                 <div className="space-y-1">
@@ -179,7 +179,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                             <div className="grid grid-cols-2 gap-4">
                                                 <StatCard
                                                     title="Solo Producer"
-                                                    value={beatDetails?.isOnlyProducer === true ? "Yes" : "No"}
+                                                    value={beatDetails?.isOnlyProducer === "yes" ? "Yes" : "No"}
                                                     className="flex-1"
                                                 />
                                                 <StatCard
