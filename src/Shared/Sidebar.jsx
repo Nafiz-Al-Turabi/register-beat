@@ -137,7 +137,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     </Link>
                 </div>
                 <p className='text-xs text-gray-500'>
-                    <Link target='_blank' to='/term-of-use' className='hover:underline'>Term of Use</Link> and <Link target='_blank' to='/privacy' className='hover:underline'>Privacy Policy</Link>
+                    <Link  to='/term-of-use' className='hover:underline'>Term of Use</Link> and <Link  to='/privacy' className='hover:underline'>Privacy Policy</Link>
                 </p>
             </div>
             {showPopup && <ManangeSubsPopup setShowPopup={setShowPopup} />}
