@@ -51,7 +51,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                         ) :
                             <>
                                 <div className="pt-8 px-8">
-                                    <h2 className="text-4xl font-bold bg-[#7C3AED] bg-clip-text text-transparent">
+                                    <h2 className="text-4xl font-bold bg-[#7e3aed] bg-clip-text text-transparent">
                                         {beatDetails?.beatName}
                                     </h2>
                                     <div className="mt-2 flex items-center space-x-2">

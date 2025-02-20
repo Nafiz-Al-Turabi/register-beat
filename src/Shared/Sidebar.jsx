@@ -41,8 +41,11 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                 <img src={`${fileUrl}/uploads/images/${user?.avatar}`} alt="avatar" className="w-full h-full object-cover" />
                             </div>
                             <div className="ml-3 ">
-                                <p className="text-sm font-semibold">{user?.name}</p>
-                                <p className="text-xs text-gray-400">Plan: {user?.active === true ? 'Standard' : 'N/A'}</p>
+                                <p className="text-sm font-semibold">
+                                    {
+                                        user?.producerName ? user?.producerName : user?.fullName
+                                    }</p>
+                                <p className="text-xs text-gray-400">Plan: {user?.active === true ? 'Standard' : 'Inactive'}</p>
                             </div>
                         </div>
                         <span
