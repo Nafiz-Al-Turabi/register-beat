@@ -1,7 +1,7 @@
 import React from 'react';
-import { FaBell } from 'react-icons/fa';
+import { FaBell, FaMusic } from 'react-icons/fa';
 import { HiOutlineShieldCheck, HiShieldCheck } from 'react-icons/hi';
-import { LuBarChart3, LuLineChart, LuUpload, LuFileText } from 'react-icons/lu';
+import { LuBarChart3, LuLineChart, LuUpload, LuFileText, LuCheck, LuSearch, LuBell, LuGlobe, LuMusic, LuShield, LuShieldCheck } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 
 
@@ -107,7 +107,7 @@ const LandingPage = () => {
 
                         <div className="flex items-start gap-6 p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800">
                             <div className="w-12 h-12 bg-[#7C3AED] rounded-xl flex items-center justify-center shrink-0">
-                                <FaBell className="w-6 h-6 text-white" />
+                                <LuBell className="w-6 h-6 text-white" />
                             </div>
                             <div>
                                 <h3 className="text-xl font-semibold text-white mb-2">Blockchain-Backed Registration</h3>
@@ -120,7 +120,7 @@ const LandingPage = () => {
 
                         <div className="flex items-start gap-6 p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800">
                             <div className="w-12 h-12 bg-[#7C3AED] rounded-xl flex items-center justify-center shrink-0">
-                                <HiOutlineShieldCheck className="w-6 h-6 text-white" />
+                                <LuShieldCheck className="w-6 h-6 text-white" />
                             </div>
                             <div>
                                 <h3 className="text-xl font-semibold text-white mb-2">Simple &amp; Secure Registration Process</h3>
@@ -192,7 +192,320 @@ const LandingPage = () => {
                     </div>
                 </div>
             </section>
-            
+            {/* Dashboard Preview Section */}
+            <section className="container py-16">
+                <h2 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
+                    Take Full Control of <span className="text-[#7C3AED]">Your Beats</span>
+                </h2>
+                <div className="relative w-full max-w-6xl mx-auto">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
+                    <div className="relative rounded-xl overflow-hidden border border-gray-800">
+                        <img
+                            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2dashboardbp-N1TqXd5LG0IVlYTd2c6m8SmV8xnzbu.webp"
+                            alt="BeatProtect Dashboard Interface"
+                            width={1920}
+                            height={1080}
+                            className="w-full h-auto"
+                        />
+                    </div>
+                </div>
+            </section>
+            {/* Legal Protection Section */}
+            <section className="container py-24">
+                <div className="max-w-6xl mx-auto">
+                    <div className="text-center mb-16">
+                        <div className="inline-block">
+                            <div className="flex items-center gap-2 text-[#7C3AED] font-medium mb-4">
+                                <LuShield className="w-5 h-5" />
+                                <span>Legal Protection</span>
+                            </div>
+                        </div>
+                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                            Your Beat, Protected with{" "}
+                            <span className="bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 text-transparent bg-clip-text">
+                                International Legal Proof
+                            </span>
+                        </h2>
+                        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                            At BeatProtect, we know how important it is to keep your music safe from unauthorized use. That&apos;s why
+                            every time you register a beat, we generate solid legal proof using Safe Creative technology.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8 mb-16">
+                        <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800">
+                            <h3 className="text-2xl font-bold text-white mb-6">How Do We Protect Your Beat?</h3>
+                            <div className="space-y-6">
+                                <div className="flex gap-4">
+                                    <div className="w-6 h-6 text-[#7C3AED] mt-1">
+                                        <LuCheck className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-lg font-semibold text-white mb-2">Instant Proof of Ownership</h4>
+                                        <p className="text-gray-400">
+                                            The moment you register your beat, we create a digital certificate that proves you are the
+                                            rightful owner.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-4">
+                                    <div className="w-6 h-6 text-[#7C3AED] mt-1">
+                                        <LuCheck className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-lg font-semibold text-white mb-2">Three Unique Digital Fingerprints</h4>
+                                        <p className="text-gray-400">
+                                            We generate cryptographic proof to ensure your beat remains unaltered and its registration date is
+                                            accurate.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-4">
+                                    <div className="w-6 h-6 text-[#7C3AED] mt-1">
+                                        <LuCheck className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-lg font-semibold text-white mb-2">Official Timestamp</h4>
+                                        <p className="text-gray-400">
+                                            A certified timestamp is added, guaranteeing that your beat was officially registered at an exact
+                                            date and time.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-4">
+                                    <div className="w-6 h-6 text-[#7C3AED] mt-1">
+                                        <LuCheck className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-lg font-semibold text-white mb-2">International Recognition</h4>
+                                        <p className="text-gray-400">
+                                            BeatProtect uses a technology accepted worldwide under the Berne Convention and the World
+                                            Intellectual Property Organization (WIPO).
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-4">
+                                    <div className="w-6 h-6 text-[#7C3AED] mt-1">
+                                        <LuCheck className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-lg font-semibold text-white mb-2">Permanent Proof</h4>
+                                        <p className="text-gray-400">
+                                            Once registered, your certificate never expires. You will always have access to your proof of
+                                            ownership.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800">
+                            <h3 className="text-2xl font-bold text-white mb-6">What Does This Mean for You as a Producer?</h3>
+                            <div className="grid gap-6">
+                                <div className="relative pl-12">
+                                    <div className="absolute left-0 top-1 w-8 h-8 bg-[#7C3AED]/10 rounded-lg flex items-center justify-center">
+                                        <LuMusic className="w-5 h-5 text-[#7C3AED]" />
+                                    </div>
+                                    <p className="text-lg text-white">Your music is protected from the moment you register it</p>
+                                </div>
+
+                                <div className="relative pl-12">
+                                    <div className="absolute left-0 top-1 w-8 h-8 bg-[#7C3AED]/10 rounded-lg flex items-center justify-center">
+                                        <LuSearch className="w-5 h-5 text-[#7C3AED]" />
+                                    </div>
+                                    <p className="text-lg text-white">
+                                        You can prove ownership if someone uses your beat without permission
+                                    </p>
+                                </div>
+
+                                <div className="relative pl-12">
+                                    <div className="absolute left-0 top-1 w-8 h-8 bg-[#7C3AED]/10 rounded-lg flex items-center justify-center">
+                                        <LuBell className="w-5 h-5 text-[#7C3AED]" />
+                                    </div>
+                                    <p className="text-lg text-white">You can claim your rights on platforms like YouTube or Spotify</p>
+                                </div>
+
+                                <div className="relative pl-12">
+                                    <div className="absolute left-0 top-1 w-8 h-8 bg-[#7C3AED]/10 rounded-lg flex items-center justify-center">
+                                        <LuGlobe className="w-5 h-5 text-[#7C3AED]" />
+                                    </div>
+                                    <p className="text-lg text-white">You have legal proof valid in any country</p>
+                                </div>
+                            </div>
+
+                            <div className="mt-8 pt-8 border-t border-gray-800">
+                                <p className="text-lg text-white mb-6">
+                                    Don&apos;t leave your music unprotected. Register your first beat today and ensure it&apos;s yours
+                                    forever.
+                                </p>
+                                <button size="lg" className="w-full bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md">
+                                    Start Protecting Your Beats
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/* ************************************ */}
+            {/* Counter will here */}
+            {/* ************************************ */}
+            {/* Video Showcase Section */}
+            <section className="container py-24">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="space-y-8">
+                        <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+                            Protect Your Beats with Secure Digital Registration
+                        </h2>
+                        <p className="text-xl text-gray-400 max-w-lg">
+                            Our platform allows you to register your beats quickly and legally, generating a digital certificate with
+                            SafeCreative. Each beat receives a unique cryptographic fingerprint and a dual timestamp seal recognized
+                            globally, ensuring authenticity and protection in any copyright dispute. Register your music with
+                            confidence, knowing you can always prove your ownership.
+                        </p>
+                        <div className="flex items-center gap-4">
+                            <button size="lg" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md">
+                                Start Protecting your Beats
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="relative group">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
+                        <div className="relative rounded-xl overflow-hidden border border-gray-800">
+                            <img
+                                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/column1v2%20-%2001-RryJpoRhijBzskS8Qrb6Y9fOnO2BLv.webp"
+                                alt="Beat Protection Success Screen"
+                                width={600}
+                                height={600}
+                                className="w-full h-auto"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="container py-24">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="relative group order-last lg:order-first">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
+                        <div className="relative bg-grey-900 rounded-xl overflow-hidden border border-gray-800">
+                            <img
+                                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/beatstolen2-xmdKaVZZra5upKwLFNBCdLIVRzpWba.webp"
+                                alt="Beat can be Stolen warning screen"
+                                width={600}
+                                height={600}
+                                className="w-full h-auto"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="space-y-8 order-first lg:order-last">
+                        <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+                            Are you going to lose all your hard work?
+                        </h2>
+                        <p className="text-xl text-gray-400 max-w-lg">
+                            Imagine you upload a beat to YouTube, an artist uses it without permission and registers it before you.
+                            Once someone else registers it, proving it was yours will be very difficult. Every day your beat goes
+                            unregistered, someone could be using and monetizing it. Don&apos;t wait until it&apos;s too late and
+                            someone else registers your work.
+                        </p>
+                        <div className="flex items-center gap-4">
+                            <button size="lg" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md">
+                                Start Protecting your Beats
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="container py-24">
+                <div className="max-w-4xl mx-auto text-center">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                            Prove You Own Your Beats. Publish with Confidence. Protect Your Music.
+                        </h2>
+                        <p className="text-xl text-gray-400">
+                            Here, you don&apos;t have to worry—you come to secure your music. Your beats, your talent, shielded
+                            against unauthorized use.
+                        </p>
+                    </div>
+                    <div className="grid gap-8 mb-16">
+                        <div className="space-y-4 text-center">
+                            <p className="text-lg text-white flex items-center justify-center gap-3">
+                                <span className="text-2xl">🔒</span>
+                                Register your beat in seconds and get legal proof of ownership.
+                            </p>
+                            <p className="text-lg text-white flex items-center justify-center gap-3">
+                                <span className="text-2xl">🚀</span>
+                                Forget about theft—claim what&apos;s rightfully yours without hassle.
+                            </p>
+                            <p className="text-lg text-white flex items-center justify-center gap-3">
+                                <span className="text-2xl">📜</span>
+                                Your registrations are valid on digital platforms and in legal disputes.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="mb-16">
+                        <h3 className="text-4xl font-bold text-white mb-8">What You&apos;ll Avoid with BeatProtect:</h3>
+
+                        <div className="grid md:grid-cols-2 gap-8">
+                            <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+                                <p className="text-lg text-white flex items-start gap-3">
+                                    <span className="text-2xl">❌</span>
+                                    <span>
+                                        <strong className="block text-[#FFD700] mb-2">The fear of having your beats stolen</strong>
+                                        With BeatProtect, every registered beat is official proof that it belongs to you.
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+                                <p className="text-lg text-white flex items-start gap-3">
+                                    <span className="text-2xl">❌</span>
+                                    <span>
+                                        <strong className="block text-[#FFD700] mb-2">Losing Proof of Ownership</strong>
+                                        Without proper registration, anyone can claim your beat as theirs. BeatProtect gives you a legal
+                                        certificate that proves you created it first.
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+                                <p className="text-lg text-white flex items-start gap-3">
+                                    <span className="text-2xl">❌</span>
+                                    <span>
+                                        <strong className="block text-[#FFD700] mb-2">
+                                            Not knowing what to do if someone uses your beat without permission
+                                        </strong>
+                                        We provide the tools you need to claim your music and enforce your rights.
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+                                <p className="text-lg text-white flex items-start gap-3">
+                                    <span className="text-2xl">❌</span>
+                                    <span>
+                                        <strong className="block text-[#FFD700] mb-2">
+                                            Feeling insecure when uploading beats to YouTube or platforms
+                                        </strong>
+                                        Register them before publishing and upload with the confidence that no one can take them from you.
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="text-center">
+                        <button className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white text-lg py-2 px-8 rounded-md">
+                            Register Your Beat Now
+                        </button>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };
