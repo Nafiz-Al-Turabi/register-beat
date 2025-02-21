@@ -1,13 +1,14 @@
 import React from 'react';
 import { FaBell, FaMusic } from 'react-icons/fa';
 import { HiOutlineShieldCheck, HiShieldCheck } from 'react-icons/hi';
-import { LuBarChart3, LuLineChart, LuUpload, LuFileText, LuCheck, LuSearch, LuBell, LuGlobe, LuMusic, LuShield, LuShieldCheck } from 'react-icons/lu';
+import { LuBarChart3, LuLineChart, LuUpload, LuFileText, LuCheck, LuSearch, LuBell, LuGlobe, LuMusic, LuShield, LuShieldCheck, LuTwitter, LuInstagram } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
+import Testimonial from '../../Components/Testimonial/Testimonial';
 
 
 const LandingPage = () => {
     return (
-        <div className='bg-black max-w-[1440px] mx-auto px-4 xl:px-0'>
+        <div className='bg-black  px-4 xl:px-0'>
             <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm px-4 xl:px-0">
                 <div className="container mx-auto flex items-center justify-between py-4">
                     <Link href="/" className="text-2xl font-bold text-white">
@@ -33,7 +34,7 @@ const LandingPage = () => {
                 </div>
             </nav>
             {/* Hero Section */}
-            <main className="container pt-20 pb-16 mt-4">
+            <main className="container mx-auto pt-20 pb-16 mt-4">
                 <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
                     <div className="inline-flex items-center rounded-full bg-[#7C3AED] px-4 py-1 text-sm text-white">
                         Protect your beats today
@@ -64,7 +65,7 @@ const LandingPage = () => {
                 </div>
             </main>
             {/* Results Section */}
-            <section className="container py-24">
+            <section className="container mx-auto py-24">
                 <div className="text-center mb-20">
                     <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
                         An <span className="text-[#7C3AED]">ALL-NEW</span> way to
@@ -147,7 +148,7 @@ const LandingPage = () => {
                 </div>
             </section>
             {/* Steps Section */}
-            <section className="container py-24">
+            <section className="container mx-auto py-24">
                 <div className="text-center mb-20">
                     <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
                         Register and Protect your beats in <span className="text-[#7C3AED]">3 easy steps</span>
@@ -193,7 +194,7 @@ const LandingPage = () => {
                 </div>
             </section>
             {/* Dashboard Preview Section */}
-            <section className="container py-16">
+            <section className="container mx-auto py-16">
                 <h2 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
                     Take Full Control of <span className="text-[#7C3AED]">Your Beats</span>
                 </h2>
@@ -211,7 +212,7 @@ const LandingPage = () => {
                 </div>
             </section>
             {/* Legal Protection Section */}
-            <section className="container py-24">
+            <section className="container mx-auto py-24">
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-16">
                         <div className="inline-block">
@@ -354,7 +355,7 @@ const LandingPage = () => {
             {/* Counter will here */}
             {/* ************************************ */}
             {/* Video Showcase Section */}
-            <section className="container py-24">
+            <section className="container mx-auto py-24">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-8">
                         <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
@@ -388,7 +389,7 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            <section className="container py-24">
+            <section className="container mx-auto py-24">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="relative group order-last lg:order-first">
                         <div className="absolute -inset-1 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
@@ -422,7 +423,7 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            <section className="container py-24">
+            <section className="container mx-auto py-24">
                 <div className="max-w-4xl mx-auto text-center">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
@@ -506,7 +507,7 @@ const LandingPage = () => {
                     </div>
                 </div>
             </section>
-            <section className="container py-24">
+            <section className="container mx-auto py-24">
                 <div className="max-w-4xl mx-auto text-center">
                     <h3 className="text-[#FFD700] text-lg font-semibold mb-4">
                         Every minute you wait, someone could be stealing your beat. Sign up now and protect yourself.
@@ -522,6 +523,148 @@ const LandingPage = () => {
                     </button>
                 </div>
             </section>
+            <Testimonial />
+            <section className="container mx-auto py-24">
+                <div className="text-center mb-16">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7C3AED]/10 border border-[#7C3AED]/20 mb-8">
+                        <span className="relative flex h-3 w-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7C3AED] opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#7C3AED]"></span>
+                        </span>
+                        <p className="text-lg font-medium bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 bg-clip-text text-transparent">
+                            Over 800 producers are already securing their work with BeatProtect
+                        </p>
+                    </div>
+                    <h2 className="text-4xl md:text-6xl font-bold text-white">
+                        Start Protecting your beats <span className="text-[#7C3AED]">Today</span>
+                    </h2>
+                </div>
+
+                <div className="max-w-xl mx-auto">
+                    {/* Monthly Plan */}
+                    <div className="relative ">
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
+                        <div className="relative bg-gray-950 rounded-xl p-8 shadow-2xl flex flex-col h-full">
+                            <div className="absolute -top-3 right-4">
+                                <span className="bg-[#7C3AED] text-white px-3 py-1 text-sm rounded-full">Popular</span>
+                            </div>
+
+                            <div className="mb-6">
+                                <h3 className="text-2xl font-bold text-white mb-2">Pro Monthly</h3>
+                                <div className="flex items-baseline">
+                                    <span className="text-4xl font-bold text-white">$9.99</span>
+                                    <span className="text-gray-400 ml-2">/month</span>
+                                </div>
+                            </div>
+
+                            <ul className="space-y-4 mb-8">
+                                <li className="flex items-center text-white">
+                                    <LuCheck className="h-5 w-5 text-[#7C3AED] mr-3" />
+                                    Register 20 Beats per month
+                                </li>
+                                <li className="flex items-center text-white">
+                                    <LuCheck className="h-5 w-5 text-[#7C3AED] mr-3" />
+                                    Advanced blockchain protection
+                                </li>
+                                <li className="flex items-center text-white">
+                                    <LuCheck className="h-5 w-5 text-[#7C3AED] mr-3" />
+                                    Legal Proof Certification
+                                </li>
+                                <li className="flex items-center text-white">
+                                    <LuCheck className="h-5 w-5 text-[#7C3AED] mr-3" />
+                                    Certificate Generation for Every Beat
+                                </li>
+                                <li className="flex items-center text-white">
+                                    <LuCheck className="h-5 w-5 text-[#7C3AED] mr-3" />
+                                    Get Extra Credits to Register More Beats
+                                </li>
+                            </ul>
+
+                            <button className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto">Get Pro Monthly</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer className="bg-black border-t border-gray-800">
+                <div className="container mx-auto py-12 md:py-16 lg:py-20">
+                    <div className="grid gap-8 lg:grid-cols-3">
+                        {/* Column 1: Logo and Description */}
+                        <div className="space-y-6">
+                            <Link href="/" className="text-2xl font-bold text-white">
+                                BeatProtect
+                            </Link>
+                            <p className="text-gray-400 text-sm max-w-[400px]">
+                                BeatProtect is your trusted partner in music protection. We provide cutting-edge blockchain technology
+                                and legal tools to secure your musical creations, ensuring your rights are protected worldwide.
+                            </p>
+                        </div>
+
+                        {/* Column 2: Navigation */}
+                        <div className="grid gap-8">
+                            <div className="space-y-4">
+                                <h3 className="text-white font-semibold">Menu</h3>
+                                <ul className="space-y-3">
+                                    <li>
+                                        <Link href="#" className="text-gray-400 hover:text-white text-sm">
+                                            Why BeatProtect?
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="text-gray-400 hover:text-white text-sm">
+                                            Support
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="text-gray-400 hover:text-white text-sm">
+                                            Pricing
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="text-gray-400 hover:text-white text-sm">
+                                            Contact Us
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Column 3: Social Media */}
+                        <div className="space-y-4">
+                            <h3 className="text-white font-semibold">Follow Us</h3>
+                            <div className="flex flex-col space-y-3">
+                                <Link href="#" className="text-gray-400 hover:text-white text-sm flex items-center gap-2">
+                                    <LuInstagram className="w-5 h-5" />
+                                    Instagram
+                                </Link>
+                                <Link href="#" className="text-gray-400 hover:text-white text-sm flex items-center gap-2">
+                                    <LuTwitter className="w-5 h-5" />
+                                    Twitter
+                                </Link>
+                                <Link href="#" className="text-gray-400 hover:text-white text-sm flex items-center gap-2">
+                                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.13v-3.31C6.15 10.39 2 11.83 2 15.89a4.83 4.83 0 0 0 4.83 4.83c2.6 0 4.83-2.23 4.83-4.83V8.73c1.38.88 3.03 1.34 4.83 1.34v-3.38z" />
+                                    </svg>
+                                    TikTok
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="border-t border-gray-800">
+                    <div className="container mx-auto py-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                        <div className="flex gap-4 text-sm text-gray-400">
+                            <Link href="/terms" className="hover:text-white">
+                                Terms of Use
+                            </Link>
+                            <Link href="/privacy" className="hover:text-white">
+                                Privacy Policy
+                            </Link>
+                        </div>
+                        <p className="text-gray-400 text-sm">© {new Date().getFullYear()} BeatProtect. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
         </div>
     );
 };
