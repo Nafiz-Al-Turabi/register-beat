@@ -1,39 +1,94 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaBell, FaMusic, FaTiktok } from 'react-icons/fa';
 import { HiOutlineShieldCheck, HiShieldCheck } from 'react-icons/hi';
 import { LuBarChart3, LuLineChart, LuUpload, LuFileText, LuCheck, LuSearch, LuBell, LuGlobe, LuMusic, LuShield, LuShieldCheck, LuTwitter, LuInstagram } from 'react-icons/lu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Testimonial from '../../Components/Testimonial/Testimonial';
 import StatsSection from '../../Components/AnimatedCounter/AnimatedCounter';
 import FAQ from '../../Components/FAQ/FAQ';
+import ContactUs from '../ContactUs/ContactUs';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 
 const LandingPage = () => {
+    const { user, logout } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const scrollToSection = (id) => {
+        const element = document.getElementById(id);
+        if (!element) {
+            console.warn(`Element with id "${id}" not found`);
+            return;
+        }
+
+        const startPosition = window.pageYOffset;
+        const targetPosition = element.getBoundingClientRect().top + startPosition;
+        const distance = targetPosition - startPosition;
+
+        // Increased duration for slower overall movement
+        const duration = 1500;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+
+            // Custom easing function for gentler acceleration and slower overall speed
+            const ease = 0.5 - Math.cos(progress * Math.PI) / 2;
+
+            // Add smoothing factor to reduce speed
+            const smoothedEase = Math.pow(ease, 1.5);
+
+            window.scrollTo(0, startPosition + distance * smoothedEase);
+
+            if (progress < 1) {
+                requestAnimationFrame(animation);
+            }
+        }
+
+        requestAnimationFrame(animation);
+    };
     return (
-        <div className='bg-black  px-4 xl:px-0'>
+        <div className='bg-black  px-4 2xl:px-0'>
             <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm px-4 xl:px-0">
                 <div className="container mx-auto flex items-center justify-between py-4">
-                    <Link to="/" className="text-2xl font-bold text-white">
+                    <button onClick={() => scrollToSection('hero')} className="text-2xl font-bold text-white">
                         BeatProtect
-                    </Link>
+                    </button>
                     <div className="hidden md:flex items-center space-x-8">
-                        <Link to="#" className="text-gray-300 hover:text-white">
+                        <button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-white">
                             Contact
-                        </Link>
-                        <Link to="#" className="text-gray-300 hover:text-white">
+                        </button>
+                        <button onClick={() => scrollToSection('pricing')} className="text-gray-300 hover:text-white">
                             Pricing
-                        </Link>
+                        </button>
                     </div>
                     <div className="flex items-center space-x-4">
-                        <Link to="/login" className="text-gray-300 hover:text-white">
-                            Sign In
-                        </Link>
-                        <button className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md">Get Started</button>
+                        {
+                            user ? (
+                                <button onClick={logout} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md">Logout</button>
+                            ) : (
+                                <Link to="/login" className="text-gray-300 hover:text-white">
+                                    Sign In
+                                </Link>
+                            )
+                        }
+                        {
+                            user
+                                ?
+                                <div>
+                                    <Link to="/dashboard" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md">Dashboard</Link>
+                                </div>
+                                :
+
+                                <button onClick={() => navigate('/signup')} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md"> Get Started
+                                </button>
+                        }
                     </div>
                 </div>
             </nav>
             {/* Hero Section */}
-            <main className="container mx-auto pt-20 pb-16 mt-4">
+            <main id="hero" className="container mx-auto pt-20 pb-16 mt-4">
                 <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
                     <div className="inline-flex items-center rounded-full bg-[#7C3AED] px-4 py-1 text-sm text-white">
                         Protect your beats today
@@ -523,7 +578,7 @@ const LandingPage = () => {
                 </div>
             </section>
             <Testimonial />
-            <section className="container mx-auto py-24">
+            <section id="pricing" className="container mx-auto py-24">
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7C3AED]/10 border border-[#7C3AED]/20 mb-8">
                         <span className="relative flex h-3 w-3">
@@ -585,6 +640,9 @@ const LandingPage = () => {
                 </div>
             </section>
             <FAQ />
+            <section id="contact">
+                <ContactUs />
+            </section>
             <footer className="bg-black border-t border-gray-800">
                 <div className="container mx-auto py-12 md:py-16 lg:py-20">
                     <div className="grid gap-8 lg:grid-cols-3">

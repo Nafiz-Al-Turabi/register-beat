@@ -27,7 +27,7 @@ const Payment = () => {
   );
 
   if (user?.active === true || user?.role === 'admin' || new Date(user?.subscriptionEndDate) > new Date()) {
-    navigate('/');
+    navigate('/dashboard');
   }
 
   useEffect(() => {
