@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaBell } from 'react-icons/fa';
 import { HiOutlineShieldCheck, HiShieldCheck } from 'react-icons/hi';
-import { LuBarChart3, LuLineChart } from 'react-icons/lu';
+import { LuBarChart3, LuLineChart, LuUpload, LuFileText } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 
 
@@ -143,6 +143,52 @@ const LandingPage = () => {
                                 className="w-full h-auto"
                             />
                         </div>
+                    </div>
+                </div>
+            </section>
+            {/* Steps Section */}
+            <section className="container py-24">
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
+                        Register and Protect your beats in <span className="text-[#7C3AED]">3 easy steps</span>
+                    </h2>
+                    <p className="text-xl text-gray-400">Protect your music with our simple registration process</p>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-8">
+                    {/* Step 1 */}
+                    <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800">
+                        <div className="w-12 h-12 bg-[#7C3AED] rounded-xl flex items-center justify-center mb-6">
+                            <LuUpload className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-white mb-3">Upload your beat</h3>
+                        <p className="text-gray-400">
+                            Simply upload your music file and we&apos;ll handle the technical details for you.
+                        </p>
+                    </div>
+
+                    {/* Step 2 */}
+                    <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800">
+                        <div className="w-12 h-12 bg-[#7C3AED] rounded-xl flex items-center justify-center mb-6">
+                            <LuFileText className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-white mb-3">Complete the Form</h3>
+                        <p className="text-gray-400">
+                            Include key details like your name, producer name, YouTube link, and specify your rights to ensure legal
+                            protection for your beat.
+                        </p>
+                    </div>
+
+                    {/* Step 3 */}
+                    <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800">
+                        <div className="w-12 h-12 bg-[#7C3AED] rounded-xl flex items-center justify-center mb-6">
+                            <HiOutlineShieldCheck className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-white mb-3">Receive Your Certificate ✅</h3>
+                        <p className="text-gray-400">
+                            A legal certificate with a digital fingerprint and timestamp is generated. Download your proof of
+                            registration and use it in any dispute.
+                        </p>
                     </div>
                 </div>
             </section>
