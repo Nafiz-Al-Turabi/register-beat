@@ -1,9 +1,11 @@
 import React from 'react';
-import { FaBell, FaMusic } from 'react-icons/fa';
+import { FaBell, FaMusic, FaTiktok } from 'react-icons/fa';
 import { HiOutlineShieldCheck, HiShieldCheck } from 'react-icons/hi';
 import { LuBarChart3, LuLineChart, LuUpload, LuFileText, LuCheck, LuSearch, LuBell, LuGlobe, LuMusic, LuShield, LuShieldCheck, LuTwitter, LuInstagram } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 import Testimonial from '../../Components/Testimonial/Testimonial';
+import StatsSection from '../../Components/AnimatedCounter/AnimatedCounter';
+import FAQ from '../../Components/FAQ/FAQ';
 
 
 const LandingPage = () => {
@@ -352,7 +354,7 @@ const LandingPage = () => {
                 </div>
             </section>
             {/* ************************************ */}
-            {/* Counter will here */}
+            <StatsSection />
             {/* ************************************ */}
             {/* Video Showcase Section */}
             <section className="container mx-auto py-24">
@@ -585,6 +587,7 @@ const LandingPage = () => {
                     </div>
                 </div>
             </section>
+            <FAQ />
             <footer className="bg-black border-t border-gray-800">
                 <div className="container mx-auto py-12 md:py-16 lg:py-20">
                     <div className="grid gap-8 lg:grid-cols-3">
@@ -641,9 +644,7 @@ const LandingPage = () => {
                                     Twitter
                                 </Link>
                                 <Link href="#" className="text-gray-400 hover:text-white text-sm flex items-center gap-2">
-                                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.13v-3.31C6.15 10.39 2 11.83 2 15.89a4.83 4.83 0 0 0 4.83 4.83c2.6 0 4.83-2.23 4.83-4.83V8.73c1.38.88 3.03 1.34 4.83 1.34v-3.38z" />
-                                    </svg>
+                                    <FaTiktok className="w-5 h-5" />
                                     TikTok
                                 </Link>
                             </div>
