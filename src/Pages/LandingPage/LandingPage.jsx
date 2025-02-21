@@ -506,6 +506,22 @@ const LandingPage = () => {
                     </div>
                 </div>
             </section>
+            <section className="container py-24">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h3 className="text-[#FFD700] text-lg font-semibold mb-4">
+                        Every minute you wait, someone could be stealing your beat. Sign up now and protect yourself.
+                    </h3>
+                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                        Don&apos;t wait until they&apos;re stolen. Protect your beats before uploading.
+                    </h2>
+                    <p className="text-xl text-gray-400 mb-8">
+                        Make sure every beat you upload is legally protected. Say goodbye to the fear of digital theft.
+                    </p>
+                    <button className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white text-lg py-2 px-8 rounded-md">
+                        Protect your Beats Today
+                    </button>
+                </div>
+            </section>
         </div>
     );
 };
