@@ -13,22 +13,19 @@ const LandingPage = () => {
         <div className='bg-black  px-4 xl:px-0'>
             <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm px-4 xl:px-0">
                 <div className="container mx-auto flex items-center justify-between py-4">
-                    <Link href="/" className="text-2xl font-bold text-white">
+                    <Link to="/" className="text-2xl font-bold text-white">
                         BeatProtect
                     </Link>
                     <div className="hidden md:flex items-center space-x-8">
-                        <Link href="#" className="text-gray-300 hover:text-white">
-                            Why BeatProtect?
+                        <Link to="#" className="text-gray-300 hover:text-white">
+                            Contact
                         </Link>
-                        <Link href="#" className="text-gray-300 hover:text-white">
-                            Support
-                        </Link>
-                        <Link href="#" className="text-gray-300 hover:text-white">
+                        <Link to="#" className="text-gray-300 hover:text-white">
                             Pricing
                         </Link>
                     </div>
                     <div className="flex items-center space-x-4">
-                        <Link href="/signin" className="text-gray-300 hover:text-white">
+                        <Link to="/login" className="text-gray-300 hover:text-white">
                             Sign In
                         </Link>
                         <button className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md">Get Started</button>

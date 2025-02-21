@@ -59,7 +59,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         isDropdown && (
                             <div ref={dropdownRef} className="absolute space-y-5 -bottom-20 text-white bg-[#1e1e1e] p-4 w-full border border-gray-700 rounded-md animate-dropdown ">
                                 <Link
-                                    to="/settings?name=profile"
+                                    to="/dashboard/settings?name=profile"
                                     className="flex items-center text-base text-white hover:text-white"
                                 >
                                     <RiUser3Line className="mr-2" /> Edit Profile
@@ -71,7 +71,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                     >
                                         <LuCreditCard className="mr-2" /> Manage Subscription
                                     </button> : <NavLink
-                                        to="/settings"
+                                        to="/dashboard/settings"
                                          className="flex items-center text-base text-white hover:text-white"
                                     >
                                         <FaCog className="mr-2" /> Settings
@@ -83,7 +83,8 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                 </div>
                 <nav className="space-y-2">
                     <NavLink
-                        to="/"
+                        to="/dashboard"
+                        end
                         className={({ isActive }) =>
                             `flex items-center text-base px-4 py-2 text-white font-medium rounded hover:bg-[#191919] hover:text-[#e3e6ed] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
                         }
@@ -91,7 +92,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         <MdOutlineDashboard className="mr-2" /> Dashboard
                     </NavLink>
                     <NavLink
-                        to="/my-beats"
+                        to="/dashboard/my-beats"
                         className={({ isActive }) =>
                             `flex items-center text-base px-4 py-2 text-white font-medium rounded hover:bg-[#191919] hover:text-[#e3e6ed] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
                         }
@@ -125,7 +126,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     }
                     <hr className='my-2 border-zinc-700' />
                     <NavLink
-                        to="/settings"
+                        to="/dashboard/settings"
                         className={({ isActive }) =>
                             `flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
                         }

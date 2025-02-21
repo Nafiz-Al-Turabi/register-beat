@@ -32,23 +32,28 @@ const protectedRoute = (element, roles) => (
 export const router = createBrowserRouter([
   {
     path: "/",
+    element: <LandingPage />, 
+  },
+  {
+    path: "/dashboard",
     element: protectedRoute(<DashboardLayout />, ["admin", "user"]),
-    errorElement: <NotFound></NotFound>,
+    errorElement: <NotFound />,
     children: [
-      { path: "/", element: <DashboardContents /> },
-      { path: "/settings", element: <Settings /> },
-      { path: "/upgrade", element: <PlanPurchase /> },
-      { path: "/register-beat", element: <RegisterBeat /> },
-      { path: "/my-beats", element: <MyBeats /> },
-      { path: "/song-matches", element: <SongMatches /> },
-      { path: "/profile", element: <Profile /> },
-      { path: "/contact", element: <Contact /> },
-      { path: "/search-beat", element: <SearchBeat /> },
+      { path: "", element: <DashboardContents /> }, 
+      { path: "settings", element: <Settings /> },
+      { path: "upgrade", element: <PlanPurchase /> },
+      { path: "register-beat", element: <RegisterBeat /> },
+      { path: "my-beats", element: <MyBeats /> },
+      { path: "song-matches", element: <SongMatches /> },
+      { path: "profile", element: <Profile /> },
+      { path: "contact", element: <Contact /> },
+      { path: "search-beat", element: <SearchBeat /> },
     ],
   },
-  { path: "/payment", element: protectedRoute(<Payment />, ["user", "admin"]) },
-  { path: "/beat-protect", element: <LandingPage /> },
-
+  {
+    path: "/payment",
+    element: protectedRoute(<Payment />, ["user", "admin"]),
+  },
   {
     path: "/login",
     element: <Login />,
@@ -77,7 +82,7 @@ export const router = createBrowserRouter([
       { path: "users", element: <Users /> },
       { path: "users/:id", element: <UserDetails /> },
       { path: "allcontact", element: <AdminContact /> },
-      { path: "transections", element: <Transactions /> },
+      { path: "transactions", element: <Transactions /> },
     ],
   },
 ]);
