@@ -23,6 +23,7 @@ import SearchBeat from "../Pages/SearchBeat/SearchBeat";
 import PaypalLoading from "../Components/PaypalLoading/PaypalLoading";
 import TermOfUse from "../Pages/TermOfUse/TermOfUse";
 import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
+import LandingPage from "../Pages/LandingPage/LandingPage";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -46,6 +47,7 @@ export const router = createBrowserRouter([
     ],
   },
   { path: "/payment", element: protectedRoute(<Payment />, ["user", "admin"]) },
+  { path: "/beat-protect", element: <LandingPage /> },
 
   {
     path: "/login",
