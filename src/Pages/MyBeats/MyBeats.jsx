@@ -157,7 +157,7 @@ const MyBeats = () => {
               <p className="text-xl xl:text-3xl text-[#adbace] font-bold">No recent activity</p>
               <p className="text-xl text-[#6b7c96]">Start by registering your first beat to see activity here.</p>
               <div>
-                <Link to='/register-beat'>
+                <Link to='/dashboard/register-beat'>
                   <button className='p-3 px-5 mt-4 primary-bg rounded-md text-xl font-bold'>Register a Beat</button>
                 </Link>
               </div>

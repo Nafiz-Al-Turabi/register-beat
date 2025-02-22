@@ -26,7 +26,7 @@ const Settings = () => {
             <button className={`pb-2 px-4 ${settingActive ? 'border-b-2 border-[#7e3aed] text-[#7e3aed]' : ''}`} onClick={() => handleActive('settings')}>Settings</button>
             <button className={`pb-2 px-4 ${planActive ? 'border-b-2 border-[#7e3aed] text-[#7e3aed]' : ''}`} onClick={() => handleActive('plans')}>Plan & Billing</button>
         </div>
-        <div className='p-4'>
+        <div className='py-4 md:p-4'>
             {settingActive && (
                 <div className='animate-from-middle'>
                     <ProfileSetting />

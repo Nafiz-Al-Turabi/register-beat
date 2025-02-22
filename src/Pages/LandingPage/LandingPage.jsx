@@ -81,7 +81,7 @@ const LandingPage = () => {
                                 </div>
                                 :
 
-                                <button onClick={() => navigate('/signup')} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md"> Get Started
+                                <button onClick={() => navigate('/dashboard')} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md"> Get Started
                                 </button>
                         }
                     </div>
@@ -112,7 +112,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-center w-full mt-8">
-                        <button className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-10 py-2 rounded-md">
+                        <button className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-10 py-2 rounded-md duration-300 ease-in-out">
                             Register Your Beat Now
                         </button>
                     </div>
@@ -397,7 +397,7 @@ const LandingPage = () => {
                                     Don&apos;t leave your music unprotected. Register your first beat today and ensure it&apos;s yours
                                     forever.
                                 </p>
-                                <button size="lg" className="w-full bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md">
+                                <button onClick={() => navigate('/dashboard')} size="lg" className="w-full bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md duration-300 ease-in-out">
                                     Start Protecting Your Beats
                                 </button>
                             </div>
@@ -422,7 +422,7 @@ const LandingPage = () => {
                             confidence, knowing you can always prove your ownership.
                         </p>
                         <div className="flex items-center gap-4">
-                            <button size="lg" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md">
+                            <button onClick={() => navigate('/dashboard')} size="lg" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md duration-300 ease-in-out ">
                                 Start Protecting your Beats
                             </button>
                         </div>
@@ -469,7 +469,7 @@ const LandingPage = () => {
                             someone else registers your work.
                         </p>
                         <div className="flex items-center gap-4">
-                            <button size="lg" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md">
+                            <button onClick={() => navigate('/dashboard')} size="lg" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md duration-300 ease-in-out ">
                                 Start Protecting your Beats
                             </button>
                         </div>
@@ -555,7 +555,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="text-center">
-                        <button className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white text-lg py-2 px-8 rounded-md">
+                        <button onClick={() => navigate('/dashboard')} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white text-lg py-2 px-8 rounded-md duration-300 ease-in-out ">
                             Register Your Beat Now
                         </button>
                     </div>
@@ -572,7 +572,7 @@ const LandingPage = () => {
                     <p className="text-xl text-gray-400 mb-8">
                         Make sure every beat you upload is legally protected. Say goodbye to the fear of digital theft.
                     </p>
-                    <button className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white text-lg py-2 px-8 rounded-md">
+                    <button onClick={() => navigate('/dashboard')} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white text-lg py-2 px-8 rounded-md duration-300 ease-in-out ">
                         Protect your Beats Today
                     </button>
                 </div>
@@ -634,7 +634,7 @@ const LandingPage = () => {
                                 </li>
                             </ul>
 
-                            <button className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto">Get Pro Monthly</button>
+                            <button onClick={() => navigate('/payment')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Pro Monthly</button>
                         </div>
                     </div>
                 </div>
@@ -663,24 +663,14 @@ const LandingPage = () => {
                                 <h3 className="text-white font-semibold">Menu</h3>
                                 <ul className="space-y-3">
                                     <li>
-                                        <Link href="#" className="text-gray-400 hover:text-white text-sm">
-                                            Why BeatProtect?
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#" className="text-gray-400 hover:text-white text-sm">
-                                            Support
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#" className="text-gray-400 hover:text-white text-sm">
+                                        <button onClick={() => scrollToSection('pricing')} className="text-gray-400 hover:text-white text-sm">
                                             Pricing
-                                        </Link>
+                                        </button>
                                     </li>
                                     <li>
-                                        <Link href="#" className="text-gray-400 hover:text-white text-sm">
+                                        <button onClick={() => scrollToSection('contact')}className="text-gray-400 hover:text-white text-sm">
                                             Contact Us
-                                        </Link>
+                                        </button>
                                     </li>
                                 </ul>
                             </div>
