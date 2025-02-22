@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { LuSend } from "react-icons/lu";
+import axiosInstance from "../../Axios/AxiosInstance";
 
 export default function ContactUs() {
     const [isLoading, setIsLoading] = useState(false);
@@ -15,14 +17,22 @@ export default function ContactUs() {
 
     async function onSubmit(data) {
         setIsLoading(true);
-
-        // Simulate form submission delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        alert("Message sent! We'll get back to you as soon as possible.");
-
-        setIsLoading(false);
-        reset();
+        try {
+            const response = await axiosInstance.post('/support/create', {
+                name: data.name,
+                email: data.email,
+                issue: data.message
+            });
+            
+            if (response.status === 200 || response.status === 201) {
+                toast.success(response.data.message || "Message sent! We'll get back to you as soon as possible.");
+                reset();
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to send message. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -48,8 +58,8 @@ export default function ContactUs() {
                                     First Name
                                 </label>
                                 <input
-                                    id="firstName"
-                                    {...register("firstName", { required: "First name is required" })}
+                                    id="name"
+                                    {...register("name", { required: "First name is required" })}
                                     placeholder="Enter your first name"
                                     className="bg-zinc-900 border border-zinc-800 rounded-md p-2"
                                 />

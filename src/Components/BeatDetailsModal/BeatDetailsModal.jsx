@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import fileUrl from "../../Axios/fileUrl";
 import { RiErrorWarningLine } from "react-icons/ri";
 import esFlag from "../../assets/img/spain.png"
@@ -8,11 +8,22 @@ import bg from "../../assets/img/details-bg.jpg"
 
 
 const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
-    if (!isOpen) return null;
+    const [isAnimating, setIsAnimating] = useState(false);
 
-    console.log(beatDetails)
+    useEffect(() => {
+        if (isOpen) {
+            setIsAnimating(true);
+        }
+    }, [isOpen]);
 
-    const closeModal = () => setIsOpen(false);
+    if (!isOpen && !isAnimating) return null;
+
+    const closeModal = () => {
+        setIsAnimating(false);
+        setTimeout(() => {
+            setIsOpen(false);
+        }, 300); 
+    };
 
     const StatCard = ({ title, value, className = "" }) => (
         <div className="bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl hover:bg-gray-800/50 transition-all duration-300">
@@ -28,7 +39,9 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                 onClick={closeModal}
             >
                 <div
-                    className="relative w-full max-w-4xl rounded-2xl bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white shadow-2xl border border-gray-800/50"
+                     className={`relative w-full max-w-4xl rounded-2xl bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white shadow-2xl border border-gray-800/50 transition-all duration-300 ${
+                        isAnimating ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+                    }`}
                     onClick={e => e.stopPropagation()}
                 >
                     {/* Top Decorative Bar */}
@@ -71,7 +84,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         <div className="space-y-6 lg:col-span-1">
                                             {/* Beat Image */}
-                                            <div className="w-full h-64 md:h-80 group relative overflow-hidden rounded-xl" 
+                                            <div className="w-full h-64 md:h-80 group relative overflow-hidden rounded-xl p-2" 
                                                 style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'left' }}
                                             >
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
