@@ -112,7 +112,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-center w-full mt-8">
-                        <button className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-10 py-2 rounded-md duration-300 ease-in-out">
+                        <button onClick={() => navigate('/dashboard')}  className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-10 py-2 rounded-md duration-300 ease-in-out">
                             Register Your Beat Now
                         </button>
                     </div>
