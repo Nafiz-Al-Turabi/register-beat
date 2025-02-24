@@ -65,7 +65,7 @@ const AdminDashboard = () => {
                         </NavLink>
                         <NavLink
                             onClick={() => setIsOpen(!isOpen)}
-                            to="transections"
+                            to="transactions"
                             className={({ isActive }) =>
                                 `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
                             }

@@ -13,7 +13,7 @@ const Users = () => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 100;
+  const itemsPerPage = 40;
 
   const {
     isLoading,

@@ -146,7 +146,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
 
             setTimeout(() => {
                 setRedirectLoading(false);
-                navigate("/");
+                navigate("/dashboard");
             }, 30000);
             setTimeout(() => {
                 refreshUserInfo();

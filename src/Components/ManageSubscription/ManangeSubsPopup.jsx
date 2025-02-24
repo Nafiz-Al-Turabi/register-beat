@@ -50,12 +50,12 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
 
     const handleContactClick = () => {
         setShowPopup(false);
-        navigate('/contact');
+        navigate('/dashboard/contact');
     };
 
    const handlecloseToHome = () => {
     setShowPopup(false);
-    navigate('/');
+    navigate('/dashboard');
    }
 
     return (

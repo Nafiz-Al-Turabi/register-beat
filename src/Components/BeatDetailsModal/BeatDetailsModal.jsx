@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import fileUrl from "../../Axios/fileUrl";
 import { RiErrorWarningLine } from "react-icons/ri";
 import esFlag from "../../assets/img/spain.png"
 import usFlag from "../../assets/img/usa.png"
 import Loading from "../Loading/Loading";
+import bg from "../../assets/img/details-bg.jpg"
 
 
 const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
-    if (!isOpen) return null;
+    const [isAnimating, setIsAnimating] = useState(false);
 
-    console.log(beatDetails)
+    useEffect(() => {
+        if (isOpen) {
+            setIsAnimating(true);
+        }
+    }, [isOpen]);
 
-    const closeModal = () => setIsOpen(false);
+    if (!isOpen && !isAnimating) return null;
+
+    const closeModal = () => {
+        setIsAnimating(false);
+        setTimeout(() => {
+            setIsOpen(false);
+        }, 300); 
+    };
 
     const StatCard = ({ title, value, className = "" }) => (
         <div className="bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl hover:bg-gray-800/50 transition-all duration-300">
@@ -27,7 +39,9 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                 onClick={closeModal}
             >
                 <div
-                    className="relative w-full max-w-4xl rounded-2xl bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white shadow-2xl border border-gray-800/50"
+                     className={`relative w-full max-w-4xl rounded-2xl bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white shadow-2xl border border-gray-800/50 transition-all duration-300 ${
+                        isAnimating ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+                    }`}
                     onClick={e => e.stopPropagation()}
                 >
                     {/* Top Decorative Bar */}
@@ -51,7 +65,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                         ) :
                             <>
                                 <div className="pt-8 px-8">
-                                    <h2 className="text-4xl font-bold bg-[#7C3AED] bg-clip-text text-transparent">
+                                    <h2 className="text-4xl font-bold bg-[#7e3aed] bg-clip-text text-transparent">
                                         {beatDetails?.beatName}
                                     </h2>
                                     <div className="mt-2 flex items-center space-x-2">
@@ -67,42 +81,31 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                 {/* Main Content */}
                                 <div className="p-8 space-y-8">
                                     {/* Image and Primary Info */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                        <div className="space-y-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                        <div className="space-y-6 lg:col-span-1">
                                             {/* Beat Image */}
-                                            <div className=" w-full h-44 group relative overflow-hidden rounded-xl ">
+                                            <div className="w-full h-64 md:h-80 group relative overflow-hidden rounded-xl p-2" 
+                                                style={{ backgroundImage: `url(${bg})`, backgroundSize: 'cover', backgroundPosition: 'left' }}
+                                            >
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                                 <img
                                                     src={`${fileUrl}/${beatDetails?.imagePath}`}
                                                     alt="Beat Cover"
-                                                    className="w-full aspect-square object-cover rounded-xl transform transition-transform group-hover:scale-105"
+                                                    className="w-full h-full object-contain rounded-xl transition-transform duration-300 "
                                                 />
                                             </div>
 
                                             <div className="bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl hover:bg-gray-800/50 transition-all duration-300 space-y-2">
                                                 <div className="flex justify-between items-center">
                                                     <h1 className="text-base font-bold text-gray-400">Status:</h1>
-                                                    <p className="text-xs">{beatDetails?.registrationStatus}</p>
+                                                    <p className="text-[10px]">{beatDetails?.registrationStatus}</p>
                                                 </div>
                                                 <div className="flex justify-between items-center">
                                                     <h1 className="text-base font-bold text-gray-400">Registrasion code:</h1>
-                                                    <p className="text-xs">{beatDetails?.registerCode}</p>
+                                                    <p className="text-[10px]">{beatDetails?.registerCode}</p>
                                                 </div>
                                             </div>
-                                            <div className="bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl hover:bg-gray-800/50 transition-all duration-300">
-                                                <div>
-                                                    <h1 className="text-lg font-semibold bg-[#7C3AED] bg-clip-text text-transparent">
-                                                        Certificate:
-                                                    </h1>
-                                                    <p className="text-sm">
-                                                        {beatDetails?.certificateUrl
-                                                            ? beatDetails.certificateUrl.startsWith("http")
-                                                                ? "Your certificate is ready to download"
-                                                                : <span className="text-sm bg-red-400/20 p-0.5 px-1 lg:px-2 rounded-md flex items-center gap-2"> <RiErrorWarningLine className="text-red-500 text-base lg:text-base" />{beatDetails.certificateUrl}</span>
-                                                            : "It will take up to 24 hours to generate."}
-                                                    </p>
-                                                </div>
-                                            </div>
+                                            
 
                                             {/* YouTube Link */}
                                             <a
@@ -123,7 +126,7 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
 
                                         </div>
 
-                                        <div className="space-y-6">
+                                        <div className="space-y-6 lg:col-span-2">
                                             {/* Beat Stats Grid */}
                                             <div className="grid grid-cols-2 gap-4">
                                                 <StatCard title="BPM" value={beatDetails?.bpm} className="text-[#7C3AED] " />
@@ -139,21 +142,21 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                             </div>
 
                                             {/* Producers Section */}
-                                            <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl space-y-4">
+                                            <div className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl ">
                                                 <h3 className="text-lg font-semibold bg-[#7C3AED]  bg-clip-text text-transparent">
                                                     Producers
                                                 </h3>
                                                 <div className="space-y-1">
                                                     <div className="flex justify-between">
-                                                        <span className="text-gray-400">Full name:</span>
+                                                        <span className="text-gray-400">Full Name:</span>
                                                         <span className="font-medium">{beatDetails?.fullName}</span>
                                                     </div>
                                                     {
-                                                        beatDetails?.producer ? 
-                                                        <div className="flex justify-between">
-                                                            <span className="text-gray-400">Producer:</span>
-                                                            <p className="font-medium flex flex-col items-center gap-2 text-right"><span>{beatDetails?.producer}</span></p>
-                                                        </div> : null
+                                                        beatDetails?.producer ?
+                                                            <div className="flex justify-between">
+                                                                <span className="text-gray-400">Producer:</span>
+                                                                <p className="font-medium flex flex-col items-center gap-2 text-right"><span>{beatDetails?.producer}</span></p>
+                                                            </div> : null
                                                     }
                                                     {
                                                         beatDetails?.producerName && beatDetails?.collaborators ?
@@ -188,19 +191,33 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                                     className="flex-1"
                                                 />
                                             </div>
+                                            <div className="bg-gray-900/50 backdrop-blur-sm p-4 rounded-xl hover:bg-gray-800/50 transition-all duration-300">
+                                                <div className="md:flex items-center gap-2">
+                                                    <h1 className="text-lg font-semibold bg-[#7C3AED] bg-clip-text text-transparent">
+                                                        Certificate:
+                                                    </h1>
+                                                    <p className="text-sm">
+                                                        {beatDetails?.certificateUrl
+                                                            ? beatDetails.certificateUrl.startsWith("http")
+                                                                ? "Your certificate is ready to download"
+                                                                : <span className="text-sm bg-red-400/20 p-0.5 px-1 lg:px-2 rounded-md flex items-center gap-2"> <RiErrorWarningLine className="text-red-500 text-base lg:text-base" />{beatDetails.certificateUrl}</span>
+                                                            : "It will take up to 24 hours to generate."}
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="flex justify-end p-4  border-gray-800/50">
+                                <div className="md:flex justify-end p-4 border-t  border-gray-800/50 ">
 
                                     {/* Footer */}
                                     {beatDetails?.certificateUrl?.startsWith("http") && (
-                                        <div className="p-4 border-t border-gray-800/50">
+                                        <div className="p-4">
                                             <div className="flex justify-end">
                                                 <button
                                                     onClick={() => window.open(beatDetails.certificateUrl, '_blank')}
-                                                    className="flex items-center gap-2 px-8 py-3  bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] rounded-md transform hover:scale-105 transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                                                    className="w-full flex items-center gap-2 px-8 py-3  bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] rounded-md transform hover:scale-105 transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
                                                 >
 
                                                     Download Certificate EN <img src={usFlag} alt="usFlag" className="w-5 h-5" />
@@ -209,11 +226,11 @@ const BeatDetailsModal = ({ isOpen, setIsOpen, beatDetails, beatLoading }) => {
                                         </div>
                                     )}
                                     {beatDetails?.certificateUrlSpanish?.startsWith("http") && (
-                                        <div className="p-4 border-t border-gray-800/50">
+                                        <div className="p-4">
                                             <div className="flex justify-end">
                                                 <button
                                                     onClick={() => window.open(beatDetails.certificateUrlSpanish, '_blank')}
-                                                    className="flex items-center gap-2 px-8 py-3  bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] rounded-md transform hover:scale-105 transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                                                    className="w-full flex items-center gap-2 px-8 py-3  bg-gradient-to-l to-[#7837eb] from-[#5046e6] hover:bg-gradient-to-r hover:to-[#7837eb] hover:from-[#5046e6] rounded-md transform hover:scale-105 transition-all duration-300 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
 
                                                 >
                                                     Descargar Certificado ES <img src={esFlag} alt="esFlag" className="w-5 h-5" />

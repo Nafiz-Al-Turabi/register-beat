@@ -28,7 +28,7 @@ const Protected = ({ children, role = [] }) => {
     }
 
     if (user && isLoginPage) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/dashbaord" replace />;
     }
 
     if (user?.paypalSubsStatus === 'pending') {
@@ -52,7 +52,7 @@ const Protected = ({ children, role = [] }) => {
 
     const roles = Array.isArray(role) ? role : [role];
     if (roles.length > 0 && user && !roles.includes(user.role) && !isHomePage) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/dashboard" replace />;
     }
 
     return children;

@@ -33,7 +33,7 @@ const Login = () => {
                 password: data.password
             })
             toast.success("Login Successful")
-            navigate("/")
+            navigate("/dashboard")
         } catch (error) {
             console.error('Login error:', error.response?.data?.message || error.message);
         } finally {
