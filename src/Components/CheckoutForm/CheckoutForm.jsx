@@ -68,7 +68,7 @@ const CheckoutForm = ({ priceId }) => {
         setTimeout(() => {
           navigate('/dashboard');
           refreshUserInfo();
-        }, 1500);
+        }, 3500);
       } else {
         toast.error('Subscription creation failed!');
       }
