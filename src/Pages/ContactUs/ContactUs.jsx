@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { LuSend } from "react-icons/lu";
@@ -8,6 +8,9 @@ import axiosInstance from "../../Axios/AxiosInstance";
 
 export default function ContactUs() {
     const [isLoading, setIsLoading] = useState(false);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const {
         register,
         handleSubmit,

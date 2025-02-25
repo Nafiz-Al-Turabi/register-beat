@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Fa0 } from 'react-icons/fa6';
 import { LuCheck } from "react-icons/lu";
 import FAQ from '../../Components/FAQ/FAQ';
 const Pricing = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className='px-4 2xl:px-0'>
             <section id="pricing" className="container mx-auto py-16 lg:py-24">

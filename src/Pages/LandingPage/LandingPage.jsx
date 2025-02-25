@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
-import { FaBell, FaMusic, FaTiktok } from 'react-icons/fa';
-import { HiOutlineShieldCheck, HiShieldCheck } from 'react-icons/hi';
+import { FaTiktok } from 'react-icons/fa';
+import { HiOutlineShieldCheck, } from 'react-icons/hi';
 import { LuBarChart3, LuLineChart, LuUpload, LuFileText, LuCheck, LuSearch, LuBell, LuGlobe, LuMusic, LuShield, LuShieldCheck, LuTwitter, LuInstagram } from 'react-icons/lu';
 import { Link, useNavigate } from 'react-router-dom';
 import Testimonial from '../../Components/Testimonial/Testimonial';
 import StatsSection from '../../Components/AnimatedCounter/AnimatedCounter';
 import FAQ from '../../Components/FAQ/FAQ';
-import ContactUs from '../ContactUs/ContactUs';
 import { AuthContext } from '../../Provider/AuthProvider';
+import youtube from '../../assets/img/youtubeicon2.png'
+import spotify from '../../assets/img/spotify-icon.png'
+import apple from '../../assets/img/apple-music-icon.png'
 
 
 const LandingPage = () => {
@@ -381,10 +383,15 @@ const LandingPage = () => {
                             </div>
 
                             <div className="mt-8 pt-8 border-t border-gray-800">
-                                <p className="text-lg text-white mb-6">
-                                    Don&apos;t leave your music unprotected. Register your first beat today and ensure it&apos;s yours
-                                    forever.
+                                <p className="text-lg text-white text-center mb-6">
+                                Protect your beats from unauthorized uploads on
+                                major platforms
                                 </p>
+                                <div className='flex items-center justify-center gap-4 mb-10'>
+                                    <img src={youtube} alt="" className='w-12 h-12' />
+                                    <img src={spotify} alt="" className='w-12 h-12' />
+                                    <img src={apple} alt="" className='w-12 h-12' />
+                                </div>
                                 <button onClick={() => navigate('/dashboard')} size="lg" className="w-full bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md duration-300 ease-in-out">
                                     Start Protecting Your Beats
                                 </button>
