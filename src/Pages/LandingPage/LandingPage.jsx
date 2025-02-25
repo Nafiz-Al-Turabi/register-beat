@@ -46,13 +46,10 @@ const LandingPage = () => {
                     <button onClick={() => scrollToSection('hero')} className="text-2xl font-bold text-white">
                         BeatProtect
                     </button>
-                    <div className="hidden md:flex items-center space-x-8">
-                        <button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-white">
-                            Contact
-                        </button>
-                        <button onClick={() => scrollToSection('pricing')} className="text-gray-300 hover:text-white">
-                            Pricing
-                        </button>
+                   
+                    <div className='flex items-center space-x-4'>
+                        <Link to={`/contact-us?${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`} className="text-gray-300 hover:text-white">Contact</Link>
+                        <Link to={`/pricing?${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`} className="text-gray-300 hover:text-white">Pricing</Link>
                     </div>
                     <div className="flex items-center space-x-4">
                         {
@@ -631,9 +628,6 @@ const LandingPage = () => {
                 </div>
             </section>
             <FAQ />
-            <section id="contact">
-                <ContactUs />
-            </section>
             <footer className="bg-black border-t border-gray-800">
                 <div className="container mx-auto py-12 md:py-16 lg:py-20">
                     <div className="grid gap-8 lg:grid-cols-3">

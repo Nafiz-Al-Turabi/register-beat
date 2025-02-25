@@ -24,6 +24,8 @@ import PaypalLoading from "../Components/PaypalLoading/PaypalLoading";
 import TermOfUse from "../Pages/TermOfUse/TermOfUse";
 import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import LandingPage from "../Pages/LandingPage/LandingPage";
+import ContactUs from "../Pages/ContactUs/ContactUs";
+import Pricing from "../Pages/Pricing/Pricing";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -73,6 +75,14 @@ export const router = createBrowserRouter([
   {
     path: "/privacy",
     element: <PrivacyPolicy />,
+  },
+  {
+    path: "/contact-us",
+    element: <ContactUs />,
+  },
+  {
+    path: "/pricing",
+    element: <Pricing />,
   },
   {
     path: "/admin-dashboard",
