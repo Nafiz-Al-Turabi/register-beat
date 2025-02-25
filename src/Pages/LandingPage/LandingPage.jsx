@@ -19,12 +19,9 @@ const LandingPage = () => {
             console.warn(`Element with id "${id}" not found`);
             return;
         }
-
         const startPosition = window.pageYOffset;
         const targetPosition = element.getBoundingClientRect().top + startPosition;
         const distance = targetPosition - startPosition;
-
-        // Increased duration for slower overall movement
         const duration = 1500;
         let startTime = null;
 
@@ -32,26 +29,20 @@ const LandingPage = () => {
             if (startTime === null) startTime = currentTime;
             const timeElapsed = currentTime - startTime;
             const progress = Math.min(timeElapsed / duration, 1);
-
-            // Custom easing function for gentler acceleration and slower overall speed
             const ease = 0.5 - Math.cos(progress * Math.PI) / 2;
-
-            // Add smoothing factor to reduce speed
             const smoothedEase = Math.pow(ease, 1.5);
-
             window.scrollTo(0, startPosition + distance * smoothedEase);
 
             if (progress < 1) {
                 requestAnimationFrame(animation);
             }
         }
-
         requestAnimationFrame(animation);
     };
     return (
-        <div className='bg-black  px-4 2xl:px-0'>
-            <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm px-4 xl:px-0">
-                <div className="container mx-auto flex items-center justify-between py-4">
+        <div className='bg-black px-4 2xl:px-0'>
+            <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm">
+                <div className="container mx-auto flex items-center justify-between py-4 px-4 2xl:px-0">
                     <button onClick={() => scrollToSection('hero')} className="text-2xl font-bold text-white">
                         BeatProtect
                     </button>
