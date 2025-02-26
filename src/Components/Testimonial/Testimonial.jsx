@@ -5,8 +5,8 @@ import testimonials from '../../../public/tesimonials.json';
 const Testimonial = () => {
     return (
         <div>
-            <section className="container mx-auto py-24">
-                <div className="text-center mb-16">
+            <section className="container mx-auto py-10 lg:py-24">
+                <div className="text-center mb-8 lg:mb-16">
                     <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
                         Trusted by Producers <span className="text-[#7C3AED]">Worldwide</span>
                     </h2>

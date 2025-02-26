@@ -26,6 +26,7 @@ import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import LandingPage from "../Pages/LandingPage/LandingPage";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import Pricing from "../Pages/Pricing/Pricing";
+import LandingLayout from "../Layout/landingLayout";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -34,7 +35,21 @@ const protectedRoute = (element, roles) => (
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage />, 
+    element: <LandingLayout />, 
+    children: [
+      {
+        path: "/",
+        element: <LandingPage />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs />,
+      },
+      {
+        path: "/pricing",
+        element: <Pricing />,
+      },
+    ],
   },
   {
     path: "/dashboard",
@@ -76,14 +91,7 @@ export const router = createBrowserRouter([
     path: "/privacy",
     element: <PrivacyPolicy />,
   },
-  {
-    path: "/contact-us",
-    element: <ContactUs />,
-  },
-  {
-    path: "/pricing",
-    element: <Pricing />,
-  },
+  
   {
     path: "/admin-dashboard",
     element: protectedRoute(<AdminDashboard />, ["admin"]),

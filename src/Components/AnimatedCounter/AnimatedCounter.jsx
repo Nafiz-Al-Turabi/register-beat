@@ -54,8 +54,8 @@ const AnimatedCounter = ({ end, duration = 5000 }) => {
 
 const StatsSection = () => {
     return (
-        <section className="container mx-auto py-24">
-            <div className="text-center mb-16">
+        <section className="container mx-auto lg:py-24">
+            <div className="text-center mb-8 lg:mb-16">
                 <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
                     Real Results: <span className="text-[#7C3AED]">Protecting Producers Worldwide</span>
                 </h2>

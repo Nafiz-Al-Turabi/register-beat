@@ -9,7 +9,7 @@ const Protected = ({ children, role = [] }) => {
     const location = useLocation();
 
     // Prevent infinite redirects by checking current path
-    const isLoginPage = location.pathname === '/login';
+    const isLoginPage = location.pathname === '/signup';
     const isPaymentPage = location.pathname === '/payment';
     const isHomePage = location.pathname === '/';
 
@@ -20,8 +20,8 @@ const Protected = ({ children, role = [] }) => {
     if (!user && !isLoginPage) {
         return (
             <Navigate 
-                to="/login" 
-                state={{ from: location.pathname !== '/login' ? location : '/' }} 
+                to="/signup" 
+                state={{ from: location.pathname !== '/signup' ? location : '/' }} 
                 replace 
             />
         );

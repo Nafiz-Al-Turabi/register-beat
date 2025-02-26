@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FaTiktok } from 'react-icons/fa';
 import { HiOutlineShieldCheck, } from 'react-icons/hi';
 import { LuBarChart3, LuLineChart, LuUpload, LuFileText, LuCheck, LuSearch, LuBell, LuGlobe, LuMusic, LuShield, LuShieldCheck, LuTwitter, LuInstagram } from 'react-icons/lu';
@@ -15,70 +15,14 @@ import apple from '../../assets/img/apple-music-icon.png'
 const LandingPage = () => {
     const { user, logout } = useContext(AuthContext)
     const navigate = useNavigate()
-    const scrollToSection = (id) => {
-        const element = document.getElementById(id);
-        if (!element) {
-            console.warn(`Element with id "${id}" not found`);
-            return;
-        }
-        const startPosition = window.pageYOffset;
-        const targetPosition = element.getBoundingClientRect().top + startPosition;
-        const distance = targetPosition - startPosition;
-        const duration = 1500;
-        let startTime = null;
-
-        function animation(currentTime) {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
-            const ease = 0.5 - Math.cos(progress * Math.PI) / 2;
-            const smoothedEase = Math.pow(ease, 1.5);
-            window.scrollTo(0, startPosition + distance * smoothedEase);
-
-            if (progress < 1) {
-                requestAnimationFrame(animation);
-            }
-        }
-        requestAnimationFrame(animation);
-    };
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    // }, []);
     return (
         <div className='bg-black px-4 2xl:px-0'>
-            <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm">
-                <div className="container mx-auto flex items-center justify-between py-4 px-4 2xl:px-0">
-                    <button onClick={() => scrollToSection('hero')} className="text-2xl font-bold text-white">
-                        BeatProtect
-                    </button>
-                   
-                    <div className='flex items-center space-x-4'>
-                        <Link to={`/contact-us?${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`} className="text-gray-300 hover:text-white">Contact</Link>
-                        <Link to={`/pricing?${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`} className="text-gray-300 hover:text-white">Pricing</Link>
-                    </div>
-                    <div className="flex items-center space-x-4">
-                        {
-                            user ? (
-                                <button onClick={logout} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md">Logout</button>
-                            ) : (
-                                <Link to="/login" className="text-gray-300 hover:text-white">
-                                    Sign In
-                                </Link>
-                            )
-                        }
-                        {
-                            user
-                                ?
-                                <div>
-                                    <Link to="/dashboard" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md">Dashboard</Link>
-                                </div>
-                                :
-
-                                <button onClick={() => navigate('/dashboard')} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md"> Get Started
-                                </button>
-                        }
-                    </div>
-                </div>
-            </nav>
+            
             {/* Hero Section */}
-            <main id="hero" className="container mx-auto pt-20 pb-16 mt-4">
+            <main id="hero" className="container mx-auto pt-20 lg:pb-16 mt-4">
                 <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
                     <div className="inline-flex items-center rounded-full bg-[#7C3AED] px-4 py-1 text-sm text-white">
                         Protect your beats today
@@ -109,9 +53,9 @@ const LandingPage = () => {
                 </div>
             </main>
             {/* Results Section */}
-            <section className="container mx-auto py-24">
-                <div className="text-center mb-20">
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
+            <section className="container mx-auto py-16 lg:py-24">
+                <div className="text-center mb-8 lg:mb-20">
+                    <h2 className="text-3xl md:text-6xl font-bold text-white mb-4">
                         An <span className="text-[#7C3AED]">ALL-NEW</span> way to
                         <br />
                         protect your beats.
@@ -192,9 +136,9 @@ const LandingPage = () => {
                 </div>
             </section>
             {/* Steps Section */}
-            <section className="container mx-auto py-24">
-                <div className="text-center mb-20">
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
+            <section className="container mx-auto py-4 lg:py-24">
+                <div className="text-center mb-8 lg:mb-20">
+                    <h2 className="text-3xl md:text-6xl font-bold text-white mb-4">
                         Register and Protect your beats in <span className="text-[#7C3AED]">3 easy steps</span>
                     </h2>
                     <p className="text-xl text-gray-400">Protect your music with our simple registration process</p>
@@ -238,8 +182,8 @@ const LandingPage = () => {
                 </div>
             </section>
             {/* Dashboard Preview Section */}
-            <section className="container mx-auto py-16">
-                <h2 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
+            <section className="container mx-auto py-16 lg:py-24">
+                <h2 className="text-3xl md:text-6xl font-bold text-white text-center mb-8">
                     Take Full Control of <span className="text-[#7C3AED]">Your Beats</span>
                 </h2>
                 <div className="relative w-full max-w-6xl mx-auto">
@@ -256,16 +200,16 @@ const LandingPage = () => {
                 </div>
             </section>
             {/* Legal Protection Section */}
-            <section className="container mx-auto py-24">
+            <section className="container mx-auto py-6 lg:py-24">
                 <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-8 lg:mb-16">
                         <div className="inline-block">
                             <div className="flex items-center gap-2 text-[#7C3AED] font-medium mb-4">
                                 <LuShield className="w-5 h-5" />
                                 <span>Legal Protection</span>
                             </div>
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                        <h2 className="text-3xl md:text-6xl font-bold text-white mb-6">
                             Your Beat, Protected with{" "}
                             <span className="bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 text-transparent bg-clip-text">
                                 International Legal Proof
@@ -404,10 +348,10 @@ const LandingPage = () => {
             <StatsSection />
             {/* ************************************ */}
             {/* Video Showcase Section */}
-            <section className="container mx-auto py-24">
+            <section className="container mx-auto pt-24 lg:py-24">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-8">
-                        <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+                        <h2 className="text-3xl md:text-6xl font-bold text-white leading-tight">
                             Protect Your Beats with Secure Digital Registration
                         </h2>
                         <p className="text-xl text-gray-400 max-w-lg">
@@ -438,7 +382,7 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            <section className="container mx-auto py-24">
+            <section className="container mx-auto py-16 lg:py-24">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="relative group order-last lg:order-first">
                         <div className="absolute -inset-1 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
@@ -454,7 +398,7 @@ const LandingPage = () => {
                     </div>
 
                     <div className="space-y-8 order-first lg:order-last">
-                        <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+                        <h2 className="text-3xl md:text-6xl font-bold text-white leading-tight">
                             Are you going to lose all your hard work?
                         </h2>
                         <p className="text-xl text-gray-400 max-w-lg">
@@ -472,10 +416,10 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            <section className="container mx-auto py-24">
+            <section className="container mx-auto py-6 lg:py-24">
                 <div className="max-w-4xl mx-auto text-center">
                     <div className="text-center mb-12">
-                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                        <h2 className="text-3xl md:text-6xl font-bold text-white mb-6">
                             Prove You Own Your Beats. Publish with Confidence. Protect Your Music.
                         </h2>
                         <p className="text-xl text-gray-400">
@@ -499,8 +443,8 @@ const LandingPage = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="mb-16">
-                        <h3 className="text-4xl font-bold text-white mb-8">What You&apos;ll Avoid with BeatProtect:</h3>
+                    <div className="mb-8 lg:mb-16">
+                        <h3 className="text-3xl font-bold text-white mb-8">What You&apos;ll Avoid with BeatProtect:</h3>
 
                         <div className="grid md:grid-cols-2 gap-8">
                             <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
@@ -556,12 +500,12 @@ const LandingPage = () => {
                     </div>
                 </div>
             </section>
-            <section className="container mx-auto py-24">
+            <section className="container mx-auto py-16 lg:py-24">
                 <div className="max-w-4xl mx-auto text-center">
                     <h3 className="text-[#FFD700] text-lg font-semibold mb-4">
                         Every minute you wait, someone could be stealing your beat. Sign up now and protect yourself.
                     </h3>
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                    <h2 className="text-3xl md:text-6xl font-bold text-white mb-6">
                         Don&apos;t wait until they&apos;re stolen. Protect your beats before uploading.
                     </h2>
                     <p className="text-xl text-gray-400 mb-8">
@@ -573,9 +517,9 @@ const LandingPage = () => {
                 </div>
             </section>
             <Testimonial />
-            <section id="pricing" className="container mx-auto py-24">
+            <section id="pricing" className="container mx-auto py-14 lg:py-24">
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7C3AED]/10 border border-[#7C3AED]/20 mb-8">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7C3AED]/10 border border-[#7C3AED]/20 mb-6 lg:mb-8">
                         <span className="relative flex h-3 w-3">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7C3AED] opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-[#7C3AED]"></span>
@@ -584,12 +528,12 @@ const LandingPage = () => {
                             Over 800 producers are already securing their work with BeatProtect
                         </p>
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-bold text-white">
+                    <h2 className="text-3xl md:text-6xl font-bold text-white">
                         Start Protecting your beats <span className="text-[#7C3AED]">Today</span>
                     </h2>
                 </div>
 
-                <div className="max-w-xl mx-auto">
+                <div className="max-w-xl mx-auto -mt-10 lg:mt-0">
                     {/* Monthly Plan */}
                     <div className="relative ">
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
@@ -635,74 +579,6 @@ const LandingPage = () => {
                 </div>
             </section>
             <FAQ />
-            <footer className="bg-black border-t border-gray-800">
-                <div className="container mx-auto py-12 md:py-16 lg:py-20">
-                    <div className="grid gap-8 lg:grid-cols-3">
-                        {/* Column 1: Logo and Description */}
-                        <div className="space-y-6">
-                            <Link href="/" className="text-2xl font-bold text-white">
-                                BeatProtect
-                            </Link>
-                            <p className="text-gray-400 text-sm max-w-[400px]">
-                                BeatProtect is your trusted partner in music protection. We provide cutting-edge blockchain technology
-                                and legal tools to secure your musical creations, ensuring your rights are protected worldwide.
-                            </p>
-                        </div>
-
-                        {/* Column 2: Navigation */}
-                        <div className="grid gap-8">
-                            <div className="space-y-4">
-                                <h3 className="text-white font-semibold">Menu</h3>
-                                <ul className="space-y-3">
-                                    <li>
-                                        <button onClick={() => scrollToSection('pricing')} className="text-gray-400 hover:text-white text-sm">
-                                            Pricing
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button onClick={() => scrollToSection('contact')}className="text-gray-400 hover:text-white text-sm">
-                                            Contact Us
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        {/* Column 3: Social Media */}
-                        <div className="space-y-4">
-                            <h3 className="text-white font-semibold">Follow Us</h3>
-                            <div className="flex flex-col space-y-3">
-                                <Link href="#" className="text-gray-400 hover:text-white text-sm flex items-center gap-2">
-                                    <LuInstagram className="w-5 h-5" />
-                                    Instagram
-                                </Link>
-                                <Link href="#" className="text-gray-400 hover:text-white text-sm flex items-center gap-2">
-                                    <LuTwitter className="w-5 h-5" />
-                                    Twitter
-                                </Link>
-                                <Link href="#" className="text-gray-400 hover:text-white text-sm flex items-center gap-2">
-                                    <FaTiktok className="w-5 h-5" />
-                                    TikTok
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="border-t border-gray-800">
-                    <div className="container mx-auto py-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                        <div className="flex gap-4 text-sm text-gray-400">
-                            <Link href="/terms" className="hover:text-white">
-                                Terms of Use
-                            </Link>
-                            <Link href="/privacy" className="hover:text-white">
-                                Privacy Policy
-                            </Link>
-                        </div>
-                        <p className="text-gray-400 text-sm">© {new Date().getFullYear()} BeatProtect. All rights reserved.</p>
-                    </div>
-                </div>
-            </footer>
         </div>
     );
 };
