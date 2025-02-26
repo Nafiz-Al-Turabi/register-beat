@@ -8,7 +8,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    // Add click outside handler
+    // Add click outside handler and scroll lock
     React.useEffect(() => {
         const handleClickOutside = (event) => {
             const mobileMenu = document.getElementById('mobile-menu');
@@ -19,8 +19,19 @@ const Navbar = () => {
             }
         };
 
+        // Handle scroll locking
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+
         document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            // Cleanup scroll lock on unmount
+            document.body.style.overflow = 'unset';
+        };
     }, [isMenuOpen]);
 
     return (
@@ -60,7 +71,7 @@ const Navbar = () => {
                 <div className="hidden md:flex items-center space-x-4">
                     {
                         user ? (
-                            <button onClick={logout} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-2 rounded-md">Logout</button>
+                            <button onClick={logout} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-1 rounded-md">Logout</button>
                         ) : (
                             <Link to="/login" className="text-gray-300 hover:text-white">
                                 Sign In
@@ -98,7 +109,7 @@ const Navbar = () => {
                 {/* Mobile Menu Panel */}
                 <div
                     id="mobile-menu"
-                    className={`fixed top-0 right-0 h-full bg-black/95 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}
+                    className={`fixed top-0 right-0 h-full w-full bg-black transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}
                 >
                     <div className="flex flex-col justify-between h-full p-4  ">
                         <div className='flex items-center justify-between'>
@@ -107,7 +118,7 @@ const Navbar = () => {
                                 <IoIosClose className='text-white w-6 h-6  ' />
                             </button>
                         </div>
-                        <div className='flex flex-col items-center space-y-10'>
+                        <div className='flex flex-col items-center space-y-10 -mt-80'>
                             <NavLink
                                 to="/"
                                 className={({ isActive }) =>
