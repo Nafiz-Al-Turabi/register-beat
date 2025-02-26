@@ -3,7 +3,7 @@ import { FaCrown, FaCog, FaSignOutAlt, } from "react-icons/fa";
 import { LuCreditCard } from "react-icons/lu";
 import { MdKeyboardArrowDown, MdOutlineDashboard } from "react-icons/md";
 import { RiMoneyCnyCircleLine, RiMusic2Line, RiUser3Line } from "react-icons/ri";
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import ManangeSubsPopup from '../Components/ManageSubscription/ManangeSubsPopup';
 import { AuthContext } from '../Provider/AuthProvider';
 import fileUrl from '../Axios/fileUrl';
@@ -14,6 +14,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     const [showPopup, setShowPopup] = useState(false);
     const dropdownRef = useRef(null);
     const { logout, user } = useContext(AuthContext)
+    const navigate = useNavigate();
 
     const toggleDropdown = () => {
         setDropdown(!isDropdown)
@@ -29,6 +30,11 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    }
 
     return (
         <div>
@@ -134,7 +140,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         <FaCog className="mr-2" /> Settings
                     </NavLink>
                     <Link
-                        onClick={logout}
+                        onClick={handleLogout}
                         className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
                     >
                         <FaSignOutAlt className="mr-2" /> Log Out

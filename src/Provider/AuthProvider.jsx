@@ -60,6 +60,8 @@ const AuthProvider = ({ children }) => {
     const signup = async (credentials) => {
         try {
             const response = await axiosInstance.post("/users/register", credentials);
+            // Automatically login after successful registration
+            await login(credentials);
             return response.data;
         } catch (error) {
             handleError(error);
@@ -70,7 +72,6 @@ const AuthProvider = ({ children }) => {
     const login = async (credentials) => {
         try {
             const response = await axiosInstance.post("/users/login", credentials, { withCredentials: true });
-            console.log("Login Response:", response.data);
             const { token, user } = response.data;
             setUser(user);
         } catch (error) {

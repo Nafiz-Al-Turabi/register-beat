@@ -29,7 +29,7 @@ const Signup = () => {
                 password: data.password
             })
             toast.success('Registration Successful.');
-            navigate('/login');
+            navigate('/dashboard');
         } catch (error) {
             console.error('Registration error:', error.response?.data?.message || error.message);
             toast.error('Registration failed. Please try again.');
