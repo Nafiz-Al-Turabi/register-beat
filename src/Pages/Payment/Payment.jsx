@@ -67,6 +67,11 @@ const Payment = () => {
       .catch(error => console.error(error));
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  }
+
   return (
     <div className='animate-from-middle'>
       <div className='max-w-7xl mx-auto flex justify-between items-center mt-10 px-4 xl:px-0'>
@@ -76,7 +81,7 @@ const Payment = () => {
             <p className='text-zinc-400 text-sm'>{user?.name}</p>
             <p className='text-zinc-400 text-xs'>{user?.email}</p>
           </div>
-          <button onClick={logout} className='text-white text-xl border border-zinc-600 rounded p-1 hover:bg-[#7e3aed] duration-300'><IoIosLogOut /></button>
+          <button onClick={handleLogout} className='text-white text-xl border border-zinc-600 rounded p-1 hover:bg-[#7e3aed] duration-300'><IoIosLogOut /></button>
         </div>
       </div>
 
