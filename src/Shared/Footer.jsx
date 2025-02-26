@@ -64,10 +64,10 @@ const Footer = () => {
                 <div className="border-t border-gray-800">
                     <div className="container mx-auto py-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div className="flex gap-4 text-sm text-gray-400">
-                            <Link href="/terms" className="hover:text-white">
+                            <Link to="/term-of-use" className="hover:text-white">
                                 Terms of Use
                             </Link>
-                            <Link href="/privacy" className="hover:text-white">
+                            <Link to="/privacy" className="hover:text-white">
                                 Privacy Policy
                             </Link>
                         </div>
