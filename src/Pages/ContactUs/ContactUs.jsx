@@ -40,7 +40,7 @@ export default function ContactUs() {
 
     return (
         <div className="min-h-screen bg-black text-white">
-            <div className="max-w-3xl mx-auto space-y-8 py-24">
+            <div className="max-w-3xl mx-auto space-y-8 py-24 px-4 xl:px-0">
                 <div className="text-center space-y-4">
                     <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl">Get in Touch</h1>
                     <p className="text-gray-400 max-w-[600px] mx-auto">

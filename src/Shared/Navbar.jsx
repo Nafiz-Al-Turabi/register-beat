@@ -1,11 +1,27 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
+import { IoIosClose, IoIosLogOut } from 'react-icons/io';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // Add click outside handler
+    React.useEffect(() => {
+        const handleClickOutside = (event) => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuButton = document.getElementById('menu-button');
+
+            if (isMenuOpen && mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isMenuOpen]);
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-black">
@@ -66,6 +82,7 @@ const Navbar = () => {
 
                 {/* Mobile Menu Button */}
                 <button
+                    id="menu-button"
                     className="md:hidden text-white"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
@@ -74,79 +91,92 @@ const Navbar = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     ) : (
-                        ''
+                        ""
                     )}
                 </button>
 
                 {/* Mobile Menu Panel */}
-                <div className={`fixed top-0 right-0 h-full w-64 bg-black/95 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}>
-                    <div className="flex flex-col p-6 space-y-4">
-                        <NavLink
-                            to="/"
-                            className={({ isActive }) =>
-                                isActive ? "text-[#7C3AED] font-medium" : "text-gray-300 hover:text-[#7C3AED]"
-                            }
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Home
-                        </NavLink>
-                        <NavLink
-                            to="/contact-us"
-                            className={({ isActive }) =>
-                                isActive ? "text-[#7C3AED] font-medium" : "text-gray-300 hover:text-[#7C3AED]"
-                            }
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Contact
-                        </NavLink>
-                        <NavLink
-                            to="/pricing"
-                            className={({ isActive }) =>
-                                isActive ? "text-[#7C3AED] font-medium" : "text-gray-300 hover:text-[#7C3AED]"
-                            }
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Pricing
-                        </NavLink>
-                        {user ? (
-                            <>
-                                <Link
-                                    to="/dashboard"
-                                    className="text-gray-300 hover:text-[#7C3AED]"
-                                    onClick={() => setIsMenuOpen(false)}
-                                >
-                                    Dashboard
-                                </Link>
-                                <button
-                                    onClick={() => {
-                                        logout();
-                                        setIsMenuOpen(false);
-                                    }}
-                                    className="text-gray-300 hover:text-[#7C3AED]"
-                                >
-                                    Logout
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <Link
-                                    to="/login"
-                                    className="text-gray-300 hover:text-[#7C3AED]"
-                                    onClick={() => setIsMenuOpen(false)}
-                                >
-                                    Sign In
-                                </Link>
-                                <button
-                                    onClick={() => {
-                                        navigate('/dashboard');
-                                        setIsMenuOpen(false);
-                                    }}
-                                    className="text-gray-300 hover:text-[#7C3AED]"
-                                >
-                                    Get Started
-                                </button>
-                            </>
-                        )}
+                <div
+                    id="mobile-menu"
+                    className={`fixed top-0 right-0 h-full bg-black/95 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}
+                >
+                    <div className="flex flex-col justify-between h-full p-4  ">
+                        <div className='flex items-center justify-between'>
+                            <a href="/" className='text-2xl font-bold text-white'>BeatProtect</a>
+                            <button className='border border-[#7C3AED] rounded-md p-1' onClick={() => setIsMenuOpen(false)}>
+                                <IoIosClose className='text-white w-6 h-6  ' />
+                            </button>
+                        </div>
+                        <div className='flex flex-col items-center space-y-10'>
+                            <NavLink
+                                to="/"
+                                className={({ isActive }) =>
+                                    isActive ? "text-[#7C3AED] text-4xl font-medium" : "text-4xl text-gray-300 hover:text-[#7C3AED]"
+                                }
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Home
+                            </NavLink>
+                            <NavLink
+                                to="/contact-us"
+                                className={({ isActive }) =>
+                                    isActive ? "text-[#7C3AED] text-4xl font-medium" : "text-4xl text-gray-300 hover:text-[#7C3AED]"
+                                }
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Contact
+                            </NavLink>
+                            <NavLink
+                                to="/pricing"
+                                className={({ isActive }) =>
+                                    isActive ? "text-[#7C3AED] text-4xl font-medium" : "text-4xl text-gray-300 hover:text-[#7C3AED]"
+                                }
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Pricing
+                            </NavLink>
+                        </div>
+                        <div className='grid grid-cols-4 gap-4'>
+                            {user ? (
+                                <>
+                                    <Link
+                                        to="/dashboard"
+                                        className="col-span-3 text-gray-300 hover:text-[#7C3AED] bg-[#7C3AED] px-4 py-2 rounded-md"
+                                        onClick={() => setIsMenuOpen(false)}
+                                    >
+                                        Dashboard
+                                    </Link>
+                                    <button
+                                        onClick={() => {
+                                            logout();
+                                            setIsMenuOpen(false);
+                                        }}
+                                        className=" flex items-center justify-center text-gray-300 hover:text-[#7C3AED] bg-[#7C3AED] px-4 py-2 rounded-md"
+                                    >
+                                        <IoIosLogOut className='text-white w-6 h-6' />
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link
+                                        to="/login"
+                                        className="text-center text-gray-300 hover:text-[#7C3AED] bg-[#7C3AED] px-4 py-2 rounded-md"
+                                        onClick={() => setIsMenuOpen(false)}
+                                    >
+                                        Sign In
+                                    </Link>
+                                    <button
+                                        onClick={() => {
+                                            navigate('/dashboard');
+                                            setIsMenuOpen(false);
+                                        }}
+                                        className="text-gray-300 hover:text-[#7C3AED] bg-[#7C3AED] px-4 py-2 rounded-md"
+                                    >
+                                        Get Started
+                                    </button>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

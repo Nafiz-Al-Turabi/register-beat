@@ -15,9 +15,9 @@ import apple from '../../assets/img/apple-music-icon.png'
 const LandingPage = () => {
     const { user, logout } = useContext(AuthContext)
     const navigate = useNavigate()
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    // }, []);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className='bg-black px-4 2xl:px-0'>
             
