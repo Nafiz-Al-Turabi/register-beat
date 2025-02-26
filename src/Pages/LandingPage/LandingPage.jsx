@@ -28,7 +28,7 @@ const LandingPage = () => {
                         Protect your beats today
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight">Create. Register. Protect.</h1>
+                    <h1 className="text-4xl md:text-7xl font-bold text-white tracking-tight">Create. Register. Protect.</h1>
 
                     <p className="text-xl text-gray-400 max-w-2xl">
                         Protect Your Beats &amp; Take Control of Your Beats on YouTube
