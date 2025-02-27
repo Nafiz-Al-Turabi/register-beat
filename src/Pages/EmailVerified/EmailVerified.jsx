@@ -1,31 +1,31 @@
-import { useNavigate } from "react-router-dom";
-import { LuCheckCircle } from "react-icons/lu";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import axiosInstance from "../../Axios/AxiosInstance";
+
 const EmailVerified = () => {
-    const navigate = useNavigate();
-    return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-black px-4">
-            <div className="bg-gradient-to-br from-gray-900 via-black to-gray-900 shadow-lg rounded-2xl p-8 max-w-md text-center">
-                <LuCheckCircle className="text-green-500 w-16 h-16 mx-auto" />
-                <h2 className="text-2xl font-semibold text-[#7e3aed] mt-4">
-                    Email Verified Successfully!
-                </h2>
-                <p className="text-gray-400 mt-2">
-                    Your account has been successfully verified. You can now log in and start using our services.
-                </p>
+  const { token } = useParams();
+  const navigate = useNavigate();
+  const [message, setMessage] = useState("Verifying...");
 
-                <button
-                    className="mt-6 px-6 py-2 bg-[#7e3aed] text-white rounded-lg shadow-md hover:bg-[#7f3aedd8] transition"
-                    onClick={() => navigate("/login")}
-                >
-                    Go to Login
-                </button>
+  useEffect(() => {
+    const emailVerified = async () => {
+      try {
+        await axiosInstance.get(`/users/verify-email/${token}`);
+        setMessage("Email verified! Redirecting to login...");
+        setTimeout(() => navigate("/login"), 1000);
+      } catch (error) {
+        setMessage("Invalid or expired link.");
+      }
+    };
 
-                <p className="mt-4 text-sm text-gray-500">
-                    Need help? <a href="/contact-us" className="text-[#7e3aed] hover:underline">Contact Support</a>
-                </p>
-            </div>
-        </div>
-    );
+    emailVerified();
+  }, [token, navigate]);
+
+  return <div>{message}</div>;
 };
 
 export default EmailVerified;
+
+
+// export default EmailVerified;

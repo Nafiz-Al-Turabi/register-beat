@@ -86,7 +86,7 @@ export const router = createBrowserRouter([
     element: <VerifyAccount />,
   },
   {
-    path: "/email-verified",
+    path: "/api/users/verify-email/:token",
     element: <EmailVerified />,
   },
   {
