@@ -53,7 +53,7 @@ const Login = () => {
         try {
             setIsGoogleLoading(true);
             await googleLogin();
-            navigate("/")
+            navigate("/dashboard")
         } catch (error) {
             console.error('Google login error:', error.response?.data?.message || error.message);
             alert('Google login failed. Please try again.');

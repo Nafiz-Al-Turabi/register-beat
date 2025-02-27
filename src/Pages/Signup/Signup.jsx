@@ -62,7 +62,7 @@ const Signup = () => {
     const googleLoginHandler = async () => {
         try {
             await googleLogin();
-            navigate("/")
+            navigate("/dashboard")
         } catch (error) {
             console.error('Google login error:', error.response?.data?.message || error.message);
             toast.error('Google login failed. Please try again.');
