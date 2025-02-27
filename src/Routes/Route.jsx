@@ -27,6 +27,8 @@ import LandingPage from "../Pages/LandingPage/LandingPage";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import Pricing from "../Pages/Pricing/Pricing";
 import LandingLayout from "../Layout/landingLayout";
+import VerifyAccount from "../Pages/VerifyAccount/VerifyAccount";
+import EmailVerified from "../Pages/EmailVerified/EmailVerified";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -78,6 +80,14 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/verify-account",
+    element: <VerifyAccount />,
+  },
+  {
+    path: "/email-verified",
+    element: <EmailVerified />,
   },
   {
     path: "/payment-checking",

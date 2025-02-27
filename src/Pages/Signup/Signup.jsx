@@ -8,6 +8,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { trackEvent } from '../../facebookPixel/facebookPixel';
 
 const Signup = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [emailFilled, setEmailFilled] = useState(false);
     const [nameFilled, setNameFilled] = useState(false);
@@ -23,6 +24,7 @@ const Signup = () => {
 
     const onSubmit = async (data) => {
         try {
+            setIsLoading(true);
             await signup({
                 name: data.name,
                 email: data.email,
@@ -33,6 +35,8 @@ const Signup = () => {
         } catch (error) {
             console.error('Registration error:', error.response?.data?.message || error.message);
             toast.error('Registration failed. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -139,7 +143,9 @@ const Signup = () => {
                     </div>
 
                     <button onClick={handleButtonClick} type="submit" className="w-full primary-bg text-lg text-white font-bold py-3 rounded-full mt-4">
-                        Create Account
+                        {isLoading ? <div className="flex items-center justify-center disabled:opacity-50">
+                            "Loading..."
+                        </div> : "Create Account"}
                     </button>
                     <div className="mt-4 text-center flex justify-between items-center">
                         <hr className='w-32 border-gray-600' />
