@@ -49,7 +49,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                             <div className="ml-3 ">
                                 <p className="text-sm font-semibold">
                                     {
-                                        user?.producerName ? user?.producerName : user?.fullName
+                                        user?.producerName ? user?.producerName : user?.name
                                     }</p>
                                 <p className="text-xs text-gray-400">Plan: {user?.active === true ? 'Standard' : 'Inactive'}</p>
                             </div>

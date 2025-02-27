@@ -144,7 +144,7 @@ const Signup = () => {
 
                     <button onClick={handleButtonClick} type="submit" className="w-full primary-bg text-lg text-white font-bold py-3 rounded-full mt-4">
                         {isLoading ? <div className="flex items-center justify-center disabled:opacity-50">
-                            "Loading..."
+                            Loading...
                         </div> : "Create Account"}
                     </button>
                     <div className="mt-4 text-center flex justify-between items-center">
