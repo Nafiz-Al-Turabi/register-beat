@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LuInstagram, LuTwitter } from 'react-icons/lu';
 import { FaTiktok } from 'react-icons/fa';
+import logo from '../assets/logo.png';
 
 const Footer = () => {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Footer = () => {
                         {/* Column 1: Logo and Description */}
                         <div className="space-y-6">
                             <Link href="/" className="text-2xl font-bold text-white">
-                                BeatProtect
+                                <img src={logo} alt="" className='w-44' />
                             </Link>
                             <p className="text-gray-400 text-sm max-w-[400px]">
                                 BeatProtect is your trusted partner in music protection. We provide cutting-edge blockchain technology
