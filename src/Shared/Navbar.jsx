@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { IoIosClose, IoIosLogOut } from 'react-icons/io';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
@@ -38,7 +39,7 @@ const Navbar = () => {
         <nav className="fixed top-0 left-0 right-0 z-50 bg-black">
             <div className="container mx-auto flex items-center justify-between py-4 px-4 2xl:px-0">
                 <button onClick={() => navigate('/')} className="text-2xl font-bold text-white">
-                    BeatProtect
+                    <img src={logo} alt="" className='w-44' />
                 </button>
 
                 {/* Desktop Menu */}
@@ -113,7 +114,7 @@ const Navbar = () => {
                 >
                     <div className="flex flex-col justify-between h-full p-4  ">
                         <div className='flex items-center justify-between'>
-                            <a href="/" className='text-2xl font-bold text-white'>BeatProtect</a>
+                            <a href="/" className='text-2xl font-bold text-white'> <img src={logo} alt="" className='w-44' /></a>
                             <button className='border border-[#7C3AED] rounded-md p-1' onClick={() => setIsMenuOpen(false)}>
                                 <IoIosClose className='text-white w-6 h-6  ' />
                             </button>
