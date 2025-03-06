@@ -171,7 +171,7 @@ const Navbar = () => {
                                 <>
                                     <Link
                                         to="/login"
-                                        className="text-center text-gray-300 hover:text-[#7C3AED] bg-[#7C3AED] px-4 py-2 rounded-md"
+                                        className="col-span-2 text-center text-gray-300 hover:text-[#7C3AED] bg-[#7C3AED] px-4 py-2 rounded-md"
                                         onClick={() => setIsMenuOpen(false)}
                                     >
                                         Sign In
@@ -181,7 +181,7 @@ const Navbar = () => {
                                             navigate('/dashboard');
                                             setIsMenuOpen(false);
                                         }}
-                                        className="text-gray-300 hover:text-[#7C3AED] bg-[#7C3AED] px-4 py-2 rounded-md"
+                                        className="col-span-2 text-gray-300 hover:text-[#7C3AED] bg-[#7C3AED] px-4 py-2 rounded-md"
                                     >
                                         Get Started
                                     </button>
