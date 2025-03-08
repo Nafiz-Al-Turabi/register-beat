@@ -4,7 +4,7 @@
         "name": "Michael Reyes",
         "country": "🇺🇸",
         "rating": 5,
-        "image": "/placeholder.svg?height=80&width=80",
+        "image": "../src/assets/testimonials/Michael reyes US.webp",
         "testimonial": "I always worried about my beats being stolen. Now, I have peace of mind knowing my work is legally registered and protected. This platform is a game-changer for producers!"
     },
     {
@@ -12,7 +12,7 @@
         "name": "Jason T - YoMagix",
         "country": "🇺🇸",
         "rating": 4,
-        "image": "/placeholder.svg?height=80&width=80",
+        "image": "../src/assets/testimonials/Yo Magix.webp",
         "testimonial": "I uploaded my beats to YouTube, and suddenly, I found artists using them without permission. Thanks to BeatProtect, I had proof of ownership and was able to take action."
     },
     {
@@ -20,7 +20,7 @@
         "name": "Marcus Wilson",
         "country": "🇬🇧",
         "rating": 5,
-        "image": "/placeholder.svg?height=80&width=80",
+        "image": "../src/assets/testimonials/marcus wilson.jpg",
         "testimonial": "BeatProtect gives me confidence every time I upload a new beat. The registration process is easy, and I love knowing that if someone tries to steal my work, I have legal proof to back me up."
     },
     {
@@ -28,7 +28,7 @@
         "name": "Daniel Paredes",
         "country": "🇦🇷",
         "rating": 5,
-        "image": "/placeholder.svg?height=80&width=80",
+        "image": "../src/assets/testimonials/daniel paredes.jpg",
         "testimonial": "I never thought I needed something like BeatProtect until I saw one of my beats on a song I never authorized. Thanks to this platform, I was able to prove my rights and protect my music career!"
     },
     {
@@ -36,7 +36,7 @@
         "name": "David Martinez",
         "country": "🇲🇽",
         "rating": 5,
-        "image": "/placeholder.svg?height=80&width=80",
+        "image": "../src/assets/testimonials/david martinez.webp",
         "testimonial": "Durante años, me sentí impotente ante los artistas que usaban mis beats sin pagar. Ahora, con BeatProtect, puedo registrar mis beats al instante y asegurarme de recibir el crédito (y el pago) que merezco."
     },
     {
@@ -44,7 +44,7 @@
         "name": "Gérard Moreau",
         "country": "🇫🇷",
         "rating": 5,
-        "image": "/placeholder.svg?height=80&width=80",
+        "image": "../src/assets/testimonials/Gérard Moreau.jpg",
         "testimonial": "BeatProtect makes it easy to secure my beats. I don’t have to worry about complicated legal processes—I just upload my track, and I get my registration certificate. Simple, fast, and effective!"
     }
 ]

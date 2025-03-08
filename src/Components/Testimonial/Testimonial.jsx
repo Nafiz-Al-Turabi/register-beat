@@ -24,9 +24,8 @@ const Testimonial = () => {
                                     <img
                                         src={testimonial.image}
                                         alt="Producer Avatar"
-                                        width={80}
-                                        height={80}
-                                        className="rounded-full object-cover"
+                                        
+                                        className="h-20 w-20 rounded-full object-cover"
                                     />
                                     <div>
                                         <h3 className="text-xl font-semibold text-white">{testimonial.name} {testimonial.country}</h3>
