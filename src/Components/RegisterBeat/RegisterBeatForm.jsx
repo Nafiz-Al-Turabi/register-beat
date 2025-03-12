@@ -90,6 +90,7 @@ const RegisterBeatForm = ({ setRegisterData, formData }) => {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
+            withCredentials: true
         });
 
         setProgress(100);
