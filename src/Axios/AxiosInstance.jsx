@@ -7,6 +7,9 @@ const axiosInstance = axios.create({
      //baseURL: 'https://louizmizik-server.onrender.com/api',
     //baseURL: 'https://phpstack-1408986-5240724.cloudwaysapps.com/api',
     withCredentials: true,
+    headers: {
+        'Content-Type': 'application/json'
+    }
 });
 
 export default axiosInstance;
