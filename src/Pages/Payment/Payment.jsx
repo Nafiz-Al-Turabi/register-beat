@@ -62,6 +62,7 @@ const Payment = () => {
           window.location.href = approvalUrl;
         } else {
           console.error('PayPal approval URL not found');
+          
         }
       })
       .catch(error => console.error(error));
