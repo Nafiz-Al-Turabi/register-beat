@@ -18,7 +18,7 @@ const CompletedPopup = () => {
                     process.</p>
                 {/* </div> */}
                 <Link 
-                    to="/"
+                    to="/dashboard"
                     onClick={refreshUserInfo}
                     className="primary-bg text-white font-bold px-8 py-3 rounded-lg active:scale-95"
                 >
