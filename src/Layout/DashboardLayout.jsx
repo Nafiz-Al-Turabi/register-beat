@@ -3,6 +3,7 @@ import { FaBars, FaPlus } from "react-icons/fa";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../Shared/Sidebar";
 import { initFacebookPixel } from "../facebookPixel/facebookPixel";
+import CookieBar from "../Components/CookieBar/CookieBar";
 
 const DashboardLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -51,6 +52,7 @@ const DashboardLayout = () => {
                 {/* Content Section */}
                 <div className="max-w-full mx-4 md:mx-12 py-2">
                     <Outlet />
+                    <CookieBar />
                 </div>
             </div>
         </div>
