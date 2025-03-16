@@ -6,7 +6,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { trackEvent } from '../../facebookPixel/facebookPixel';
-
+import logo from '../../assets/logo.png';
 const Signup = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -73,9 +73,13 @@ const Signup = () => {
     return (
         <div className="flex justify-center items-center min-h-screen">
             <div className="w-full max-w-md tertiary-bg p-8 rounded-xl shadow-lg animate-signup ">
-                <h2 className="text-3xl font-bold text-center text-[#7e3aed] mb-8">
-                    <span className='text-white'>Join</span> BeatProtect
-                </h2>
+                <div className='flex flex-col justify-center items-center gap-4'>
+                    <img src={logo} alt="logo" className='w-60 mb-1' />
+                    <div className='text-center'>
+                        <h2 className='text-white text-2xl font-bold mb-1.5'>Create your account</h2>
+                        <p className='text-gray-400 text-sm'>You're one step closer to protecting your music like never before</p>
+                    </div>
+                </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
                     <div className='relative'>
@@ -148,9 +152,9 @@ const Signup = () => {
                         </div> : "Create Account"}
                     </button>
                     <div className="mt-4 text-center flex justify-between items-center">
-                        <hr className='w-32 border-gray-600' />
-                        <span className="text-sm text-gray-400">Or continue with</span>
-                        <hr className='w-32 border-gray-600' />
+                        <hr className='w-44 border-gray-600' />
+                        <span className="text-sm text-gray-400">Or</span>
+                        <hr className='w-44 border-gray-600' />
                     </div>
                 </form>
                 <button onClick={googleLoginHandler} className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-4 hover:bg-gray-100 focus:outline-none">

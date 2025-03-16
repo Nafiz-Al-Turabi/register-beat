@@ -7,7 +7,7 @@ import logo from '../assets/logo.png';
 const Footer = () => {
     const navigate = useNavigate();
     return (
-        <div className='px-4 xl:px-0'>
+        <div className='px-4 2xl:px-0'>
             <footer className="bg-black border-t border-gray-800">
                 <div className="container mx-auto py-12 md:py-16 lg:py-20">
                     <div className="grid gap-8 lg:grid-cols-3">

@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { FcGoogle } from "react-icons/fc";
 import axiosInstance from '../../Axios/AxiosInstance';
 import { trackEvent } from '../../facebookPixel/facebookPixel';
+import logo from '../../assets/logo.png';
 
 const Login = () => {
     const [forgotPasswordStep, setForgotPasswordStep] = useState(0);
@@ -20,9 +21,9 @@ const Login = () => {
     const [isForgotPasswordLoading, setIsForgotPasswordLoading] = useState(false);
 
     // Track event when button is clicked for meta pixel
-  const handleButtonClick = () => {
-    trackEvent("loginButtonClick", { buttonName: "login" });
-  };
+    const handleButtonClick = () => {
+        trackEvent("loginButtonClick", { buttonName: "login" });
+    };
 
 
     const onSubmit = async (data) => {
@@ -65,14 +66,14 @@ const Login = () => {
     // Reset form when changing steps
     const handleStepChange = (step) => {
         setForgotPasswordStep(step);
-        reset(); 
+        reset();
     };
 
     const handleForgotPassword = async (data) => {
         try {
             setIsForgotPasswordLoading(true);
             switch (forgotPasswordStep) {
-                case 1: 
+                case 1:
                     try {
                         const { data: otpResponse } = await axiosInstance.post('/users/request-forgot-password-otp', {
                             email: data.email
@@ -96,7 +97,7 @@ const Login = () => {
                     }
                     break;
 
-                case 3: 
+                case 3:
                     try {
                         if (data.newPassword !== data.confirmPassword) {
                             toast.error('Passwords do not match');
@@ -108,7 +109,7 @@ const Login = () => {
                         });
 
                         toast.success('Password reset successful');
-                        handleStepChange(0); 
+                        handleStepChange(0);
                     } catch (error) {
                         toast.error(error.response?.data?.message || 'Failed to reset password');
                     }
@@ -207,7 +208,13 @@ const Login = () => {
                 {forgotPasswordStep === 0 ? (
                     // Normal login form
                     <div className="w-full max-w-md tertiary-bg p-8 rounded-xl shadow-lg animate-login ">
-                        <h2 className="text-3xl font-bold text-center text-[#7e3aed] mb-8"> <span className='text-white'>Login</span> to BeatProtect</h2>
+                        <div className='flex flex-col justify-center items-center gap-4'>
+                            <img src={logo} alt="logo"  className='w-60 mb-2' />
+                            <div className='text-center mb-6'>
+                                <h2 className='text-white text-2xl font-bold mb-1.5'>Welcome Back</h2>
+                                <p className='text-gray-400 text-sm'>Sign in to continue protecting your beats</p>
+                            </div>
+                        </div>
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                             <div className='relative'>
                                 <label htmlFor="email" className="block text-[#9da6be] text-sm font-medium mb-2">Email</label>
@@ -215,7 +222,7 @@ const Login = () => {
                                     type="email"
                                     id="email"
                                     placeholder="Enter your email"
-                                    {...register("email", { 
+                                    {...register("email", {
                                         required: "Email is required",
                                         onChange: (e) => handleEmailChange(e)
                                     })}
@@ -231,7 +238,7 @@ const Login = () => {
                                     type="password"
                                     id="password"
                                     placeholder="Enter your password"
-                                    {...register("password", { 
+                                    {...register("password", {
                                         required: "Password is required",
                                         onChange: (e) => handlePasswordChange(e)
                                     })}
@@ -251,23 +258,23 @@ const Login = () => {
                                 </button>
                             </div>
 
-                            <button 
+                            <button
                                 onClick={handleButtonClick}
-                                type="submit" 
+                                type="submit"
                                 disabled={isLoading}
                                 className="w-full primary-bg text-lg text-white font-bold py-3 rounded-full mt-4 disabled:opacity-50"
                             >
                                 {isLoading ? 'Loading...' : 'Sign In'}
                             </button>
                         </form>
-                        <div className="mt-4 text-center flex justify-between items-center">
-                            <hr className='w-32 border-gray-600' />
-                            <span className="text-sm text-gray-400">Or continue with</span>
-                            <hr className='w-32 border-gray-600' />
+                        <div className="mt-4 text-center flex justify-between items-center gap-2">
+                            <hr className='w-44 border-gray-600' />
+                            <span className="text-sm text-gray-400">Or</span>
+                            <hr className='w-44 border-gray-600' />
                         </div>
 
-                        <button 
-                            onClick={googleLoginHandler} 
+                        <button
+                            onClick={googleLoginHandler}
                             disabled={isGoogleLoading}
                             className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-4 hover:bg-gray-100 focus:outline-none disabled:opacity-50"
                         >
