@@ -209,7 +209,9 @@ const Login = () => {
                     // Normal login form
                     <div className="w-full max-w-md tertiary-bg p-8 rounded-xl shadow-lg animate-login ">
                         <div className='flex flex-col justify-center items-center gap-4'>
-                            <img src={logo} alt="logo"  className='w-60 mb-2' />
+                            <Link to='/'>
+                                <img src={logo} alt="logo" className='w-60 mb-2' />
+                            </Link>
                             <div className='text-center mb-6'>
                                 <h2 className='text-white text-2xl font-bold mb-1.5'>Welcome Back</h2>
                                 <p className='text-gray-400 text-sm'>Sign in to continue protecting your beats</p>

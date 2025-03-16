@@ -13,7 +13,6 @@ const Signup = () => {
     const [emailFilled, setEmailFilled] = useState(false);
     const [nameFilled, setNameFilled] = useState(false);
     const [passwordFilled, setPasswordFilled] = useState(false);
-    const [confirmPasswordFilled, setConfirmPasswordFilled] = useState(false);
     const { signup, googleLogin } = useContext(AuthContext)
     const navigate = useNavigate();
 
@@ -74,13 +73,15 @@ const Signup = () => {
         <div className="flex justify-center items-center min-h-screen">
             <div className="w-full max-w-md tertiary-bg p-8 rounded-xl shadow-lg animate-signup ">
                 <div className='flex flex-col justify-center items-center gap-4'>
-                    <img src={logo} alt="logo" className='w-60 mb-1' />
+                    <Link to='/'>
+                        <img src={logo} alt="logo" className='w-60 mb-1' />
+                    </Link>
                     <div className='text-center'>
                         <h2 className='text-white text-2xl font-bold mb-1.5'>Create your account</h2>
                         <p className='text-gray-400 text-sm'>You're one step closer to protecting your music like never before</p>
                     </div>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-2.5 lg:space-y-6">
 
                     <div className='relative'>
                         <label htmlFor="name" className="block text-[#9da6be] text-sm font-medium mb-2">name</label>
@@ -94,7 +95,6 @@ const Signup = () => {
                             })}
                             className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                         />
-                        {!nameFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
                         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
                     </div>
                     <div className='relative'>
@@ -109,7 +109,7 @@ const Signup = () => {
                             })}
                             className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                         />
-                        {!emailFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
+                        
                         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                     </div>
 
@@ -125,7 +125,6 @@ const Signup = () => {
                             })}
                             className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                         />
-                        {!passwordFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
                         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
                     </div>
 
@@ -142,7 +141,6 @@ const Signup = () => {
                             })}
                             className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                         />
-                        {!confirmPasswordFilled && <PiDotsThree className='bg-red-500 w-6 h-6 rounded-sm absolute top-[42px] right-5' />}
                         {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>}
                     </div>
 
@@ -161,7 +159,7 @@ const Signup = () => {
                     Sign up with <FcGoogle className='ml-1' />oogle
                 </button>
                 <div className="mt-4 text-center">
-                    <Link to='/login' className="text-sm text-gray-400">Already have an account? <span className="text-[#7e3aed] hover:underline underline-offset-4">Login</span></Link>
+                    <Link to='/login' className="text-sm text-gray-400">Already have an account? <span className="text-[#7e3aed] hover:underline underline-offset-4">Sign in</span></Link>
                 </div>
             </div>
         </div>
