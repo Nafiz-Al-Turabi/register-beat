@@ -40,7 +40,7 @@ const Contact = () => {
         issue: "",
       });
     } catch (error) {
-      toast.error("Failed to submit support request.");
+      toast.error(" Fail to send message.");
       console.error(error);
     } finally {
       setLoading(false);

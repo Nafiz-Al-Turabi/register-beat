@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LuInstagram, LuTwitter } from 'react-icons/lu';
-import { FaTiktok } from 'react-icons/fa';
+import { FaTiktok, FaXTwitter } from 'react-icons/fa6';
 import logo from '../assets/logo.png';
 
 const Footer = () => {
@@ -50,7 +50,7 @@ const Footer = () => {
                                     Instagram
                                 </Link>
                                 <Link href="#" className="text-gray-400 hover:text-white text-sm flex items-center gap-2">
-                                    <LuTwitter className="w-5 h-5" />
+                                    <FaXTwitter  className="w-5 h-5" />
                                     Twitter
                                 </Link>
                                 <Link href="#" className="text-gray-400 hover:text-white text-sm flex items-center gap-2">
