@@ -18,6 +18,11 @@ const faqData = [
             "With your subscription, you receive 20 credits each month (1 credit = 1 beat registration). If you need more, you can purchase additional credits at any time. Your subscription renews automatically every month, and you can manage it from your account dashboard.",
     },
     {
+        question: "What happens if I want to register more than 20 beats per month?",
+        answer:
+            "You can purchase packs of 10 credits for $5. This way, you can buy as many credits as you need to register and protect your beats. This is ideal for producers with large beat catalogs.",
+    },
+    {
         question: "Can I cancel my subscription at any time?",
         answer:
             "Yes, you can cancel your subscription at any time. When you cancel, you will retain access to your registered beats until the end of your billing cycle. After that, your beat protection services will expire, and you will no longer be able to register new beats unless you resubscribe.",
