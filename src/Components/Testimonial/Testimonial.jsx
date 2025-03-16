@@ -20,7 +20,7 @@ const Testimonial = () => {
         },
         {
             "id": 2,
-            "name": "Jason T - YoMagix",
+            "name": "Jason T YoMagix",
             "country": "🇺🇸",
             "rating": 4,
             "image": YoMagix,
