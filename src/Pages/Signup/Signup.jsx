@@ -78,7 +78,7 @@ const Signup = () => {
                     </Link>
                     <div className='text-center'>
                         <h2 className='text-white text-2xl font-bold mb-1.5'>Create your account</h2>
-                        <p className='text-gray-400 text-sm'>You're one step closer to protecting your music like never before</p>
+                        <p className='text-gray-400 text-sm'>You're one step closer to protecting your music like never before.</p>
                     </div>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-2.5 lg:space-y-6">
@@ -155,7 +155,7 @@ const Signup = () => {
                         <hr className='w-44 border-gray-600' />
                     </div>
                 </form>
-                <button onClick={googleLoginHandler} className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-4 hover:bg-gray-100 focus:outline-none">
+                <button onClick={googleLoginHandler} className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-1 sm:mt-4 hover:bg-gray-100 focus:outline-none">
                     Sign up with <FcGoogle className='ml-1' />oogle
                 </button>
                 <div className="mt-4 text-center">

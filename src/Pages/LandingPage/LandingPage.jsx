@@ -20,7 +20,7 @@ const LandingPage = () => {
     }, []);
     return (
         <div className='bg-black px-4 2xl:px-0'>
-            
+
             {/* Hero Section */}
             <main id="hero" className="container mx-auto pt-20 lg:pb-16 mt-4">
                 <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
@@ -46,7 +46,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-center w-full mt-8">
-                        <button onClick={() => navigate('/dashboard')}  className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-10 py-2 rounded-md duration-300 ease-in-out">
+                        <button onClick={() => navigate('/dashboard')} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-10 py-2 rounded-md duration-300 ease-in-out">
                             Register Your Beat Now
                         </button>
                     </div>
@@ -211,9 +211,7 @@ const LandingPage = () => {
                         </div>
                         <h2 className="text-3xl md:text-6xl font-bold text-white mb-6">
                             Your Beat, Protected with{" "}
-                            <span className="bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 text-transparent bg-clip-text">
-                                International Legal Proof
-                            </span>
+                            International Legal Proof
                         </h2>
                         <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                             At BeatProtect, we know how important it is to keep your music safe from unauthorized use. That&apos;s why
@@ -328,8 +326,8 @@ const LandingPage = () => {
 
                             <div className="mt-8 pt-8 border-t border-gray-800">
                                 <p className="text-lg text-white text-center mb-6">
-                                Protect your beats from unauthorized uploads on
-                                major platforms
+                                    Protect your beats from unauthorized uploads on
+                                    major platforms
                                 </p>
                                 <div className='flex items-center justify-center gap-4 mb-10'>
                                     <img src={youtube} alt="" className='w-12 h-12' />
@@ -524,9 +522,6 @@ const LandingPage = () => {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7C3AED] opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-[#7C3AED]"></span>
                         </span>
-                        <p className="text-lg font-medium bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 bg-clip-text text-transparent">
-                            Over 800 producers are already securing their work with BeatProtect
-                        </p>
                     </div>
                     <h2 className="text-3xl md:text-6xl font-bold text-white">
                         Start Protecting your beats <span className="text-[#7C3AED]">Today</span>
