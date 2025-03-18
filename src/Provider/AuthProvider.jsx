@@ -1,42 +1,19 @@
 import React, { useState, createContext, useEffect } from "react";
 import axiosInstance from "../Axios/AxiosInstance";
 import toast from "react-hot-toast";
-import { getAuth, GoogleAuthProvider, signInWithRedirect, onAuthStateChanged } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
 export const AuthContext = createContext();
-const auth = getAuth(app);
+const auth = getAuth(app)
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const googleProvider = new GoogleAuthProvider();
+    const googleProvider = new GoogleAuthProvider()
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-            const lastLoginMethod = localStorage.getItem("lastLoginMethod");
-            
-            if (currentUser) {
-                if (lastLoginMethod === "google") {
-                    const { displayName, email } = currentUser;
-                    try {
-                        const loginResponse = await axiosInstance.post("/users/google/login", 
-                            { email, name: displayName }, 
-                            { withCredentials: true }
-                        );
-                        setUser(loginResponse.data.user);
-                        toast.success("Google login successful!");
-                    } catch (error) {
-                        console.error("Google login error:", error);
-                        toast.error("Google login failed. Try again.");
-                    }
-                } else {
-                    await fetchUserInfo();
-                }
-            }
-            setLoading(false);
-        });
-        return () => unsubscribe();
+        fetchUserInfo();
     }, []);
 
     const fetchUserInfo = async () => {
@@ -68,6 +45,7 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    // Handle API errors
     const handleError = (error) => {
         if (error.response?.data?.message) {
             console.error(error.response.data.message);
@@ -78,9 +56,12 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    // User signup
     const signup = async (credentials) => {
         try {
             const response = await axiosInstance.post("/users/register", credentials);
+            // Automatically login after successful registration
+            // await login(credentials);
             return response.data;
         } catch (error) {
             handleError(error);
@@ -94,7 +75,6 @@ const AuthProvider = ({ children }) => {
             const { token, user } = response.data;
             console.log(token, user);
             setUser(user);
-            localStorage.setItem("lastLoginMethod", "email");
         } catch (error) {
             handleError(error);
             throw error;
@@ -103,15 +83,32 @@ const AuthProvider = ({ children }) => {
 
     const googleLogin = async () => {
         setLoading(true);
-        localStorage.setItem("lastLoginMethod", "google");
-        signInWithRedirect(auth, googleProvider);
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            const { displayName, email, photoURL } = result.user;
+            try {
+                const loginResponse = await axiosInstance.post("/users/google/login",
+                    {
+                        email,
+                        name: displayName,
+                    },
+                    { withCredentials: true }
+                );
+                setUser(loginResponse.data.user);
+                toast.success("Google login successful!");
+                return loginResponse.data;
+            } catch (error) {
+                console.log(error);
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
     const logout = async () => {
         try {
             await axiosInstance.post("/users/logout", {}, { withCredentials: true });
             setUser(null);
-            localStorage.removeItem("lastLoginMethod");
             toast.success("Logout successful");
         } catch (error) {
             console.error("Logout failed:", error);
