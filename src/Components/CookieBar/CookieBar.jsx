@@ -9,7 +9,7 @@ const CookieBar = () => {
         if (!cookieAccepted) {
             const timer = setTimeout(() => {
                 setShowCookieBar(true);
-            }, 20000);
+            }, 2000);
             return () => clearTimeout(timer);
         }
     }, []);

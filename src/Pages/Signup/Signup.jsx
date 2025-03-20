@@ -81,6 +81,16 @@ const Signup = () => {
                         <p className='text-gray-400 text-sm'>You're one step closer to protecting your music like never before.</p>
                     </div>
                 </div>
+                <div className='mb-2.5'>
+                    <button onClick={googleLoginHandler} className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-1 sm:mt-4 hover:bg-gray-100 focus:outline-none">
+                        Sign up with <FcGoogle className='ml-1' />oogle
+                    </button>
+                    <div className="mt-4 text-center flex justify-between items-center">
+                        <hr className='w-44 border-gray-600' />
+                        <span className="text-sm text-gray-400">Or</span>
+                        <hr className='w-44 border-gray-600' />
+                    </div>
+                </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-2.5 lg:space-y-6">
 
                     <div className='relative'>
@@ -109,7 +119,7 @@ const Signup = () => {
                             })}
                             className="w-full p-3 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:outline-none focus:ring-1 focus:ring-[#7e3aed]"
                         />
-                        
+
                         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                     </div>
 
@@ -149,15 +159,7 @@ const Signup = () => {
                             Loading...
                         </div> : "Create Account"}
                     </button>
-                    <div className="mt-4 text-center flex justify-between items-center">
-                        <hr className='w-44 border-gray-600' />
-                        <span className="text-sm text-gray-400">Or</span>
-                        <hr className='w-44 border-gray-600' />
-                    </div>
                 </form>
-                <button onClick={googleLoginHandler} className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-1 sm:mt-4 hover:bg-gray-100 focus:outline-none">
-                    Sign up with <FcGoogle className='ml-1' />oogle
-                </button>
                 <div className="mt-4 text-center">
                     <Link to='/login' className="text-sm text-gray-400">Already have an account? <span className="text-[#7e3aed] hover:underline underline-offset-4">Sign in</span></Link>
                 </div>
