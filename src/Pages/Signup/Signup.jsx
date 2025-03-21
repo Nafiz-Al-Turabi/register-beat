@@ -83,7 +83,7 @@ const Signup = () => {
                 </div>
                 <div className='mb-2.5'>
                     <button onClick={googleLoginHandler} className="w-full flex items-center justify-center bg-white text-lg font-bold text-black py-3 rounded-full mt-1 sm:mt-4 hover:bg-gray-100 focus:outline-none">
-                        Sign up with <FcGoogle className='ml-1' />oogle
+                        Continue with <FcGoogle className='ml-1' />oogle
                     </button>
                     <div className="mt-4 text-center flex justify-between items-center">
                         <hr className='w-44 border-gray-600' />
