@@ -11,7 +11,7 @@ const ProfileSetting = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [imageFile, setImageFile] = useState(null);
     const [previewImage, setPreviewImage] = useState('');
-    const { user,refreshUserInfo } = useContext(AuthContext);
+    const { user, refreshUserInfo } = useContext(AuthContext);
 
     const handleFile = (file) => {
         const fileUrl = URL.createObjectURL(file);
@@ -87,6 +87,19 @@ const ProfileSetting = () => {
             <div className='mt-6'>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div>
+                        <label htmlFor="full-name" className="block text-[#e3e6ed] text-sm font-medium mb-2">Full Name</label>
+                        <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
+                            <input
+                                type="text"
+                                id="full-name"
+                                placeholder="Enter your full name"
+                                defaultValue={user?.fullName}
+                                {...register("full-name")}
+                                className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
+                            />
+                        </div>
+                    </div>
+                    <div>
                         <label htmlFor="username" className="block text-[#e3e6ed] text-sm font-medium mb-2">Username</label>
                         <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
@@ -117,19 +130,7 @@ const ProfileSetting = () => {
                         {/* {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>} */}
                         {/* <p className='text-sm text-[#72747e] mt-2'>To change your email, please <Link to={""} className='text-[#5816c5] underline'>follow these instructions</Link></p> */}
                     </div>
-                    <div>
-                        <label htmlFor="full-name" className="block text-[#e3e6ed] text-sm font-medium mb-2">Full Name</label>
-                        <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
-                            <input
-                                type="text"
-                                id="full-name"
-                                placeholder="Enter your full name"
-                                defaultValue={user?.fullName}
-                                {...register("full-name")}
-                                className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
-                            />
-                        </div>
-                    </div>
+
                     <div>
                         <label htmlFor="producer-name" className="block text-[#e3e6ed] text-sm font-medium mb-2">Producer Name</label>
                         <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>

@@ -36,6 +36,16 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
         navigate('/');
     }
 
+    const handleVerifyEmail = async () => {
+        try {
+            const res = await axiosInstance.get('/users/first-step-varify-mail',
+            )
+            navigate('/verify-account')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div>
             {/* Sidebar */}
@@ -78,7 +88,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                         <LuCreditCard className="mr-2" /> Manage Subscription
                                     </button> : <NavLink
                                         to="/dashboard/settings"
-                                         className="flex items-center text-base text-white hover:text-white"
+                                        className="flex items-center text-base text-white hover:text-white"
                                     >
                                         <FaCog className="mr-2" /> Settings
                                     </NavLink>
@@ -109,6 +119,13 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
 
                 <div className="mt-auto border-gray-800 flex flex-col py-2">
                     {
+                        user?.isVerified === false ?
+                            <button onClick={handleVerifyEmail} className='primary-bg text-white w-full py-2 rounded mb-4 flex items-center justify-center'>
+                                Verify Your email
+                            </button> :
+                            ''
+                    }
+                    {
                         user?.active === true ||
                             new Date(user?.subscriptionEndDAte) > new Date()
                             ?
@@ -130,6 +147,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                             </Link> :
                             ''
                     }
+
                     <hr className='my-2 border-zinc-700' />
                     <NavLink
                         to="/dashboard/settings"
@@ -147,7 +165,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     </Link>
                 </div>
                 <p className='text-xs text-gray-500'>
-                    <Link  to='/term-of-use' className='hover:underline'>Term of Use</Link> and <Link  to='/privacy' className='hover:underline'>Privacy Policy</Link>
+                    <Link to='/term-of-use' className='hover:underline'>Term of Use</Link> and <Link to='/privacy' className='hover:underline'>Privacy Policy</Link>
                 </p>
             </div>
             {showPopup && <ManangeSubsPopup setShowPopup={setShowPopup} />}
