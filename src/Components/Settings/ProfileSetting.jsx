@@ -93,7 +93,7 @@ const ProfileSetting = () => {
                                 type="text"
                                 id="full-name"
                                 placeholder="Enter your full name"
-                                defaultValue={user?.fullName}
+                                defaultValue={user?.name}
                                 {...register("full-name")}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
@@ -106,7 +106,7 @@ const ProfileSetting = () => {
                                 type="text"
                                 id="username"
                                 placeholder="Enter your name"
-                                defaultValue={user?.name}
+                                defaultValue={user?.fullName} 
                                 {...register("username", { required: "Username is required" })}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />

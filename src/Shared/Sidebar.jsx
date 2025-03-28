@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FaCrown, FaCog, FaSignOutAlt, } from "react-icons/fa";
 import { LuCreditCard } from "react-icons/lu";
-import { MdKeyboardArrowDown, MdOutlineDashboard } from "react-icons/md";
+import { MdKeyboardArrowDown, MdOutlineDashboard, MdVerified } from "react-icons/md";
 import { RiMoneyCnyCircleLine, RiMusic2Line, RiUser3Line } from "react-icons/ri";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import ManangeSubsPopup from '../Components/ManageSubscription/ManangeSubsPopup';
@@ -57,10 +57,14 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                 <img src={`${fileUrl}/uploads/images/${user?.avatar}`} alt="avatar" className="w-full h-full object-cover" />
                             </div>
                             <div className="ml-3 ">
-                                <p className="text-sm font-semibold">
+                                <p className="text-sm font-semibold flex items-center gap-1">
                                     {
-                                        user?.producerName ? user?.producerName : user?.name
-                                    }</p>
+                                        user?.producerName ? user?.producerName : user?.name 
+                                    }
+                                    {
+                                        user?.isVerified ? <MdVerified /> : ""
+                                    }
+                                </p>
                                 <p className="text-xs text-gray-400">Plan: {user?.active === true ? 'Standard' : 'Inactive'}</p>
                             </div>
                         </div>
@@ -120,7 +124,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                 <div className="mt-auto border-gray-800 flex flex-col py-2">
                     {
                         user?.isVerified === false ?
-                            <button onClick={handleVerifyEmail} className='primary-bg text-white w-full py-2 rounded mb-4 flex items-center justify-center'>
+                            <button onClick={handleVerifyEmail} className='bg-red-600 text-white w-full py-2 rounded mb-4 flex items-center justify-center'>
                                 Verify Your email
                             </button> :
                             ''
