@@ -11,7 +11,9 @@ const ProfileSetting = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [imageFile, setImageFile] = useState(null);
     const [previewImage, setPreviewImage] = useState('');
+    const [loading,setLoading]= useState(false)
     const { user, refreshUserInfo } = useContext(AuthContext);
+
 
     const handleFile = (file) => {
         const fileUrl = URL.createObjectURL(file);
@@ -20,6 +22,7 @@ const ProfileSetting = () => {
     };
 
     const onSubmit = async (data) => {
+        setLoading(true)
         try {
             const formData = new FormData();
             formData.append('name', data.username);
@@ -56,6 +59,8 @@ const ProfileSetting = () => {
             const errorMsg = error.response?.data?.message || 'Profile update failed. Please try again.';
             toast.error(errorMsg);
             console.error('Profile update error:', error);
+        }finally{
+            setLoading(false)
         }
     };
 
@@ -90,29 +95,31 @@ const ProfileSetting = () => {
                         <label htmlFor="full-name" className="block text-[#e3e6ed] text-sm font-medium mb-2">Full Name</label>
                         <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
-                                type="text"
-                                id="full-name"
-                                placeholder="Enter your full name"
-                                defaultValue={user?.name}
-                                {...register("full-name")}
-                                className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
+                               type="text"
+                               id="username"
+                               placeholder="Enter your name"
+                               defaultValue={user?.name}
+                               {...register("username", { required: "Full name is required" })}
+                               className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
+                             <PiDotsThree className='bg-red-500 w-6 h-6 rounded' />
+                             {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>}
                         </div>
                     </div>
                     <div>
                         <label htmlFor="username" className="block text-[#e3e6ed] text-sm font-medium mb-2">Username</label>
                         <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
-                                type="text"
-                                id="username"
-                                placeholder="Enter your username"
-                                defaultValue={user?.fullName} 
-                                {...register("username", { required: "Username is required" })}
-                                className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
+                                 type="text"
+                                 id="full-name"
+                                 placeholder="Enter your full name"
+                                 defaultValue={user?.fullName}
+                                 {...register("full-name")}
+                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
-                            <PiDotsThree className='bg-red-500 w-6 h-6 rounded' />
+                           
                         </div>
-                        {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>}
+                       
                     </div>
                     <div>
                         {/* <label htmlFor="email" className="block text-[#e3e6ed] text-sm font-medium mb-2">Email</label>
@@ -183,7 +190,9 @@ const ProfileSetting = () => {
                         {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>}
                     </div>
                     <button type="submit" className="primary-bg text-base text-white font-bold p-3 mt-4 rounded-lg active:scale-95">
-                        Save
+                        {
+                            loading ? "Saving.." : "Save"
+                        }
                     </button>
                 </form>
             </div>
