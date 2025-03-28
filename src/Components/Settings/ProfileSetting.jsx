@@ -105,7 +105,7 @@ const ProfileSetting = () => {
                             <input
                                 type="text"
                                 id="username"
-                                placeholder="Enter your name"
+                                placeholder="Enter your username"
                                 defaultValue={user?.fullName} 
                                 {...register("username", { required: "Username is required" })}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
