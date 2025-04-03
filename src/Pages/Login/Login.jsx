@@ -150,12 +150,12 @@ const Login = () => {
             case 2:
                 return (
                     <div className='bg-[#0f1423] animate-from-middle p-6 rounded-lg shadow-lg'>
-                        <h3 className="text-xl text-center mb-4">Enter OTP</h3>
+                        <h3 className="text-xl text-center mb-4">Enter the code sent to your email</h3>
                         <div className="space-y-4">
                             <input
                                 type="text"
                                 {...register("otp", { required: "OTP is required" })}
-                                placeholder="Enter OTP"
+                                placeholder=""
                                 className="w-full p-3 bg-[#1e2837] text-white rounded-md"
                             />
                             <button
