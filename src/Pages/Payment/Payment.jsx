@@ -16,6 +16,7 @@ const Payment = () => {
   const [clientSecret, setClientSecret] = useState('');
   const { user, logout, refreshUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
+  const customerId =  user?.customerId
 
   if (user?.paypalSubsStatus === 'pending') {
     navigate('/payment-checking');
@@ -39,14 +40,14 @@ const Payment = () => {
     fetchPriceId();
   }, []);
 
-  useEffect(() => {
-    if (priceId) {
-      axiosInstance
-        .post('/payments/create-payment-intent', { priceId })
-        .then(response => setClientSecret(response.data.clientSecret))
-        .catch(error => console.error(error));
-    }
-  }, [priceId]);
+  // useEffect(() => {
+  //   if (priceId) {
+  //     axiosInstance
+  //       .post('/payments/create-payment-intent', { priceId })
+  //       .then(response => setClientSecret(response.data.clientSecret))
+  //       .catch(error => console.error(error));
+  //   }
+  // }, [priceId]);
 
   // Handle switching payment methods and store in localStorage
   const handlePaymentMethodChange = (method) => {
@@ -130,9 +131,9 @@ const Payment = () => {
               </button>
             </div>
 
-            {clientSecret && priceId ? (
+            { priceId ? (
               paymentMethod === 'card' ? (
-                <Elements stripe={stripePromise} options={{ clientSecret }}>
+                <Elements stripe={stripePromise} >
                   <CheckoutForm priceId={priceId} />
                 </Elements>
               ) : (
