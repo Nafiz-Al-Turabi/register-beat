@@ -235,6 +235,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                                             <span>Stripe</span>
                                         </button>
                                         <button
+                                        // disabled={true}
                                             className={`flex gap-2 items-center p-2 rounded ${paymentMethod === "paypal"
                                                 ? "bg-[#8c50ff]"
                                                 : "bg-[#3a3a3a]"
@@ -256,20 +257,23 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                                 </button>
 
                                 {paymentMethod === "paypal" && (
-                                    <div className="w-full h-12 overflow-hidden mt-2">
-                                        <PayPalButtons
-                                            style={{
-                                                layout: "vertical",
-                                                size: "responsive",
-                                                shape: "rect",
-                                                color: "gold",
-                                                label: "paypal",
-                                            }}
-
-                                            createOrder={createOrder}
-                                            onApprove={(data) => captureOrder(data.orderID)}
-                                        />
+                                    <div className="text-lg font-bold text-center">
+                                        Coming soon 
                                     </div>
+                                    // <div className="w-full h-12 overflow-hidden mt-2">
+                                    //     <PayPalButtons
+                                    //         style={{
+                                    //             layout: "vertical",
+                                    //             size: "responsive",
+                                    //             shape: "rect",
+                                    //             color: "gold",
+                                    //             label: "paypal",
+                                    //         }}
+
+                                    //         createOrder={createOrder}
+                                    //         onApprove={(data) => captureOrder(data.orderID)}
+                                    //     />
+                                    // </div>
                                 )}
 
                             </div>
