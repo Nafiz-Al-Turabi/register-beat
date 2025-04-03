@@ -124,6 +124,7 @@ const Payment = () => {
                 Card
               </button>
               <button
+                // disabled={true}
                 onClick={() => handlePaymentMethodChange('paypal')}
                 className={`flex-1 py-1 ${paymentMethod === 'paypal' ? 'primary-bg' : ''} rounded`}
               >
@@ -137,14 +138,17 @@ const Payment = () => {
                   <CheckoutForm priceId={priceId} />
                 </Elements>
               ) : (
-                <div>
-                  <button
-                    onClick={handlePaypalPayment}
-                    className="flex justify-center items-center w-full py-3 px-4 bg-yellow-500 text-white font-semibold rounded-md transition duration-200"
-                  >
-                    <img src={paypal} alt="paypal" className='w-40 object-cover' />
-                  </button>
+                <div className='text-center text-white text-lg font-bold'>
+                  Coming soon
                 </div>
+                // <div>
+                //   <button
+                //     onClick={handlePaypalPayment}
+                //     className="flex justify-center items-center w-full py-3 px-4 bg-yellow-500 text-white font-semibold rounded-md transition duration-200"
+                //   >
+                //     <img src={paypal} alt="paypal" className='w-40 object-cover' />
+                //   </button>
+                // </div>
               )
             ) : (
               <Loading />
