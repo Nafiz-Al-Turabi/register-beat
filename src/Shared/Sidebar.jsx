@@ -8,6 +8,7 @@ import ManangeSubsPopup from '../Components/ManageSubscription/ManangeSubsPopup'
 import { AuthContext } from '../Provider/AuthProvider';
 import fileUrl from '../Axios/fileUrl';
 import axiosInstance from '../Axios/AxiosInstance';
+import dummyImage from '../assets/dummy.jpg'
 
 const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     const [isDropdown, setDropdown] = useState(false);
@@ -54,7 +55,9 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     <div onClick={toggleDropdown} className="flex items-center justify-between mb-8 border border-gray-700 bg-[#131313] p-3 rounded-md cursor-pointer">
                         <div className="flex items-center ">
                             <div className="bg-[#2f3947] w-8 h-8 rounded-md flex items-center justify-center text-sm overflow-hidden">
-                                <img src={`${fileUrl}/uploads/images/${user?.avatar}`} alt="avatar" className="w-full h-full object-cover" />
+                              {
+                                user?.avatar ?   <img src={`${fileUrl}/uploads/images/${user?.avatar}`} alt="avatar" className="w-full h-full object-cover" /> : <img src={dummyImage} alt="avatar" className="w-full h-full object-cover" />
+                              }
                             </div>
                             <div className="ml-3 ">
                                 <p className="text-sm font-semibold flex items-center gap-1">
@@ -135,7 +138,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                             ?
                             ''
                             :
-                            <Link to='payment'>
+                            <Link to='/payment'>
                                 <button className="primary-bg text-white w-full py-2 rounded mb-4 flex items-center justify-center">
                                     <FaCrown className=" mr-2" /> Subscribe Now
                                 </button>
