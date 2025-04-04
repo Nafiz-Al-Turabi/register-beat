@@ -16,7 +16,7 @@ const Payment = () => {
   const [clientSecret, setClientSecret] = useState('');
   const { user, logout, refreshUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
-  const customerId =  user?.customerId
+  const customerId = user?.customerId
 
   if (user?.paypalSubsStatus === 'pending') {
     navigate('/payment-checking');
@@ -63,7 +63,7 @@ const Payment = () => {
           window.location.href = approvalUrl;
         } else {
           console.error('PayPal approval URL not found');
-          
+
         }
       })
       .catch(error => console.error(error));
@@ -109,7 +109,7 @@ const Payment = () => {
             <div className='flex justify-between items-center mt-4'>
               <p className=" text-lg font-bold">Total: $9.99/month</p>
               <p className='text-gray-400 text-sm'>
-                <Link  to='/term-of-use' className='hover:underline'>Terms of Use</Link> and <Link  to='/privacy' className='hover:underline'>Privacy Policy</Link>
+                <Link to='/term-of-use' className='hover:underline'>Terms of Use</Link> and <Link to='/privacy' className='hover:underline'>Privacy Policy</Link>
               </p>
             </div>
           </div>
@@ -123,16 +123,17 @@ const Payment = () => {
               >
                 Card
               </button>
+              {/* 
               <button
-                // disabled={true}
                 onClick={() => handlePaymentMethodChange('paypal')}
                 className={`flex-1 py-1 ${paymentMethod === 'paypal' ? 'primary-bg' : ''} rounded`}
               >
                 PayPal
               </button>
+              */}
             </div>
 
-            { priceId ? (
+            {priceId ? (
               paymentMethod === 'card' ? (
                 <Elements stripe={stripePromise} >
                   <CheckoutForm priceId={priceId} />

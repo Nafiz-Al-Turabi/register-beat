@@ -234,8 +234,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                                             <ImCreditCard className="text-[#c4bb8f] text-xl" />
                                             <span>Stripe</span>
                                         </button>
-                                        <button
-                                        // disabled={true}
+                                        {/* <button
                                             className={`flex gap-2 items-center p-2 rounded ${paymentMethod === "paypal"
                                                 ? "bg-[#8c50ff]"
                                                 : "bg-[#3a3a3a]"
@@ -244,7 +243,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                                         >
                                             <ImCreditCard className="text-[#c4bb8f] text-xl" />
                                             <span>PayPal</span>
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
                                 <button
