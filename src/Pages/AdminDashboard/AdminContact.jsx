@@ -124,7 +124,7 @@ const AdminContact = () => {
           onClick={() => setSelectedRequest(null)}
         >
           <div
-            className="bg-[#1a1d21] w-full max-w-md mx-4 p-6 rounded-xl shadow-xl text-white transform transition-all duration-300 scale-100"
+            className="bg-[#1a1d21] w-full max-w-xl mx-4 p-6 rounded-xl shadow-xl text-white transform transition-all duration-300 scale-100"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-4">
