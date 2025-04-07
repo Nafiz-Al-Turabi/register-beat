@@ -7,7 +7,9 @@ import toast from "react-hot-toast";
 
 export const AuthContext = createContext();
 
-const GOOGLE_CLIENT_ID = "721848498798-t52o73v6k3r0ss1g49dg7a905hef1at8.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_OAUTH_CLIENT_ID;
+
+console.log(GOOGLE_CLIENT_ID);
 
 const AuthProviderInner = ({ children }) => {
     const [user, setUser] = useState(null);
