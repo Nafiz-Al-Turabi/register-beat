@@ -23,9 +23,14 @@ const faqData = [
             "You can purchase packs of 10 credits for $5. This way, you can buy as many credits as you need to register and protect your beats. This is ideal for producers with large beat catalogs.",
     },
     {
+        question: "What happens if I don't use my credits within a month? Do they roll over?",
+        answer:
+            "Yes! If you don't use your credits wihin a month, they amnaticalty roll over to next  month. You'll never lose the credits you've paid for."
+    },
+    {
         question: "Can I cancel my subscription at any time?",
         answer:
-            "Yes, you can cancel your subscription at any time. When you cancel, you will retain access to your registered beats until the end of your billing cycle. After that, your beat protection services will expire, and you will no longer be able to register new beats unless you resubscribe.",
+            "Yes, you can cancel your subscription whenever you want. Once you cancel, you'll still have access to your registered beats, but you won't be able to register new ones unless you resubscribe. ",
     },
 ];
 
