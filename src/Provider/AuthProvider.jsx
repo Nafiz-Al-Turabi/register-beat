@@ -9,7 +9,6 @@ export const AuthContext = createContext();
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_OAUTH_CLIENT_ID;
 
-console.log(GOOGLE_CLIENT_ID);
 
 const AuthProviderInner = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -110,7 +109,9 @@ const AuthProviderInner = ({ children }) => {
                 { withCredentials: true }
             );
             setUser(data.user);
+            console.log(data.user);
             toast.success("Google login successful!");
+            window.location.href = "/dashboard";
         } catch (error) {
             showError(error);
         }
