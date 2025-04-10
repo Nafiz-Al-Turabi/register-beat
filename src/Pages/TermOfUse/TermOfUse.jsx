@@ -7,8 +7,8 @@ const TermsOfUse = () => {
     return (
         <div className="max-w-4xl mx-auto my-10 p-6 bg-gradient-to-br from-gray-900 via-black to-gray-900 shadow-md rounded-lg">
             <h1 className="text-3xl font-bold mb-6">Terms of Use for BeatProtect.io</h1>
-            <p className="text-gray-400 mb-4">Effective Date: [Insert Date]</p>
-            <p className="text-gray-400 mb-4">Last Updated: [Insert Date]</p>
+            <p className="text-gray-400 mb-4">Effective Date: [11/29/2024]</p>
+            <p className="text-gray-400 mb-4">Last Updated: [04/08/2025]</p>
             <p className="text-gray-400 mb-4">
                 Welcome to BeatProtect.io (“Company”, “we”, “us”, or “our”). By accessing or using our platform, you (“User”, “Producer”, “you”) agree to comply with and be bound by these Terms of Use (“Terms”). If you do not agree with these Terms, do not use our platform.
             </p>
@@ -90,7 +90,7 @@ const TermsOfUse = () => {
 
             <h2 className="text-xl font-semibold mt-6">10. Governing Law & Dispute Resolution</h2>
             <p className="text-gray-400">
-                These Terms are governed by the laws of [Insert Country]. Any disputes arising from the use of the platform will be resolved through arbitration or legal proceedings in [Insert Jurisdiction].
+                These Terms are governed by the laws of Puerto Rico. Any disputes arising from the use of the platform will be resolved through arbitration or legal proceedings in San Juan.
             </p>
 
             <h2 className="text-xl font-semibold mt-6">11. Contact Information</h2>

@@ -7,8 +7,8 @@ const PrivacyPolicy = () => {
     return (
         <div className="max-w-4xl mx-auto my-10 p-6 bg-gradient-to-br from-gray-900 via-black to-gray-900 shadow-md rounded-lg">
             <h1 className="text-3xl font-bold mb-6">Privacy Policy for BeatProtect.io</h1>
-            <p className="text-gray-400"><strong>Effective Date:</strong> [Insert Date]</p>
-            <p className="text-gray-400 mb-4"><strong>Last Updated:</strong> [Insert Date]</p>
+            <p className="text-gray-400"><strong>Effective Date:</strong> [11/29/2024]</p>
+            <p className="text-gray-400 mb-4"><strong>Last Updated:</strong> [04/08/2025]</p>
             <p className="text-gray-400 mb-4">
                 This Privacy Policy describes how <a href="https://beatprotect.io" className="text-[#7e3aed]">BeatProtect.io</a> (the “Site”, “we”, “us”, or “our”) collects, uses, and discloses your Personal Information when you visit or use our services.
             </p>

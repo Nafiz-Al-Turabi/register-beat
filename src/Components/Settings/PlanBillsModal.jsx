@@ -232,7 +232,7 @@ const PlanBillsModal = ({ setShowModal, showModal }) => {
                                             onClick={() => setPaymentMethod("stripe")}
                                         >
                                             <ImCreditCard className="text-[#c4bb8f] text-xl" />
-                                            <span>Stripe</span>
+                                            <span>Card</span>
                                         </button>
                                         {/* <button
                                             className={`flex gap-2 items-center p-2 rounded ${paymentMethod === "paypal"
