@@ -214,8 +214,9 @@ const LandingPage = () => {
                             International Legal Proof
                         </h2>
                         <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                            At BeatProtect, we know how important it is to keep your music safe from unauthorized use. That&apos;s why
-                            every time you register a beat, we generate solid legal proof using Safe Creative technology.
+                            At BeatProtect, We know how important it is to keep safe from unauthorized
+                            use. That's why every time you register a beat, we generate solid legal proof using
+                            advanced digital certification technology.
                         </p>
                     </div>
 
@@ -353,11 +354,8 @@ const LandingPage = () => {
                             Protect Your Beats with Secure Digital Registration
                         </h2>
                         <p className="text-xl text-gray-400 max-w-lg">
-                            Our platform allows you to register your beats quickly and legally, generating a digital certificate with
-                            SafeCreative. Each beat receives a unique cryptographic fingerprint and a dual timestamp seal recognized
-                            globally, ensuring authenticity and protection in any copyright dispute. Register your music with
-                            confidence, knowing you can always prove your ownership.
-                        </p>
+                            Our platform allows you to register your beats quickly and legally, generating a digital
+                            backed by advanced technology. Each beat receive a unique cryptographic fingerprint and a dual timestamp seal recognized globally, ensuring authenticity and proection in any copyright dispute. Register your music with confidence, knowing you can always prove your ownership.                        </p>
                         <div className="flex items-center gap-4">
                             <button onClick={() => navigate('/dashboard')} size="lg" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md duration-300 ease-in-out ">
                                 Start Protecting your Beats
@@ -517,11 +515,12 @@ const LandingPage = () => {
             <Testimonial />
             <section id="pricing" className="container mx-auto py-14 lg:py-24">
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7C3AED]/10 border border-[#7C3AED]/20 mb-6 lg:mb-8">
+                    <div className=" text-xs sm:text-sm lg:text-base inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#7C3AED]/10 border border-[#7C3AED]/20 mb-6 lg:mb-8">
                         <span className="relative flex h-3 w-3">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7C3AED] opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-[#7C3AED]"></span>
                         </span>
+                        Over 800 producers are already securing their work with Beatprotect
                     </div>
                     <h2 className="text-3xl md:text-6xl font-bold text-white">
                         Start Protecting your beats <span className="text-[#7C3AED]">Today</span>
