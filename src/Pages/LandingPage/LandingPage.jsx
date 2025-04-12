@@ -214,9 +214,9 @@ const LandingPage = () => {
                             International Legal Proof
                         </h2>
                         <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                            At BeatProtect, We know how important it is to keep safe from unauthorized
-                            use. That's why every time you register a beat, we generate solid legal proof using
-                            advanced digital certification technology.
+                            At BeatProtect, we know how important it is to keep your music safe from unauthorized use.
+                            That's why every time you register a beat, we generate solid legal proof using Safe Creative
+                            technology.
                         </p>
                     </div>
 
@@ -355,7 +355,11 @@ const LandingPage = () => {
                         </h2>
                         <p className="text-xl text-gray-400 max-w-lg">
                             Our platform allows you to register your beats quickly and legally, generating a digital
-                            backed by advanced technology. Each beat receive a unique cryptographic fingerprint and a dual timestamp seal recognized globally, ensuring authenticity and proection in any copyright dispute. Register your music with confidence, knowing you can always prove your ownership.                        </p>
+                            certificate backed by advanced technology. Each beat receives a unique cryptographic
+                            fingerprint and a dual timestamp seal recognized globally, ensuring authenticity and
+                            protection in any copyright dispute. Register your music with confidence, knowing you
+                            can always prove your ownership.
+                        </p>
                         <div className="flex items-center gap-4">
                             <button onClick={() => navigate('/dashboard')} size="lg" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md duration-300 ease-in-out ">
                                 Start Protecting your Beats
