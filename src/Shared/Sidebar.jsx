@@ -3,6 +3,7 @@ import { FaCrown, FaCog, FaSignOutAlt, } from "react-icons/fa";
 import { LuCreditCard } from "react-icons/lu";
 import { MdKeyboardArrowDown, MdOutlineDashboard, MdVerified } from "react-icons/md";
 import { RiMoneyCnyCircleLine, RiMusic2Line, RiUser3Line } from "react-icons/ri";
+import { LuHeadphones } from "react-icons/lu";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import ManangeSubsPopup from '../Components/ManageSubscription/ManangeSubsPopup';
 import { AuthContext } from '../Provider/AuthProvider';
@@ -121,6 +122,14 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                         }
                     >
                         <RiMusic2Line className="mr-2" /> My Beats
+                    </NavLink>
+                    <NavLink
+                        to="/dashboard/all-matches-song"
+                        className={({ isActive }) =>
+                            `flex items-center text-base px-4 py-2 text-white font-medium rounded hover:bg-[#191919] hover:text-[#e3e6ed] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
+                        }
+                    >
+                        <LuHeadphones className="mr-2" /> Song Matches
                     </NavLink>
                 </nav>
 

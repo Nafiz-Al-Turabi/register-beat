@@ -49,7 +49,7 @@ const MyBeats = () => {
   });
 
   const offset = currentPage * itemsPerPage;
-  const currentBeats = beats.slice(offset, offset + itemsPerPage);
+  const currentBeats = beats?.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(beats.length / itemsPerPage);
 
   const handlePageChange = ({ selected }) => {
