@@ -7,6 +7,7 @@ import PlanPurchase from "../Pages/PlanPurchase/PlanPurchase";
 import RegisterBeat from "../Pages/RegisterBeat";
 import DashboardContents from "../Components/DashboardContents/DashboardContents";
 import MyBeats from "../Pages/MyBeats/MyBeats";
+import AllMatchesSong from "../Pages/AllMatchesSong/AllMatchesSong"
 import Profile from "../Pages/Profile/Profile";
 import SongMatches from "../Pages/SongMatches/SongMatches";
 import Protected from "../Private/Protected";
@@ -63,6 +64,7 @@ export const router = createBrowserRouter([
       { path: "upgrade", element: <PlanPurchase /> },
       { path: "register-beat", element: <RegisterBeat /> },
       { path: "my-beats", element: <MyBeats /> },
+      {path: "all-matches-song", element:<AllMatchesSong/>},
       { path: "song-matches", element: <SongMatches /> },
       { path: "profile", element: <Profile /> },
       { path: "contact", element: <Contact /> },
