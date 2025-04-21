@@ -112,27 +112,31 @@ const AllMatchesSong = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:3001/api/beat/update-match-song/${selectedSong.beatId}/${selectedSong.id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ category: verificationStatus }),
-            });
-
-            const result = await response.json();
-            if (!response.ok) throw new Error(result.message || "Something went wrong");
-
-            console.log("Update Success:", result);
+            const response = await axiosInstance.put(
+                `/beat/update-match-song/${selectedSong.beatId}/${selectedSong.id}`,
+                { category: verificationStatus }
+            );
+        
+            console.log("Update Success:", response.data);
             setSelectedSong(null);
             setVerificationStatus(null);
-
+        
             // Refetch updated data
             fetchSongs();
-
+        
         } catch (error) {
             console.error("Error updating category:", error);
             alert(error.message);
         }
     };
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const rowsPerPage = 10;
+
+    const totalSongs = songs?.songs?.length || 0;
+    const totalPages = Math.ceil(totalSongs / rowsPerPage);
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const paginatedSongs = songs?.songs?.slice(startIndex, startIndex + rowsPerPage);
 
     return (
         <div className="text-white p-6 bg-black">
@@ -192,10 +196,10 @@ const AllMatchesSong = () => {
                     <p className="text-red-500">{error}</p>
                 ) : (
                     <div className="overflow-x-auto">
-                        <table className="min-w-full">
+                        <table className="min-w-[640px] w-full">
                             <thead>
                                 <tr className="text-gray-400 text-left border-b border-gray-800">
-                                    <th className="px-4 py-3"></th>
+                                    <th className="px-4 py-3">lmage                                                                                                                                                                            </th>
                                     <th className="px-4 py-3">Song name</th>
                                     <th className="px-4 py-3">Artist</th>
                                     <th className="px-4 py-3">Beat used</th>
@@ -204,24 +208,58 @@ const AllMatchesSong = () => {
                             </thead>
                             <tbody>
                                 {Array.isArray(songs?.songs) && songs.songs.map((song, index) => (
-                                    <tr key={index}
+                                    <tr
+                                        key={index}
                                         className="hover:bg-gray-800/50 transition cursor-pointer"
                                         onClick={() => setSelectedSong(song)}
                                     >
-                                        <td className="px-4 py-4 border-b border-gray-800">
-                                            <img src={`${fileUrl}/${song?.imageUrl}`} alt={song.name} className="w-10 h-10 rounded" />
+                                        <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
+                                            <img
+                                                src={`${fileUrl}/${song?.imageUrl}`}
+                                                alt={song.name}
+                                                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded object-cover"
+                                            />
                                         </td>
-                                        <td className="px-4 py-4 border-b border-gray-800">{song.title}</td>
-                                        <td className="px-4 py-4 text-gray-400 border-b border-gray-800">{song.artist}</td>
-                                        <td className="px-4 py-4 text-gray-400 border-b border-gray-800">{song.beatName}</td>
-                                        <td className="px-4 py-4 border-b border-gray-800">
+                                        <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
+                                            {song.title}
+                                        </td>
+                                        <td className="px-4 py-4 text-gray-400 border-b border-gray-800 whitespace-nowrap">
+                                            {song.artist}
+                                        </td>
+                                        <td className="px-4 py-4 text-gray-400 border-b border-gray-800 whitespace-nowrap">
+                                            {song.beatName}
+                                        </td>
+                                        <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
                                             <StatusBadge status={song.category} />
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
+                        {totalPages > 1 && (
+                            <div className="flex justify-center items-center mt-4 space-x-2">
+                                <button
+                                    className="px-3 py-1 border rounded text-gray-300 hover:bg-gray-700 disabled:opacity-50"
+                                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                    disabled={currentPage === 1}
+                                >
+                                    Previous
+                                </button>
+                                <span className="text-gray-400">
+                                    Page {currentPage} of {totalPages}
+                                </span>
+                                <button
+                                    className="px-3 py-1 border rounded text-gray-300 hover:bg-gray-700 disabled:opacity-50"
+                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        )}
+
                     </div>
+
                 )}
             </div>
 

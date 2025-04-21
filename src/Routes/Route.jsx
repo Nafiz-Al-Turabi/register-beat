@@ -30,6 +30,8 @@ import Pricing from "../Pages/Pricing/Pricing";
 import LandingLayout from "../Layout/landingLayout";
 import VerifyAccount from "../Pages/VerifyAccount/VerifyAccount";
 import EmailVerified from "../Pages/EmailVerified/EmailVerified";
+import EnglishTemplate from "../Pages/MessageTemplate/EnglishTemplate";
+import SpanishTemplate from "../Pages/MessageTemplate/SpanishTemplate";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -69,6 +71,8 @@ export const router = createBrowserRouter([
       { path: "profile", element: <Profile /> },
       { path: "contact", element: <Contact /> },
       { path: "search-beat", element: <SearchBeat /> },
+      {path: "english-template" , element :<EnglishTemplate/>},
+      {path: "spanish-template" , element :<SpanishTemplate/>},
     ],
   },
   {
