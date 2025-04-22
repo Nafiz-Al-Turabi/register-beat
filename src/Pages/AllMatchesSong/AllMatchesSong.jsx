@@ -9,10 +9,13 @@ import axiosInstance from "../../Axios/AxiosInstance";
 import { AuthContext } from "../../Provider/AuthProvider";
 import fileUrl from "../../Axios/fileUrl";
 import Loading from "../../Components/Loading/Loading";
+import { SiApplemusic } from "react-icons/si";
 //import { FiMessageSquare } from "react-icons/fi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const AllMatchesSong = () => {
+    const navigate = useNavigate();
     const [selectedSong, setSelectedSong] = useState(null);
     const [verificationStatus, setVerificationStatus] = useState('');
     const [loading, setLoading] = useState(false);
@@ -89,14 +92,14 @@ const AllMatchesSong = () => {
             case "YouTube":
                 return (
                     <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex justify-center gap-4 items-center px-4 py-2 rounded">
-                        <FaYoutube className="text-red-500 w-6 h-6" />
+                        <FaYoutube className="text-red-600 w-6 h-6" />
                         <p className="text-white">YouTube</p>
                     </a>
                 );
             case "Apple Music":
                 return (
                     <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex justify-center gap-4 items-center px-4 py-2 rounded">
-                        <FaApple className="w-6 h-6" />
+                        <SiApplemusic className="w-6 h-6 text-red-600 m-0 p-0 bg-white rounded-lg " />
                         <p className="text-white">Apple Music</p>
                     </a>
                 );
@@ -207,34 +210,35 @@ const AllMatchesSong = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {Array.isArray(songs?.songs) && songs.songs.map((song, index) => (
-                                    <tr
-                                        key={index}
-                                        className="hover:bg-gray-800/50 transition cursor-pointer"
-                                        onClick={() => setSelectedSong(song)}
-                                    >
-                                        <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
-                                            <img
-                                                src={`${fileUrl}/${song?.imageUrl}`}
-                                                alt={song.name}
-                                                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded object-cover"
-                                            />
-                                        </td>
-                                        <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
-                                            {song.title}
-                                        </td>
-                                        <td className="px-4 py-4 text-gray-400 border-b border-gray-800 whitespace-nowrap">
-                                            {song.artist}
-                                        </td>
-                                        <td className="px-4 py-4 text-gray-400 border-b border-gray-800 whitespace-nowrap">
-                                            {song.beatName}
-                                        </td>
-                                        <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
-                                            <StatusBadge status={song.category} />
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+  {Array.isArray(paginatedSongs) && paginatedSongs.map((song, index) => (
+    <tr
+      key={index}
+      className="hover:bg-gray-800/50 transition cursor-pointer"
+      onClick={() => setSelectedSong(song)}
+    >
+      <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
+        <img
+          src={`${fileUrl}/${song?.imageUrl}`}
+          alt={song.name}
+          className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded object-cover"
+        />
+      </td>
+      <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
+        {song.title}
+      </td>
+      <td className="px-4 py-4 text-gray-400 border-b border-gray-800 whitespace-nowrap">
+        {song.artist}
+      </td>
+      <td className="px-4 py-4 text-gray-400 border-b border-gray-800 whitespace-nowrap">
+        {song.beatName}
+      </td>
+      <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
+        <StatusBadge status={song.category} />
+      </td>
+    </tr>
+  ))}
+</tbody>
+
                         </table>
                         {totalPages > 1 && (
                             <div className="flex justify-center items-center mt-4 space-x-2">
@@ -370,7 +374,7 @@ const AllMatchesSong = () => {
 
             {isModalOpen && (
                 <div className="fixed inset-0 bg-gray-800/60 flex items-center justify-center z-50">
-                    <div className="bg-gray-900 text-white rounded-lg p-8 max-w-lg w-full relative">
+                    <div className="bg-[#111111] text-white rounded-lg p-8 max-w-lg w-full relative">
                         <button
                             onClick={closeModal}
                             className="absolute right-4 top-4 text-gray-400 hover:text-white"
@@ -378,13 +382,13 @@ const AllMatchesSong = () => {
                             <IoIosCloseCircleOutline className="w-6 h-6" />
                         </button>
                         <h2 className="text-2xl font-bold mb-4">How to Contact the Artist</h2>
-                        <p className="mb-6">Follow these steps to contact the artist and negotiate the use of your beat. By approaching it this way, you can turn the artist into a regular client and increase your earnings.</p>
+                        <p className="mb-6  text-sm opacity-50">Follow these steps to contact the artist and negotiate the use of your beat. By approaching it this way, you can turn the artist into a regular client and increase your earnings.</p>
 
                         <div className="space-y-4">
                             {/* Step 1 */}
-                            <div>
+                            <div className="bg-[#101726] p-4 rounded-lg">
                                 <h3 className="font-semibold text-lg">Step 1: Find Contact Information</h3>
-                                <p>Go to the song link and look for any direct contact with the artist (Instagram, Email, etc.).</p>
+                                <p className=" text-sm opacity-50">Go to the song link and look for any direct contact with the artist (Instagram, Email, etc.).</p>
                                 <a
                                     href={lastsong.song_link}
                                     target="_blank"
@@ -396,11 +400,11 @@ const AllMatchesSong = () => {
                             </div>
 
                             {/* Step 2 */}
-                            <div>
+                            <div className="bg-[#101726] p-4 rounded-lg">
                                 <h3 className="font-semibold text-lg">Step 2: Use Message Template</h3>
-                                <p>Use one of our message templates to contact the artist. Choose your preferred language:</p>
-                                <div className="flex gap-4 mt-2">
-                                    <button className="px-4 py-2 bg-purple-600 text-white rounded-md flex items-center justify-center">
+                                <p className=" text-sm opacity-50">Use one of our message templates to contact the artist. Choose your preferred language:</p>
+                                <div className=" flex justify-between gap-4 mt-2">
+                                    <button onClick={()=>{navigate("/dashboard/english-template")}} className="px-4 py-2 bg-purple-600 text-white rounded-md flex items-center justify-center">
                                         <span className="mr-2">English Template</span>
                                     </button>
                                     <button className="px-4 py-2 bg-purple-600 text-white rounded-md flex items-center justify-center">
@@ -410,9 +414,9 @@ const AllMatchesSong = () => {
                             </div>
 
                             {/* Step 3 */}
-                            <div>
+                            <div className="bg-[#101726] p-4 rounded-lg">
                                 <h3 className="font-semibold text-lg">Step 3: Customize and Send</h3>
-                                <p>Customize the template with the specific details of your case and send it to the artist through the contact method you found.</p>
+                                <p className=" text-sm opacity-50">Customize the template with the specific details of your case and send it to the artist through the contact method you found.</p>
                             </div>
 
                             <p className="mt-4 text-xs text-gray-400">
