@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { IoIosLink } from "react-icons/io";
 
 const EnglishTemplate = () => {
     const templateRef = useRef(null);
@@ -57,7 +58,10 @@ const EnglishTemplate = () => {
                         To ensure that you can continue using the beat legally and avoid any copyright claims, I
                         invite you to purchase the appropriate license via the following link:
                     </p>
-                    <p className="mt-2">👉 [Link to purchase License]</p>
+                    <div className='flex items-center '>
+                    <IoIosLink/>
+                    <p className="mt-2"> [Link to purchase License]</p>
+                    </div>
                     <p className="mt-4">
                         I really like what you've done with the song, and I would love for it to remain available on
                         streaming platforms. However, if you are not willing to acquire the License, I will have to
