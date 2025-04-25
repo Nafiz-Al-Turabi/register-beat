@@ -25,7 +25,7 @@ const EnglishTemplate = () => {
                 </div>
             )}
 
-            <h1 className="text-purple-400 text-3xl font-bold mb-4">Message Template</h1>
+            <h1 className="text-[#6e33cb] text-3xl font-bold mb-4">Message Template</h1>
             <p className="text-gray-300 text-center max-w-2xl mb-8">
                 Use this professional template to contact artists using your beats without authorization
             </p>
@@ -34,7 +34,7 @@ const EnglishTemplate = () => {
                 <div className="flex justify-end mb-4">
                     <button
                         onClick={handleCopy}
-                        className="bg-purple-600 text-white hover:bg-purple-700 px-4 py-2 rounded-lg"
+                        className="bg-[#6e33cb] text-white hover:bg-purple-700 px-4 py-2 rounded-lg"
                     >
                         Copy Template
                     </button>

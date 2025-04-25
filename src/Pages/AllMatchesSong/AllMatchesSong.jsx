@@ -31,6 +31,12 @@ const AllMatchesSong = () => {
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
+    const handleClick = () => {
+        if (window.confirm("Are you sure this is not your beat?")) {
+          notMyBeat();
+        }
+      };
+
     const fetchSongs = async () => {
         if (!userId) return;
         setVerificationStatus('')
@@ -54,25 +60,25 @@ const AllMatchesSong = () => {
 
     const StatusBadge = ({ status }) => {
         switch (status) {
-            case "licensed":
+            case "Licensed":
                 return (
                     <div className="flex items-center gap-1 bg-green-900/20 px-3 py-1 rounded-lg text-sm font-medium w-28 ">
                         <IoMdCheckmarkCircleOutline className="text-green-500 w-4" />
-                        <span className="text-green-500">licensed</span>
+                        <span className="text-green-500">Licensed</span>
                     </div>
                 );
-            case "unauthorized":
+            case "Unauthorized":
                 return (
                     <div className="flex items-center gap-1 bg-red-900/20 px-3 py-1 rounded-lg text-sm font-medium w-36">
                         <FaRegCircleXmark className="text-red-500 w-30" />
-                        <span className="text-red-500">unauthorized</span>
+                        <span className="text-red-500">Unauthorized</span>
                     </div>
                 );
-            case "pending":
+            case "Pending":
                 return (
                     <div className="flex items-center gap-1 bg-yellow-900/20 px-3 py-1 rounded-lg text-sm font-medium w-28">
                         <FaClock className="text-yellow-500" />
-                        <span className="text-yellow-500">pending</span>
+                        <span className="text-yellow-500">Pending</span>
                     </div>
                 );
             default:
@@ -119,29 +125,49 @@ const AllMatchesSong = () => {
                 `/beat/update-match-song/${selectedSong.beatId}/${selectedSong.id}`,
                 { category: verificationStatus }
             );
-        
+
             console.log("Update Success:", response.data);
             setSelectedSong(null);
             setVerificationStatus(null);
-        
+
             // Refetch updated data
             fetchSongs();
-        
+
         } catch (error) {
             console.error("Error updating category:", error);
             alert(error.message);
         }
     };
 
+    const notMyBeat = async () => {
+        try{
+            const response = await axiosInstance.put(
+                `/beat/not-my-beat/${selectedSong.beatId}/${selectedSong.id}`,
+                
+            );
+            console.log("Delete Success:", response.data);
+            setSelectedSong(null);
+            fetchSongs();
+
+        }catch (error) {
+            console.error("Error updating category:", error);
+            alert(error.message);
+        }
+    }
+
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
-
-    const totalSongs = songs?.songs?.length || 0;
+    
+    // Filter out songs where hide is true
+    const visibleSongs = songs?.songs?.filter(song => !song.hide) || [];
+    
+    const totalSongs = visibleSongs.length;
     const totalPages = Math.ceil(totalSongs / rowsPerPage);
     const startIndex = (currentPage - 1) * rowsPerPage;
-    const paginatedSongs = songs?.songs?.slice(startIndex, startIndex + rowsPerPage);
+    const paginatedSongs = visibleSongs.slice(startIndex, startIndex + rowsPerPage);
 
     return (
+        songs && songs.total>0 ? (
         <div className="text-white p-6 bg-black">
             <h1 className="text-3xl font-bold pb-8">Beat Analytics Dashboard</h1>
 
@@ -149,20 +175,20 @@ const AllMatchesSong = () => {
                 <div className="bg-gray-900/80 p-6 rounded-lg">
                     <h3 className="text-gray-400 mb-2">Songs Scanned</h3>
                     <div className="text-5xl font-bold mb-2">{songs.total}</div>
-                    <div className="flex items-center text-green-500 text-sm">
+                    {/* <div className="flex items-center text-green-500 text-sm">
                         <span className="mr-1">↑</span> +12% this month
-                    </div>
+                    </div> */}
                 </div>
                 <div className="bg-gray-900/80 p-6 rounded-lg">
                     <h3 className="text-gray-400 mb-2">Songs Licensed</h3>
-                    <div className="text-5xl font-bold mb-2">{songs.licensed}</div>
-                    <div className="flex items-center text-green-500 text-sm">
+                    <div className="text-5xl font-bold mb-2">{songs.Licensed}</div>
+                    {/* <div className="flex items-center text-green-500 text-sm">
                         <span className="mr-1">↑</span> +18% this month
-                    </div>
+                    </div> */}
                 </div>
                 <div className="bg-gray-900/80 p-6 rounded-lg">
                     <h3 className="text-gray-400 mb-2">Unauthorized Beats</h3>
-                    <div className="text-5xl font-bold mb-2">{songs.unauthorized}</div>
+                    <div className="text-5xl font-bold mb-2">{songs.Unauthorized}</div>
                     <div className="text-red-500 text-sm">Action required</div>
                 </div>
             </div>
@@ -178,17 +204,17 @@ const AllMatchesSong = () => {
                     <div className="flex items-center gap-2 text-green-500 justify-between sm:justify-start bg-gray-800 sm:bg-transparent px-4 py-2 sm:px-0 sm:py-0 rounded-full sm:rounded-none">
                         <IoMdCheckmarkCircleOutline className="mr-1" />
                         <span>Licensed</span>
-                        <span className="ml-2 px-2 py-0.5 bg-gray-800 rounded-md">{songs.licensed}</span>
+                        <span className="ml-2 px-2 py-0.5 bg-gray-800 rounded-md">{songs.Licensed}</span>
                     </div>
                     <div className="flex items-center gap-2 text-red-500 justify-between sm:justify-start bg-gray-800 sm:bg-transparent px-4 py-2 sm:px-0 sm:py-0 rounded-full sm:rounded-none">
                         <FaRegCircleXmark className="mr-1" />
                         <span>Unauthorized</span>
-                        <span className="ml-2 px-2 py-0.5 bg-gray-800 rounded-md">{songs.unauthorized}</span>
+                        <span className="ml-2 px-2 py-0.5 bg-gray-800 rounded-md">{songs.Unauthorized}</span>
                     </div>
                     <div className="flex items-center gap-2 text-yellow-500 justify-between sm:justify-start bg-gray-800 sm:bg-transparent px-4 py-2 sm:px-0 sm:py-0 rounded-full sm:rounded-none">
                         <FaClock className="mr-1" />
                         <span>Pending</span>
-                        <span className="ml-2 px-2 py-0.5 bg-gray-800 rounded-md">{songs.pending}</span>
+                        <span className="ml-2 px-2 py-0.5 bg-gray-800 rounded-md">{songs.Pending}</span>
                     </div>
                 </div>
 
@@ -210,34 +236,34 @@ const AllMatchesSong = () => {
                                 </tr>
                             </thead>
                             <tbody>
-  {Array.isArray(paginatedSongs) && paginatedSongs.map((song, index) => (
-    <tr
-      key={index}
-      className="hover:bg-gray-800/50 transition cursor-pointer"
-      onClick={() => setSelectedSong(song)}
-    >
-      <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
-        <img
-          src={`${fileUrl}/${song?.imageUrl}`}
-          alt={song.name}
-          className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded object-cover"
-        />
-      </td>
-      <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
-        {song.title}
-      </td>
-      <td className="px-4 py-4 text-gray-400 border-b border-gray-800 whitespace-nowrap">
-        {song.artist}
-      </td>
-      <td className="px-4 py-4 text-gray-400 border-b border-gray-800 whitespace-nowrap">
-        {song.beatName}
-      </td>
-      <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
-        <StatusBadge status={song.category} />
-      </td>
-    </tr>
-  ))}
-</tbody>
+                                {Array.isArray(paginatedSongs) && paginatedSongs.map((song, index) => (
+                                    <tr
+                                        key={index}
+                                        className="hover:bg-gray-800/50 transition cursor-pointer"
+                                        onClick={() => setSelectedSong(song)}
+                                    >
+                                        <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
+                                            <img
+                                                src={`${fileUrl}/${song?.imageUrl}`}
+                                                alt={song.name}
+                                                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded object-cover"
+                                            />
+                                        </td>
+                                        <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
+                                            {song.title}
+                                        </td>
+                                        <td className="px-4 py-4 text-gray-400 border-b border-gray-800 whitespace-nowrap">
+                                            {song.artist}
+                                        </td>
+                                        <td className="px-4 py-4 text-gray-400 border-b border-gray-800 whitespace-nowrap">
+                                            {song.beatName}
+                                        </td>
+                                        <td className="px-4 py-4 border-b border-gray-800 whitespace-nowrap">
+                                            <StatusBadge status={song.category} />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
 
                         </table>
                         {totalPages > 1 && (
@@ -287,18 +313,38 @@ const AllMatchesSong = () => {
                             </button>
 
                             <div className="pt-8 px-8">
-                                <div className="flex gap-5">
-                                    <div><img src={`${fileUrl}/${selectedSong?.imageUrl}`} className="w-20 h-20 rounded" /></div>
-                                    <div>
-                                        <h2 className="text-4xl font-bold bg-[#7e3aed] bg-clip-text text-transparent">{selectedSong.title}</h2>
-                                        <div className="mt-2 flex items-center ">
-                                            <span className="px-3 py-1 text-xs text-gray-400">By {selectedSong.artist}</span>
+                                <div className="flex flex-col sm:flex-row justify-between gap-6 sm:gap-4">
+
+                                    {/* Left section - song image and info */}
+                                    <div className="flex flex-col sm:flex-row gap-4">
+                                        <div className="flex items-center justify-center mb-4 sm:mb-0">
+                                            <img src={`${fileUrl}/${selectedSong?.imageUrl}`} className="w-24 h-24 rounded-md object-cover shadow-md" />
                                         </div>
-                                        <div>
-                                            <StatusBadge status={selectedSong.category} />
+
+                                        <div className="text-center sm:text-left">
+                                            <h2 className="text-2xl sm:text-4xl font-bold bg-[#7e3aed] bg-clip-text text-transparent">
+                                                {selectedSong.title}
+                                            </h2>
+                                            <div className="mt-2">
+                                                <span className="px-3 py-1 text-sm text-gray-400 block sm:inline">
+                                                    By {selectedSong.artist}
+                                                </span>
+                                            </div>
+                                            <div >
+                                                <StatusBadge status={selectedSong.category} />
+                                            </div>
                                         </div>
                                     </div>
+
+                                    {/* Right section - button */}
+                                    <div className="flex sm:items-start justify-center sm:justify-end">
+                                        <button onClick={handleClick} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/10 text-red-400 text-sm font-medium hover:border-red-400 hover:border transition-all duration-200">
+                                            <FaRegCircleXmark className="text-red-500 w-3 h-3" />
+                                            Not my beat
+                                        </button>
+                                    </div>
                                 </div>
+
                             </div>
 
                             <div className="p-8 space-y-8">
@@ -320,8 +366,8 @@ const AllMatchesSong = () => {
                                 <h3>License Status</h3>
                                 <div className="items-center">
                                     <button
-                                        onClick={() => setVerificationStatus("licensed")}
-                                        className={`flex-1 px-4 w-full py-4 rounded-md mt-0 flex items-center justify-between transition-colors ${verificationStatus === "licensed" || (verificationStatus === '' && selectedSong.category === "licensed") ? "bg-green-500/10 text-green-400 border-2 border-green-400" : "bg-gray-700/30 text-gray-400 hover:bg-gray-700/50"}`}
+                                        onClick={() => setVerificationStatus("Licensed")}
+                                        className={`flex-1 px-4 w-full py-4 rounded-md mt-0 flex items-center justify-between transition-colors ${verificationStatus === "Licensed" || (verificationStatus === '' && selectedSong.category === "Licensed") ? "bg-green-500/10 text-green-400 border-2 border-green-400" : "bg-gray-700/30 text-gray-400 hover:bg-gray-700/50"}`}
                                     >
                                         <span className="flex items-center gap-1">
                                             <IoMdCheckmarkCircleOutline className="text-green-500 w-5 h-5" />
@@ -331,8 +377,8 @@ const AllMatchesSong = () => {
                                     </button>
 
                                     <button
-                                        onClick={() => setVerificationStatus(verificationStatus === "unauthorized" ? "" : "unauthorized")}
-                                        className={`flex-1 px-4 w-full py-4 mt-2 rounded-md flex items-center justify-between transition-colors ${verificationStatus === "unauthorized" || (verificationStatus === '' && selectedSong.category === "unauthorized") ? "bg-red-500/10 text-red-400 border-2 border-red-400" : "bg-gray-700/30 text-gray-400 hover:bg-gray-700/50"}`}
+                                        onClick={() => setVerificationStatus(verificationStatus === "Unauthorized" ? "" : "Unauthorized")}
+                                        className={`flex-1 px-4 w-full py-4 mt-2 rounded-md flex items-center justify-between transition-colors ${verificationStatus === "Unauthorized" || (verificationStatus === '' && selectedSong.category === "Unauthorized") ? "bg-red-500/10 text-red-400 border-2 border-red-400" : "bg-gray-700/30 text-gray-400 hover:bg-gray-700/50"}`}
                                     >
                                         <span className="flex items-center gap-1">
                                             <FaRegCircleXmark className="text-red-500 w-5 h-5" />
@@ -353,14 +399,14 @@ const AllMatchesSong = () => {
                                     ))}
                                 </div>
 
-                                <div className="flex justify-between items-center">
-                                    <button onClick={() => { openModal(); setLastsong(selectedSong); setSelectedSong(null); }} className="px-4 w-60 py-2 border border-gray-600 rounded-lg  hover:text-white bg-gray-700/30 text-gray-400 hover:bg-gray-700/50">
-                                        <div className="flex gap-4">
+                                <div className="flex gap-4 justify-between items-center">
+                                    <button onClick={() => { openModal(); setLastsong(selectedSong); setSelectedSong(null); }} className="px-4 text-center w-full py-2 border border-gray-600 rounded-lg  hover:text-white bg-gray-700/30 text-gray-400 hover:bg-gray-700/50">
+                                        <div className="flex gap-4 justify-center">
                                             <FiMessageSquare className="w-6 h-6" />
                                             <p>Contact Artist</p>
                                         </div>
                                     </button>
-                                    <button onClick={handleDone} className="bg-violet-600 w-60 hover:bg-violet-700 text-white px-6 py-2 rounded-lg">
+                                    <button onClick={handleDone} className="bg-violet-600 w-full hover:bg-violet-700 text-white px-6 py-2 rounded-lg">
                                         Done
                                     </button>
                                 </div>
@@ -393,7 +439,7 @@ const AllMatchesSong = () => {
                                     href={lastsong.song_link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="mt-2 px-4 py-2 bg-purple-600 text-white rounded-md flex items-center justify-center"
+                                    className="mt-2 px-4 py-2 bg-[#7b39ed] text-white rounded-md flex items-center justify-center"
                                 >
                                     <span className="mr-2">Go to Song Link</span>
                                 </a>
@@ -404,10 +450,10 @@ const AllMatchesSong = () => {
                                 <h3 className="font-semibold text-lg">Step 2: Use Message Template</h3>
                                 <p className=" text-sm opacity-50">Use one of our message templates to contact the artist. Choose your preferred language:</p>
                                 <div className=" flex justify-between gap-4 mt-2">
-                                    <button onClick={()=>{navigate("/dashboard/english-template")}} className="px-4 py-2 bg-purple-600 text-white rounded-md flex items-center justify-center">
+                                    <button onClick={() => { navigate("/dashboard/english-template") }} className="px-4 py-2 bg-[#7b39ed] text-white rounded-md flex items-center justify-center">
                                         <span className="mr-2">English Template</span>
                                     </button>
-                                    <button className="px-4 py-2 bg-purple-600 text-white rounded-md flex items-center justify-center">
+                                    <button onClick={() => { navigate("/dashboard/spanish-template") }} className="px-4 py-2 bg-[#7b39ed] text-white rounded-md flex items-center justify-center">
                                         <span className="mr-2">Spanish Template</span>
                                     </button>
                                 </div>
@@ -436,6 +482,11 @@ const AllMatchesSong = () => {
                 </div>
             )}
         </div>
+        ) : (
+            <div className="flex items-center  bg-gray-800 h-96 justify-center bg text-white">
+                <h2 className="text-5xl font-bold">No Matches song Found</h2>
+            </div>
+        )
     );
 };
 
