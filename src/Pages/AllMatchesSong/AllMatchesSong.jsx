@@ -483,11 +483,17 @@ const AllMatchesSong = () => {
             )}
         </div>
         ) : (
+            loading ? (
+                <Loading />
+            ) : error ? (
+                <p className="text-red-500">{error}</p>
+            ) : (
             <div className="flex items-center  bg-gray-800 h-96 justify-center bg text-white">
                 <h2 className="text-5xl font-bold">No Matches song Found</h2>
             </div>
         )
-    );
+    )
+);
 };
 
 export default AllMatchesSong;
