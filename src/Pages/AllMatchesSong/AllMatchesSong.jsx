@@ -90,21 +90,21 @@ const AllMatchesSong = () => {
         switch (platform) {
             case "Spotify":
                 return (
-                    <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex justify-center gap-4 items-center px-4 py-2 rounded">
+                    <a href={`${link}?spotify`} target="_blank" rel="noopener noreferrer" className="inline-flex justify-center gap-4 items-center px-4 py-2 rounded">
                         <FaSpotify className="text-green-500 w-6 h-6" />
                         <p className="text-white">Spotify</p>
                     </a>
                 );
             case "YouTube":
                 return (
-                    <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex justify-center gap-4 items-center px-4 py-2 rounded">
+                    <a href={`${link}?youtube`} target="_blank" rel="noopener noreferrer" className="inline-flex justify-center gap-4 items-center px-4 py-2 rounded">
                         <FaYoutube className="text-red-600 w-6 h-6" />
                         <p className="text-white">YouTube</p>
                     </a>
                 );
             case "Apple Music":
                 return (
-                    <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex justify-center gap-4 items-center px-4 py-2 rounded">
+                    <a href={`${link}?applemusic`} target="_blank" rel="noopener noreferrer" className="inline-flex justify-center gap-4 items-center px-4 py-2 rounded">
                         <SiApplemusic className="w-6 h-6 text-red-600 m-0 p-0 bg-white rounded-lg " />
                         <p className="text-white">Apple Music</p>
                     </a>
