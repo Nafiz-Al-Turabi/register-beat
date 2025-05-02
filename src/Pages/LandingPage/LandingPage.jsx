@@ -10,6 +10,8 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import youtube from '../../assets/img/youtubeicon2.png'
 import spotify from '../../assets/img/spotify-icon.png'
 import apple from '../../assets/img/apple-music-icon.png'
+import { Button } from '@headlessui/react';
+import { Check, X } from 'lucide-react';
 
 
 const LandingPage = () => {
@@ -416,6 +418,218 @@ const LandingPage = () => {
                 </div>
             </section>
 
+
+            {/* neww one add tohidul--------------------------- */}
+
+            <section className=" relative container mx-auto py-16 lg:py-24">
+                {/* Background decorative elements */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#7C3AED]/10 rounded-full blur-3xl"></div>
+                    <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-[#7C3AED]/10 rounded-full blur-3xl"></div>
+                </div>
+
+                <div className="text-center mb-16 relative z-10">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-[#1a1a1a] border border-[#7C3AED]/20 px-4 py-2 mb-8">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="text-[#7C3AED]"
+                        >
+                            <path
+                                d="M15 3H7C4.79086 3 3 4.79086 3 7V17C3 19.2091 4.79086 21 7 21H15"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            />
+                            <path d="M21 12L15 8V16L21 12Z" fill="currentColor" />
+                        </svg>
+                        <span className="text-[#7C3AED] font-medium">NEW FEATURE</span>
+                    </div>
+                    <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                        <span className="text-[#7C3AED]">Introducing: BeatScanner</span>
+                    </h2>
+                    <h3 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                        Track Your Beats
+                        <br />
+                        Across Streaming Platforms
+                    </h3>
+                    <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                        Discover who's using your beats and verify if they've purchased the proper license. Our advanced scanning
+                        technology monitors digital platforms to protect your work.
+                    </p>
+                </div>
+
+                <div className="grid lg:grid-cols-12 gap-8 relative z-10">
+                    {/* Left side - Analytics Dashboard */}
+                    <div className="lg:col-span-7 bg-black/40 backdrop-blur-sm rounded-2xl border border-gray-800 p-6 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/10"></div>
+
+                        <div className="flex items-center justify-between mb-8">
+                            <h3 className="text-2xl font-bold text-white">Beat Analytics Dashboard</h3>
+                            <div className="flex items-center gap-2 text-sm text-gray-400">
+                                <span className="inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+                                Updated: 2 days ago
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-4 mb-8">
+                            <div className="bg-gray-900/50 rounded-xl p-4 border border-gray-800">
+                                <p className="text-gray-400 text-sm mb-1">Songs Scanned</p>
+                                <p className="text-3xl font-bold text-white">247</p>
+                                <p className="text-xs text-green-500 flex items-center mt-2">
+                                    <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M18 15L12 9L6 15"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                    +12% this month
+                                </p>
+                            </div>
+
+                            <div className="bg-gray-900/50 rounded-xl p-4 border border-gray-800">
+                                <p className="text-gray-400 text-sm mb-1">Songs Licensed</p>
+                                <p className="text-3xl font-bold text-white">89</p>
+                                <p className="text-xs text-green-500 flex items-center mt-2">
+                                    <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M18 15L12 9L6 15"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                    +24% this month
+                                </p>
+                            </div>
+
+                            <div className="bg-gray-900/50 rounded-xl p-4 border border-gray-800">
+                                <p className="text-gray-400 text-sm mb-1">Unauthorized Songs</p>
+                                <p className="text-3xl font-bold text-[#FF5A5A]">17</p>
+                                <p className="text-xs text-[#FF5A5A] flex items-center mt-2">
+                                    <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6 9L12 15L18 9"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                    Action required
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Recent Activity */}
+                        <div>
+                            <div className="flex items-center justify-between mb-4">
+                                <h4 className="text-white font-medium">Recent Activity</h4>
+                                <button className="text-[#7C3AED] text-sm hover:underline">View all</button>
+                            </div>
+
+                            <div className="space-y-3">
+                                <div className="flex items-center gap-3 p-3 bg-gray-900/30 rounded-lg border border-gray-800">
+                                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <div className="flex-1">
+                                        <p className="text-sm text-white">New Song Match: "Traveling" using your beat</p>
+                                        <p className="text-xs text-gray-500">2 hours ago</p>
+                                    </div>
+                                    <span className="text-xs font-medium bg-green-900/30 text-green-400 px-2 py-0.5 rounded-full border border-green-900">
+                                        Licensed
+                                    </span>
+                                </div>
+
+                                <div className="flex items-center gap-3 p-3 bg-gray-900/30 rounded-lg border border-gray-800">
+                                    <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                                    <div className="flex-1">
+                                        <p className="text-sm text-white">New Song Match: "Night Rider" using your beat</p>
+                                        <p className="text-xs text-gray-500">6 hours ago</p>
+                                    </div>
+                                    <span className="text-xs font-medium bg-red-900/30 text-red-400 px-2 py-0.5 rounded-full border border-red-900">
+                                        Unlicensed
+                                    </span>
+                                </div>
+
+                                <div className="flex items-center gap-3 p-3 bg-gray-900/30 rounded-lg border border-gray-800">
+                                    <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                                    <div className="flex-1">
+                                        <p className="text-sm text-white">Scan completed: 24 beats analyzed</p>
+                                        <p className="text-xs text-gray-500">12 hours ago</p>
+                                    </div>
+                                    <span className="text-xs font-medium bg-blue-900/30 text-blue-400 px-2 py-0.5 rounded-full border border-blue-900">
+                                        Completed
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right side - Features */}
+                    <div className="lg:col-span-5 space-y-6">
+                        <div className="bg-black/40 backdrop-blur-sm rounded-2xl border border-gray-800 p-6 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-[#7C3AED]/10 to-[#7C3AED]"></div>
+
+                            <h3 className="text-2xl font-bold text-white mb-6">How the Scanner Works</h3>
+
+                            <div className="space-y-8">
+                                <div className="relative pl-8">
+                                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-[#7C3AED]/20 flex items-center justify-center">
+                                        <span className="text-[#7C3AED] text-sm font-bold">1</span>
+                                    </div>
+                                    <div className="absolute left-3 top-6 h-[calc(100%-12px)] w-px bg-gradient-to-b from-[#7C3AED] to-transparent"></div>
+                                    <h4 className="text-white font-medium mb-2">Digital Fingerprint Registration</h4>
+                                    <p className="text-gray-400 text-sm">
+                                        When you register your beat, we create a unique digital fingerprint that identifies your music,
+                                        similar to a human fingerprint.
+                                    </p>
+                                </div>
+
+                                <div className="relative pl-8">
+                                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-[#7C3AED]/20 flex items-center justify-center">
+                                        <span className="text-[#7C3AED] text-sm font-bold">2</span>
+                                    </div>
+                                    <div className="absolute left-3 top-6 h-[calc(100%-12px)] w-px bg-gradient-to-b from-[#7C3AED] to-transparent"></div>
+                                    <h4 className="text-white font-medium mb-2">Continuous Scanning</h4>
+                                    <p className="text-gray-400 text-sm">
+                                        Our algorithms constantly scan streaming platforms and social networks looking for matches with your
+                                        beats.
+                                    </p>
+                                </div>
+
+                                <div className="relative pl-8">
+                                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-[#7C3AED]/20 flex items-center justify-center">
+                                        <span className="text-[#7C3AED] text-sm font-bold">3</span>
+                                    </div>
+                                    <h4 className="text-white font-medium mb-2">Instant Notifications</h4>
+                                    <p className="text-gray-400 text-sm">
+                                        You receive real-time alerts about new uses of your beats, allowing you to take immediate action
+                                        when necessary.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-black/40 backdrop-blur-sm rounded-2xl border border-gray-800 p-6">
+                            <div className="flex justify-center">
+                                <Button onClick={() => navigate('/dashboard')} className="w-full p-2 rounded-lg bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white">
+                                    Start Monitoring Your Beats
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            {/* end here------------------------------- */}
+
             <section className="container mx-auto py-6 lg:py-24">
                 <div className="max-w-4xl mx-auto text-center">
                     <div className="text-center mb-12">
@@ -531,9 +745,14 @@ const LandingPage = () => {
                     </h2>
                 </div>
 
-                <div className="max-w-xl mx-auto -mt-10 lg:mt-0">
-                    {/* Monthly Plan */}
-                    <div className="relative ">
+               
+
+
+
+
+                <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    {/* Pro Plan */}
+                    <div className="relative">
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
                         <div className="relative bg-gray-950 rounded-xl p-8 shadow-2xl flex flex-col h-full">
                             <div className="absolute -top-3 right-4">
@@ -541,7 +760,7 @@ const LandingPage = () => {
                             </div>
 
                             <div className="mb-6">
-                                <h3 className="text-2xl font-bold text-white mb-2">Pro Monthly</h3>
+                                <h3 className="text-2xl font-bold text-white mb-2">Pro</h3>
                                 <div className="flex items-baseline">
                                     <span className="text-4xl font-bold text-white">$9.99</span>
                                     <span className="text-gray-400 ml-2">/month</span>
@@ -550,28 +769,79 @@ const LandingPage = () => {
 
                             <ul className="space-y-4 mb-8">
                                 <li className="flex items-center text-white">
-                                    <LuCheck className="h-5 w-5 text-[#7C3AED] mr-3" />
+                                    <Check className="h-5 w-5 text-[#7C3AED] mr-3" />
                                     Register 20 Beats per month
                                 </li>
                                 <li className="flex items-center text-white">
-                                    <LuCheck className="h-5 w-5 text-[#7C3AED] mr-3" />
+                                    <Check className="h-5 w-5 text-[#7C3AED] mr-3" />
                                     Advanced blockchain protection
                                 </li>
                                 <li className="flex items-center text-white">
-                                    <LuCheck className="h-5 w-5 text-[#7C3AED] mr-3" />
+                                    <Check className="h-5 w-5 text-[#7C3AED] mr-3" />
                                     Legal Proof Certification
                                 </li>
                                 <li className="flex items-center text-white">
-                                    <LuCheck className="h-5 w-5 text-[#7C3AED] mr-3" />
+                                    <Check className="h-5 w-5 text-[#7C3AED] mr-3" />
                                     Certificate Generation for Every Beat
                                 </li>
                                 <li className="flex items-center text-white">
-                                    <LuCheck className="h-5 w-5 text-[#7C3AED] mr-3" />
-                                    Get Extra Credits to Register More Beats
+                                    <Check className="h-5 w-5 text-[#7C3AED] mr-3" />
+                                    24/7 Beat Protection Coverage
+                                </li>
+                                <li className="flex items-center text-gray-400">
+                                    <X className="h-5 w-5 text-red-500 mr-3" />
+                                    Search Songs Using Your Beats
                                 </li>
                             </ul>
 
                             <button onClick={() => navigate('/payment')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Pro Monthly</button>
+                        </div>
+                    </div>
+
+                    {/* Ultra Plan */}
+                    <div className="relative">
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FFD700] to-[#FFD700]/50 rounded-2xl blur opacity-75" />
+                        <div className="relative bg-gray-950 rounded-xl p-8 shadow-2xl flex flex-col h-full border border-[#FFD700]/20">
+                            <div className="absolute -top-3 right-4">
+                                <span className="bg-[#FFD700] text-black px-3 py-1 text-sm rounded-full font-medium">Ultra</span>
+                            </div>
+
+                            <div className="mb-6">
+                                <h3 className="text-2xl font-bold text-white mb-2">Ultra</h3>
+                                <div className="flex items-baseline">
+                                    <span className="text-4xl font-bold text-white">$14.99</span>
+                                    <span className="text-gray-400 ml-2">/month</span>
+                                </div>
+                            </div>
+
+                            <ul className="space-y-4 mb-8">
+                                <li className="flex items-center text-white">
+                                    <Check className="h-5 w-5 text-[#FFD700] mr-3" />
+                                    Register 20 Beats per month
+                                </li>
+                                <li className="flex items-center text-white">
+                                    <Check className="h-5 w-5 text-[#FFD700] mr-3" />
+                                    Advanced blockchain protection
+                                </li>
+                                <li className="flex items-center text-white">
+                                    <Check className="h-5 w-5 text-[#FFD700] mr-3" />
+                                    Legal Proof Certification
+                                </li>
+                                <li className="flex items-center text-white">
+                                    <Check className="h-5 w-5 text-[#FFD700] mr-3" />
+                                    Certificate Generation for Every Beat
+                                </li>
+                                <li className="flex items-center text-white">
+                                    <Check className="h-5 w-5 text-[#FFD700] mr-3" />
+                                    24/7 Beat Protection Coverage
+                                </li>
+                                <li className="flex items-center text-white">
+                                    <Check className="h-5 w-5 text-[#FFD700] mr-3" />
+                                    Search Songs Using Your Beats
+                                </li>
+                            </ul>
+                            <button onClick={() => navigate('/payment')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Ultra</button>
+                           
                         </div>
                     </div>
                 </div>
