@@ -12,6 +12,7 @@ import spotify from '../../assets/img/spotify-icon.png'
 import apple from '../../assets/img/apple-music-icon.png'
 import { Button } from '@headlessui/react';
 import { Check, X } from 'lucide-react';
+import WistiaPlayer from '../../Components/HomeVideo/WistiaPlayer';
 
 
 const LandingPage = () => {
@@ -35,6 +36,7 @@ const LandingPage = () => {
                     <p className="text-xl text-gray-400 max-w-2xl">
                         Protect Your Beats &amp; Take Control of Your Beats on YouTube
                     </p>
+
 
                     <div className="relative w-full max-w-2xl mt-8">
                         <div className="absolute -inset-1 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
@@ -67,6 +69,14 @@ const LandingPage = () => {
                         confidence.
                     </p>
                 </div>
+             {/* ------------------------------------------------------------------------- */}
+                <div className="max-w-4xl mx-auto mb-40">
+                    <WistiaPlayer
+                        mediaId="z5wwp3l7bv"
+                        className="rounded-lg shadow-lg"
+                    />
+                </div>
+            {/* ----------------------------------------------------------------------------- */}
 
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-8">
@@ -137,6 +147,10 @@ const LandingPage = () => {
                     </div>
                 </div>
             </section>
+
+
+
+
             {/* Steps Section */}
             <section className="container mx-auto py-4 lg:py-24">
                 <div className="text-center mb-8 lg:mb-20">
@@ -745,7 +759,7 @@ const LandingPage = () => {
                     </h2>
                 </div>
 
-               
+
 
 
 
@@ -841,7 +855,7 @@ const LandingPage = () => {
                                 </li>
                             </ul>
                             <button onClick={() => navigate('/payment')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Ultra</button>
-                           
+
                         </div>
                     </div>
                 </div>
