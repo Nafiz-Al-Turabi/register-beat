@@ -38,7 +38,7 @@ const LandingPage = () => {
                     </p>
 
 
-                    <div className="relative w-full max-w-2xl mt-8">
+                    {/* <div className="relative w-full max-w-2xl mt-8">
                         <div className="absolute -inset-1 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
                         <div className="relative rounded-xl overflow-hidden">
                             <video className="w-full h-full object-cover" autoPlay loop muted playsInline>
@@ -48,6 +48,13 @@ const LandingPage = () => {
                                 />
                             </video>
                         </div>
+                    </div> */}
+
+                    <div className="max-w-4xl mx-auto mb-20">
+                        <WistiaPlayer
+                            mediaId="z5wwp3l7bv"
+                            className="rounded-lg shadow-lg"
+                        />
                     </div>
                     <div className="flex items-center justify-center w-full mt-8">
                         <button onClick={() => navigate('/dashboard')} className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-10 py-2 rounded-md duration-300 ease-in-out">
@@ -69,14 +76,14 @@ const LandingPage = () => {
                         confidence.
                     </p>
                 </div>
-             {/* ------------------------------------------------------------------------- */}
-                <div className="max-w-4xl mx-auto mb-40">
+                {/* ------------------------------------------------------------------------- */}
+                {/* <div className="max-w-4xl mx-auto mb-40">
                     <WistiaPlayer
                         mediaId="z5wwp3l7bv"
                         className="rounded-lg shadow-lg"
                     />
-                </div>
-            {/* ----------------------------------------------------------------------------- */}
+                </div> */}
+                {/* ----------------------------------------------------------------------------- */}
 
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="space-y-8">
