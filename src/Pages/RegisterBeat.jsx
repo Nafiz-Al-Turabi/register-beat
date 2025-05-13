@@ -30,7 +30,7 @@ const RegisterBeat = () => {
     }
 };
 
-  if ((user?.active === false && new Date(user?.subscriptionEndDAte) < new Date())) {
+  if ((user?.active === false && user?.credit === 0)) {
     return (
       <div className='md:h-[600px] flex justify-center items-center'>
         <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">
