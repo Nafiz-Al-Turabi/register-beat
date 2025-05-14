@@ -154,6 +154,18 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                             </Link>
                     }
                     {
+                        user?.active === true  
+                            
+                            ?
+                            ''
+                            :
+                            <Link to='/Add-on'>
+                                <button className="primary-bg text-white w-full py-2 rounded mb-4 flex items-center justify-center">
+                                    <FaCrown className=" mr-2" /> Scan your beats now
+                                </button>
+                            </Link>
+                    }
+                    {
                         user.role === 'admin' ?
                             <Link
                                 to="/admin-dashboard"

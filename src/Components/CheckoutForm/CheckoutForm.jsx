@@ -62,7 +62,7 @@ const CheckoutForm = ({ priceId }) => {
         customerId,
         priceId,
       });
-
+      
       if (subscriptionResponse.status === 200) {
         toast.success('Subscription created successfully!');
         setTimeout(() => {
