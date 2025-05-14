@@ -32,6 +32,7 @@ import VerifyAccount from "../Pages/VerifyAccount/VerifyAccount";
 import EmailVerified from "../Pages/EmailVerified/EmailVerified";
 import EnglishTemplate from "../Pages/MessageTemplate/EnglishTemplate";
 import SpanishTemplate from "../Pages/MessageTemplate/SpanishTemplate";
+import Addon from "../Components/Addonpage/Addon";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -90,6 +91,10 @@ export const router = createBrowserRouter([
   {
     path: "/verify-account",
     element: <VerifyAccount />,
+  },
+  {
+    path: "/Add-on",
+    element: <Addon />,
   },
   {
     path: "/api/users/verify-email/:token",
