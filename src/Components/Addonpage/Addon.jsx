@@ -46,7 +46,7 @@ const Addon = () => {
                         {/* Buttons */}
                         <button 
                           className="w-full bg-purple-600 text-white py-3 rounded-lg font-medium mb-3"
-                          onClick={() => setShowModal(false)}
+                          onClick={() =>navigate("/upgrade/payment")}
                         >
                           Upgrade Now
                         </button>
