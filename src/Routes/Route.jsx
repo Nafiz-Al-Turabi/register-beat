@@ -33,6 +33,7 @@ import EmailVerified from "../Pages/EmailVerified/EmailVerified";
 import EnglishTemplate from "../Pages/MessageTemplate/EnglishTemplate";
 import SpanishTemplate from "../Pages/MessageTemplate/SpanishTemplate";
 import Addon from "../Components/Addonpage/Addon";
+import Addpayment from "../Pages/Payment/Addpayment";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
   {
     path: "/payment",
     element: protectedRoute(<Payment />, ["user", "admin"]),
+  },
+  {
+    path: "/upgrade/payment",
+    element: protectedRoute(<Addpayment />, ["user", "admin"]),
   },
   {
     path: "/login",

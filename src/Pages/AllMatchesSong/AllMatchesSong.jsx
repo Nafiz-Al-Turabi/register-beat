@@ -223,7 +223,7 @@ const AllMatchesSong = () => {
 
     return (
         <>
-            {user && !user.isUltraPlan ? (
+            {user && user.planType !=="ultra" ? (
                 // Show ONLY the upgrade modal when user exists without Ultra Plan
               <Addon/>
 
@@ -231,7 +231,7 @@ const AllMatchesSong = () => {
                 // Show dashboard content when either:
                 // 1. No user exists OR
                 // 2. User has Ultra Plan
-                songs && songs.total > 0 ? (
+                songs ? (
                     <div className="text-white p-6 bg-black">
                         <h1 className="text-3xl font-bold pb-8">Beat Analytics Dashboard</h1>
 

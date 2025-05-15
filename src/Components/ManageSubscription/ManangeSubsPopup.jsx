@@ -113,6 +113,14 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
                                 </div>
                                 {user?.active && (
                                     <button
+                                        className="bg-[#712dde] font-semibold rounded-full py-3 mt-2 active:scale-95"
+                                        onClick={handleCancelClick}
+                                    >
+                                        Downgrade to Pro
+                                    </button>
+                                )}
+                                {user?.active && (
+                                    <button
                                         className="bg-red-600 font-semibold rounded-full py-3 mt-2 active:scale-95"
                                         onClick={handleCancelClick}
                                     >

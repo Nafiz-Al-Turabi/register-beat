@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { act, useContext, useState } from 'react';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { AuthContext } from '../../Provider/AuthProvider';
@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { trackEvent } from '../../facebookPixel/facebookPixel';
 
-const CheckoutForm = ({ priceId }) => {
+const CheckoutForm = ({ priceId, action }) => {
   const [email, setEmail] = useState('');
   const [paymentMethodId, setPaymentMethodId] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -16,6 +16,12 @@ const CheckoutForm = ({ priceId }) => {
   const elements = useElements();
   const { user, refreshUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
+  let show;
+  if(action === 'upgrade') {
+    show = 'Add on $4.99';
+  } else{
+    show = 'Pay $9.99';
+  }
 
   // Track event when button is clicked for meta pixel
   const handleButtonClick = () => {
@@ -60,7 +66,8 @@ const CheckoutForm = ({ priceId }) => {
       // Now, create the subscription
       const subscriptionResponse = await axiosInstance.post(`/payments/create-subscription/${user._id}`, {
         customerId,
-        priceId,
+        //priceId,
+        action
       });
       
       if (subscriptionResponse.status === 200) {
@@ -192,7 +199,7 @@ const CheckoutForm = ({ priceId }) => {
                  transition duration-200 focus:outline-none focus:ring-2 
                  focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-800`}
         >
-          {loading ? 'Processing...' : 'Pay $9.99'}
+          {loading ? 'Processing...' : show}
         </button>
       </form>
       {errorMessage && (
