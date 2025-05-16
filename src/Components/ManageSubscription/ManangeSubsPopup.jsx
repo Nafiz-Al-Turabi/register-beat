@@ -10,7 +10,7 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
     const { user, refreshUserInfo } = useContext(AuthContext);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const [step, setStep] = useState(1); // Step 1 = Details, Step 2 = Confirm, Step 3 = Warning, Step 4 = Success
+    const [step, setStep] = useState(1); // Step 1 = Details, Step 2 = Confirm, Step 3 = Warning, Step 4 = Success, Step 5 = Downgrade Confirm
 
     const formatDate = (dateString) => {
         if (!dateString) return 'N/A';
@@ -56,6 +56,27 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
    const handlecloseToHome = () => {
     setShowPopup(false);
     navigate('/dashboard');
+   }
+
+   const handleCancelClickDwongraded = () => {
+        setStep(5); // Move to downgrade confirmation step
+   }
+
+   const confirmDowngrade = async () => {
+        setIsLoading(true);
+        try {
+            await axiosInstance.post(`/payments/create-subscription/${user._id}`, {
+                customerId: user.customerId,
+                action: "downgrade"
+            });
+            toast.success('Successfully downgraded to Pro plan');
+            refreshUserInfo();
+            setShowPopup(false);
+        } catch (error) {
+            toast.error('Failed to downgrade plan. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
    }
 
     return (
@@ -111,10 +132,10 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
                                         </li>
                                     </ul>
                                 </div>
-                                {user?.active && (
+                                {(user?.active && user?.planType === "ultra") && (
                                     <button
                                         className="bg-[#712dde] font-semibold rounded-full py-3 mt-2 active:scale-95"
-                                        onClick={handleCancelClick}
+                                        onClick={handleCancelClickDwongraded}
                                     >
                                         Downgrade to Pro
                                     </button>
@@ -164,7 +185,7 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
                                 <ul className="text-slate-400">
                                     <li>⚠️ You will no longer be able to register new beats.</li>
                                     <li>⚠️ Your beats will be exposed to the public.</li>
-                                    <li>⚠️ You won’t be able to submit YouTube claims for unauthorized use of your beats.</li>
+                                    <li>⚠️ You won't be able to submit YouTube claims for unauthorized use of your beats.</li>
                                 </ul>
                                 <button
                                     className="bg-red-600 font-semibold rounded-full py-3 mt-4 active:scale-95"
@@ -189,6 +210,28 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
                                 >
                                     Close
                                 </button>
+                            </div>
+                        )}
+
+                        {/* Step 5: Downgrade Confirmation */}
+                        {step === 5 && (
+                            <div className="rounded-lg flex flex-col gap-4 animate-from-middle">
+                                <h3 className="text-xl font-semibold">Are you sure you want to downgrade to Pro plan?</h3>
+                                <div className="flex gap-4 justify-between">
+                                    <button
+                                        className="bg-[#712dde] font-semibold rounded-full py-2 w-full px-5 active:scale-95"
+                                        onClick={confirmDowngrade}
+                                        disabled={isLoading}
+                                    >
+                                        {isLoading ? 'Processing...' : 'Yes, downgrade'}
+                                    </button>
+                                    <button
+                                        className="primary-bg font-semibold rounded-full py-2 w-full px-5 active:scale-95"
+                                        onClick={() => setStep(1)}
+                                    >
+                                        No, go back
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>

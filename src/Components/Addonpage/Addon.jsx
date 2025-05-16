@@ -27,7 +27,7 @@ const Addon = () => {
                         </p>
         
                         {/* Pricing Info Box */}
-                        <div className="bg-gray-800 bg-opacity-40 rounded-lg p-3 mb-6">
+                        <div className="bg-[#282133] bg-opacity-40 rounded-lg p-3 mb-6">
                           <div className="flex items-start mb-2">
                             <div className="flex-shrink-0 mr-2 mt-1">
                               <div className="bg-purple-600 w-4 h-4 rounded-sm flex items-center justify-center">
@@ -35,7 +35,7 @@ const Addon = () => {
                               </div>
                             </div>
                             <div className="text-left">
-                              <p className="text-purple-400 text-sm">Today: <span className="text-gray-300">Pay only $4.99 to upgrade to Ultra Plan</span></p>
+                              <p className="text-[#7c3aed] text-sm">Today: <span className="text-gray-300">Pay only $4.99 to upgrade to Ultra Plan</span></p>
                             </div>
                           </div>
                           <div className="text-left pl-6">
@@ -45,7 +45,7 @@ const Addon = () => {
         
                         {/* Buttons */}
                         <button 
-                          className="w-full bg-purple-600 text-white py-3 rounded-lg font-medium mb-3"
+                          className="w-full bg-[#702cdd] text-white py-3 rounded-lg font-medium mb-3"
                           onClick={() =>navigate("/upgrade/payment")}
                         >
                           Upgrade Now
