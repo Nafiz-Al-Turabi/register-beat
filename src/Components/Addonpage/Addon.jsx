@@ -1,18 +1,21 @@
 import { Crown } from 'lucide-react';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Addon = () => {
    const navigate = useNavigate();
+   const { user } = useContext(AuthContext);
+   const dateOnly = user?.subscriptionEndDAte.split('T')[0];
     return (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                       <div className="bg-gray-900 border border-purple-900/30 rounded-xl w-96  text-center p-6 shadow-lg">
                         {/* Crown Logo */}
                         <div className="relative inline-block mb-4">
-                          <div className="bg-purple-600 rounded-full p-5 w-16 h-16 flex items-center justify-center mx-auto">
+                          <div className="bg-[#702cdd] rounded-full p-5 w-16 h-16 flex items-center justify-center mx-auto">
                             <Crown className="text-white w-8 h-8" />
                           </div>
-                          <div className="absolute -right-1 -top-1 bg-purple-600 rounded-full p-1 w-6 h-6 flex items-center justify-center">
+                          <div className="absolute -right-1 -top-1 bg-[#702cdd] rounded-full p-1 w-6 h-6 flex items-center justify-center">
                             <span className="text-white text-xs">
                               🔥
                             </span>
@@ -39,7 +42,7 @@ const Addon = () => {
                             </div>
                           </div>
                           <div className="text-left pl-6">
-                            <p className="text-gray-400 text-xs">Next billing cycle: <span className="text-gray-300">Your subscription will automatically renew at $14.99/month on (renewal date) with all Ultra Plan features.</span></p>
+                            <p className="text-gray-400 text-xs">Next billing cycle: <span className="text-gray-300">Your subscription will automatically renew at $14.99/month on ({dateOnly}) with all Ultra Plan features.</span></p>
                           </div>
                         </div>
         
