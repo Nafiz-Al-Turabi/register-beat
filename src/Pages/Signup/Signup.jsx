@@ -30,7 +30,7 @@ const Signup = () => {
                 password: data.password
             })
             toast.success('Registration Successful.');
-            navigate('/dashboard');
+            navigate('/pricing');
         } catch (error) {
             console.error('Registration error:', error.response?.data?.message || error.message);
         } finally {
@@ -61,7 +61,7 @@ const Signup = () => {
         try {
             await googleLogin();
             setTimeout(()=>{
-                navigate("/dashboard")
+                navigate("/pricing")
             })
         } catch (error) {
             console.error('Google login error:', error.response?.data?.message || error.message);
