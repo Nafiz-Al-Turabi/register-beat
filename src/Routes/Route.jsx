@@ -34,6 +34,7 @@ import EnglishTemplate from "../Pages/MessageTemplate/EnglishTemplate";
 import SpanishTemplate from "../Pages/MessageTemplate/SpanishTemplate";
 import Addon from "../Components/Addonpage/Addon";
 import Addpayment from "../Pages/Payment/Addpayment";
+import Ultrapayment from "../Pages/Payment/Ultrapayment";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
   {
     path: "/upgrade/payment",
     element: protectedRoute(<Addpayment />, ["user", "admin"]),
+  },
+  {
+    path: "/ultra/payment",
+    element: protectedRoute(<Ultrapayment />, ["user", "admin"]),
   },
   {
     path: "/login",

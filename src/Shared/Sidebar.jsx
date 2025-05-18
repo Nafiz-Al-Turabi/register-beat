@@ -147,7 +147,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                             ?
                             ''
                             :
-                            <Link to='/payment'>
+                            <Link to='/pricing'>
                                 <button className="primary-bg text-white w-full py-2 rounded mb-4 flex items-center justify-center">
                                     <FaCrown className=" mr-2" /> Subscribe Now
                                 </button>

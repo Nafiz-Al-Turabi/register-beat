@@ -24,7 +24,7 @@ const Addon = () => {
         
                         {/* Modal Text */}
                         <h2 className="text-white text-xl font-bold mb-1">Start Scanning your Beats</h2>
-                        <p className="text-purple-400  mb-3">for only $4.99</p>
+                        <p className="text-purple-400  mb-3">for only $5</p>
                         <p className="text-gray-400 text-sm mb-6">
                           Find out if someone is using your beats without permission.
                         </p>
@@ -38,7 +38,7 @@ const Addon = () => {
                               </div>
                             </div>
                             <div className="text-left">
-                              <p className="text-[#7c3aed] text-sm">Today: <span className="text-gray-300">Pay only $4.99 to upgrade to Ultra Plan</span></p>
+                              <p className="text-[#7c3aed] text-sm">Today: <span className="text-gray-300">Pay only $5 to upgrade to Ultra Plan</span></p>
                             </div>
                           </div>
                           <div className="text-left pl-6">
