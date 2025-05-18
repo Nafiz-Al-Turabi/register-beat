@@ -11,7 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
-const Addpayment = () => {
+const Ultrapayment = () => {
   const [priceId, setPriceId] = useState(null);
   const [clientSecret, setClientSecret] = useState('');
   const { user, logout, refreshUserInfo } = useContext(AuthContext);
@@ -27,9 +27,9 @@ const Addpayment = () => {
     localStorage.getItem('paymentMethod') || 'card'
   );
 
-//   if (user?.active === true || user?.role === 'admin' || new Date(user?.subscriptionEndDate) > new Date()) {
-//     navigate('/dashboard');
-//   }
+  if (user?.active === true || user?.role === 'admin' || new Date(user?.subscriptionEndDate) > new Date()) {
+    navigate('/dashboard');
+  }
 
   useEffect(() => {
     async function fetchPriceId() {
@@ -92,7 +92,7 @@ const Addpayment = () => {
           <div className="w-full md:w-1/2 p-6 bg-[#111111] rounded-lg border border-purple-700/30">
             <h2 className="text-xl font-bold mb-4">Order Summary</h2>
             <div className="flex justify-between items-center">
-              <p className="text-lg font-bold">Upgrade to Ultra Plan</p>
+              <p className="text-lg font-bold">Ultra Plan</p>
               <p className="text-lg font-bold">$14.99/month</p>
             </div>
             <hr className="border-purple-700/30 my-4" />
@@ -108,7 +108,7 @@ const Addpayment = () => {
             </ul>
             <hr className="border-purple-700/30 my-4" />
             <div className='flex justify-between items-center mt-4'>
-              <p className=" text-lg font-bold">Total: $5 to Upgrade</p>
+              <p className=" text-lg font-bold">Total: $14.99/month</p>
               <p className='text-gray-400 text-sm'>
                 <Link to='/term-of-use' className='hover:underline'>Terms of Use</Link> and <Link to='/privacy' className='hover:underline'>Privacy Policy</Link>
               </p>
@@ -137,7 +137,7 @@ const Addpayment = () => {
             {priceId ? (
               paymentMethod === 'card' ? (
                 <Elements stripe={stripePromise} >
-                  <CheckoutForm priceId={priceId} action={"upgrade"} />
+                  <CheckoutForm priceId={priceId} action={"ultra"} />
                 </Elements>
               ) : (
                 <div className='text-center text-white text-lg font-bold'>
@@ -162,4 +162,4 @@ const Addpayment = () => {
   );
 };
 
-export default Addpayment;
+export default Ultrapayment;

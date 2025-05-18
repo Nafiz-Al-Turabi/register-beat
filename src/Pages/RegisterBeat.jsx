@@ -35,7 +35,7 @@ const RegisterBeat = () => {
       <div className='md:h-[600px] flex justify-center items-center'>
         <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">
           <h1 className="md:text-3xl text-white font-bold">Please subscribe to register a beat</h1>
-          <Link to='/payment'>
+          <Link to='/pricing'>
             <button className="primary-bg text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
               <FaCrown className=" mr-2" /> Subscribe Now
             </button>

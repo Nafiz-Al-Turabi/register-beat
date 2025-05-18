@@ -17,9 +17,13 @@ const CheckoutForm = ({ priceId, action }) => {
   const { user, refreshUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
   let show;
-  if(action === 'upgrade') {
-    show = 'Pay $4.99';
-  } else{
+  if (action === 'upgrade') {
+    show = 'Pay $5';
+  }
+  else if (action === 'ultra') {
+    show = 'Pay $14.99';
+  }
+  else {
     show = 'Pay $9.99';
   }
 
@@ -64,12 +68,21 @@ const CheckoutForm = ({ priceId, action }) => {
       const customerId = response.data.customerId;
 
       // Now, create the subscription
-      const subscriptionResponse = await axiosInstance.post(`/payments/create-subscription/${user._id}`, {
-        customerId,
-        //priceId,
-        action
-      });
-      
+      let subscriptionResponse;
+      if (action === 'ultra') {
+        subscriptionResponse = await axiosInstance.post(`/payments/ultra-subscription/${user._id}`, {
+          customerId,
+          //priceId,
+          action
+        });
+      } else {
+        subscriptionResponse = await axiosInstance.post(`/payments/create-subscription/${user._id}`, {
+          customerId,
+          //priceId,
+          action
+        });
+      }
+
       if (subscriptionResponse.status === 200) {
         toast.success('Subscription created successfully!');
         setTimeout(() => {
@@ -111,7 +124,7 @@ const CheckoutForm = ({ priceId, action }) => {
         onSubmit={handleSubmit}
         className=""
       >
-        
+
         <label htmlFor="email" className="text-md text-zinc-300">Email</label>
         <input
           type="email"

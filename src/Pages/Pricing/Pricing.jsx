@@ -1,9 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Fa0 } from 'react-icons/fa6';
 import { LuCheck } from "react-icons/lu";
 import FAQ from '../../Components/FAQ/FAQ';
 import { Check, X } from 'lucide-react';
+import { AuthContext } from '../../Provider/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 const Pricing = () => {
+
+    const { user} = useContext(AuthContext);
+    const navigate = useNavigate();
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -115,7 +120,7 @@ const Pricing = () => {
                                     Search Songs Using Your Beats
                                 </li>
                             </ul>
-                            <button onClick={() => navigate('/payment')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Ultra</button>
+                            <button onClick={() => navigate('/ultra/payment')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Ultra</button>
 
                         </div>
                     </div>

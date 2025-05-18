@@ -11,6 +11,7 @@ const Protected = ({ children, role = [] }) => {
     // Prevent infinite redirects by checking current path
     const isLoginPage = location.pathname === '/signup';
     const isPaymentPage = location.pathname === '/payment';
+    const isUltraPaymentPage = location.pathname === '/ultra/payment';
     const isHomePage = location.pathname === '/';
 
     if (loading) {
@@ -40,11 +41,11 @@ const Protected = ({ children, role = [] }) => {
         !user?.active && 
         !user?.subscriptionId;
 
-    if (needsSubscription && !isPaymentPage) {
+    if (needsSubscription && !isPaymentPage && !isUltraPaymentPage) {
         return (
             <Navigate 
-                to="/payment" 
-                state={{ from: location.pathname !== '/payment' ? location : '/' }} 
+                to="/pricing" 
+                state={{ from: location.pathname !== '/pricing' ? location : '/' }} 
                 replace 
             />
         );
