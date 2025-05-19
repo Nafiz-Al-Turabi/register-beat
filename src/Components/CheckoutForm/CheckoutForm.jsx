@@ -18,7 +18,7 @@ const CheckoutForm = ({ priceId, action }) => {
   const navigate = useNavigate();
   let show;
   if (action === 'upgrade') {
-    show = 'Pay $5';
+    show = 'Pay $5.00';
   }
   else if (action === 'ultra') {
     show = 'Pay $14.99';

@@ -12,10 +12,10 @@ const Addon = () => {
                       <div className="bg-gray-900 border border-purple-900/30 rounded-xl w-96  text-center p-6 shadow-lg">
                         {/* Crown Logo */}
                         <div className="relative inline-block mb-4">
-                          <div className="bg-[#702cdd] rounded-full p-5 w-16 h-16 flex items-center justify-center mx-auto">
+                          <div className="bg-[#7137d1] rounded-full p-5 w-16 h-16 flex items-center justify-center mx-auto">
                             <Crown className="text-white w-8 h-8" />
                           </div>
-                          <div className="absolute -right-1 -top-1 bg-[#702cdd] rounded-full p-1 w-6 h-6 flex items-center justify-center">
+                          <div className="absolute -right-1 -top-1 bg-[#7137d1] rounded-full p-1 w-6 h-6 flex items-center justify-center">
                             <span className="text-white text-xs">
                               🔥
                             </span>
@@ -33,12 +33,12 @@ const Addon = () => {
                         <div className="bg-[#282133] bg-opacity-40 rounded-lg p-3 mb-6">
                           <div className="flex items-start mb-2">
                             <div className="flex-shrink-0 mr-2 mt-1">
-                              <div className="bg-purple-600 w-4 h-4 rounded-sm flex items-center justify-center">
+                              <div className="bg-[#7137d1] w-4 h-4 rounded-sm flex items-center justify-center">
                                 <span className="text-white text-xs">✓</span>
                               </div>
                             </div>
                             <div className="text-left">
-                              <p className="text-[#7c3aed] text-sm">Today: <span className="text-gray-300">Pay only $5 to upgrade to Ultra Plan</span></p>
+                              <p className="text-[#7137d1] text-sm">Today: <span className="text-gray-300">Pay only $5 to upgrade to Ultra Plan</span></p>
                             </div>
                           </div>
                           <div className="text-left pl-6">
@@ -48,7 +48,7 @@ const Addon = () => {
         
                         {/* Buttons */}
                         <button 
-                          className="w-full bg-[#702cdd] text-white py-3 rounded-lg font-medium mb-3"
+                          className="w-full bg-[#7137d1] text-white py-3 rounded-lg font-medium mb-3"
                           onClick={() =>navigate("/upgrade/payment")}
                         >
                           Upgrade Now

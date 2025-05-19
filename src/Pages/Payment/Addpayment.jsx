@@ -108,7 +108,7 @@ const Addpayment = () => {
             </ul>
             <hr className="border-purple-700/30 my-4" />
             <div className='flex justify-between items-center mt-4'>
-              <p className=" text-lg font-bold">Total: $5 to Upgrade</p>
+              <p className=" text-lg font-bold">Total: $5.00 to Upgrade</p>
               <p className='text-gray-400 text-sm'>
                 <Link to='/term-of-use' className='hover:underline'>Terms of Use</Link> and <Link to='/privacy' className='hover:underline'>Privacy Policy</Link>
               </p>
