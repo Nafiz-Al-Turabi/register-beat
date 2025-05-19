@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PiDotsThree } from "react-icons/pi";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
@@ -15,6 +15,7 @@ const Signup = () => {
     const [passwordFilled, setPasswordFilled] = useState(false);
     const { signup, googleLogin } = useContext(AuthContext)
     const navigate = useNavigate();
+    const location = useLocation();
 
     // Track event when button is clicked for meta pixel
     const handleButtonClick = () => {
@@ -30,7 +31,25 @@ const Signup = () => {
                 password: data.password
             })
             toast.success('Registration Successful.');
-            navigate('/dashboard');
+
+             const selectedPlan = localStorage.getItem('selectedPlanAfterRegister') || 
+                                location.state?.selectedPlan;
+
+            if (selectedPlan) {
+                // Clear the stored plan
+                localStorage.removeItem('selectedPlanAfterRegister');
+                
+                // Redirect to the appropriate payment page
+                navigate(selectedPlan === 'pro' ? '/payment' : '/ultra/payment', {
+                    state: { fromRegistration: true } // Optional: to show welcome message on payment page
+                });
+           // navigate('/dashboard');}
+            }
+            else {
+                // Default redirect after registration
+                navigate('/dashboard');
+            }
+
         } catch (error) {
             console.error('Registration error:', error.response?.data?.message || error.message);
         } finally {
