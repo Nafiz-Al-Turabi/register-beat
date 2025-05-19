@@ -21,6 +21,17 @@ const LandingPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+      const handlePlanSelect = (planType) => {
+        if (!user) {
+            // Store selected plan in localStorage before redirecting to register
+            localStorage.setItem('selectedPlanAfterRegister', planType);
+            navigate('/signup');
+        } else {
+            // User is logged in, proceed directly to payment
+            navigate(planType === 'pro' ? '/payment' : '/ultra/payment');
+        }
+    };
+    
     return (
         <div className='bg-black px-4 2xl:px-0'>
 
@@ -815,7 +826,7 @@ const LandingPage = () => {
                                 </li>
                             </ul>
 
-                            <button onClick={() => navigate('/payment')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Pro Monthly</button>
+                            <button onClick={() => handlePlanSelect('pro')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Pro Monthly</button>
                         </div>
                     </div>
 
@@ -861,7 +872,7 @@ const LandingPage = () => {
                                     Search Songs Using Your Beats
                                 </li>
                             </ul>
-                            <button onClick={() => navigate('/payment')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Ultra</button>
+                            <button onClick={() => handlePlanSelect('ultra')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Ultra</button>
 
                         </div>
                     </div>
