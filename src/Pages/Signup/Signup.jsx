@@ -114,7 +114,7 @@ const Signup = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-2.5 lg:space-y-6">
 
                     <div className='relative'>
-                        <label htmlFor="name" className="block text-[#9da6be] text-sm font-medium mb-2">name</label>
+                        <label htmlFor="name" className="block text-[#9da6be] text-sm font-medium mb-2">Name</label>
                         <input
                             type="name"
                             id="name"
