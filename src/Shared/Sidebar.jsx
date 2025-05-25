@@ -69,7 +69,7 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                                         user?.isVerified ? <MdVerified /> : ""
                                     }
                                 </p>
-                                <p className="text-xs text-gray-400">Plan: {user?.active === true ? user.planType : 'Inactive'}</p>
+                                <p className="text-xs text-gray-400">Plan: {user?.active === true ? user.planType.charAt(0).toUpperCase() + user.planType.slice(1).toLowerCase(): 'Inactive'}</p>
                             </div>
                         </div>
                         <span
