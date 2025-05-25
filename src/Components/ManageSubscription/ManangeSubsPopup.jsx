@@ -132,14 +132,14 @@ const ManageSubscriptionPopup = ({ setShowPopup }) => {
                                         </li>
                                     </ul>
                                 </div>
-                                {(user?.active && user?.planType === "ultra") && (
+                                {/* {(user?.active && user?.planType === "ultra") && (
                                     <button
                                         className="bg-[#712dde] font-semibold rounded-full py-3 mt-2 active:scale-95"
                                         onClick={handleCancelClickDwongraded}
                                     >
                                         Downgrade to Pro
                                     </button>
-                                )}
+                                )} */}
                                 {user?.active && (
                                     <button
                                         className="bg-red-600 font-semibold rounded-full py-3 mt-2 active:scale-95"
