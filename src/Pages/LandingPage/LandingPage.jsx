@@ -396,7 +396,7 @@ const LandingPage = () => {
                         </p>
                         <div className="flex items-center gap-4">
                             <button onClick={() => navigate('/dashboard')} size="lg" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md duration-300 ease-in-out ">
-                                Start Protecting your Beats
+                                Start Protecting Your Beats
                             </button>
                         </div>
                     </div>
@@ -443,7 +443,7 @@ const LandingPage = () => {
                         </p>
                         <div className="flex items-center gap-4">
                             <button onClick={() => navigate('/dashboard')} size="lg" className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white px-4 py-3 rounded-md duration-300 ease-in-out ">
-                                Start Protecting your Beats
+                                Start Protecting Your Beats
                             </button>
                         </div>
                     </div>
@@ -773,7 +773,7 @@ const LandingPage = () => {
                         Over 800 producers are already securing their work with Beatprotect
                     </div>
                     <h2 className="text-3xl md:text-6xl font-bold text-white">
-                        Start Protecting your beats <span className="text-[#7C3AED]">Today</span>
+                        Start Protecting Your Beats <span className="text-[#7C3AED]">Today</span>
                     </h2>
                 </div>
 
@@ -787,9 +787,9 @@ const LandingPage = () => {
                     <div className="relative">
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-[#7C3AED] to-[#7C3AED]/50 rounded-2xl blur opacity-75" />
                         <div className="relative bg-gray-950 rounded-xl p-8 shadow-2xl flex flex-col h-full">
-                            <div className="absolute -top-3 right-4">
+                            {/* <div className="absolute -top-3 right-4">
                                 <span className="bg-[#7C3AED] text-white px-3 py-1 text-sm rounded-full">Popular</span>
-                            </div>
+                            </div> */}
 
                             <div className="mb-6">
                                 <h3 className="text-2xl font-bold text-white mb-2">Pro</h3>
@@ -826,7 +826,7 @@ const LandingPage = () => {
                                 </li>
                             </ul>
 
-                            <button onClick={() => handlePlanSelect('pro')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Pro Monthly</button>
+                            <button onClick={() => handlePlanSelect('pro')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Start Protecting Your Work</button>
                         </div>
                     </div>
 
@@ -835,7 +835,7 @@ const LandingPage = () => {
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FFD700] to-[#FFD700]/50 rounded-2xl blur opacity-75" />
                         <div className="relative bg-gray-950 rounded-xl p-8 shadow-2xl flex flex-col h-full border border-[#FFD700]/20">
                             <div className="absolute -top-3 right-4">
-                                <span className="bg-[#FFD700] text-black px-3 py-1 text-sm rounded-full font-medium">Ultra</span>
+                                <span className="bg-[#FFD700] text-black px-3 py-1 text-sm rounded-full font-medium">Most Popular</span>
                             </div>
 
                             <div className="mb-6">
@@ -872,7 +872,7 @@ const LandingPage = () => {
                                     Search Songs Using Your Beats
                                 </li>
                             </ul>
-                            <button onClick={() => handlePlanSelect('ultra')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Get Ultra</button>
+                            <button onClick={() => handlePlanSelect('ultra')} className="w-full bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-md text-white mt-auto duration-300 ease-in-out ">Start Protecting Your Work</button>
 
                         </div>
                     </div>
