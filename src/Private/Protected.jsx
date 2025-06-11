@@ -21,7 +21,7 @@ const Protected = ({ children, role = [] }) => {
     if (!user && !isLoginPage) {
         return (
             <Navigate 
-                to="/signup" 
+                to="/pricing" 
                 state={{ from: location.pathname !== '/signup' ? location : '/' }} 
                 replace 
             />
