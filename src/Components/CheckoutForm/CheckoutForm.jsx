@@ -84,6 +84,9 @@ const CheckoutForm = ({ priceId, action }) => {
       }
 
       if (subscriptionResponse.status === 200) {
+        if (typeof fbq === 'function') {
+          fbq('track', 'Subscribe', { value: '9.99', currency: 'USD', predicted_ltv: '0.00' });
+        }
         toast.success('Subscription created successfully!');
         setTimeout(() => {
           navigate('/dashboard');

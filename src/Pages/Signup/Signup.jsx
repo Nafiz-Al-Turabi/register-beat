@@ -30,6 +30,10 @@ const Signup = () => {
                 email: data.email,
                 password: data.password
             })
+            // Track complete registration
+            if (typeof fbq === 'function') {
+                fbq('track', 'CompleteRegistration');
+            }
             toast.success('Registration Successful.');
 
              const selectedPlan = localStorage.getItem('selectedPlanAfterRegister') || 
