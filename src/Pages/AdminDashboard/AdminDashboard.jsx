@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { RiContactsLine } from "react-icons/ri";
 import {
     FaHome,
@@ -41,55 +41,53 @@ const AdminDashboard = () => {
                 ref={sidebarRef}
                 className={`fixed md:static w-64 h-full bg-[#212529] text-white transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
             >
-                <div className="py-5 ml-16 text-lg font-bold">Admin Dashboard</div>
-                <nav className="mt-6 space-y-4 px-4">
-                    <NavLink
-                        onClick={() => setIsOpen(!isOpen)}
-                        to="/admin-dashboard"
-                        end  // for active route 
-                        className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
-                        }
-                    >
-                        <FaHome className="h-5 w-5 mr-2" /> Dashboard
-                    </NavLink>
-                    <NavLink
-                        onClick={() => setIsOpen(!isOpen)}
-                        to="users"
-                        className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
-                        }
-                    >
-                        <FaUsers className="h-5 w-5 mr-2" /> Users
-                    </NavLink>
-                    <NavLink
-                        onClick={() => setIsOpen(!isOpen)}
-                        to="transections"
-                        className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
-                        }
-                    >
-                        <AiOutlineTransaction className="h-5 w-5 mr-2" /> Transections
-                    </NavLink>
-                    <NavLink
-                        onClick={() => setIsOpen(!isOpen)}
-                        to="allcontact"
-                        className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
-                        }
-                    >
-                        <RiContactsLine className="h-5 w-5 mr-2" /> All Contact
-                    </NavLink>
-                    <NavLink
-                        onClick={() => setIsOpen(!isOpen)}
-                        to="/settings"
-                        className={({ isActive }) =>
-                            `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
-                        }
-                    >
-                        <FaCog className="h-5 w-5 mr-2" /> Settings
-                    </NavLink>
-                </nav>
+                <div className="py-5 ml-16 md:ml-5 text-lg font-bold">Admin Dashboard</div>
+                <div className='flex flex-col justify-between h-[90%]'>
+                    <nav className="mt-6 space-y-4 px-4">
+                        <NavLink
+                            onClick={() => setIsOpen(!isOpen)}
+                            to="/admin-dashboard"
+                            end  // for active route 
+                            className={({ isActive }) =>
+                                `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
+                            }
+                        >
+                            <FaHome className="h-5 w-5 mr-2" /> Dashboard
+                        </NavLink>
+                        <NavLink
+                            onClick={() => setIsOpen(!isOpen)}
+                            to="users"
+                            className={({ isActive }) =>
+                                `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
+                            }
+                        >
+                            <FaUsers className="h-5 w-5 mr-2" /> Users
+                        </NavLink>
+                        <NavLink
+                            onClick={() => setIsOpen(!isOpen)}
+                            to="transactions"
+                            className={({ isActive }) =>
+                                `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
+                            }
+                        >
+                            <AiOutlineTransaction className="h-5 w-5 mr-2" /> Transactions
+                        </NavLink>
+                        <NavLink
+                            onClick={() => setIsOpen(!isOpen)}
+                            to="allcontact"
+                            className={({ isActive }) =>
+                                `flex items-center px-4 py-2 hover:bg-violet-400 rounded-md duration-300 ease-in-out ${isActive ? 'bg-violet-700' : ''}`
+                            }
+                        >
+                            <RiContactsLine className="h-5 w-5 mr-2" /> All Contact
+                        </NavLink>
+                    </nav>
+                    <div className='px-4'>
+                        <Link className='flex items-center px-4 py-2 bg-[#1a1d21] rounded-md duration-300 ease-in-out' to='/'>
+                            <FaHome className="h-5 w-5 mr-2" /> Home
+                        </Link>
+                    </div>
+                </div>
             </div>
 
             {/* Main Content Area */}

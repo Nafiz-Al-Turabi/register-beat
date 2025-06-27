@@ -1,49 +1,75 @@
-import React, { useContext, useState } from 'react'
-import { FaCrown,FaCog, FaSignOutAlt,} from "react-icons/fa";
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { FaCrown, FaCog, FaSignOutAlt, } from "react-icons/fa";
 import { LuCreditCard } from "react-icons/lu";
-import { MdKeyboardArrowDown, MdOutlineDashboard } from "react-icons/md";
+import { MdKeyboardArrowDown, MdOutlineDashboard, MdVerified } from "react-icons/md";
 import { RiMoneyCnyCircleLine, RiMusic2Line, RiUser3Line } from "react-icons/ri";
-import { Link, NavLink } from 'react-router-dom';
+import { LuHeadphones } from "react-icons/lu";
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import ManangeSubsPopup from '../Components/ManageSubscription/ManangeSubsPopup';
 import { AuthContext } from '../Provider/AuthProvider';
 import fileUrl from '../Axios/fileUrl';
 import axiosInstance from '../Axios/AxiosInstance';
+import dummyImage from '../assets/dummy.jpg'
 
 const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
     const [isDropdown, setDropdown] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
+    const dropdownRef = useRef(null);
     const { logout, user } = useContext(AuthContext)
+    const navigate = useNavigate();
 
     const toggleDropdown = () => {
         setDropdown(!isDropdown)
     }
-    const handleCredit = async () => {
-        try {
-            const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
-
-
-            if (response.data?.url) {
-                window.location.href = response.data.url;
-            } else {
-                console.error('Redirect URL not found in the response');
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdown(false);
             }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    }
+
+    const handleVerifyEmail = async () => {
+        try {
+            const res = await axiosInstance.get('/users/first-step-varify-mail',
+            )
+            navigate('/verify-account')
         } catch (error) {
-            console.error("Error purchasing credits: ", error.response ? error.response.data : error.message);
+            console.log(error);
         }
-    };
+    }
+
     return (
         <div>
             {/* Sidebar */}
             <div className={`fixed top-0 left-0 h-full bg-[#0f0f0f] w-64 p-4 flex flex-col transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 z-50`}>
                 <div className="relative">
-                    <div onClick={toggleDropdown} className="flex items-center justify-between mb-8 border border-gray-700 bg-[#0f0f0f] p-3 rounded-md cursor-pointer">
+                    <div onClick={toggleDropdown} className="flex items-center justify-between mb-8 border border-gray-700 bg-[#131313] p-3 rounded-md cursor-pointer">
                         <div className="flex items-center ">
                             <div className="bg-[#2f3947] w-8 h-8 rounded-md flex items-center justify-center text-sm overflow-hidden">
-                                <img src={`${fileUrl}/uploads/images/${user?.avatar}`} alt="avatar" />
+                              {
+                                user?.avatar ?   <img src={`${fileUrl}/uploads/images/${user?.avatar}`} alt="avatar" className="w-full h-full object-cover" /> : <img src={dummyImage} alt="avatar" className="w-full h-full object-cover" />
+                              }
                             </div>
                             <div className="ml-3 ">
-                                <p className="text-sm font-semibold">{user?.name}</p>
-                                <p className="text-xs text-gray-400">Plan Básico</p>
+                                <p className="text-sm font-semibold flex items-center gap-1">
+                                    {
+                                        user?.producerName ? user?.producerName : user?.name 
+                                    }
+                                    {
+                                        user?.isVerified ? <MdVerified /> : ""
+                                    }
+                                </p>
+                                <p className="text-xs text-gray-400">Plan: {user?.active === true ? user.planType.charAt(0).toUpperCase() + user.planType.slice(1).toLowerCase(): 'Inactive'}</p>
                             </div>
                         </div>
                         <span
@@ -55,77 +81,119 @@ const Sidebar = ({ toggleSidebar, isSidebarOpen }) => {
                     </div>
                     {
                         isDropdown && (
-                            <div className="absolute space-y-5 -bottom-20 text-white bg-[#1e1e1e] p-4 w-full border border-gray-700 rounded-md animate-dropdown ">
+                            <div ref={dropdownRef} className="absolute space-y-5 -bottom-20 text-white bg-[#1e1e1e] p-4 w-full border border-gray-700 rounded-md animate-dropdown ">
                                 <Link
-                                    to="/settings?name=profile"
+                                    to="/dashboard/settings?name=profile"
                                     className="flex items-center text-base text-white hover:text-white"
                                 >
                                     <RiUser3Line className="mr-2" /> Edit Profile
                                 </Link>
-                                <button
-                                    className="flex items-center text-base text-white hover:text-white"
-                                    onClick={() => setShowPopup(true)}
-                                >
-                                    <LuCreditCard className="mr-2" /> Manage Subscription
-                                </button>                               
+                                {
+                                    user?.active === true ? <button
+                                        className="flex items-center text-base text-white hover:text-white"
+                                        onClick={() => setShowPopup(true)}
+                                    >
+                                        <LuCreditCard className="mr-2" /> Manage Subscription
+                                    </button> : <NavLink
+                                        to="/dashboard/settings"
+                                        className="flex items-center text-base text-white hover:text-white"
+                                    >
+                                        <FaCog className="mr-2" /> Settings
+                                    </NavLink>
+                                }
                             </div>
                         )
                     }
                 </div>
                 <nav className="space-y-2">
                     <NavLink
-                        to="/"
-                        className="flex items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded hover:bg-[#191919]"
+                        to="/dashboard"
+                        end
+                        className={({ isActive }) =>
+                            `flex items-center text-base px-4 py-2 text-white font-medium rounded hover:bg-[#191919] hover:text-[#e3e6ed] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
+                        }
                     >
                         <MdOutlineDashboard className="mr-2" /> Dashboard
                     </NavLink>
-                    <Link
-                        to="/my-beats"
-                        className="flex items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded hover:bg-[#191919]"
+                    <NavLink
+                        to="/dashboard/my-beats"
+                        className={({ isActive }) =>
+                            `flex items-center text-base px-4 py-2 text-white font-medium rounded hover:bg-[#191919] hover:text-[#e3e6ed] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
+                        }
                     >
                         <RiMusic2Line className="mr-2" /> My Beats
-                    </Link>
+                    </NavLink>
+                    <NavLink
+                        to="/dashboard/all-matches-song"
+                        className={({ isActive }) =>
+                            `flex items-center text-base px-4 py-2 text-white font-medium rounded hover:bg-[#191919] hover:text-[#e3e6ed] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
+                        }
+                    >
+                        <LuHeadphones className="mr-2" /> Song Matches
+                    </NavLink>
                 </nav>
-                <div className="mt-auto border-t border-gray-800 flex flex-col py-2">
+
+                <div className="mt-auto border-gray-800 flex flex-col py-2">
                     {
-                        user?.active === true
+                        user?.isVerified === false ?
+                            <button onClick={handleVerifyEmail} className='bg-red-600 text-white w-full py-2 rounded mb-4 flex items-center justify-center'>
+                                Verify Your email
+                            </button> :
+                            ''
+                    }
+                    {
+                        user?.active === true ||
+                            new Date(user?.subscriptionEndDAte) > new Date()
                             ?
-                            <button onClick={handleCredit} className="bg-purple-500 text-white w-full py-2 rounded mb-4 flex items-center justify-center">
-                                <RiMoneyCnyCircleLine className=" mr-2" /> Buy Extra Credit
-                            </button>
+                            ''
                             :
-                            <Link to='payment'>
-                                <button className="bg-purple-500 text-white w-full py-2 rounded mb-4 flex items-center justify-center">
+                            <Link to='/pricing'>
+                                <button className="primary-bg text-white w-full py-2 rounded mb-4 flex items-center justify-center">
                                     <FaCrown className=" mr-2" /> Subscribe Now
                                 </button>
                             </Link>
                     }
                     {
+                        user?.active === true && user?.planType === "pro" 
+                            
+                            ?
+                            <Link to='/Add-on'>
+                                <button className="primary-bg text-white w-full py-2 rounded mb-4 flex items-center justify-center">
+                                    <FaCrown className=" mr-2" /> Scan your beats now
+                                </button>
+                            </Link>
+                            :
+                            ''
+                    }
+                    {
                         user.role === 'admin' ?
                             <Link
                                 to="/admin-dashboard"
-                                className="flex justify-center items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded bg-violet-700 hover:bg-violet-600 duration-300 ease-linear"
+                                className="flex justify-center items-center text-base hover:text-[#e3e6ed] px-4 py-2 text-white font-medium rounded bg-zinc-700 hover:bg-zinc-600 duration-300 ease-linear"
                             >
                                 Admin Panel
                             </Link> :
                             ''
                     }
-                    <Link
-                        to="/settings"
-                        className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
+
+                    <hr className='my-2 border-zinc-700' />
+                    <NavLink
+                        to="/dashboard/settings"
+                        className={({ isActive }) =>
+                            `flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919] ${isActive ? 'bg-[#191919] text-[#e3e6ed]' : ''}`
+                        }
                     >
                         <FaCog className="mr-2" /> Settings
-                    </Link>
+                    </NavLink>
                     <Link
-                        // to="/login"
-                        onClick={logout}
+                        onClick={handleLogout}
                         className="flex items-center text-base text-[#e3e6ed] hover:text-white px-4 py-2 rounded hover:bg-[#191919]"
                     >
                         <FaSignOutAlt className="mr-2" /> Log Out
                     </Link>
                 </div>
                 <p className='text-xs text-gray-500'>
-                    <Link to='/terms' className='hover:underline'>Term of Use</Link> and <Link to='/privacy' className='hover:underline'>Privacy Policy</Link>
+                    <Link to='/term-of-use' className='hover:underline'>Term of Use</Link> and <Link to='/privacy' className='hover:underline'>Privacy Policy</Link>
                 </p>
             </div>
             {showPopup && <ManangeSubsPopup setShowPopup={setShowPopup} />}

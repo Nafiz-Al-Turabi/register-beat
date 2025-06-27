@@ -1,121 +1,149 @@
-import React, { useState, createContext, useEffect } from "react";
+// contexts/AuthProvider.jsx
+import React, { useState, useEffect, createContext } from "react";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 import axiosInstance from "../Axios/AxiosInstance";
 import toast from "react-hot-toast";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import app from "../firebase/firebase.config";
 
 export const AuthContext = createContext();
-const auth = getAuth(app)
 
-const AuthProvider = ({ children }) => {
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_OAUTH_CLIENT_ID;
+
+
+const AuthProviderInner = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const googleProvider = new GoogleAuthProvider()
 
     useEffect(() => {
         fetchUserInfo();
+        handleOAuthRedirect();
     }, []);
 
     const fetchUserInfo = async () => {
         try {
-            const response = await axiosInstance.get("/users/check", {
-                withCredentials: true,
-            });
-            setUser(response.data.user);
-        } catch (error) {
-            console.error("Failed to fetch user info:", error.response?.data?.message || error.message);
+            const { data } = await axiosInstance.get("/users/check", { withCredentials: true });
+            setUser(data.user);
+        } catch {
             setUser(null);
         } finally {
             setLoading(false);
         }
     };
 
-    // Handle API errors
-    const handleError = (error) => {
-        if (error.response?.data?.message) {
-            console.error(error.response.data.message);
-            toast.error(error.response.data.message);
-        } else {
-            console.error("An unexpected error occurred:", error);
-            toast.error("Something went wrong. Please try again.");
-        }
-    };
-
-    // User signup
-    const signup = async (credentials) => {
+    const refreshUserInfo = async () => {
         try {
-            const response = await axiosInstance.post("/users/register", credentials);
-            return response.data;
-        } catch (error) {
-            handleError(error);
-            throw error;
-        }
-    };
-
-    const login = async (credentials) => {
-        try {
-            const response = await axiosInstance.post("/users/login", credentials, { withCredentials: true });
-            console.log("Login Response:", response.data);
-            const { token, user } = response.data;
-            setUser(user);
-        } catch (error) {
-            handleError(error);
-            throw error;
-        }
-    };
-
-    const googleLogin = async () => {
-        setLoading(true);
-        try {
-            const result = await signInWithPopup(auth, googleProvider);
-            const { displayName, email, photoURL } = result.user;
-            try {
-                const loginResponse = await axiosInstance.post("/users/google/login",
-                    {
-                        email,
-                        name: displayName,
-                    },
-                    { withCredentials: true }
-                );
-                setUser(loginResponse.data.user);
-                toast.success("Google login successful!");
-                return loginResponse.data;
-            } catch (error) {
-                console.log(error);
-            }
+            setLoading(true);
+            const { data } = await axiosInstance.get("/users/check", { withCredentials: true });
+            setUser(data.user);
+        } catch (err) {
+            showError(err);
         } finally {
             setLoading(false);
         }
     };
 
+    const signup = async (credentials) => {
+        try {
+            const { data } = await axiosInstance.post("/users/register", credentials);
+            await login(credentials); // Auto login
+            return data;
+        } catch (err) {
+            showError(err);
+            throw err;
+        }
+    };
 
+    const login = async (credentials) => {
+        try {
+            const { data } = await axiosInstance.post("/users/login", credentials, { withCredentials: true });
+            setUser(data.user);
+        } catch (err) {
+            showError(err);
+            throw err;
+        }
+    };
 
     const logout = async () => {
         try {
             await axiosInstance.post("/users/logout", {}, { withCredentials: true });
             setUser(null);
             toast.success("Logout successful");
-        } catch (error) {
-            console.error("Logout failed:", error);
-            toast.error("Logout failed. Please try again.");
-            throw error;
+        } catch (err) {
+            showError(err);
         }
     };
 
-    const userInfo = {
-        user,
-        loading,
-        signup,
-        login,
-        googleLogin,
-        logout,
+    const googleLogin = () => {
+        const state = Math.random().toString(36).substring(2, 15);
+        localStorage.setItem('googleOAuthState', state);
+
+        const redirectUri = window.location.origin;
+        const googleAuthUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth');
+        googleAuthUrl.searchParams.set("client_id", GOOGLE_CLIENT_ID);
+        googleAuthUrl.searchParams.set("redirect_uri", redirectUri);
+        googleAuthUrl.searchParams.set("response_type", "id_token");
+        googleAuthUrl.searchParams.set("scope", "email profile");
+        googleAuthUrl.searchParams.set("state", state);
+        googleAuthUrl.searchParams.set("nonce", Date.now().toString());
+        googleAuthUrl.searchParams.set("prompt", "select_account");
+
+        window.location.href = googleAuthUrl.toString();
+    };
+
+    const handleOAuthRedirect = () => {
+        const params = new URLSearchParams(window.location.hash.substring(1));
+        const idToken = params.get("id_token");
+
+        if (idToken) {
+            handleGoogleLoginSuccess({ credential: idToken });
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    };
+
+    const handleGoogleLoginSuccess = async ({ credential }) => {
+        try {
+            const { email, name } = jwtDecode(credential);
+            const { data } = await axiosInstance.post(
+                "/users/google/login",
+                { email, name },
+                { withCredentials: true }
+            );
+            setUser(data.user);
+            console.log(data.user);
+            toast.success("Google login successful!");
+            window.location.href = "/dashboard";
+        } catch (error) {
+            showError(error);
+        }
+    };
+
+    const showError = (err) => {
+        const message = err?.response?.data?.message || "Something went wrong!";
+        console.error(message);
+        toast.error(message);
     };
 
     return (
-        <AuthContext.Provider value={userInfo}>
+        <AuthContext.Provider
+            value={{
+                user,
+                loading,
+                signup,
+                login,
+                logout,
+                googleLogin,
+                refreshUserInfo,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );
 };
+
+const AuthProvider = ({ children }) => (
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+        <AuthProviderInner>{children}</AuthProviderInner>
+    </GoogleOAuthProvider>
+);
 
 export default AuthProvider;

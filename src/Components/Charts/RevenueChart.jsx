@@ -75,7 +75,6 @@ const RevenueChart = () => {
       style={{
         width: "100%",
         maxWidth: "600px",
-
         padding: "10px",
       }}
       className="mt-10 bg-[#212529] rounded-lg"

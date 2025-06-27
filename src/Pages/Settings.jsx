@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import PlansBills from '../Components/Settings/PlansBills';
 import ProfileSetting from '../Components/Settings/ProfileSetting';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Settings = () => {
+    const { user } = useContext(AuthContext);
     const [settingActive, setSettingActive] = useState(true);
     const [planActive, setPlanActive] = useState(false);
 
@@ -21,19 +23,23 @@ const Settings = () => {
         {settingActive && <div className='text-3xl font-bold py-4 mt-4 animate-from-middle'>My Account</div>} 
         {planActive && <div className='text-3xl font-bold py-4 mt-4 animate-from-middle'>Plans & Billing</div>} 
         <div className='flex gap-4  border-b border-[#464646]'>
-            <button className={`pb-2 px-4 ${settingActive ? 'border-b-2 border-[#7837eb] text-[#7837eb]' : ''}`} onClick={() => handleActive('settings')}>Settings</button>
-            <button className={`pb-2 px-4 ${planActive ? 'border-b-2 border-[#7837eb] text-[#7837eb]' : ''}`} onClick={() => handleActive('plans')}>Plan & Billing</button>
+            <button className={`pb-2 px-4 ${settingActive ? 'border-b-2 border-[#7e3aed] text-[#7e3aed]' : ''}`} onClick={() => handleActive('settings')}>Settings</button>
+            <button className={`pb-2 px-4 ${planActive ? 'border-b-2 border-[#7e3aed] text-[#7e3aed]' : ''}`} onClick={() => handleActive('plans')}>Plan & Billing</button>
         </div>
-        <div className='p-4'>
+        <div className='py-4 md:p-4'>
             {settingActive && (
                 <div className='animate-from-middle'>
                     <ProfileSetting />
                 </div>
             )}
             {planActive && (
-                <div className='animate-from-middle'>
-                    <PlansBills />
-                </div>
+                (user?.active === false && user?.subscriptionEndDAte < new Date()) ? (
+                    <p className="text-center py-4">Please subscribe to continue using our services.</p>
+                ) : (
+                    <div className='animate-from-middle'>
+                        <PlansBills />
+                    </div>
+                )
             )}
         </div>
     </div>

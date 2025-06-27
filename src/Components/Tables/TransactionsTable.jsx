@@ -4,35 +4,35 @@ const TransactionsTable = ({ transactions }) => {
     return (
         <>
             {
-                transactions.map((transaction) => (<tr
+                transactions?.map((transaction) => (<tr
                     key={transaction._id}
                     className="hover:bg-zinc-800 even:bg-[#212529] transition-colors"
                 >
                     <td className="px-4 py-4 text-white">
-                        {transaction._id}
+                        {transaction?._id}
                     </td>
                     <td className="px-4 py-4 text-white">
-                        {transaction.userNAme || ''}
+                        {transaction?.userNAme || ''}
                     </td>
                     <td className="px-4 py-4 text-zinc-300">
-                        {transaction.userEmail || ''}
+                        {transaction?.userEmail || ''}
                     </td>
                     <td className="px-4 py-4 text-zinc-300">
-                        {transaction.credit}
+                        {transaction?.credit}
                     </td>
                     <td className="px-4 py-4 text-zinc-300">
-                        {transaction.customerId}
+                        {transaction?.customerId}
                     </td>
                     <td
                         className={`px-4 py-4 font-bold `}
                     >
-                        {transaction.method}
+                        {transaction?.method}
                     </td>
                     <td className="px-4 py-4 text-zinc-300">
-                        {transaction.amount}$
+                        {transaction?.amount}$
                     </td>
                     <td className="px-4 py-4 text-zinc-300">
-                        {new Date(transaction.createdAt).toLocaleString()}
+                        {new Date(transaction?.createdAt).toLocaleString()}
                     </td>
                 </tr>))
             }

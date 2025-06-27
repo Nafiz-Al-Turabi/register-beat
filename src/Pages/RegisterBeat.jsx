@@ -5,6 +5,8 @@ import { LuMusic } from 'react-icons/lu';
 import { AuthContext } from '../Provider/AuthProvider';
 import { Link } from 'react-router-dom';
 import { FaCrown } from 'react-icons/fa';
+import { RiMoneyCnyCircleLine } from 'react-icons/ri';
+import axiosInstance from '../Axios/AxiosInstance';
 
 const RegisterBeat = () => {
   const { user } = useContext(AuthContext);
@@ -13,17 +15,43 @@ const RegisterBeat = () => {
   const [image, setImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [isDragging, setIsDragging] = useState({ audio: false, image: false });
-  
 
-  if (user?.active === false) {
+  const handleCredit = async () => {
+    try {
+        const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
+        if (response.data?.url) {
+            window.location.href = response.data.url;
+            refetch();
+        } else {
+            console.error('Redirect URL not found in the response');
+        }
+    } catch (error) {
+        console.error("Error purchasing credits: ", error.response ? error.response.data : error.message);
+    }
+};
+
+  if ((user?.active === false && user?.credit === 0)) {
     return (
-      <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">
-        <h1 className="text-3xl text-[#b079e9] font-bold">Please subscribe to register a beat</h1>
-        <Link to='/payment'>
-          <button className="bg-purple-500 text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
-            <FaCrown className=" mr-2" /> Subscribe Now
-          </button>
-        </Link>
+      <div className='md:h-[600px] flex justify-center items-center'>
+        <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">
+          <h1 className="md:text-3xl text-white font-bold">Please subscribe to register a beat</h1>
+          <Link to='/pricing'>
+            <button className="primary-bg text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
+              <FaCrown className=" mr-2" /> Subscribe Now
+            </button>
+          </Link>
+        </div>
+      </div>
+    )
+  }else if(user?.credit === 0){
+    return(
+      <div className='md:h-[600px] flex justify-center items-center'>
+        <div className="flex flex-col justify-center items-center p-6 bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] text-white rounded-lg mt-8 animate-from-middle ">
+          <h1 className="md:text-3xl text-white font-bold">You alreay subscribed but you have no credit</h1>
+            <button onClick={handleCredit} className="primary-bg text-white w-full py-2 px-5 mt-5 rounded mb-4 flex items-center justify-center">
+              <RiMoneyCnyCircleLine className=" mr-2" />  Buy Extra Credit
+            </button>
+        </div>
       </div>
     )
   }
@@ -72,7 +100,7 @@ const RegisterBeat = () => {
 
   return (
     <div className="flex flex-col p-1 lg:p-4 animate-from-middle max-w-6xl mx-auto">
-      <h1 className="text-3xl md:text-4xl font-bold text-[#b079e9] text-center mb-8">Register a New Beat</h1>
+      <h1 className="text-3xl md:text-4xl font-bold text-[#7e3aed] text-center mb-8">Register a New Beat</h1>
       <div className="flex flex-col md:flex-row gap-8">
         {/* Beat File Upload */}
         <div className="w-full lg:w-1/2 max-h-fit bg-gray-800 p-6 rounded-lg">
@@ -83,10 +111,10 @@ const RegisterBeat = () => {
               }`}
           >
             <input {...audioDropzone.getInputProps()} />
-            <p className="py-3 px-5 bg-[#7837eb] text-sm md:text-base text-white font-semibold rounded-full hover:bg-[#8749f1] transition active:scale-95">
+            <p className="py-3 px-5 primary-bg text-sm md:text-base text-white font-semibold rounded-full active:scale-95">
               Select or Drop Beat File
             </p>
-            <p className="mt-4 text-sm md:text-base text-gray-400 text-center">or drag and drop your beat file here</p>
+            <p className="mt-4 text-sm md:text-base text-gray-400 text-center">Or drag and drop your beat file here</p>
             {audio && <p className='flex justify-between items-center gap-2 text-lg text-[#c6b3ec] mt-3'><LuMusic className='font-bold' /> {audio.name}</p>}
           </div>
         </div>
@@ -100,11 +128,11 @@ const RegisterBeat = () => {
               }`}
           >
             <input {...imageDropzone.getInputProps()} />
-            <p className="py-3 px-5 bg-[#7837eb] text-sm md:text-base text-white font-semibold rounded-full hover:bg-[#8749f1] transition active:scale-95">
+            <p className="py-3 px-5 primary-bg text-sm md:text-base text-white font-semibold rounded-full active:scale-95">
               Select or Drop Image File
             </p>
-            <p className="mt-4 text-sm md:text-base text-gray-400 text-center">or drag and drop your image file here</p>
-            {previewImage && <img src={previewImage} alt="" className='w-36 h-36 mt-4 object-cover rounded-lg' />}
+            <p className="mt-4 text-sm md:text-base text-gray-400 text-center">Or drag and drop your image file here</p>
+            {previewImage && <img src={previewImage} alt="" className='w-20 h-20 mt-4 object-cover rounded-lg' />}
           </div>
         </div>
       </div>
