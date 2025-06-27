@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axiosInstance from "../Axios/AxiosInstance";
+import toast from "react-hot-toast";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,7 +9,6 @@ const Contact = () => {
     issue: "",
   });
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +23,7 @@ const Contact = () => {
 
     // Basic validation
     if (!formData.name || !formData.email || !formData.issue) {
-      setMessage("All fields are required.");
+      toast.error("All fields are required.");
       return;
     }
 
@@ -31,7 +31,7 @@ const Contact = () => {
 
     try {
       const response = await axiosInstance.post("/support/create", formData);
-      setMessage(response.data.message);
+      toast.success(response.data.message);
 
       // Clear the form fields on success
       setFormData({
@@ -40,7 +40,7 @@ const Contact = () => {
         issue: "",
       });
     } catch (error) {
-      setMessage("Failed to submit support request.");
+      toast.error(" Fail to send message.");
       console.error(error);
     } finally {
       setLoading(false);
@@ -103,27 +103,16 @@ const Contact = () => {
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-end mt-6">
             <button
               type="submit"
               disabled={loading}
-              className="bg-purple-600 text-white font-bold px-8 py-3 rounded-lg hover:bg-purple-700 transition active:scale-95"
+              className="primary-bg text-white font-bold px-8 py-3 rounded-lg hover:bg-purple-700 transition active:scale-95"
             >
               {loading ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>
-
-        {/* Message */}
-        {message && (
-          <p
-            className={`mt-4 text-center ${
-              message.includes("Failed") ? "text-red-500" : "text-green-500"
-            }`}
-          >
-            {message}
-          </p>
-        )}
       </div>
     </div>
   );

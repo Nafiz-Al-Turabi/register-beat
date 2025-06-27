@@ -7,6 +7,7 @@ import PlanPurchase from "../Pages/PlanPurchase/PlanPurchase";
 import RegisterBeat from "../Pages/RegisterBeat";
 import DashboardContents from "../Components/DashboardContents/DashboardContents";
 import MyBeats from "../Pages/MyBeats/MyBeats";
+import AllMatchesSong from "../Pages/AllMatchesSong/AllMatchesSong"
 import Profile from "../Pages/Profile/Profile";
 import SongMatches from "../Pages/SongMatches/SongMatches";
 import Protected from "../Private/Protected";
@@ -19,6 +20,21 @@ import Contact from "../Pages/Contact";
 import AdminContact from "../Pages/AdminDashboard/AdminContact";
 import Transactions from "../Pages/AdminDashboard/Transactions";
 import UserDetails from "../Pages/UserDetails/UserDetails";
+import SearchBeat from "../Pages/SearchBeat/SearchBeat";
+import PaypalLoading from "../Components/PaypalLoading/PaypalLoading";
+import TermOfUse from "../Pages/TermOfUse/TermOfUse";
+import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
+import LandingPage from "../Pages/LandingPage/LandingPage";
+import ContactUs from "../Pages/ContactUs/ContactUs";
+import Pricing from "../Pages/Pricing/Pricing";
+import LandingLayout from "../Layout/landingLayout";
+import VerifyAccount from "../Pages/VerifyAccount/VerifyAccount";
+import EmailVerified from "../Pages/EmailVerified/EmailVerified";
+import EnglishTemplate from "../Pages/MessageTemplate/EnglishTemplate";
+import SpanishTemplate from "../Pages/MessageTemplate/SpanishTemplate";
+import Addon from "../Components/Addonpage/Addon";
+import Addpayment from "../Pages/Payment/Addpayment";
+import Ultrapayment from "../Pages/Payment/Ultrapayment";
 
 const protectedRoute = (element, roles) => (
   <Protected role={roles}>{element}</Protected>
@@ -27,19 +43,52 @@ const protectedRoute = (element, roles) => (
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: protectedRoute(<DashboardLayout />, ["admin", "user"]),
-    errorElement: <NotFound></NotFound>,
+    element: <LandingLayout />, 
     children: [
-      { path: "/", element: <DashboardContents /> },
-      { path: "/settings", element: <Settings /> },
-      { path: "/upgrade", element: <PlanPurchase /> },
-      { path: "/register-beat", element: <RegisterBeat /> },
-      { path: "/my-beats", element: <MyBeats /> },
-      { path: "/song-matches", element: <SongMatches /> },
-      { path: "/profile", element: <Profile /> },
-      { path: "/payment", element: <Payment /> },
-      { path: "/contact", element: <Contact /> },
+      {
+        path: "/",
+        element: <LandingPage />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs />,
+      },
+      {
+        path: "/pricing",
+        element: <Pricing />,
+      },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: protectedRoute(<DashboardLayout />, ["admin", "user"]),
+    errorElement: <NotFound />,
+    children: [
+      { path: "", element: <DashboardContents /> }, 
+      { path: "settings", element: <Settings /> },
+      { path: "upgrade", element: <PlanPurchase /> },
+      { path: "register-beat", element: <RegisterBeat /> },
+      { path: "my-beats", element: <MyBeats /> },
+      {path: "all-matches-song", element:<AllMatchesSong/>},
+      { path: "song-matches", element: <SongMatches /> },
+      { path: "profile", element: <Profile /> },
+      { path: "contact", element: <Contact /> },
+      { path: "search-beat", element: <SearchBeat /> },
+      {path: "english-template" , element :<EnglishTemplate/>},
+      {path: "spanish-template" , element :<SpanishTemplate/>},
+    ],
+  },
+  {
+    path: "/payment",
+    element: protectedRoute(<Payment />, ["user", "admin"]),
+  },
+  {
+    path: "/upgrade/payment",
+    element: protectedRoute(<Addpayment />, ["user", "admin"]),
+  },
+  {
+    path: "/ultra/payment",
+    element: protectedRoute(<Ultrapayment />, ["user", "admin"]),
   },
   {
     path: "/login",
@@ -50,6 +99,31 @@ export const router = createBrowserRouter([
     element: <Signup />,
   },
   {
+    path: "/verify-account",
+    element: <VerifyAccount />,
+  },
+  {
+    path: "/Add-on",
+    element: <Addon />,
+  },
+  {
+    path: "/api/users/verify-email/:token",
+    element: <EmailVerified />,
+  },
+  {
+    path: "/payment-checking",
+    element: <PaypalLoading />,
+  },
+  {
+    path: "/term-of-use",
+    element: <TermOfUse />,
+  },
+  {
+    path: "/privacy",
+    element: <PrivacyPolicy />,
+  },
+  
+  {
     path: "/admin-dashboard",
     element: protectedRoute(<AdminDashboard />, ["admin"]),
     children: [
@@ -57,7 +131,7 @@ export const router = createBrowserRouter([
       { path: "users", element: <Users /> },
       { path: "users/:id", element: <UserDetails /> },
       { path: "allcontact", element: <AdminContact /> },
-      { path: "transections", element: <Transactions /> },
+      { path: "transactions", element: <Transactions /> },
     ],
   },
 ]);

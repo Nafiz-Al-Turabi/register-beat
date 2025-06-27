@@ -91,8 +91,8 @@ const AdminHome = () => {
                         <MdOutlineLibraryMusic />
                     </div>
                     <div>
-                        <h4 className="text-base font-semibold">Average Beat Regi</h4>
-                        <p className="text-base font-bold mt-2">{admin?.data?.AvrgBeatRegistration || 0}</p>
+                        <h4 className="text-base font-semibold">Average Beat Registration</h4>
+                        <p className="text-base font-bold mt-2">{admin?.data?.AvrgBeatRegistration?.toFixed(2) || 0}%</p>
                     </div>
                 </div>
                 <div className="bg-[#212529] hover:bg-violet-800 cursor-pointer duration-300 p-4 rounded-lg shadow-lg flex items-center">
@@ -119,7 +119,7 @@ const AdminHome = () => {
                     </div>
                     <div>
                         <h4 className="text-base font-semibold">Total Revenue</h4>
-                        <p className="text-base font-bold mt-2">{admin?.data?.totalRevenue || 0}</p>
+                        <p className="text-base font-bold mt-2">{admin?.data?.totalRevenue?.toFixed(2) || 0}</p>
                     </div>
                 </div>
             </div>

@@ -1,30 +1,53 @@
-import React, { useContext, useState } from 'react';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import React, { act, useContext, useState } from 'react';
+import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axiosInstance from '../../Axios/AxiosInstance';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { trackEvent } from '../../facebookPixel/facebookPixel';
 
-const CheckoutForm = ({ priceId }) => {
+const CheckoutForm = ({ priceId, action }) => {
   const [email, setEmail] = useState('');
   const [paymentMethodId, setPaymentMethodId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const stripe = useStripe();
   const elements = useElements();
-  const { user } = useContext(AuthContext);
+  const { user, refreshUserInfo } = useContext(AuthContext);
   const navigate = useNavigate();
+  let show;
+  if (action === 'upgrade') {
+    show = 'Pay $5.00';
+  }
+  else if (action === 'ultra') {
+    show = 'Pay $14.99';
+  }
+  else {
+    show = 'Pay $9.99';
+  }
+
+  // Track event when button is clicked for meta pixel
+  const handleButtonClick = () => {
+    trackEvent("SubscribedButtonClick", { buttonName: "subscribe" });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
 
-    // Create customer and handle payment method
+    // Create payment method with separate card elements
+    const cardNumberElement = elements.getElement(CardNumberElement);
+    const cardExpiryElement = elements.getElement(CardExpiryElement);
+    const cardCvcElement = elements.getElement(CardCvcElement);
+
     const { paymentMethod, error } = await stripe.createPaymentMethod({
       type: 'card',
-      card: elements.getElement(CardElement),
+      card: cardNumberElement,
+      billing_details: {
+        email: email,
+      },
     });
 
     if (error) {
@@ -45,15 +68,30 @@ const CheckoutForm = ({ priceId }) => {
       const customerId = response.data.customerId;
 
       // Now, create the subscription
-      const subscriptionResponse = await axiosInstance.post(`/payments/create-subscription/${user._id}`, {
-        customerId,
-        priceId,
-      });
+      let subscriptionResponse;
+      if (action === 'ultra') {
+        subscriptionResponse = await axiosInstance.post(`/payments/ultra-subscription/${user._id}`, {
+          customerId,
+          //priceId,
+          action
+        });
+      } else {
+        subscriptionResponse = await axiosInstance.post(`/payments/create-subscription/${user._id}`, {
+          customerId,
+          //priceId,
+          action
+        });
+      }
 
       if (subscriptionResponse.status === 200) {
+        if (typeof fbq === 'function') {
+          fbq('track', 'Subscribe', { value: '9.99', currency: 'USD', predicted_ltv: '0.00' });
+        }
         toast.success('Subscription created successfully!');
-
-        navigate('/');
+        setTimeout(() => {
+          navigate('/dashboard');
+          refreshUserInfo();
+        }, 4500);
       } else {
         toast.error('Subscription creation failed!');
       }
@@ -69,10 +107,10 @@ const CheckoutForm = ({ priceId }) => {
   const handleCredit = async () => {
     try {
       const response = await axiosInstance.post(`/credit/purchase-credits/${user?._id}`);
-      
-      
+
+
       if (response.data?.url) {
-        window.location.href = response.data.url; 
+        window.location.href = response.data.url;
       } else {
         console.error('Redirect URL not found in the response');
       }
@@ -80,31 +118,30 @@ const CheckoutForm = ({ priceId }) => {
       console.error("Error purchasing credits: ", error.response ? error.response.data : error.message);
     }
   };
-  
+
 
   return (
     <div>
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto bg-gradient-to-tl to-[#192332] via-[#22314b] from-[#141928] p-6 rounded-lg shadow-lg"
+        className=""
       >
-        <h3 className="text-center text-xl font-semibold text-gray-100 mb-6">
-          Subscribe Now
-        </h3>
 
+        <label htmlFor="email" className="text-md text-zinc-300">Email</label>
         <input
           type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full mb-4 px-4 py-3 rounded-md bg-transparent border border-slate-600 
+          className="w-full mb-3 px-4 py-2 mt-1 rounded-md bg-transparent border border-purple-700/20 
                text-white placeholder-gray-400 focus:outline-none"
         />
 
-        <div className="mb-6">
-          <CardElement
+        <div className="mb-3">
+          <label htmlFor="card-number" className="text-md text-zinc-300">Card Number</label>
+          <CardNumberElement
             options={{
               style: {
                 base: {
@@ -119,21 +156,66 @@ const CheckoutForm = ({ priceId }) => {
                 }
               }
             }}
-            className="p-3 rounded-md bg-transparent border border-slate-600"
+            className="p-2 mt-1 rounded-md bg-transparent border border-purple-700/20"
           />
         </div>
 
+        <div className="grid grid-cols-2 gap-2">
+          <div className="mb-6 ">
+            <label htmlFor="card-expiry" className="text-md text-zinc-300">Expiry Date</label>
+            <CardExpiryElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: '16px',
+                    color: '#ecf0f1',
+                    '::placeholder': {
+                      color: '#94a3b8'
+                    }
+                  },
+                  invalid: {
+                    color: '#ef4444'
+                  }
+                }
+              }}
+              className="p-2 mt-1 w-full rounded-md bg-transparent border border-purple-700/20"
+            />
+          </div>
+
+          <div className="mb-6">
+            <label htmlFor="card-cvc" className="text-md text-zinc-300">CVC</label>
+            <CardCvcElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: '16px',
+                    color: '#ecf0f1',
+                    '::placeholder': {
+                      color: '#94a3b8'
+                    }
+                  },
+                  invalid: {
+                    color: '#ef4444'
+                  }
+                }
+              }}
+              className="p-2 mt-1 rounded-md bg-transparent border border-purple-700/20"
+            />
+          </div>
+        </div>
+
         <button
+          onClick={handleButtonClick}
           type="submit"
           disabled={loading}
-          className={`w-full py-3 px-4 rounded-md text-white font-medium text-base
+          className={`w-full py-2 px-4 rounded-md text-white font-medium text-base
                  ${loading
               ? 'bg-violet-400 cursor-not-allowed'
-              : 'bg-violet-500 hover:bg-violet-600 active:bg-violet-700'} 
+              : 'primary-bg'} 
                  transition duration-200 focus:outline-none focus:ring-2 
                  focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-800`}
         >
-          {loading ? 'Processing...' : 'Subscribe'}
+          {loading ? 'Processing...' : show}
         </button>
       </form>
       {errorMessage && (

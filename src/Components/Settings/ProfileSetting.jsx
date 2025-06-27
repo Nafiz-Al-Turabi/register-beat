@@ -5,12 +5,16 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axiosInstance from '../../Axios/AxiosInstance';
 import toast from 'react-hot-toast';
+import fileUrl from '../../Axios/fileUrl';
+import dummyImage from '../../assets/dummy.jpg'
 
 const ProfileSetting = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [imageFile, setImageFile] = useState(null);
     const [previewImage, setPreviewImage] = useState('');
-    const { user } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false)
+    const { user, refreshUserInfo } = useContext(AuthContext);
+
 
     const handleFile = (file) => {
         const fileUrl = URL.createObjectURL(file);
@@ -19,10 +23,11 @@ const ProfileSetting = () => {
     };
 
     const onSubmit = async (data) => {
+        setLoading(true)
         try {
             const formData = new FormData();
-            formData.append('username', data.username);
-            formData.append('email', data.email);
+            formData.append('name', data.username);
+            // formData.append('email', data.email);
             formData.append('fullName', data["full-name"] || '');
             formData.append('producerName', data["producer-name"] || '');
             formData.append('youtubeChannel', data["youtube-channel"] || '');
@@ -41,11 +46,13 @@ const ProfileSetting = () => {
             }
 
             const response = await axiosInstance.put(`/users/update-profile/${user?._id}`, formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
+                headers: { 'Content-Type': 'multipart/form-data' },
+                withCredentials: true
             });
 
             if (response.status === 200) {
                 toast.success('Profile updated successfully!');
+                refreshUserInfo();
             } else {
                 throw new Error('Unexpected error while updating profile.');
             }
@@ -53,6 +60,8 @@ const ProfileSetting = () => {
             const errorMsg = error.response?.data?.message || 'Profile update failed. Please try again.';
             toast.error(errorMsg);
             console.error('Profile update error:', error);
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -62,7 +71,17 @@ const ProfileSetting = () => {
             <div>
                 <div className='flex gap-4 mt-4'>
                     <div className='bg-[#1e2837] rounded-lg w-20 h-20'>
-                        <img src={previewImage || user?.profilePicture} alt="Profile" className={`rounded-lg ${previewImage ? 'object-cover w-full h-full' : ''}`} />
+                        <img
+                            src={
+                                previewImage
+                                    ? previewImage
+                                    : user?.avatar
+                                        ? `${fileUrl}/uploads/images/${user.avatar}`
+                                        : dummyImage
+                            }
+                            alt="Profile"
+                            className="rounded-lg w-full h-full object-cover"
+                        />
                     </div>
                     <button>
                         <label htmlFor="uploadFile1" className="flex bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
@@ -79,43 +98,27 @@ const ProfileSetting = () => {
                         </label>
                     </button>
                 </div>
-                <p className='text-sm text-[#72747e] mt-2'>Min. 200x200 px. PNG or JPG.</p>
+                <p className='text-base text-[#72747e] mt-2'>{user?.email}</p>
             </div>
             <div className='mt-6'>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div>
-                        <label htmlFor="username" className="block text-[#e3e6ed] text-sm font-medium mb-2">Username</label>
+                        <label htmlFor="full-name" className="block text-[#e3e6ed] text-sm font-medium mb-2">Full Name</label>
                         <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
                                 type="text"
                                 id="username"
                                 placeholder="Enter your name"
                                 defaultValue={user?.name}
-                                {...register("username", { required: "Username is required" })}
+                                {...register("username", { required: "Full name is required" })}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
                             <PiDotsThree className='bg-red-500 w-6 h-6 rounded' />
+                            {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>}
                         </div>
-                        {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>}
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-[#e3e6ed] text-sm font-medium mb-2">Email</label>
-                        <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
-                            <input
-                                type="email"
-                                id="email"
-                                placeholder="Enter your email"
-                                defaultValue={user?.email}
-                                {...register("email", { required: "Email is required" })}
-                                className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
-                            />
-                            <PiDotsThree className='bg-red-500 w-6 h-6 rounded' />
-                        </div>
-                        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
-                        <p className='text-sm text-[#72747e] mt-2'>To change your email, please <Link to={""} className='text-[#5816c5] underline'>follow these instructions</Link></p>
-                    </div>
-                    <div>
-                        <label htmlFor="full-name" className="block text-[#e3e6ed] text-sm font-medium mb-2">Full Name</label>
+                        <label htmlFor="username" className="block text-[#e3e6ed] text-sm font-medium mb-2">Username</label>
                         <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
                             <input
                                 type="text"
@@ -125,8 +128,27 @@ const ProfileSetting = () => {
                                 {...register("full-name")}
                                 className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
                             />
+
                         </div>
+
                     </div>
+                    <div>
+                        {/* <label htmlFor="email" className="block text-[#e3e6ed] text-sm font-medium mb-2">Email</label>
+                        <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                disabled
+                                Value={user?.email}
+                                {...register("email",)}
+                                className="w-full bg-[#1e2837] text-white focus:outline-none focus:bg-[#1e2837]"
+                            />
+                        </div> */}
+                        {/* {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>} */}
+                        {/* <p className='text-sm text-[#72747e] mt-2'>To change your email, please <Link to={""} className='text-[#5816c5] underline'>follow these instructions</Link></p> */}
+                    </div>
+
                     <div>
                         <label htmlFor="producer-name" className="block text-[#e3e6ed] text-sm font-medium mb-2">Producer Name</label>
                         <div className='flex justify-between items-center lg:w-1/2 p-2 bg-[#1e2837] text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-purple-600'>
@@ -178,8 +200,10 @@ const ProfileSetting = () => {
                         </div>
                         {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>}
                     </div>
-                    <button type="submit" className="bg-[#7837eb] text-base text-white font-bold p-3 mt-4 rounded-lg hover:bg-purple-700 duration-200 focus:outline-none">
-                        Save
+                    <button type="submit" className="primary-bg text-base text-white font-bold p-3 mt-4 rounded-lg active:scale-95">
+                        {
+                            loading ? "Saving.." : "Save"
+                        }
                     </button>
                 </form>
             </div>
